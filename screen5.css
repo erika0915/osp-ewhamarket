@@ -1,0 +1,221 @@
+/* 기본설정 */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} 
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Pretendard-Regular', sans-serif;
+    margin: 0;
+}
+
+.header{
+    background-color: #ffffff; 
+    padding: 10px; 
+    text-align: left; 
+    font-family: "Bad Script", serif;
+}
+
+/* 네비게이션바 설정 */
+.topnav{
+    overflow: hidden; 
+    background-color:#ffffff;
+    font-weight: bold;
+    font-size: large;
+}
+
+.topnav a{ 
+    float: left; 
+    display: block; 
+    color: black; 
+    text-align: center; 
+    padding: 10px 100px; 
+    text-decoration: none;
+}
+
+.topnav a:hover{
+    background-color: #ffffff; 
+    color: green;
+}
+
+.topnav {
+  display: flex;
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center;     /* 세로 방향 가운데 정렬 (필요한 경우) */
+  gap: 20px;               /* 각 링크 사이의 간격 설정 */
+}
+/* 네비게이션바 끝 */
+
+/*사이드바 설정*/
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.side-bar{
+    float: left;
+    position: sticky;
+    top: 50px;
+    margin-right: 50px;
+}
+
+ul{
+    list-style-type: none;
+    height: 100%;
+    margin: 0;
+    width: auto;
+    overflow: auto;
+}
+
+li  a{
+    text-decoration: none;
+    display: block;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.side-bar a:hover{
+    color: green;
+}
+/* 사이드바 끝 */
+
+/* 가로선 */
+#nav{
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#review{
+    width: 80%; /* 구분선 너비 */
+    border-top: 1px solid #ccc; /* 얇은 회색 구분선 설정 */
+    margin: 20px auto; /* 구분선 상하 여백 및 가운데 정렬 */
+}  
+/* 가로선 끝 */
+
+/* 리뷰 목록 */
+.title{
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-size: x-large;
+}
+/* 정렬 기준 */
+.array{
+    float: right;
+    margin-right: 20px;
+    margin-top: 80px;
+    display: flex;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+.array button{
+    padding: 5px 10px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+.product {
+    width: 45%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.review {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+  
+.review img {
+    object-fit: cover;
+    border-radius: 8px;
+}
+  
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+  
+.product-info .desc {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+  
+.product-info .time {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+  
+.product-info p {
+    font-size: 14px;
+    color: #666;
+}
+
+.cost {
+    color: red;
+}
+  
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+    text-align: left;
+}
+
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: center;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 1.3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
