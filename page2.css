@@ -1,0 +1,160 @@
+/* 기본설정 */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} 
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Pretendard-Regular', sans-serif;
+    margin: 0;
+}
+
+.header{
+    background-color: #ffffff; 
+    padding: 10px; 
+    text-align: left; 
+    font-family: "Bad Script", serif;
+}
+
+/* 네비게이션바 설정 */
+.topnav{
+    overflow: hidden; 
+    background-color:#ffffff;
+    font-weight: bold;
+    font-size: large;
+}
+
+.topnav a{ 
+    float: left; 
+    display: block; 
+    color: black; 
+    text-align: center; 
+    padding: 10px 100px; 
+    text-decoration: none;
+}
+
+.topnav a:hover{
+    background-color: #ffffff; 
+    color: green;
+}
+
+.topnav {
+  display: flex;
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center;     /* 세로 방향 가운데 정렬 (필요한 경우) */
+  gap: 20px;               /* 각 링크 사이의 간격 설정 */
+}
+/* 네비게이션바 끝 */
+
+
+.title2{
+ float: left;
+	text-align:left;
+margin-left:180px;
+margin-top:35px;
+  color: #000;
+  font-size:30px;
+}
+
+.order{
+  float: right;
+  text-align: center;
+margin-top:60px;
+margin-right:20px;
+  font-size: 18px;
+}
+
+.inID,
+input[type="password"]{
+  text-align:center;
+  padding: 10px;
+  width:70%;
+  margin-bottom: 15px;
+  border:none;
+  border-radius: 15px;
+  font-size: 20px;
+  background-color: #f5f5f5;
+  color:#848484;
+}
+
+.input, .btn{text-align:center;}
+
+.blgin{
+  text-align:center;
+  padding: 10px 25px;
+  margin:15px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  background-color:black;
+  color:white;
+  font-style:bold;
+ 
+}
+.chkblg{
+margin-left:180px;
+text-align:left;
+
+}
+.udr{
+text-align:center;}
+
+.gallery:hover {
+  border: 1px solid #777;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 33.33333%
+}
+
+.gallery {
+  border: 1px solid #ccc;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+.desc {
+  padding: 15px;
+  text-align: left;
+}
+
+.price{
+  padding: 15px;
+  text-align: left;
+  color: red;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
