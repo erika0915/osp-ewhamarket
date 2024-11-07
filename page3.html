@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="page3.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} 
+
+body {
+  font-family: 'Pretendard-Regular', sans-serif;
+  margin: 0;
+  background-color: #f5f5f5; /* 배경 색상 추가 */
+}
+
+
+
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="top-bar">
+	<div class="search-bar">
+  		<input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
+    </div> 
+<div class="title">
+    <p class="login-signup">로그인&nbsp &nbsp &nbsp회원가입</p>
+</div>
+    <ul class="nav-list">
+      <li class="nav-item">전체상품</li>
+      <li class="nav-item">마켓 랭킹</li>
+      <li class="nav-item">리뷰 조회</li>
+      <li class="nav-item">마이페이지</li>
+    </ul>
+    
+    <p class="brand">ⓒ1886 EWHA</p>
+  </div> 
+
+  <div class="column side">
+    <p>
+      <a target="_blank" href="phone1.png">
+        <img src="phone1.png" alt="phone1" width="90" height="90" style="display: block; margin: 0 auto;">
+      </a>
+    </p>
+    <p style="clear: both;">
+      <a target="_blank" href="phone2.png">
+        <img src="phone2.png" alt="phone2" width="90" height="90" style="display: block; margin: 0 auto;">
+      </a>
+    </p>
+    <p style="clear: both;">
+      <a target="_blank" href="phone3.png">
+        <img src="phone3.png" alt="phone3" width="90" height="90" style="display: block; margin: 0 auto;">
+      </a>
+    </p>
+    <p style="clear: both;">
+      <a target="_blank" href="phone4.png">
+        <img src="phone4.png" alt="phone4" width="90" height="90" style="display: block; margin: 0 auto;">
+      </a>
+    </p>
+</div>
+  
+  <div class="column middle">
+    <div class="c">
+      <a target="_blank" href="phone0.png">
+        <img src="phone0.png" alt="phone0" width="300" height="400" style="display: block; margin: 0 auto;">
+      </a>
+     <h3 class="product-name">일러스트 핸드타올</h3>
+        <hr>
+	<h4 class="product-seller">판매자: 이화컴공</h4>
+	<p>이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 오픈소스 플랫폼 과목 한 학기 동안 파이팅입니다. </p>
+	<h3 class="product-price">21000 원</h3>
+
+	<div class="dropdown-label">
+    <span style="font-family: Material Icons;">옵션 선택</span>
+  </div>
+
+<div class="dropdown">
+      <button class="dropbtn"> 
+        <span class="dropbtn_icon">색상: Black - 사이즈: S</span>
+      </button>
+      <div class="dropdown-content">
+        <a href="#">색상: Black - 사이즈: M</a>
+        <a href="#">색상: White - 사이즈: S</a>
+        <a href="#">색상: White - 사이즈: M</a>
+      </div>
+    </div>
+
+<div class="dropdown">
+      <button class="dropbtn"> 
+        <span class="dropbtn_icon">1개</span>
+      </button>
+      <div class="dropdown-content">
+        <a href="#">2개</a>
+        <a href="#">3개</a>
+        <a href="#">4개</a>
+        <a href="#">5개</a>
+      </div>
+    </div>
+
+<button class="buy" data-value="buy">바로 구매 ></button>
+
+</div>
+ 
+  
+
+</div> 
+<script>
+HTML CSS JSResult Skip Results Iframe
+EDIT ON
+window.onload=()=>{
+      document.querySelector('.dropbtn_click').onclick = ()=>{
+        dropdown();
+      }
+      document.getElementsByClassName('fastfood').onclick = ()=>{
+        showMenu(value);
+      };
+      dropdown = () => {
+        var v = document.querySelector('.dropdown-content');
+        var dropbtn = document.querySelector('.dropbtn')
+        v.classList.toggle('show');
+        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
+      }
+
+      showMenu=(value)=>{
+        var dropbtn_icon = document.querySelector('.dropbtn_icon');
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn_click = document.querySelector('.dropbtn_click');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        dropbtn_icon.innerText = '';
+        dropbtn_content.innerText = value;
+        dropbtn_content.style.color = '#252525';
+        dropbtn.style.borderColor = '#3992a8';
+      }
+    }
+    window.onclick= (e)=>{
+      if(!e.target.matches('.dropbtn_click')){
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+
+        var dropbtn_icon = document.querySelector('.dropbtn_icon');
+        var dropbtn_content = document.querySelector('.dropbtn_content');
+        var dropbtn_click = document.querySelector('.dropbtn_click');
+        var dropbtn = document.querySelector('.dropbtn');
+
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+</script>
+
+</body>
+</html>
