@@ -1,0 +1,214 @@
+/* 기본설정 */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+} 
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Pretendard-Regular', sans-serif;
+    margin: 0;
+}
+
+.header{
+    background-color: #ffffff; 
+    padding: 10px; 
+    text-align: left; 
+    font-family: "Bad Script", serif;
+}
+
+/* 네비게이션바 설정 */
+.topnav{
+    overflow: hidden; 
+    background-color:#ffffff;
+    font-weight: bold;
+    font-size: large;
+}
+
+.topnav a{ 
+    float: left; 
+    display: block; 
+    color: black; 
+    text-align: center; 
+    padding: 10px 100px; 
+    text-decoration: none;
+}
+
+.topnav a:hover{
+    background-color: #ffffff; 
+    color: green;
+}
+
+.topnav {
+  display: flex;
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center;     /* 세로 방향 가운데 정렬 (필요한 경우) */
+  gap: 20px;               /* 각 링크 사이의 간격 설정 */
+}
+/* 네비게이션바 끝 */
+
+/* 가로선 */
+#nav{
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+/* 네비게이션바 끝 */
+
+/*내용 기본설정*/
+
+/*상품 설명 칸*/
+.product {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 20px 0;
+    gap: 40px;
+}
+
+.description {
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+}
+
+hr{
+    width: 500px;
+}
+
+.description img{
+    margin-right: 40px;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name{
+    font-size: x-large;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.grade {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.grade span {
+    color: gold;
+    font-size: 32px;
+}
+
+.grade p{
+    margin-left: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.cost {
+    font-size: larger;
+    color: red;
+    margin-top: 8px;
+}
+
+.description button{
+    padding: 5px 20px;
+    white-space: nowrap;
+    text-align: center;
+    font-size: medium;
+    margin-top: 16px;
+}
+
+/* 리뷰 칸 설정 */
+.notice {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.rating-statistics {
+    width: 100%;
+    max-width: 400px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.stars {
+    font-size: 18px;
+    color: gold;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.bar {
+    flex: 1;
+    height: 10px;
+    background-color: #e0e0e0;
+    margin: 0 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background-color: #ffc107; /* 막대 그래프 색상 */
+}
+
+.count {
+    font-size: 16px;
+    color: #555;
+}
+
+.sort{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+.array{
+    float: right;
+    margin-right: 20px;
+    margin-top: 80px;
+    display: flex;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+.array button{
+    padding: 5px 10px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+#page{
+    width: 80%;
+    border: 1px solid #e0e0e0
+}
+
+.review{
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+}
+
+.date{
+    color: #555;
+    font-size: small;
+}
