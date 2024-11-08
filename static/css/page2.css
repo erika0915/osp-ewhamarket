@@ -101,6 +101,23 @@ body{
 
 /* 네비게이션바 끝 */
 
+/*순서배열 버튼 설정*/
+.array{
+  float: right;
+  margin-right: 20px;
+  margin-top: 80px;
+  display: flex;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+.array button{
+  padding: 5px 10px;
+  white-space: nowrap;
+  text-align: center;
+}
+/*순서배열 버튼 끝*/
+
+
 /*사이드바 설정*/
 a {
     color: inherit;
