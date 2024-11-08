@@ -120,8 +120,8 @@ select {
   color:#848484;
 }
 
-#userID,#price, #category, #options,{
-width:30%
+#userID, #price, #category, #options {
+  width: 30%;
 }
 
 #productName{
@@ -152,7 +152,7 @@ select {
   background-color: #f5f5f5;
   color:#848484;
   border:none;
-  background-image: url("https://w7.pngwing.com/pngs/532/502/png-transparent-grey-check-illustration-computer-icons-ifp-school-arrow-scrolling-down-arrow-angle-hand-internet.png");  background-repeat: no-repeat;  background-position: 96% center;  background-size: 2rem;}
+  background-image: url("https://w7.pngwing.com/pngs/532/502/png-transparent-grey-check-illustration-computer-icons-ifp-school-arrow-scrolling-down-arrow-angle-hand-internet.png");  background-repeat: no-repeat;  background-position: 96% center;  background-size: 2rem;
 }
 
 textarea {
