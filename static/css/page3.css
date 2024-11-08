@@ -1,3 +1,6 @@
+*{box-sizing: border-box;}
+
+
 /* 기본설정 */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @font-face {
@@ -176,6 +179,8 @@ text-align:center;}
 .product-details {
   flex: 1;
   padding-top: 10px;
+  margin-top:-30px;
+  margin-left: 60px;
 }
 
 /* Thumbnail styling */
@@ -189,7 +194,7 @@ text-align:center;}
 
 /* Main product image styling */
 .main-image img {
-  width: 100%;
+  width: 120%;
   height: auto;
 }
 
@@ -223,8 +228,126 @@ text-align:center;}
 .product-price {
   font-size: 20px;
   color: #e0217b;
-  margin: 15px 0;
+  margin: 20px 0 0 15px;
 }
+
+.product-description {
+  width: 550px;      /* 가로 크기 */
+  height: 200px;     /* 세로 크기 */
+  padding: 20px;     /* 내부 여백 */
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: rgb(234, 233, 233);
+  overflow-y: auto;  /* 내용이 넘칠 경우 세로 스크롤 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+}
+
+.product-description2 {
+  width: 900px;      /* 가로 크기 */
+  height: 250px;     /* 세로 크기 */
+  padding: 20px;     /* 내부 여백 */
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: rgb(234, 233, 233);
+  overflow-y: auto;  /* 내용이 넘칠 경우 세로 스크롤 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  margin-left:-400px;
+  margin-top:25px;
+}
+
+.product-description p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.underline{
+  text-decoration: underline;
+  font-size:large;
+}
+
+hr{
+  width:70%;
+  margin-left:0;
+}
+
+/*좋아요 기능*/
+.like-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  font-size: 25px;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.heart-icon.active {
+  color: #ff4b4b;
+}
+
+.like-count {
+  font-size: 14px;
+  color: #666;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0;
+}
+
+/*별점*/
+.review {
+  display: inline-flex;                /* 가로 배치 */
+  align-items: center;           /* 세로 가운데 정렬 */
+  margin-top: 20px;
+}
+/* 별점 전체 컨테이너 */
+.star_rating {
+  width: 100%; 
+  box-sizing: border-box; 
+  display: inline-flex; 
+  flex-direction: row; 
+  justify-content: flex-start;
+  margin-left:20px;
+
+}
+
+/* 기본 빈 별 스타일 */
+.star_rating .star {
+  width: 25px; 
+  height: 25px; 
+  margin-right: 10px;
+  display: inline-block; 
+  background: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE2bww%2FbtsviSSBz4Q%2F5UYnwSWgTlFt6CEFZ1L3Q0%2Fimg.png') no-repeat; 
+  background-size: 100%; 
+  box-sizing: border-box; 
+}
+
+/* 채워진 별 스타일 */
+.star_rating .star.on {
+  background: url('https://blog.kakaocdn.net/dn/b2d6gV/btsvbDoal87/XH5b17uLeEJcBP3RV3FyDk/img.png') no-repeat;
+  background-size: 100%; 
+}
+
+.star_number{
+  display: inline-flex;
+  font-size: large;
+}
+
 
 /* dropdown */
 
@@ -250,6 +373,7 @@ text-align:center;}
   text-align: left;
   cursor : pointer;
   font-size : 12px;
+  margin-right:15px;
 }
 
 .dropdown-content{
@@ -279,7 +403,6 @@ text-align:center;}
 
 .dropdown-label {
   padding: 10px;
-  border: 1px solid #ddd;
   border-radius: 4px;
   margin-top: 15px;
 }
