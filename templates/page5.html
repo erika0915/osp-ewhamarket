@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSS Website Layout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href = "page5.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="top-bar">
+    
+            <div class="search-bar">
+                <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
+            </div><!--search-bar-->
+            
+            
+        <div class="title">
+            <p class="login-signup">로그인&nbsp &nbsp &nbsp회원가입</p>
+        </div><!--title-->
+        
+        <div class="topnav">
+            <a href="#" onclick="goToPage('전체상품')">전체 상품</a> 
+            <a href="#" onclick="goToPage('신상품')">신상품</a> 
+            <a href="#" onclick="goToPage('리뷰 조회')">리뷰 조회</a> 
+            <a href="#" onclick="goToPage('마이페이지')">마이페이지</a> 
+        </div><!--topnav-->
+        
+            <p class="header">ⓒ1886 EWHA</p>
+            
+        </div><!--top-bar-->
+
+        <aside class="side-bar">
+            <ul>
+                <li>
+                    <a href="#"></i> 폰 악세사리</a>
+                    <ul>
+                        <li><a href="#">휴대폰 케이스</a></li>
+                        <li><a href="#">에어팟 케이스</a></li>
+                        <li><a href="#">스마트 톡</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"></i> 리빙&소품</a>
+                    <ul>
+                        <li><a href="#">오브제</a></li>
+                        <li><a href="#">홈패브릭</a></li>
+                        <li><a href="#">테이블웨어</a></li>
+                        <li><a href="#">조명</a></li>
+                        <li><a href="#">키링</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"></i> 쥬얼리</a>
+                    <ul>
+                        <li><a href="#">목걸이</a></li>
+                        <li><a href="#">귀걸이</a></li>
+                        <li><a href="#">반지</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <section class="list">
+            <div class="title">
+                <h3>상품 리뷰 목록</h3>
+            </div>
+            <div class="array">
+                <button class="review" data-value="review">리뷰 많은 순</button>
+                <button class="rate" data-value="rate">높은 평점 순</button>
+                <button class="recent" data-value="recent">최신순</button>
+            </div>
+        </section>
+
+        <hr id="review">
+
+        <div class="product-list">
+            <div class="product">
+                <div class="review">
+                    <div>
+                        <a target="_blank" href="page/all_products.html">
+                            <img src="image/towel.png" alt="prod_towel" width="300" height="200">
+                        </a>
+                        <h3 class="product-name">일러스트 핸드타올</h3>
+                        <p class="cost">4500원</p>
+                    </div>
+                    <div class="product-info">
+                        <!-- 별점 평가 -->
+                        <form class="mb-3" name="myform" id="myform" method="post">
+                            <fieldset>
+                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+                            </fieldset>
+                        </form>
+                        
+                        <!-- 상품 설명 -->
+                        <h3 class="desc">선물용으로 최고예요!</h3>
+                        <p class="time">1시간 전</p>
+                        <p> 어버이날로 부모님께 선물해드렸는데 너무 좋아하셨어요! 
+                        남녀노소 좋아할만한 제품이고, 
+                        재질도 너무 좋아서 추천합니다</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="review">
+                    <div>
+                        <a target="_blank" href="page/all_products.html">
+                            <img src="image/holder.png" alt="Forest" width="300" height="200">      
+                        </a>
+                        <h3 class="product-name">스누피 컵/텀블러 토트</h3>
+                        <p class="cost">7000원</p>
+                    </div>
+                    <div class="product-info">
+                        <!-- 별점 평가 -->
+                        <form class="mb-3" name="myform" id="myform" method="post">
+                            <fieldset>
+                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+                            </fieldset>
+                        </form>
+                        
+                        <!-- 상품 설명 -->
+                        <h3 class="desc">너무 귀여워요</h3>
+                        <p class="time">3시간 전</p>
+                        <p> 축제 때부터 눈여겨보던 제품이었는데, 운 좋게 이 사이트에서 판매하는 걸 발견해서 구매했어요 ! 조금 비싼 감이 없지않아 있지만, 비싼만큼 가치있다고 생각해요 :)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="review">
+                    <div>
+                        <a target="_blank" href="page/all.products.html">
+                            <img src="image/basket.png" alt="Northern Lights" width="300" height="200">
+                        </a>      
+                        <h3 class="product-name">미니 바스켓 정리 소품 바구니</h3>
+                        <p class="cost">6000원</p>
+                    </div>
+                    <div class="product-info">
+                        <!-- 별점 평가 -->
+                        <form class="mb-3" name="myform" id="myform" method="post">
+                            <fieldset>
+                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+                            </fieldset>
+                        </form>
+                        
+                        <!-- 상품 설명 -->
+                        <h3 class="desc">기숙사 정리 필수템</h3>
+                        <p class="time">6시간 전</p>
+                        <p>기숙사 정리가 너무 어려워서 물건을 살펴보다가, 가격도 적당하고 딱 정리하기 좋을 것 같아 구매해봤는데 튼튼하고 제가 딱 원하던 크기라 너무 좋아요 ! 제품 팔아주셔서 감사합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="review">
+                    <div>
+                        <a target="_blank" href="page/all_products.html">
+                            <img src="image/keyring.png" alt="Northern Lights" width="300" height="200">
+                        </a>
+                        <h3 class="product-name">미니 딸기 케이크 인형 키링</h3>
+                        <p class="cost">3000원</p>
+                    </div>
+                    <div class="product-info">
+                        <!-- 별점 평가 -->
+                        <form class="mb-3" name="myform" id="myform" method="post">
+                            <fieldset>
+                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+                            </fieldset>
+                        </form>
+                        
+                        <!-- 상품 설명 -->
+                        <h3 class="desc">넘 기여워서 쪼물딱</h3>
+                        <p class="time">1시간 전</p>
+                        <p> 너무 귀여워서 입으로 앙 깨물어버리고 싶어요. 어떻게 이런 걸 만들 생각을 하셨나요.. 감사합니다</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+</body>
+</html>
