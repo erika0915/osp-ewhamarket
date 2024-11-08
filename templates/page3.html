@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<div class="container">
+    <div class="container">
 
         <div class="top-bar">
     
@@ -45,16 +45,7 @@
             <p class="header">ⓒ1886 EWHA</p>
             
         </div><!--top-bar-->
- 
- 
-  
-<div id="textbox">
-    <p class="title2">전체 상품 조회</p>
-  <p class="order">리뷰 많은 순 | 높은 평점 순 | 최신순</p>
-</div>
-<div style="clear: both;"></div>
 
-  <hr>
 
 <div class="row">
   <div class="column side">
@@ -89,12 +80,17 @@
     
     <div class="product-details">
       <h3 class="product-name">일러스트 핸드타올</h3>
+      <div class="like-container">
+        <button class="like-button" onclick="toggleLike(this)">
+          <span class="heart-icon">♥</span>
+        </button>
+        <span class="like-count">(128)</span>
+      </div>
       <hr>
       <h4 class="product-seller">판매자: 이화컴공</h4>
-      <p>이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</p>
+      <div class="product-description">이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</div>
       <h3 class="product-price">21000 원</h3>
       <div class="dropdown-label">
-        <span>옵션 선택</span>
 
 <div class="dropdown">
       <button class="dropbtn"> 
@@ -123,10 +119,28 @@
 <button class="buy" data-value="buy">바로 구매 ></button>
 
       </div>
+<div class="review">
+    <div class="underline">REVIEW</div>
+    <div class="star_rating">
+      <span class="star on"></span>
+      <span class="star on"></span>
+      <span class="star on"></span>
+      <span class="star on"></span>
+      <span class="star"></span>
+    </div>
+    <div class="star_number">4(5)</div>
+  </div>
+      <div class="product-description2">
+     <h4 class="underline">상세설명</h4>
+	<p>사이즈 : heights 15 / width 10</p>
+	<p>소재 : 에폭시 </p>
+	<p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
+  </div>
 
     </div>
 
   </div>
+
 </div>
 
 
@@ -182,6 +196,22 @@ window.onload=()=>{
           }
         }
       }
+    }
+
+function toggleLike(button) {
+      const heartIcon = button.querySelector('.heart-icon');
+      const likeCount = button.parentElement.querySelector('.like-count');
+      let count = parseInt(likeCount.textContent);
+      
+      if (heartIcon.classList.contains('active')) {
+        heartIcon.classList.remove('active');
+        count--;
+      } else {
+        heartIcon.classList.add('active');
+        count++;
+      }
+      
+      likeCount.textContent = count;
     }
 </script>
 
