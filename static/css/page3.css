@@ -1,12 +1,14 @@
-<html>
-<head>
-<meta charset="UTF-8" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="page3.css">
+*{box-sizing: border-box;}
+body{margin: 0;}
 
-<style>
+.topnav{overflow: hidden; background-color: #333;}
+
+.topnav a{ float: left; display: block; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none}
+
+.topnav a:hover{background-color: #ddd; color: black;}
+
+
+/* 기본설정 */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -14,176 +16,286 @@
     font-weight: 400;
     font-style: normal;
 } 
-
-
-
-
-</style>
-</head>
-
-<body>
-<div class="container">
-
-        <div class="top-bar">
-    
-            <div class="search-bar">
-                <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
-            </div><!--search-bar-->
-            
-            
-        <div class="title">
-            <p class="login-signup">로그인&nbsp &nbsp &nbsp회원가입</p>
-        </div><!--title-->
-        
-        <div class="topnav">
-            <a href="#" onclick="goToPage('전체상품')">전체 상품</a> 
-            <a href="#" onclick="goToPage('신상품')">신상품</a> 
-            <a href="#" onclick="goToPage('리뷰 조회')">리뷰 조회</a> 
-            <a href="#" onclick="goToPage('마이페이지')">마이페이지</a> 
-        </div><!--topnav-->
-        
-            <p class="header">ⓒ1886 EWHA</p>
-            
-        </div><!--top-bar-->
  
- 
+*{
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white; /* 배경색 수정 */
+  }
+
+body{
+    font-family: 'Pretendard-Regular', sans-serif;
+    margin: 0;
+}
+
+.top-bar {
+    width: 1440px;
+    height: 109px; /* 높이 조정 */
+    position: relative;
+    border-bottom: 1px solid #ddd; /* 하단 경계선 추가 */
+}
+
+.header {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    font-size: 32px;
+    font-family: 'Bad Script', serif;
+    color: #000;
+  }
+
+.search-bar {
+    width: 200px;
+    height: 35px;
+    position: absolute;
+    left: 1000px; /* 위치 조정 */
+    bottom: 20px;
+    border-radius: 15px;
+    background: #f5f5f5;
+    border: 1px solid #f5f5f5;
+}
   
-<div id="textbox">
-    <p class="title2">전체 상품 조회</p>
-  <p class="order">리뷰 많은 순 | 높은 평점 순 | 최신순</p>
-</div>
-<div style="clear: both;"></div>
-
-  <hr>
-
-<div class="row">
-  <div class="column side">
-    <p>
-      <a target="_blank" href="phone1.png">
-        <img src="phone1.png" alt="phone1">
-      </a>
-    </p>
-    <p>
-      <a target="_blank" href="phone2.png">
-        <img src="phone2.png" alt="phone2">
-      </a>
-    </p>
-    <p>
-      <a target="_blank" href="phone3.png">
-        <img src="phone3.png" alt="phone3">
-      </a>
-    </p>
-    <p>
-      <a target="_blank" href="phone4.png">
-        <img src="phone4.png" alt="phone4">
-      </a>
-    </p>
-  </div>
+.search-bar input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 15px;
+    padding-left: 15px;
+    font-size: 15px;
+    font-family:'Pretendard-Regular';
+    outline: none;
+    background: #f5f5f5;
+}
   
-  <div class="column middle">
-    <div class="main-image">
-      <a target="_blank" href="phone0.png">
-        <img src="phone0.png" alt="phone0">
-      </a>
-    </div>
-    
-    <div class="product-details">
-      <h3 class="product-name">일러스트 핸드타올</h3>
-      <hr>
-      <h4 class="product-seller">판매자: 이화컴공</h4>
-      <p>이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</p>
-      <h3 class="product-price">21000 원</h3>
-      <div class="dropdown-label">
-        <span>옵션 선택</span>
-
-<div class="dropdown">
-      <button class="dropbtn"> 
-        <span class="dropbtn_icon">색상: Black - 사이즈: S</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">색상: Black - 사이즈: M</a>
-        <a href="#">색상: White - 사이즈: S</a>
-        <a href="#">색상: White - 사이즈: M</a>
-      </div>
-    </div>
-
-
-<div class="dropdown">
-      <button class="dropbtn"> 
-        <span class="dropbtn_icon">1개</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">2개</a>
-        <a href="#">3개</a>
-        <a href="#">4개</a>
-        <a href="#">5개</a>
-      </div>
-    </div>
-
-<button class="buy" data-value="buy">바로 구매 ></button>
-
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-
-
-</div>
- 
+.login-signup {
+    position: absolute;
+    left: 1250px; /* 위치 조정 */
+    bottom: 30px;
+    font-size: 18px;
+    color: #787878;
+    cursor: pointer;
+}
   
 
-</div> 
-<script>
-HTML CSS JSResult Skip Results Iframe
-EDIT ON
-window.onload=()=>{
-      document.querySelector('.dropbtn_click').onclick = ()=>{
-        dropdown();
-      }
-      document.getElementsByClassName('fastfood').onclick = ()=>{
-        showMenu(value);
-      };
-      dropdown = () => {
-        var v = document.querySelector('.dropdown-content');
-        var dropbtn = document.querySelector('.dropbtn')
-        v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
-      }
+/* 네비게이션바 설정 */
+  .topnav {
+    position: absolute;
+    left: 350px;
+    overflow: hidden;
+    bottom: 20px; /* 위치 조정 */
+    display: flex;
+    gap: 70px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-      showMenu=(value)=>{
-        var dropbtn_icon = document.querySelector('.dropbtn_icon');
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn_click = document.querySelector('.dropbtn_click');
-        var dropbtn = document.querySelector('.dropbtn');
 
-        dropbtn_icon.innerText = '';
-        dropbtn_content.innerText = value;
-        dropbtn_content.style.color = '#252525';
-        dropbtn.style.borderColor = '#3992a8';
-      }
-    }
-    window.onclick= (e)=>{
-      if(!e.target.matches('.dropbtn_click')){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
+.topnav a{
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-        var dropbtn_icon = document.querySelector('.dropbtn_icon');
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn_click = document.querySelector('.dropbtn_click');
-        var dropbtn = document.querySelector('.dropbtn');
+.topnav a:hover{
+    background-color: #ffffff; 
+    color: green;
+}
 
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-</script>
+/* 네비게이션바 끝 */
 
-</body>
-</html>
+.title{
+  text-align: center;
+  font-size: 24px;
+}
+
+.form-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto; /* 중앙 정렬 */
+  padding: 30px 90px 30px 90px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: white;
+  
+}
+
+.input, .btn{text-align:center;}
+
+.blgin{
+  text-align:center;
+  padding: 10px 25px;
+  margin:15px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  background-color:black;
+  color:white;
+  font-style:bold;
+ 
+}
+.chkblg{
+margin-left:180px;
+text-align:left;
+
+}
+.udr{
+text-align:center;}
+
+
+.row {
+  display: flex;
+}
+
+/* Column container */
+.row {
+  display: flex;
+  margin: 20px;
+  gap: 20px;
+}
+
+/* Side column for thumbnail images */
+.column.side {
+  flex: 0 0 auto;  /* Don't grow, don't shrink, auto basis */
+  width: 110px;    /* Fixed width for thumbnails column */
+  padding: 10px;
+}
+
+/* Middle column for main product image and details */
+.column.middle {
+  flex: 1;
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Main image container */
+.main-image {
+  flex: 0 0 auto;
+  width: 320px;
+}
+
+/* Product details container */
+.product-details {
+  flex: 1;
+  padding-top: 10px;
+}
+
+/* Thumbnail styling */
+.column.side img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Main product image styling */
+.main-image img {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle{
+    width: 100%;
+  }
+}
+
+.right-align {
+    float: right;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Product details styling */
+.product-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-seller {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.product-price {
+  font-size: 20px;
+  color: #e0217b;
+  margin: 15px 0;
+}
+
+/* dropdown */
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropbtn_icon{
+  font-family : 'Material Icons';
+}
+
+.dropbtn{
+  border : 1px solid rgb(37, 37, 37);
+  border-radius : 4px;
+  background-color: #f5f5f5;
+  font-weight: 400;
+  color : rgb(37, 37, 37);
+  padding : 12px;
+  width :200px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 12px;
+}
+
+.dropdown-content{
+  display : none;
+  position : absolute;
+  z-index : 1; /*다른 요소들보다 앞에 배치*/
+  font-weight: 400;
+  background-color: #f9f9f9;
+  min-width : 200px;
+}
+
+.dropdown-content a{
+  display : block;
+  text-decoration : none;
+  color : rgb(37, 37, 37);
+  font-size: 12px;
+  padding : 12px 20px;
+}
+
+.dropdown-content a:hover{
+  background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-label {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.content-area{
+width: 300px;
+  font-family:'Pretendard-Regular';
+margin-left:10px;
+}
