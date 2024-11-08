@@ -1,0 +1,190 @@
+
+*{
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white; /* 배경색 수정 */
+}
+
+.top-bar {
+  width: 1440px;
+  height: 109px; /* 높이 조정 */
+  position: relative;
+  border-bottom: 1px solid #ddd; /* 하단 경계선 추가 */
+}
+
+.search-bar {
+  width: 200px;
+  height: 35px;
+  position: absolute;
+  left: 1000px; /* 위치 조정 */
+  bottom: 20px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  border: 1px solid #f5f5f5;
+}
+
+.search-bar input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+  padding-left: 15px;
+  font-size: 15px;
+  font-family:'Pretendard-Regular';
+  outline: none;
+  background: #f5f5f5;
+}
+.login-signup {
+  position: absolute;
+  left: 1250px; /* 위치 조정 */
+  bottom: 30px;
+  font-size: 18px;
+  color: #787878;
+  cursor: pointer;
+}
+.topnav {
+  position: absolute;
+  left: 350px;
+  overflow:hidden;
+  bottom: 20px; /* 위치 조정 */
+  display: flex;
+  gap: 70px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topnav a{
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.topnav a:hover{
+    background-color: #ffffff; 
+    color: green;
+}
+
+
+
+.header {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size: 32px;
+  font-family: 'Bad Script', serif;
+  color: #000;
+}
+
+.title{
+  text-align: center;
+  font-size: 24px;
+}
+
+.form-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto; /* 중앙 정렬 */
+  padding: 30px 90px 30px 90px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: white;
+}
+
+
+
+
+.inid,.inemail,.inph,.month,.day,.year,.inna,
+input[type="password"],
+select {
+  padding: 10px 35px 10px 10px;
+  margin-bottom: 15px;
+  border:none;
+  border-radius: 15px;
+  font-size: 20px;
+  background-color: #f5f5f5;
+  color:#848484;
+}
+.chk{
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #848484;
+  border-radius: 15px;
+  font-size: 15px;
+  background-color: #f5f5f5;
+  color:#848484;
+  width:20%
+}
+
+#pswd,#chkpswd,#name,#phnum{
+width:90%
+}
+#bday{
+width: 30% 
+}
+#mkID{
+width:70%
+}
+#shortDescription,textarea{
+  width:100%
+}
+#email{
+width:50%
+}
+.ewhaemail{
+ color:#848484;
+ font-size: 20px;
+ margin-bottom:30px;
+}
+
+.form-row,.form-row2,.form-row3,.form-row4,.form-row5,.form-row6, .form-row7, .form-row8{
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 라벨과 입력 칸 간격 */
+}
+
+.mkIDc,.pswdc,.chkpswdc,.namec,.phnumc,.emailc,.bdayc{
+  width: 110px;
+  flex-shrink: 0; /* 라벨의 너비 고정 */
+  display: block;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.agree{
+text-align:right;
+}
+
+
+.button-group {
+display:flex;
+justify-content: space-between;
+}
+
+.cancel-button,
+.submit-button {
+  width: 20%;
+  padding:10px;
+  font-size: 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  border: none;
+  margin:10px 0px 10px 0px;
+}
+
+.cancel-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.submit-button {
+  background-color: #000;
+  color: #fff;
+}
