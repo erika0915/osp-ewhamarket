@@ -1,35 +1,16 @@
 <!-- login.html -->
 {% extends "index.html" %}
+{% block section %}
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+    <script>alert("{{ mesg[0] }}")</script>
+{% endif %}
+{% endwith %}
+<form action = “#” method="post">
+    <p>ID : <input type="text" name = "id"></p>
+    <p>password : <input type="password" name = "pw"></p>
+    <p>아이디와 비밀번호를 입력하고 로그인버튼을 누르세요.<br><input type = "submit" value = "로그인"/></p>
 
-{% block styles %}
-<link rel="stylesheet" href="/static/css/login.css">
-{% endblock %}
-
-{% block content %}
-<div class="form-container">
-    <p class="title2">ⓒ1886 EWHA</p>
-    <form action="/submit" method="post">
-        <div class="input">
-            <label class="ID" for="ID"></label>
-            <input class="inID" type="text" id="ID" placeholder="아이디를 입력하세요">
-            <label class="etrpswd" for="etrpswd"></label>
-            <input type="password" id="etrpswd" placeholder="비밀번호를 입력하세요"><br>
-        </div>
-        
-        <div class="chkblg">
-            <input type="checkbox" id="mtain" name="mtain">
-            <label class="mtain" for="mtain">로그인 상태 유지</label><br>
-        </div>
-        
-        <div class="btn">
-            <button class="blgin">로그인하기</button><br>
-            
-            <div class="udr">
-                <a href="#" onclick="goToPage('아이디 찾기')">아이디 찾기 |</a> 
-                <a href="#" onclick="goToPage('비밀번호 찾기')">비밀번호 찾기 |</a> 
-                <a href="#" onclick="goToPage('회원가입')">회원가입</a> 
-            </div>
-        </div> 
-    </form>
-</div>
-{% endblock %}
+</form>
+<a href="/signup"><button onclick="/signup">회원가입</button></a>
+{% endblock section %}
