@@ -36,6 +36,7 @@
 }
 
 .login-signup {
+  text-decoration: none;
   position: absolute;
   left: 1250px; /* 위치 조정 */
   bottom: 30px;
@@ -44,6 +45,11 @@
   cursor: pointer;
 }
 
+.login-signup a {
+  text-decoration: none;
+  color: #787878;
+}
+/*계속 링크 기본 스타일이 적용되길래 추가 */
 
 .topnav {
   position: absolute;
@@ -94,16 +100,14 @@
 .form-container {
   width: 80%;
   max-width: 1000px;
-  margin: 20px auto; /* 중앙 정렬 */
-  padding: 30px 90px 30px 90px;
+  margin: 50px auto; /*위여백 20px->50px*/
+  padding: 20px 90px 30px 90px; /*위내부여백 30px->20px*/
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: white;
-  
 }
 
-.inID,
-input[type="password"]{
+input[type="text"], input[type="password"]{ /*.inID -> input[type="text"]*/
   text-align:center;
   padding: 10px;
   width:70%;
@@ -117,9 +121,14 @@ input[type="password"]{
 
 .input, .btn{text-align:center;}
 
+.chkblg{
+  margin-left:130px; /*180->130:조금 더 왼쪽으로*/
+  text-align:left;
+  }
+
 .blgin{
   text-align:center;
-  padding: 10px 25px;
+  padding: 10px 40px; /*양옆간격 25->40*/
   margin:15px;
   border:none;
   border-radius: 15px;
@@ -127,15 +136,11 @@ input[type="password"]{
   background-color:black;
   color:white;
   font-style:bold;
- 
-}
-.chkblg{
-margin-left:180px;
-text-align:left;
+} 
 
-}
 .udr{
-text-align:center;}
+text-align:center;
+}
 
 .udr a{
   text-decoration: none;
