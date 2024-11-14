@@ -2,34 +2,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-<script src="{{ url_for('static', filename='main.js') }}" defer></script>
-</head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/login.css">
 
+    {% block styles %}{% endblock %}
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        } 
+        body {
+            font-family: 'Pretendard-Regular', sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
 <body>
-    <nav class="navbar">
-        <div class="navbar__logo">
-            
-            <a href="">ⓒ1886 EWHA</a>
+    <div class="container">
+        <div class="top-bar">
+            <div class="search-bar">
+                <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
+            </div>
+            <div class="title">
+                <p class="login-signup"><a href = "/login">로그인</a></p>
+            </div>
+            <div class="topnav">
+                <li><a href = "/reg_items">상품 등록</a></li>
+                <li><a href="#" onclick="goToPage('전체상품')">전체 상품</a></li>
+                <a href="#" onclick="goToPage('신상품')">신상품</a> 
+                <a href="#" onclick="goToPage('리뷰 조회')">리뷰 조회</a> 
+                <a href="#" onclick="goToPage('마이페이지')">마이페이지</a> 
+            </div>
+            <p class="header">ⓒ1886 EWHA</p>
         </div>
-        <ul class="navbar__menu">
-            <a href="/list">List</a>
-            <a href="/review">Review</a>
-            <a href="/reg_items">Register Items</a>
-            <a href="/reg_reviews">Register Reviews</a>
-            <a href="/login">login</a>
-        </ul>
-        <a href="#" class="navbar__toogleBtn">
-            <i class="fas fa-bars"></i>
-        </a>
-    </nav>
-    <section>
-        {% block section %}
-            
-        {% endblock section %}
-     </section>
+
+        <main>
+            {% block section %}{% endblock %}
+        </main>
+    </div>
 </body>
 </html>
+

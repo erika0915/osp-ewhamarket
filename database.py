@@ -1,12 +1,28 @@
-import pyrebase
-import json
+import pyrebase 
+import json 
+
 class DBhandler:
     def __init__(self):
-        with open('./authentication/firebase_auth.json') as f:
-            config=json.load(f)
-    
+        with open('.github/authentication/firebase_auth.json') as f:
+            config = json.load(f)
+
         firebase = pyrebase.initialize_app(config)
         self.db = firebase.database()
+    def insert_item(self, name, data, img_path):
+        item_info ={
+            "userId":data['userId'],
+            "productName" : data ['productName'],
+            "price" : data['price'],
+            "category":data['category'],
+            "option":data['option'],
+            "location":data['location'],
+            "shortDescription":data['shortDescription'],
+            "description":data['description'],
+            "img_path":img_path
+        }
+        self.db.child("item").child(name).set(item_info)
+        print(data, img_path)
+        return True 
 
     def insert_user(self, data, pw):
         user_info ={
