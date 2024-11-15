@@ -4,6 +4,7 @@ import hashlib
 import sys 
 
 application  = Flask(__name__)
+application.config["SECRET_KEY"]="helloosp"
 DB = DBhandler()
 
 @application.route("/")
