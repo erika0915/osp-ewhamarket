@@ -1,0 +1,179 @@
+/* 기본 스타일 */
+body {
+    font-family: 'Pretendard-Regular', sans-serif;
+    background-color: #f5f5f5;
+    color: #263343;
+    margin: 0;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 20px 200px 20px;
+  background-color: white;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 109px; /* 높이 조정 */
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.search-bar {
+  width: 250px;
+  height: 35px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+  font-size: 15px;
+  font-family: 'Pretendard-Regular';
+  outline: none;
+  background: #f5f5f5;
+}
+
+.login-signup {
+  font-size: 18px;
+  color: #787878;
+}
+
+.login-signup a {
+  text-decoration: none;
+  color: #787878;
+  margin-left: 20px;
+}
+
+.topnav {
+  display: flex;
+  gap: 70px;
+  list-style: none;
+  margin: 0;
+}
+
+.topnav a {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.topnav a:hover {
+  background-color: #ffffff;
+  color: green;
+}
+
+/* 헤더 */
+.header {
+  font-size: 32px;
+  font-family: 'Bad Script', serif;
+  color: #000;
+}
+
+/* 타이틀 */
+.title2 {
+  text-align: center;
+  font-family: 'Bad Script', serif;
+  color: #000;
+  font-size: 40px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+}
+
+/* 폼 스타일링 */
+.form-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px 90px 30px 90px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: white;
+}
+
+input[type="text"], input[type="password"] {
+  text-align: center;
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 15px;
+  font-size: 20px;
+  background-color: #f5f5f5;
+  color: #848484;
+}
+
+.input, .btn {
+  text-align: center;
+}
+
+.chkblg {
+  margin-left: 130px;
+  text-align: left;
+}
+
+.blgin {
+  text-align: center;
+  padding: 10px 40px;
+  margin: 15px;
+  border: none;
+  border-radius: 15px;
+  font-size: 15px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.udr {
+  text-align: center;
+}
+
+.udr a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* 반응형 디자인 추가 */
+@media screen and (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .search-bar {
+    width: 200px;
+    margin-bottom: 10px;
+  }
+
+  .login-signup {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .topnav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topnav a {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+}
