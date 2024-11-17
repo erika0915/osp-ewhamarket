@@ -1,0 +1,79 @@
+{% extends "index.html" %}
+{% block styles %}
+<link rel="stylesheet" href="/static/css/list.css">
+{% endblock %}
+
+<div class="container">
+    <aside class="side-bar">
+        <ul>
+            <li>
+                <a href="#"></i> 폰 악세사리</a>
+                <ul>
+                    <li><a href="#">휴대폰 케이스</a></li>
+                    <li><a href="#">에어팟 케이스</a></li>
+                    <li><a href="#">스마트 톡</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"></i> 리빙&소품</a>
+                <ul>
+                    <li><a href="#">오브제</a></li>
+                    <li><a href="#">홈패브릭</a></li>
+                    <li><a href="#">테이블웨어</a></li>
+                    <li><a href="#">조명</a></li>
+                    <li><a href="#">키링</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"></i> 쥬얼리</a>
+                <ul>
+                    <li><a href="#">목걸이</a></li>
+                    <li><a href="#">귀걸이</a></li>
+                    <li><a href="#">반지</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <main>
+        <section id="head">
+            <p class="title">전체 상품 조회</p>
+            <div class="array">
+                <button class="review" data-value="review">리뷰 많은 순</button>
+                <button class="rate" data-value="rate">높은 평점 순</button>
+                <button class="recent" data-value="recent">최신순</button>
+            </div>
+        </section>
+        <div class="container">
+            <div class="gallery-container">
+                {% for product in products %}
+                    <!-- 3개의 아이템마다 row 클래스를 추가하여 한 줄에 3개씩 표시 -->
+                    <div class="gallery">
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                            <img src="/static/images/phonecase.png" alt="{{ product.name }}">
+                            <div class="desc">{{ product.name }}</div>
+                            <div class="price">{{ product.price }}</div>
+                        </a>
+                    </div>
+                    
+                    <!-- 한 페이지에 6개 아이템, 3개씩 나누기 위한 조건 -->
+                    {% if loop.index % 3 == 0 %}
+                        </div><div class="gallery-container"> <!-- 새로운 행 시작 -->
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        
+    </main>
+</div>
+
+<script>
+  let demo = document.getElementById("demo");
+
+  // demo 부분에 클릭 이벤트
+  demo.addEventListener("click", function() {
+    demo.classList.toggle('click');
+  }) 
+</script>
+
+{% endblock section %}
