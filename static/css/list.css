@@ -8,14 +8,14 @@
 } 
  
 *{
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white; /* 배경색 수정 */
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white; /* 배경색 수정 */
 }
 
 /*사이드바 설정*/
@@ -55,28 +55,28 @@ li  a{
 
 /*순서배열 버튼*/
 .array{
-    float: right;
-    margin-right: 20px;
-    margin-top: 80px;
-    display: flex;
-    margin-bottom: 10px;
-    gap: 10px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 80px;
+  display: flex;
+  margin-bottom: 10px;
+  gap: 10px;
 }
 .array button{
-    padding: 5px 10px;
-    white-space: nowrap;
-    text-align: center;
+  padding: 5px 10px;
+  white-space: nowrap;
+  text-align: center;
 }
 /*순서배열 끝*/
 
 /* 전체상품조회 */
 .title{
-    float: left;
+  float: left;
 	text-align:left;
-    margin-left:180px;
-    margin-top:35px;
-    color: #000;
-    font-size:30px;
+  margin-left:180px;
+  margin-top:35px;
+  color: #000;
+  font-size:30px;
 }
 /* 끝 */
 
@@ -96,16 +96,16 @@ margin-right:20px;
 }
 
 .gallery-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;  /* 아이템 간 간격 */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;  /* 아이템 간 간격 */
 }
 
 .gallery {
-    width: 30%;  /* 3개의 아이템을 한 줄에 배치 */
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 10px;
+  width: 30%;  /* 3개의 아이템을 한 줄에 배치 */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 .gallery img {
@@ -124,6 +124,36 @@ margin-right:20px;
   color: red;
 }
 /*상품리스트끝*/
+
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  margin-top: 20px; /* 리스트와 버튼 사이 간격 */
+  gap: 10px; /* 버튼 간 간격 */
+  padding: 10px 0;
+  position: relative; /* 일반 배치 (고정 X) */
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination button.active {
+  background-color: green;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
 
 
 @media only screen and (max-width: 700px) {
