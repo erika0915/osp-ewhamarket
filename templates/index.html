@@ -1,69 +1,45 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css"/>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar_logo">
-            <p class="header">ⓒ1886 EWHA</p>
-        </div>
-        <div class="search-bar">
-            <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
-        </div>
+    <div class="container">
         <div class="log">
-            {% if session'[id']%}
-            <li><a href="/logout"><b>{{session['id']}}님 반갑습니다!</b> logout</a></li>
+            {% if session['id'] %}
+                <li><a href="/logout"><b>{{ session['id'] }}님 반갑습니다!</b> logout</a></li>
             {% else %}
-            <li><a href="/login">login</a><a href = "/signup">회원가입</a></li>
+                <li><a href="/login">login</a>&nbsp;<a href="/signup">회원가입</a></li>
             {% endif %}
-        </div>
-        <ul class="navbar_menu">
-            <li><a href="/list">전체상품</a></li>
-            <li><a href="/ranking">마켓 랭킹</a></li>
-            <li><a href="/review">리뷰 조회</a></li>
-            <li><a href="/mypage">마이페이지</a></li>
-        </ul>
-        <!-- 햄버거 메뉴 버튼 (js연결) -->
-        <a href="#" class="navbar__toggleBtn">
-            <i class="fas fa-bars"></i>
-          </a>
-    </nav>
-    <section>
-        {% block section %}
-
-        {% endblock section %}
-    </section>
-
-    <!--     <div class="container">
-        <div class="top-bar">
+        </div>        
+        <nav class="navbar">
+            <div class="navbar_logo">
+                <p class="header">ⓒ1886 EWHA</p>
+            </div>
+            <ul class="navbar_menu">
+                <li><a href="/list">전체상품</a></li>
+                <li><a href="/ranking">마켓 랭킹</a></li>
+                <li><a href="/review">리뷰 조회</a></li>
+                <li><a href="/mypage">마이페이지</a></li>
+            </ul>
+            <a href="#" class="navbar__toggleBtn">
+                <i class="fas fa-bars"></i>
+            </a>
             <div class="search-bar">
                 <input type="text" id="search-bar" placeholder="검색어를 입력하세요.">
             </div>
-            <div class="title">
-                <p class="login-signup"><a href = "/login">로그인</a>&nbsp;&nbsp;&nbsp;<a href = "/signup">회원가입</a></p>
-            </div>
-            <div class="topnav">
-                <li><a href = "/reg_items">상품 등록</a></li>
-                <li><a href="#" onclick="goToPage('전체상품')">전체 상품</a></li>
-                <a href="#" onclick="goToPage('신상품')">신상품</a> 
-                <a href="#" onclick="goToPage('리뷰 조회')">리뷰 조회</a> 
-                <a href="#" onclick="goToPage('마이페이지')">마이페이지</a> 
-            </div>
-            <p class="header">ⓒ1886 EWHA</p>
-        </div>
-
-        <main>
-            {% block section %}{% endblock %}
-        </main>
-    </div> -->
+        </nav>
+        <section>
+            {% block section %}
+            {% endblock section %}
+        </section>
+    </div>
 </body>
 </html>
-
