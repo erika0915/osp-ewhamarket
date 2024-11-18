@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', () => {
     const products = Array.from(document.querySelectorAll('.product')); // 모든 상품 요소
     const itemsPerPage = 6; // 페이지당 표시할 상품 개수
@@ -30,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 상품 표시 업데이트
     function updateDisplay() {
         // 모든 상품 숨기기
-        products.forEach(product => (product.style.display = 'none'));
+        products.forEach(product => product.classList.add('hidden'));
 
         // 현재 페이지의 상품만 표시
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
-        products.slice(start, end).forEach(product => (product.style.display = 'flex'));
+        products.slice(start, end).forEach(product => product.classList.remove('hidden'));
 
         // 버튼 활성화/비활성화
         prevButton.disabled = currentPage === 1;
@@ -64,4 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 초기 표시
     updateDisplay();
 });
-</script>
+
+let demo = document.getElementById("demo");
+
+// demo 부분에 클릭 이벤트
+demo.addEventListener("click", function() {
+  demo.classList.toggle('click');
+});
