@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/page3.css">
+<link rel="stylesheet" href="../static/css/detail.css">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
@@ -48,22 +48,22 @@
   <div class="column side">
     <p>
       <a target="_blank" href="/static/images/phone1.png">
-        <img src="/static/images/phone1.png" alt="phone1">
+        <img src="../static/images/phone1.png" alt="phone1">
       </a>
     </p>
     <p>
       <a target="_blank" href="/static/images/phone2.png">
-        <img src="/static/images/phone2.png" alt="phone2">
+        <img src="../static/images/phone2.png" alt="phone2">
       </a>
     </p>
     <p>
       <a target="_blank" href="/static/images/phone3.png">
-        <img src="/static/images/phone3.png" alt="phone3">
+        <img src="../static/images/phone3.png" alt="phone3">
       </a>
     </p>
     <p>
       <a target="_blank" href="/static/images/phone4.png">
-        <img src="/static/images/phone4.png" alt="phone4">
+        <img src="../static/images/phone4.png" alt="phone4">
       </a>
     </p>
   </div>
@@ -71,7 +71,7 @@
   <div class="column middle">
     <div class="main-image">
       <a target="_blank" href="/static/images/phone0.png">
-        <img src="/static/images/phone0.png" alt="phone0">
+        <img src="../static/images/phone0.png" alt="phone0">
       </a>
     </div>
     
@@ -147,70 +147,7 @@
   
 
 </div> 
-<script>
-HTML CSS JSResult Skip Results Iframe
-EDIT ON
-window.onload=()=>{
-      document.querySelector('.dropbtn_click').onclick = ()=>{
-        dropdown();
-      }
-      document.getElementsByClassName('fastfood').onclick = ()=>{
-        showMenu(value);
-      };
-      dropdown = () => {
-        var v = document.querySelector('.dropdown-content');
-        var dropbtn = document.querySelector('.dropbtn')
-        v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
-      }
-
-      showMenu=(value)=>{
-        var dropbtn_icon = document.querySelector('.dropbtn_icon');
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn_click = document.querySelector('.dropbtn_click');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        dropbtn_icon.innerText = '';
-        dropbtn_content.innerText = value;
-        dropbtn_content.style.color = '#252525';
-        dropbtn.style.borderColor = '#3992a8';
-      }
-    }
-    window.onclick= (e)=>{
-      if(!e.target.matches('.dropbtn_click')){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-
-        var dropbtn_icon = document.querySelector('.dropbtn_icon');
-        var dropbtn_content = document.querySelector('.dropbtn_content');
-        var dropbtn_click = document.querySelector('.dropbtn_click');
-        var dropbtn = document.querySelector('.dropbtn');
-
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-
-function toggleLike(button) {
-      const heartIcon = button.querySelector('.heart-icon');
-      const likeCount = button.parentElement.querySelector('.like-count');
-      let count = parseInt(likeCount.textContent);
-      
-      if (heartIcon.classList.contains('active')) {
-        heartIcon.classList.remove('active');
-        count--;
-      } else {
-        heartIcon.classList.add('active');
-        count++;
-      }
-      
-      likeCount.textContent = count;
-    }
-</script>
+<script src="../static/js/detail.js"></script>
 
 </body>
 </html>
