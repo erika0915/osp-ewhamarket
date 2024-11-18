@@ -91,30 +91,28 @@ margin-right:20px;
 .input, .btn{text-align:center;}
 
 /* 상품리스트 */
-.gallery:hover {
-  border: 1px solid #777;
+
+/* 상품 리스트 테이블 */
+table {
+  width: 100%; /* 테이블을 화면 너비에 맞게 확장 */
+  border-collapse: collapse;
+  margin-top: 20px;
+  text-align: center; /* 중앙 정렬 */
 }
 
-.gallery-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;  /* 아이템 간 간격 */
-}
-
-.gallery {
-  width: 30%;  /* 3개의 아이템을 한 줄에 배치 */
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-.gallery img {
-  width: 100%;
-  height: auto;
-}
-
-.desc {
+td {
   padding: 15px;
+  border: 1px solid #ccc; /* 테두리 */
+}
+
+td img {
+  width: 140px;
+  height: 200px;
+  object-fit: cover; /* 이미지 비율 유지 */
+}
+
+td .desc, td .price {
+  margin-top: 10px;
   text-align: left;
 }
 
@@ -126,33 +124,33 @@ margin-right:20px;
 /*상품리스트끝*/
 
 /* 페이징 */
-.pagination {
+.page-nation li{
+  list-style: none;
+}
+.page-wrap{
+  text-align: center;
+  font-size: 0;
+}
+.page-nation{
   display: flex;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: center;
   align-items: center;
-  margin-top: 20px; /* 리스트와 버튼 사이 간격 */
-  gap: 10px; /* 버튼 간 간격 */
-  padding: 10px 0;
-  position: relative; /* 일반 배치 (고정 X) */
+  margin-top: 20px;
 }
-
-.pagination button {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.pagination button.active {
-  background-color: green;
-  color: white;
-}
-
-.pagination button:disabled {
-  background-color: #f0f0f0;
-  cursor: not-allowed;
+.page-nation a{
+  display: block;
+  margin: 0 3px;
+  float: left;
+  border: 1px solid #e6e6e6;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background-color: #fff;
+  font-size: 13px;
+  color: black;
+  text-decoration: none;
+  font-weight:bold;
 }
 
 

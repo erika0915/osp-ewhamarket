@@ -45,31 +45,53 @@
         </div>
     </section>
     <div class="container">
-        <div class="gallery-container">
-            {% for product in products %}
-                <!-- 3개의 아이템마다 row 클래스를 추가하여 한 줄에 3개씩 표시 -->
-                <div class="gallery">
-                    <a href="{{ url_for('product_detail', product_id=product.id) }}">
-                        <img src="/static/images/phonecase.png" alt="{{ product.name }}">
-                        <div class="desc">{{ product.name }}</div>
-                        <div class="price">{{ product.price }}</div>
-                    </a>
-                </div>
-                
-                <!-- 한 페이지에 6개 아이템, 3개씩 나누기 위한 조건 -->
-                {% if loop.index % 3 == 0 %}
-                    </div><div class="gallery-container"> <!-- 새로운 행 시작 -->
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% if total > 0 %}
+            <p>상품리스트 -- 현재까지 {{ total }}개 등록됨</p>
+            <table>
+              <tr>
+                {% for key, value, price in rowl %}
+                <td>{{key}} {{price}}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for key, value, price in row1 %}
+                <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                <img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for key, value, price in row2 %}
+                <td>{{key}} {{price}}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for key, value, price in row2 %}
+                <td onclick="locaiton.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+                <img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                {% endfor %}
+              </tr>
+            </table>
+        {% else %}
+            <p>등록된 상품이 없습니다.</p>
+        {% endif %}
     </div>
   </main>
+
   <!-- 페이징 버튼 추가 -->
-  <div class="pagination">
-    <button class="prev-page">이전</button>
-    <span class="page-numbers"></span>
-    <button class="next-page">다음</button>
+  <div class="page-wrap">
+    <div class="page-nation">
+      <ul>
+        <li>
+          {% for i in range(page_count)%}
+            <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+          {% endfor %}
+        </li>
+      </ul>
+    </div>
   </div>
+  {% else %}
+  <p>등록된 상품이 없습니다. </p>
+  {% endif %}
 </div>
 
 <script src="/static/js/list.js"></script>
