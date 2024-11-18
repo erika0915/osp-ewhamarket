@@ -4,13 +4,6 @@
 <link rel="stylesheet" href="/static/css/login.css">
 {% endblock %}
 
-{% block section %} <!-- 안되길래 block content -> block section -->
-{% with mesg = get_flashed_messages() %}
-{% if mesg !=[] %}
-    <script>alert("{{ mesg[0] }}")</script>
-{% endif %}
-{% endwith %}
-
 <div class="form-container">
     <p class="title2">ⓒ1886 EWHA</p>
     <form action = “#” method="post">
