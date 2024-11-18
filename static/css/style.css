@@ -48,8 +48,8 @@ body {
 
 .log {
     position: absolute;
-    right: 20px; /* 오른쪽 정렬 */
-    top: 50%; /* 네비게이션 바의 중앙 정렬 */
+    right: 420px; /* 오른쪽 정렬 */
+    top: 8%; /* 네비게이션 바의 중앙 정렬 */
     transform: translateY(-50%);
     font-size: 18px;
     color: #787878;
