@@ -71,7 +71,7 @@
   <div class="column middle">
     <div class="main-image">
       <a target="_blank" href="/static/images/phone0.png">
-        <img src="../static/images/phone0.png" alt="phone0">
+        <img src="../static/images/{{data.img_path}}" alt="{{data.img_path}}"> <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
       </a>
     </div>
     
@@ -129,9 +129,20 @@
   </div>
       <div class="product-description2">
      <h4 class="underline">상세설명</h4>
+  <p>상품 이름 : <b>{{name}}</b> / 상품 주소 : {{data.addr}} </p>
+  <p>전화번호 : {{data.phone}} / 카테고리 : {{data.category}} </p>
 	<p>사이즈 : heights 15 / width 10</p>
 	<p>소재 : 에폭시 </p>
 	<p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
+
+  <p>본 신용카드 결제가
+    {% if data['card'] == "Y" %}
+    가능합니다 !
+    {% endif %}
+    {% if data['card'] == "N" %}
+    불가합니다 !
+    {% endif %}
+  </p>
   </div>
 
     </div>
