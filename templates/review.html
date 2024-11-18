@@ -154,12 +154,19 @@
             </div>
         </div>  
     </main>  
-    <!-- 페이징 버튼 추가 -->
-    <div class="pagination">
-        <button class="prev-page">이전</button>
-        <span class="page-numbers"></span>
-        <button class="next-page">다음</button>
+    
+  <!-- 페이징 버튼 추가 -->
+  <div class="page-wrap">
+    <div class="page-nation">
+      <ul>
+        <li>
+          {% for i in range(page_count)%}
+            <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+          {% endfor %}
+        </li>
+      </ul>
     </div>
+  </div>
 </div>
 
 <div class="clearfix"></div>

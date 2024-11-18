@@ -34,7 +34,6 @@
       </li>
     </ul>
   </aside>
-
   <main>
     <section id="head">
         <p class="title">전체 상품 조회</p>
@@ -44,30 +43,30 @@
             <button class="recent" data-value="recent">최신순</button>
         </div>
     </section>
-    <div class="container">
         {% if total > 0 %}
             <p>상품리스트 -- 현재까지 {{ total }}개 등록됨</p>
             <table>
               <tr>
-                {% for key, value, price in rowl %}
-                <td>{{key}} {{price}}</td>
+                <tr>
+                  {% for item in row1 %}
+                  <td onclick="location.href='/view_detail/{{item.key}}/';" style="cursor:pointer;">
+                    <img src="{{ url_for('static', filename='images/' + item.img_path) }}"></td>
+                  {% endfor %}
+                </tr>
+                <!-- item딕셔너리로 취급 -->
+                {% for item in rowl %}
+                <td>{{item.key}} {{item.price}}</td>
                 {% endfor %}
               </tr>
               <tr>
-                {% for key, value, price in row1 %}
-                <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                <img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                {% for item in row2 %}
+                <td onclick="location.href='/view_detail/{{item.key}}/';" style="cursor:pointer;">
+                  <img src="{{ url_for('static', filename='images/' + item.img_path) }}"></td>
                 {% endfor %}
               </tr>
               <tr>
-                {% for key, value, price in row2 %}
-                <td>{{key}} {{price}}</td>
-                {% endfor %}
-              </tr>
-              <tr>
-                {% for key, value, price in row2 %}
-                <td onclick="locaiton.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-                <img src="static/images/{{value.img_path}}", width=140, height=200></td>
+                {% for item in row2 %}
+                <td>{{item.key}} {{item.price}}</td>
                 {% endfor %}
               </tr>
             </table>
@@ -89,9 +88,6 @@
       </ul>
     </div>
   </div>
-  {% else %}
-  <p>등록된 상품이 없습니다. </p>
-  {% endif %}
 </div>
 
 <script src="/static/js/list.js"></script>

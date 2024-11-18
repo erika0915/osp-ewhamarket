@@ -188,24 +188,36 @@ li  a{
     position: relative; /* 일반 배치 (고정 X) */
 }
 
-.pagination button {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.pagination button.active {
-    background-color: green;
-    color: white;
-}
-
-.pagination button:disabled {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-}
+/* 페이징 */
+.page-nation li{
+    list-style: none;
+  }
+  .page-wrap{
+    text-align: center;
+    font-size: 0;
+  }
+  .page-nation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .page-nation a{
+    display: block;
+    margin: 0 3px;
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: black;
+    text-decoration: none;
+    font-weight:bold;
+  }
+  
 
 .clearfix:after {
   content: "";

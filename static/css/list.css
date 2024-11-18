@@ -106,8 +106,8 @@ td {
 }
 
 td img {
-  width: 140px;
-  height: 200px;
+  width: 200px;
+  height: 140px;
   object-fit: cover; /* 이미지 비율 유지 */
 }
 
