@@ -92,9 +92,10 @@
       <h4 class="product-seller">판매자: 이화컴공</h4>
       <div class="product-description">이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</div>
       <h3 class="product-price">21000 원</h3>
-      <div class="dropdown-label">
 
-<div class="dropdown">
+  <div class="dropdown-label">
+
+    <div class="dropdown">
       <button class="dropbtn"> 
         <span class="dropbtn_icon">색상: Black - 사이즈: S</span>
       </button>
@@ -105,8 +106,7 @@
       </div>
     </div>
 
-
-<div class="dropdown">
+    <div class="dropdown">
       <button class="dropbtn"> 
         <span class="dropbtn_icon">1개</span>
       </button>
@@ -118,10 +118,11 @@
       </div>
     </div>
 
-<button class="buy" data-value="buy">바로 구매 ></button>
+    <button class="buy" data-value="buy">바로 구매 ></button>
 
-      </div>
-<div class="review">
+  </div><!--dropdown-label-->
+
+  <div class="review">
     <div class="underline">REVIEW</div>
     <div class="star_rating">
       <span class="star on"></span>
@@ -132,14 +133,15 @@
     </div>
     <div class="star_number">4(5)</div>
   </div>
-      <div class="product-description2">
-     <h4 class="underline">상세설명</h4>
-  <p>상품 이름 : <b>{{name}}</b> / 상품 주소 : {{data.addr}} </p>
-  <p>전화번호 : {{data.phone}} / 카테고리 : {{data.category}} </p>
-	<p>사이즈 : heights 15 / width 10</p>
-	<p>소재 : 에폭시 </p>
-	<p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
-  <p>
+
+  <div class="product-description2">
+  <h4 class="underline">상세설명</h4>
+    <p>상품 이름 : <b>{{name}}</b> / 상품 주소 : {{data.addr}} </p>
+    <p>전화번호 : {{data.phone}} / 카테고리 : {{data.category}} </p>
+    <p>사이즈 : heights 15 / width 10</p>
+    <p>소재 : 에폭시 </p>
+    <p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
+    <p>
     For payment, the credit card is
     {% if data['card'] == "Y" %}
     accepted!
@@ -148,10 +150,9 @@
     NOT accepted!
     {% endif %}
     </p>
-
   </div>
 
-    </div>
+  </div><!--dropdown-label-->
 
   </div><!--column middle-->
   </div><!--row-->
