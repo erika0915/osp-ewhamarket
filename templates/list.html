@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 {% block styles %}
-<link rel="stylesheet" href="/static/css/list.css">
+<link rel="stylesheet" href="../static/css/list.css">
+<link rel="stylesheet" href="../static/css/style.css">
 {% endblock %}
 
 <div class="container">
@@ -81,8 +82,11 @@
       </ul>
     </div>
   </div>
+  {% else %}
+  <p>등록된 상품이 없습니다. </p>
+  {% endif %}
 </div>
 
-<script src="/static/js/list.js"></script>
+<script src="../static/js/list.js"></script>
 
 {% endblock %}
