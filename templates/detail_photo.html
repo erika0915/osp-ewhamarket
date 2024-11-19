@@ -1,16 +1,3 @@
-<!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
+<!--사진 클릭시 사진 확대해서 보이기-->
 
-<p>상품 이름 : <b>{{name}}</b> / 상품 주소 : {{data.addr}} </p>
-<p>전화번호 : {{data.phone}} / 카테고리 : {{data.category}} </p>
-
-
-<p>
-For payment, the credit card is
-{% if data['card'] == "Y" %}
-accepted!
-{% endif %}
-{% if data['card'] == "N" %}
-NOT accepted!
-{% endif %}
-</p>
 <img src="../../static/images/{{data.img_path}}", width=140, height=200>
