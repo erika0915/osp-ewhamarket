@@ -23,6 +23,10 @@ class DBhandler:
         self.db.child("item").child(name).set(item_info)
         print(data, img_path)
         return True 
+    
+    def get_items(self):
+        items = self.db.child("item").get().val()
+        return items
 
     def insert_user(self, data, pw):
         user_info ={
