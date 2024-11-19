@@ -34,6 +34,7 @@ def view_list():
     per_page = 6 
     per_row = 3 
     row_count = int(per_page/per_row)
+
     data = DB.get_items() 
     start_idx = per_page * page
     end_idx = per_page * (page+1)
@@ -45,16 +46,31 @@ def view_list():
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
         else:
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
-            
+
     return render_template(
-        "list.html", datas = data.items(),
+        "list.html", 
+        datas = data.items(),
         row1 = locals()['data_0'].items(), 
         row2 = locals()['data_1'].items(), 
-        limit = per_page 
+        limit = per_page, 
         page = page, 
-        page_count = int((item_counts/per_page)+1), #전체 페이지 수 
+        page_count = int((item_counts / per_page) + 1), 
         total = item_counts
     )
+
+    print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
+
+
+@application.route('/dynamicurl/<variable_name>/')
+def DynamicUrl(variable_name):
+    return str(variable_name)
+
+@application.route("/view_detail/<name>/")
+def view_item_detail(name):
+    print("###name:", name)
+    data = DB.get_item_byname(str(name))
+    print("###data:", data)
+
 @application.route("/login")
 def login():
     return render_template("login.html")
