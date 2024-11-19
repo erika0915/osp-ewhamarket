@@ -1,8 +1,10 @@
 {% extends "index.html" %}
+{%block styles%}
 <link rel="stylesheet" href="/static/css/wrt_review.css">
 <link rel="stylesheet" href="/static/css/style.css">
-{%block section%} 
+{% endblock%}
 
+{%block section%} 
 <main>
   <div class="form-container">
     <div class="titleReview">
@@ -69,3 +71,4 @@
     </div> 
   </div> 
 </main>
+{% endblock %}
