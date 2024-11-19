@@ -9,7 +9,8 @@ DB = DBhandler()
 
 @application.route("/")
 def hello() :
-    return render_template("index.html")
+    #return render_template("index.html")
+    return redirect(url_for('view_list'))
 
 @application.route('/reg_items')
 def reg_items():
@@ -31,6 +32,23 @@ def reg_item_submit_post():
 def login():
     return render_template("login.html")
 
+@application.route("/login_confirm", methods=['POST'])
+def login_user():
+    id_=request.form['id']
+    pw=request.form['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.find_user(id_,pw_hash):
+        session['id']=id_
+        return redirect(url_for('view_list'))
+    else:
+        flash("Wrong ID or PW!")
+        return render_template("login.html")
+
+@application.route("/logout")
+def logout_user():
+    session.clear()
+    return redirect(url_for('view_list'))
+
 @application.route("/signup")
 def signup():
     return render_template("signup.html")
@@ -45,7 +63,7 @@ def register_user():
     else:
         flash("user id already exist!")
         return render_template("signup.html")
-
+    
 @application.route('/page2')
 def page2():
     return render_template('page2.html') #list 
