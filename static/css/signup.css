@@ -93,13 +93,13 @@ width:50%
 }
 /*개인정보 수집 및 동의*/
 .agree{
-text-align:right;
+  text-align:right;
 }
 
 /*회원가입 및 취소 버튼*/
 .button-group {
-display:flex;
-justify-content: space-between;
+  display:flex;
+  justify-content: space-between;
 }
 
 .cancel-button,
@@ -115,10 +115,9 @@ justify-content: space-between;
 
 .cancel-button {
   background-color: #fff;
-  color: #000;
+  color: #e0e0e0;
   border: 0.5px solid #000;
-  border-radius: 10px;
-} /*화면과 유사하게 수정*/
+} 
 
 .submit-button {
   background-color: #000;
