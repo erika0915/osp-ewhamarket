@@ -2,6 +2,7 @@
 {% extends "index.html" %}
 {% block styles %}
 <link rel="stylesheet" href="../static/css/login.css">
+<link rel="stylesheet" href="../static/css/style.css">
 {% endblock %}
 
 {% block section %} <!-- 안되길래 block content -> block section -->
@@ -10,29 +11,30 @@
     <script>alert("{{ mesg[0] }}")</script>
 {% endif %}
 {% endwith %}
+<main>
+    <div class="form-container">
+        <p class="titleLogin">ⓒ1886 EWHA</p>
+        <form action = “#” method="post">
+            <div class="input">
+                <input type="text" id="ID" placeholder="아이디를 입력하세요">
+                <input type="password" id="etrpswd" placeholder="비밀번호를 입력하세요"><br>
+            </div> <!-- div class="input"부분 불필요한 부분 약간 수정 -->
 
-<div class="form-container">
-    <p class="title2">ⓒ1886 EWHA</p>
-    <form action = “#” method="post">
-        <div class="input">
-            <input type="text" id="ID" placeholder="아이디를 입력하세요">
-            <input type="password" id="etrpswd" placeholder="비밀번호를 입력하세요"><br>
-         </div> <!-- div class="input"부분 불필요한 부분 약간 수정 -->
+            <div class="chkblg">
+                <input type="checkbox" id="mtain" name="mtain">
+                <label class="mtain" for="mtain">로그인 상태 유지</label><br>
+            </div>
 
-    <div class="chkblg">
-        <input type="checkbox" id="mtain" name="mtain">
-        <label class="mtain" for="mtain">로그인 상태 유지</label><br>
+            <div class="btn">
+                <button class="blgin">로그인</button><br><br>
+                <div class="udr">
+                    <a href="#" onclick="goToPage('아이디 찾기')">아이디 찾기 |</a> 
+                    <a href="#" onclick="goToPage('비밀번호 찾기')">비밀번호 찾기 |</a> 
+                    <a href="/signup">회원가입</a> <!--불필요한 부분 약간 수정-->
+                    <br><br><br> <!--여백 늘리기-->
+                </div>
+            </div> 
+        </form>
     </div>
-
-    <div class="btn">
-        <button class="blgin">로그인</button><br><br>
-        <div class="udr">
-            <a href="#" onclick="goToPage('아이디 찾기')">아이디 찾기 |</a> 
-            <a href="#" onclick="goToPage('비밀번호 찾기')">비밀번호 찾기 |</a> 
-            <a href="/signup">회원가입</a> <!--불필요한 부분 약간 수정-->
-            <br><br><br> <!--여백 늘리기-->
-        </div>
-    </div> 
-</form>
-</div>
+</main>
 {% endblock section %}
