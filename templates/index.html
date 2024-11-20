@@ -7,7 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block styles %}
+    <!-- 리스트 페이지에서만 추가될 스타일 -->
+    {% endblock %}
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 <body>
@@ -25,7 +28,7 @@
             </div>
             <ul class="navbar_menu">
                 <li><a href="/list">전체상품</a></li>
-                <li><a href="/ranking">마켓 랭킹</a></li>
+                <li><a href="/reg_items">상품등록</a></li>
                 <li><a href="/review">리뷰 조회</a></li>
                 <li><a href="/mypage">마이페이지</a></li>
             </ul>

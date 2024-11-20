@@ -5,11 +5,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
 {% endblock %}
 
+
+{% block section %}
 <div class="container">
   <aside class="side-bar">
     <ul>
       <li>
-          <a href="#"></i> 폰 악세사리</a>
+          <a href="#">폰 악세사리</a>
           <ul>
             <li><a href="#">휴대폰 케이스</a></li>
             <li><a href="#">에어팟 케이스</a></li>
@@ -17,7 +19,7 @@
           </ul>
       </li>
       <li>
-          <a href="#"></i> 리빙&소품</a>
+          <a href="#">리빙&소품</a>
           <ul>
               <li><a href="#">오브제</a></li>
               <li><a href="#">홈패브릭</a></li>
@@ -27,7 +29,7 @@
           </ul>
       </li>
       <li>
-          <a href="#"></i> 쥬얼리</a>
+          <a href="#">쥬얼리</a>
           <ul>
               <li><a href="#">목걸이</a></li>
               <li><a href="#">귀걸이</a></li>
@@ -45,49 +47,54 @@
             <button class="recent" data-value="recent">최신순</button>
         </div>
     </section>
-        {% if total > 0 %}
-            <p>상품리스트 -- 현재까지 {{ total }}개 등록됨</p>
-            <table>
-              {% for row_index in range(m) %} <!-- m개의 행 -->
-              <tr>
-                  {% for col_index in range(n) %} <!-- n개의 열 -->
-                  {% set item_index = row_index * n + col_index %} <!-- 현재 아이템의 인덱스 -->
-                  {% if item_index < total %} <!-- 아이템이 존재하는 경우에만 표시 -->
-                  <td onclick="location.href='/view_detail/{{ rowl[item_index].key }}/';" style="cursor:pointer;">
-                      <img src="{{ url_for('static', filename='images/' + rowl[item_index].img_path) }}" alt="{{ rowl[item_index].key }}">
-                      <p>{{ rowl[item_index].key }}</p>
-                      <p class="price">{{ rowl[item_index].price }}</p>
-                  </td>
-                  {% else %}
-                  <td></td> <!-- 빈 셀 -->
-                  {% endif %}
-                  {% endfor %}
-              </tr>
-              {% endfor %}
-          </table>          
-        {% else %}
-            <p>등록된 상품이 없습니다.</p>
-        {% endif %}
-    </div>
-  </main>
-
-  <!-- 페이징 버튼 추가 -->
-  <div class="page-wrap">
-    <div class="page-nation">
-      <ul>
-        <li>
-          {% for i in range(page_count)%}
-            <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+    
+    {% if total > 0 %}
+      <p>상품리스트 -- 현재까지 {{ total }}개 등록됨</p>
+      <table>
+        <tr>
+          {% for key, value in row1 %}
+          <td>상품이름: {{ key }}</td>
           {% endfor %}
-        </li>
-      </ul>
-    </div>
-  </div>
-  {% else %}
-  <p>등록된 상품이 없습니다. </p>
-  {% endif %}
+        </tr>
+        <tr>
+            {% for key, value in row1 %}
+            <td onclick="location.href='view_detail/{{ key }}/';" style="cursor:pointer;">
+              <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+          {% for key, value in row2 %}
+          <td>상품이름: {{ key }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+            {% for key, value in row2 %}
+            <td onclick="location.href='view_detail/{{ key }}/';" style="cursor:pointer;">
+              <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+            </td>
+            {% endfor %}
+        </tr>
+      </table>
+
+      <div class="page-wrap">
+        <div class="page-nation">
+          <ul>
+            {% for i in range(page_count) %}
+            <li>
+            <a href="{{ url_for('view_list', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    {% else %}
+      <p>등록된 상품이 없습니다.</p>
+    {% endif %}
+
+  </main>
 </div>
-
-<script src="../static/js/list.js"></script>
-
 {% endblock %}
+
+<script src="{{ url_for('static', filename='js/list.js') }}"></script>
