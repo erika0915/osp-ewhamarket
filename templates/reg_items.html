@@ -1,8 +1,10 @@
 {% extends "index.html" %}
-{%block styles%}
-<link rel="stylesheet" href="../static/css/signup.css">
-<link rel="stylesheet" href="../static/css/style.css">
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_items.css') }}">
 {% endblock %}
+
 {%block section%} 
 <main>
   <div class="form-container">
