@@ -1,9 +1,9 @@
 {% extends "index.html" %}
-{%block styles%}
-<link rel="stylesheet" href="../static/css/detail.css">
-<link rel="stylesheet" href="../static/css/style.css">
-{% endblock%}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+{% endblock %}
 <body>
   <div class="container">
 
