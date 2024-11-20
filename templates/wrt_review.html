@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+{%block styles%}
+<link rel="stylesheet" href="../static/css/wrt_review.css">
+<link rel="stylesheet" href="../static/css/style.css">
+{% endblock%}
+
+{%block section%} 
+<main>
+  <div class="form-container">
+    <div class="titleReview">
+      <p>리뷰 작성</p>
+      <p class="discription">제품에 대한 리뷰를 작성해주세요.</p>
+    </div>
+
+    <div class=form-row>
+      <label for="productName">상품명</label>
+      <input class="inlg" type="text" id="userId" placeholder="상품명을 입력하세요.">
+    </div>
+
+    <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"style="display: none;"/>
+    <div id="image_container"></div>
+
+    <div class=form-row2>
+      <label for="reviewTitle">제목</label>
+      <input class="inpn" type="text" id="productName" placeholder="제목을 입력하세요.">
+    </div>
+
+    <div class=form-row3>
+      <label for="star">평점</label>
+      <form class="mb-3" name="myform" id="myform" method="post">
+        <div class ="star_rating">
+          <span class="star on" value="1"> </span>
+          <span class="star" value="2"> </span>
+          <span class="star" value="3"> </span>
+          <span class="star" value="4"> </span>
+          <span class="star" value="5"> </span>
+        </div>
+      </form>		
+    </div>
+
+    <div class="form-row4">
+      <label for="keyword">키워드</label>
+      <p>
+        <button class="w-btn-outline w-btn-gray-outline" type="button">예뻐요</button>
+      </p>
+      <p>
+        <button class="w-btn-outline w-btn-gray-outline" type="button">가성비 좋아요</button>
+      </p>
+      <p>
+        <button class="w-btn-outline w-btn-gray-outline" type="button">사진과 비슷해요</button>
+      </p>
+      <p>
+        <button class="w-btn-outline w-btn-gray-outline" type="button">튼튼해요</button>
+      </p>
+    </div>
+
+    <div class="form-row5">
+      <label for="content">내용</label>
+      <textarea class="content-area" id="content" placeholder="최소 20자 이상 작성해주세요." rows="6"></textarea>
+    </div>
+
+    <div class=form-row6>
+      <p class="pp">이미지   </p>
+      <label class="file-label" for="image">choose file</label>
+      <input class="file" type="file" id="image">
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="cancel-button">취소</button>
+      <button type="submit" class="submit-button">등록</button>
+    </div> 
+  </div> 
+</main>
+
+<script src="/static/js/wrt_review.js"></script>
+{% endblock %}
