@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="../static/css/list.css">
 <link rel="stylesheet" href="../static/css/style.css">
 {% endblock %}
+
 {%block section%}
 
 <div class = "container">
@@ -16,7 +17,6 @@
     상품리스트 -- 현재까지 {{ total }}개 등록됨
   </p>
   <table>
-    {% for row_index in range(m) %} <!-- m개의 행 -->
       <tr>
       {% for key, value in row1 %}
         <td> 상품이름 : {{key}} </td>
@@ -25,7 +25,7 @@
       <table>
       <tr>
       {% for key, value in row1 %}
-          <td onclick = "location.href = 'view_detail/{{key}}/';" style="cursor:pointer;"><img src= "static/images/{{value.img_path}}", width=200, height=140> </td>
+          <td onclick = "location.href = '/view_detail/{{key}}/';" style="cursor:pointer;"><img src= "static/images/{{value.img_path}}", width=200, height=140> </td>
       {% endfor %}
       </tr>
       <tr>
@@ -35,11 +35,10 @@
       </tr>
       <tr>
         {% for key, value in row2 %}
-          <td onclick = "location.href = 'view_detail/{{key}}/';" style="cursor:pointer;"><img src= "static/images/{{value.img_path}}", width=200, height=140> </td>
+          <td onclick = "location.href = '/view_detail/{{key}}/';" style="cursor:pointer;"><img src= "static/images/{{value.img_path}}", width=200, height=140> </td>
         {% endfor %}
       </tr>
       </table>
-    {% endfor %}
     </table>
   
   <!--페이지네이션을 위한 코드 시작 -->

@@ -77,6 +77,7 @@ def view_item_detail(name):
     print("###name:", name)
     data = DB.get_item_byname(str(name))
     print("###data:", data)
+    return render_template("detail.html", name=name, data=data)
 
 @application.route("/login")
 def login():
