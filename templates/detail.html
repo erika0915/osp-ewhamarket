@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {%block styles%}
-<link rel="stylesheet" href="../static/css/detail.css">
-<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
 {% endblock%}
 {%block section%}
 
@@ -12,25 +12,25 @@
     <div class="column side">
       <p>
         <a target="_blank" href="/static/images/phone1.png">
-        <img src="../static/images/phone1.png" alt="phone1">
+        <img src="../../static/images/phone1.png" alt="phone1">
         </a>
       </p>
     
       <p>
         <a target="_blank" href="/static/images/phone2.png">
-        <img src="../static/images/phone2.png" alt="phone2">
+        <img src="../../static/images/phone2.png" alt="phone2">
         </a>
       </p>
       
       <p>
         <a target="_blank" href="/static/images/phone3.png">
-        <img src="../static/images/phone3.png" alt="phone3">
+        <img src="../../static/images/phone3.png" alt="phone3">
         </a>
       </p>
     
       <p>
         <a target="_blank" href="/static/images/phone4.png">
-        <img src="../static/images/phone4.png" alt="phone4">
+        <img src="../../static/images/phone4.png" alt="phone4">
         </a>
       </p>
     </div><!--column side-->
@@ -54,9 +54,9 @@
       </div>
 
       <hr>
-      <h4 class="product-seller">판매자: {{data.useID}}</h4>
+      <h4 class="product-seller">카테고리: {{data.category}}</h4>
       <div class="product-description">이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</div>
-      <h3 class="product-price">{{data.price}}</h3>
+      <h3 class="product-price">가격 : {{data.price}}</h3>
     </div> #product details 
   <div class="dropdown-label">
 
@@ -129,5 +129,5 @@
 <script src="../static/js/detail.js"></script>
 
 </body>
-</html>
+
 {% endblock %} 
