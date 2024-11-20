@@ -14,10 +14,10 @@
 <main>
     <div class="form-container">
         <p class="titleLogin">ⓒ1886 EWHA</p>
-        <form action = “#” method="post">
-            <div class="input">
-                <input type="text" id="ID" placeholder="아이디를 입력하세요">
-                <input type="password" id="etrpswd" placeholder="비밀번호를 입력하세요"><br>
+        <form action = "/login_confirm" method="post"> <!-- #->/login_confirm -->
+            <div class="input"> <!-- request 받기 위해 name추가 -->
+                <input type="text" id="ID" name="id" placeholder="아이디를 입력하세요">
+                <input type="password" id="etrpswd" name="pw" placeholder="비밀번호를 입력하세요"><br>
             </div> <!-- div class="input"부분 불필요한 부분 약간 수정 -->
 
             <div class="chkblg">
