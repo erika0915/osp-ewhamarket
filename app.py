@@ -36,6 +36,10 @@ def view_list():
     row_count = int(per_page/per_row)
 
     data = DB.get_items() 
+    if not data:
+        print("DB에 데이터가 없습니다.")
+        return render_template("list.html", total=0, datas=[], page_count=0, m=row_count)
+
     start_idx = per_page * page
     end_idx = per_page * (page+1)
     item_counts = len(data)
@@ -46,7 +50,9 @@ def view_list():
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
         else:
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
-
+            
+    print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
+    print(f"data: {data}")
     return render_template(
         "list.html", 
         datas = data.items(),
@@ -55,7 +61,8 @@ def view_list():
         limit = per_page, 
         page = page, 
         page_count = int((item_counts / per_page) + 1), 
-        total = item_counts
+        total = item_counts, 
+        m=row_count
     )
 
     print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
@@ -120,3 +127,5 @@ def page8():
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)
+
+
