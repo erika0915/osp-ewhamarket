@@ -23,6 +23,10 @@ class DBhandler:
         self.db.child("item").child(name).set(item_info)
         print(data, img_path)
         return True 
+    
+    def get_items(self):
+        items = self.db.child("item").get().val()
+        return items
 
     def insert_user(self, data, pw):
         user_info ={
@@ -49,6 +53,7 @@ class DBhandler:
                 return False
         return True
     
+<<<<<<< HEAD
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
         target_value=[]
@@ -57,3 +62,15 @@ class DBhandler:
             if value['id'] == id_ and value['pw'] == pw_:
                 return True
         return False
+=======
+    def get_item_byname(self, name):
+        items = self.db.child("item").get()
+        target_value=""
+        print("###########", name)
+        for res in items.each():
+            key_value = res.key()
+            
+            if key_value == name:
+                target_value = res.val()
+        return target_value
+>>>>>>> 1821e199d0057bc68bc13c1479c0fdb04159e855

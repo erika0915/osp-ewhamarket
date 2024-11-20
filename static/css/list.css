@@ -105,6 +105,7 @@ td {
   border: 1px solid #ccc; /* 테두리 */
 }
 
+
 td img {
   width: 200px;
   height: 140px;
@@ -171,4 +172,16 @@ td .desc, td .price {
   display: table;
   clear: both;
   }
+
+}
+.navbar__menu.active {
+  display: block;
+}
+
+.navbar__icons.active {
+  display: block;
+}
+
+.red {
+  color: red;
 }
