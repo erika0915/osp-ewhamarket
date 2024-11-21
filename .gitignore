@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-firebase_auth.json
-__pycache__/
-*.pyc
-=======
 authentication/firebase_auth.json
 __pycache__/
 *.pyc
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56

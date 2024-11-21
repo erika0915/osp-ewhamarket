@@ -89,10 +89,7 @@ def view_item_detail(name):
 def login():
     return render_template("login.html")
 
-<<<<<<< HEAD
-=======
 # 로그인 요청 
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
 @application.route("/login_confirm", methods=['POST'])
 def login_user():
     id_=request.form['id']
@@ -105,19 +102,13 @@ def login_user():
         flash("Wrong ID or PW!")
         return render_template("login.html")
 
-<<<<<<< HEAD
-=======
 # 로그아웃 
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
 @application.route("/logout")
 def logout_user():
     session.clear()
     return redirect(url_for('view_list'))
 
-<<<<<<< HEAD
-=======
 # 회원가입 조회 
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
 @application.route("/signup")
 def signup():
     return render_template("signup.html")
@@ -133,37 +124,6 @@ def register_user():
     else:
         flash("user id already exist!")
         return render_template("signup.html")
-<<<<<<< HEAD
-    
-@application.route('/page2')
-def page2():
-    return render_template('page2.html') #list 
-
-@application.route('/page3')
-def page3():
-    return render_template('page3.html')
-
-@application.route('/page4')
-def page4():
-    return render_template('page4.html')
-
-@application.route('/page5')
-def page5():
-    return render_template('page5.html')
-
-@application.route('/page6')
-def page6():
-    return render_template('page6.html')
-
-@application.route('/page7')
-def page7():
-    return render_template('page7.html')
-
-@application.route('/page8')
-def page8():
-    return render_template('page8.html')
-=======
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)

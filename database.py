@@ -67,47 +67,8 @@ class DBhandler:
     def get_items(self):
         items = self.db.child("item").get().val()
         return items
-<<<<<<< HEAD
-
-    def insert_user(self, data, pw):
-        user_info ={
-        "id": data['id'],
-        "pw": pw, 
-        #nickname 필요없는듯해서 뺌
-        }
-        if self.user_duplicate_check(str(data['id'])):
-           self.db.child("user").push(user_info)
-           print(data)
-           return True
-        else:
-            return False
-
-    def user_duplicate_check(self, id_string):
-        users = self.db.child("user").get()
-        print("users###",users.val())
-        if str(users.val()) == "None": # first registration
-            return True
-        else:
-            for res in users.each():
-                value = res.val()
-            if value['id'] == id_string:
-                return False
-        return True
-    
-<<<<<<< HEAD
-    def find_user(self, id_, pw_):
-        users = self.db.child("user").get()
-        target_value=[]
-        for res in users.each():
-            value = res.val()
-            if value['id'] == id_ and value['pw'] == pw_:
-                return True
-        return False
-=======
-=======
     
     # 상품 세부 조회 -> 이름으로 조회 
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
     def get_item_byname(self, name):
         items = self.db.child("item").get()
         target_value=""
@@ -118,10 +79,5 @@ class DBhandler:
             if key_value == name:
                 target_value = res.val()
         return target_value
-<<<<<<< HEAD
->>>>>>> 1821e199d0057bc68bc13c1479c0fdb04159e855
-=======
-    
-    
-    
->>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
+
+
