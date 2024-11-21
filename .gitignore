@@ -1,3 +1,3 @@
-firebase_auth.json
+authentication/firebase_auth.json
 __pycache__/
 *.pyc
