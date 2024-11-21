@@ -7,15 +7,18 @@ application  = Flask(__name__, static_folder='static')
 application.config["SECRET_KEY"]="helloosp"
 DB = DBhandler()
 
+# 첫 화면 
 @application.route("/")
 def hello() :
     #return render_template("index.html")
     return redirect(url_for('view_list'))
 
+# 상품 등록 조회 
 @application.route('/reg_items')
 def reg_items():
     return render_template('reg_items.html')
 
+# 상품 등록 요청 
 @application.route("/submit_item_post", methods=['POST'])
 def reg_item_submit_post():
 
@@ -28,6 +31,7 @@ def reg_item_submit_post():
     return render_template("submit_item_result.html", data=data, img_path = "static/images/{}".format(image_file.filename))
     #reg_items
 
+# 전체 상품 조회 
 @application.route("/list")
 def view_list(): 
     page = request.args.get("page", 0, type = int) 
@@ -72,6 +76,7 @@ def view_list():
 def DynamicUrl(variable_name):
     return str(variable_name)
 
+# 상품 상세 조회 
 @application.route("/view_detail/<name>/")
 def view_item_detail(name):
     print("###name:", name)
@@ -79,10 +84,12 @@ def view_item_detail(name):
     print("###data:", data)
     return render_template("detail.html", name=name, data=data)
 
+# 로그인 조회 
 @application.route("/login")
 def login():
     return render_template("login.html")
 
+# 로그인 요청 
 @application.route("/login_confirm", methods=['POST'])
 def login_user():
     id_=request.form['id']
@@ -95,16 +102,18 @@ def login_user():
         flash("Wrong ID or PW!")
         return render_template("login.html")
 
+# 로그아웃 
 @application.route("/logout")
 def logout_user():
     session.clear()
     return redirect(url_for('view_list'))
 
-
+# 회원가입 조회 
 @application.route("/signup")
 def signup():
     return render_template("signup.html")
 
+# 회원가입 요청 
 @application.route("/signup_post", methods=['POST'])
 def register_user():
     data=request.form
