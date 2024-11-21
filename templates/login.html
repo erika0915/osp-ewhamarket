@@ -1,8 +1,9 @@
 <!-- login.html -->
 {% extends "index.html" %}
+
 {% block styles %}
-<link rel="stylesheet" href="../static/css/login.css">
-<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
 
 {% block section %} 
@@ -15,10 +16,17 @@
     <div class="form-container">
         <p class="titleLogin">ⓒ1886 EWHA</p>
         <form action = "/login_confirm" method="post"> <!-- #->/login_confirm -->
+<<<<<<< HEAD
             <div class="input"> <!-- request 받기위해 name 추가  -->
                 <input type="text" name="id" id="ID" placeholder="아이디를 입력하세요"> 
                 <input type="password" name="pw" id="etrpswd" placeholder="비밀번호를 입력하세요"><br>
             </div> 
+=======
+            <div class="input"> <!-- request 받기 위해 name추가 -->
+                <input type="text" id="ID" name="id" placeholder="아이디를 입력하세요">
+                <input type="password" id="etrpswd" name="pw" placeholder="비밀번호를 입력하세요"><br>
+            </div> <!-- div class="input"부분 불필요한 부분 약간 수정 -->
+>>>>>>> ddcd93ab66b7c33b4d6a5e960985ea045d142e56
 
             <div class="chkblg">
                 <input type="checkbox" id="mtain" name="mtain">
