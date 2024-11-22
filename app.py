@@ -132,7 +132,7 @@ def login():
 # 로그인 요청 
 @application.route("/login_confirm", methods=['POST'])
 def login_user():
-    id_=request.form['id']
+    id_=request.form['userId']
     pw=request.form['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     if DB.find_user(id_,pw_hash):
