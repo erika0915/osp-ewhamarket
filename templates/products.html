@@ -58,7 +58,7 @@
         </tr>
         <tr>
             {% for key, value in row1 %}
-            <td onclick="location.href='view_detail/{{ key }}/';" style="cursor:pointer;">
+            <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
               <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
             </td>
             {% endfor %}
@@ -70,7 +70,7 @@
         </tr>
         <tr>
             {% for key, value in row2 %}
-            <td onclick="location.href='view_detail/{{ key }}/';" style="cursor:pointer;">
+            <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
               <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
             </td>
             {% endfor %}

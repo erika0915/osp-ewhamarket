@@ -14,12 +14,12 @@ def hello() :
     return redirect(url_for('view_list'))
 
 # 상품 등록 조회 
-@application.route('/reg_items')
+@application.route('/reg_product')
 def reg_items():
-    return render_template('reg_items.html')
+    return render_template('reg_product.html')
 
 # 상품 등록 요청 
-@application.route("/submit_item_post", methods=['POST'])
+@application.route("/reg_product_post", methods=['POST'])
 def reg_item_submit_post():
 
     image_file = request.files["file"]
@@ -32,7 +32,7 @@ def reg_item_submit_post():
     #reg_items
 
 # 전체 상품 조회 
-@application.route("/list")
+@application.route("/products")
 def view_list(): 
     page = request.args.get("page", 0, type = int) 
     per_page = 6 
@@ -42,7 +42,7 @@ def view_list():
     data = DB.get_items() 
     if not data:
         print("DB에 데이터가 없습니다.")
-        return render_template("list.html", total=0, datas=[], page_count=0, m=row_count)
+        return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
 
     start_idx = per_page * page
     end_idx = per_page * (page+1)
@@ -58,7 +58,7 @@ def view_list():
     print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
     print(f"data: {data}")
     return render_template(
-        "list.html", 
+        "products.html", 
         datas = data.items(),
         row1 = locals()['data_0'].items(), 
         row2 = locals()['data_1'].items(), 
@@ -72,17 +72,17 @@ def view_list():
     print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 
-@application.route('/dynamicurl/<variable_name>/')
-def DynamicUrl(variable_name):
-    return str(variable_name)
+#@application.route('/dynamicurl/<variable_name>/')
+# def DynamicUrl(variable_name):
+#    return str(variable_name)
 
 # 상품 상세 조회 
-@application.route("/view_detail/<name>/")
+@application.route("/products/<name>/")
 def view_item_detail(name):
     print("###name:", name)
     data = DB.get_item_byname(str(name))
     print("###data:", data)
-    return render_template("detail.html", name=name, data=data)
+    return render_template("product_detail.html", name=name, data=data)
 
 # 로그인 조회 
 @application.route("/login")
