@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/review_all.css') }}">
 {% endblock %}
 
+{% block section %}
 <div class="container">
     <aside class="side-bar">
         <ul>
@@ -163,7 +164,7 @@
       <ul>
         <li>
           {% for i in range(page_count)%}
-            <a href="{{url_for('view_list', page=i)}}" color="black">{{i}}</a>
+            <a href="{{url_for('view_reviews', page=i)}}" color="black">{{i}}</a>
           {% endfor %}
         </li>
       </ul>
@@ -171,8 +172,6 @@
   </div>
 </div>
 
-<div class="clearfix"></div>
+{% endblock %}
 
 <script src="/static/js/review.js"></script>
-
-{% endblock section %}

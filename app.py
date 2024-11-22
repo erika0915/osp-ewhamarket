@@ -11,11 +11,52 @@ DB = DBhandler()
 @application.route("/")
 def hello() :
     #return render_template("index.html")
-    return redirect(url_for('view_list'))
+    return redirect(url_for('view_products'))
+
+# 리뷰 전체 조회 
+@application.route('/reviews')
+def view_reviews():
+    page = request.args.get("page", 0, type = int) 
+    per_page = 4 
+    per_row = 2 
+    row_count = int(per_page/per_row)
+
+    data = DB.get_items() 
+    if not data:
+        print("DB에 데이터가 없습니다.")
+        return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
+
+    start_idx = per_page * page
+    end_idx = per_page * (page+1)
+    item_counts = len(data)
+    data = dict(list(data.items())[start_idx:end_idx])
+    tot_count = len(data)
+    for i in range(row_count):
+        if (i == row_count -1) and (tot_count % per_row != 0):
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+        else:
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+            
+    print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
+    print(f"data: {data}")
+    return render_template(
+        "reviews.html", 
+        datas = data.items(),
+        row1 = locals()['data_0'].items(), 
+        row2 = locals()['data_1'].items(), 
+        limit = per_page, 
+        page = page, 
+        page_count = int((item_counts / per_page) + 1), 
+        total = item_counts, 
+        m=row_count
+    )
+
+    print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
+
 
 # 상품 등록 조회 
 @application.route('/reg_product')
-def reg_items():
+def reg_product():
     return render_template('reg_product.html')
 
 # 상품 등록 요청 
@@ -33,7 +74,7 @@ def reg_item_submit_post():
 
 # 전체 상품 조회 
 @application.route("/products")
-def view_list(): 
+def view_products(): 
     page = request.args.get("page", 0, type = int) 
     per_page = 6 
     per_row = 3 
@@ -78,7 +119,7 @@ def view_list():
 
 # 상품 상세 조회 
 @application.route("/products/<name>/")
-def view_item_detail(name):
+def view_product_detail(name):
     print("###name:", name)
     data = DB.get_item_byname(str(name))
     print("###data:", data)
