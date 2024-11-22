@@ -53,7 +53,6 @@ def view_reviews():
 
     print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
-
 # 상품 등록 조회 
 @application.route('/reg_product')
 def reg_product():
@@ -138,7 +137,7 @@ def login_user():
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     if DB.find_user(id_,pw_hash):
         session['id']=id_
-        return redirect(url_for('view_list'))
+        return redirect(url_for('view_products'))
     else:
         flash("Wrong ID or PW!")
         return render_template("login.html")
@@ -147,7 +146,7 @@ def login_user():
 @application.route("/logout")
 def logout_user():
     session.clear()
-    return redirect(url_for('view_list'))
+    return redirect(url_for('view_products'))
 
 # 회원가입 조회 
 @application.route("/signup")
