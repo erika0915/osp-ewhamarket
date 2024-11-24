@@ -11,13 +11,6 @@
   box-sizing: border-box;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white; /* 배경색 수정 */
-}
-
 /*사이드바 설정*/
 a {
     color: inherit;
@@ -83,8 +76,8 @@ li  a{
 .order{
   float: right;
   text-align: center;
-margin-top:60px;
-margin-right:20px;
+  margin-top:60px;
+  margin-right:20px;
   font-size: 18px;
 }
 
@@ -123,6 +116,7 @@ td .desc, td .price {
   color: red;
 }
 /*상품리스트끝*/
+
 /* 페이징 */
 .page-nation li{
   list-style: none;
@@ -152,34 +146,13 @@ td .desc, td .price {
   text-decoration: none;
   font-weight:bold;
 }
-
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
+/* 페이징 끝 */
 
 .clearfix:after {
   content: "";
   display: table;
   clear: both;
   }
-
-}
-.navbar__menu.active {
-  display: block;
-}
-
-.navbar__icons.active {
-  display: block;
-}
 
 .red {
   color: red;
