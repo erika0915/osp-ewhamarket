@@ -1,3 +1,4 @@
+<!-- 서영 -->
 {% extends "index.html" %}
 
 {% block styles %}
@@ -35,6 +36,9 @@
   </section>
   
   {% if total > 0 %}
+  <p>
+    현재까지 {{total}}개 리뷰 등록됨
+  </p>
     <table>
       <tr>
         {% for key, value in row1 %}
@@ -45,11 +49,19 @@
       </tr>
       <tr>
           {% for key, value in row1 %}
-          <td>상품이름: {{ key }}</td>
+          <td>
+            <div class="product-title">
+              {{ key }}
+              <div class="price">
+                {{ value.price }}
+              </div>
+            </div>
+          </td>
           {% endfor %}
       </tr>
+
       <tr>
-        {% for key, value in row1 %}
+        {% for key, value in row2 %}
         <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
           <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
         </td>
@@ -57,7 +69,14 @@
       </tr>
       <tr>
           {% for key, value in row1 %}
-          <td>상품이름: {{ key }}</td>
+          <td>
+            <div class="product-title">
+              {{ key }}
+              <div class="price">
+                {{ value.price }}
+              </div>
+            </div>
+          </td>
           {% endfor %}
       </tr>
     </table>

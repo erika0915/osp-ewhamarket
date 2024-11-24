@@ -1,178 +1,126 @@
+<!-- 서영 -->
 {% extends "index.html" %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/review_all.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css') }}">
 {% endblock %}
 
 {% block section %}
-<div class="container">
+<div class="product_container">
     <aside class="side-bar">
-        <ul>
-            <li>
-                <a href="#"></i> 폰 악세사리</a>
-                <ul>
-                    <li><a href="#">휴대폰 케이스</a></li>
-                    <li><a href="#">에어팟 케이스</a></li>
-                    <li><a href="#">스마트 톡</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"></i> 리빙&소품</a>
-                <ul>
-                    <li><a href="#">오브제</a></li>
-                    <li><a href="#">홈패브릭</a></li>
-                    <li><a href="#">테이블웨어</a></li>
-                    <li><a href="#">조명</a></li>
-                    <li><a href="#">키링</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"></i> 쥬얼리</a>
-                <ul>
-                    <li><a href="#">목걸이</a></li>
-                    <li><a href="#">귀걸이</a></li>
-                    <li><a href="#">반지</a></li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
-    
-    <main>
-        <section id="head">
-            <div class="title">
-                <h3>상품 리뷰 목록</h3>
-            </div>
-            <div class="array">
-                <button class="review" data-value="review">리뷰 많은 순</button>
-                <button class="rate" data-value="rate">높은 평점 순</button>
-                <button class="recent" data-value="recent">최신순</button>
-            </div>
-        </section>
-        <hr id="review">
-
-
-
-        <div class="product-list">
-            <div class="product">
-                <div class="review">
-                    <div>
-                        <a href="/review_detail/{{ product_id }}" target="_blank">
-                            <img src="../static/images/towel.png" alt="prod_towel" width="300" height="200">
-                        </a>
-                        <h3 class="product-name">일러스트 핸드타올</h3>
-                        <p class="cost">4500원</p>
-                    </div>
-                    <div class="product-info">
-                        <form class="mb-3" name="myform" id="myform" method="post">
-                            <fieldset>
-                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-                            </fieldset>
-                        </form>
-                        <h3 class="desc">선물용으로 최고예요!</h3>
-                        <p class="time">1시간 전</p>
-                        <p>어버이날로 부모님께 선물해드렸는데 너무 좋아하셨어요! 남녀노소 좋아할만한 제품이고, 재질도 너무 좋아서 추천합니다.</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="product">
-                <div class="review">
-                    <div>
-                        <a href="/review_detail/{{ product_id }}" target="_blank">
-                            <img src="../static/images/holder.png" alt="Forest" width="300" height="200">      
-                        </a>
-                        <h3 class="product-name">스누피 컵/텀블러 토트</h3>
-                        <p class="cost">7000원</p>
-                    </div>
-                    <div class="product-info">
-                        <form class="mb-3" name="myform" id="myform" method="post">
-                            <fieldset>
-                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-                            </fieldset>
-                        </form>
-                        <h3 class="desc">너무 귀여워요</h3>
-                        <p class="time">3시간 전</p>
-                        <p>축제 때부터 눈여겨보던 제품이었는데, 운 좋게 이 사이트에서 판매하는 걸 발견해서 구매했어요! 조금 비싼 감이 없지않아 있지만, 비싼만큼 가치있다고 생각해요 :)</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="product">
-                <div class="review">
-                    <div>
-                        <a href="/review_detail/{{ product_id }}" target="_blank">
-                            <img src="../static/images/basket.png" alt="Northern Lights" width="300" height="200">
-                        </a>      
-                        <h3 class="product-name">미니 바스켓 정리 소품 바구니</h3>
-                        <p class="cost">6000원</p>
-                    </div>
-                    <div class="product-info">
-                        <form class="mb-3" name="myform" id="myform" method="post">
-                            <fieldset>
-                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-                            </fieldset>
-                        </form>
-                        <h3 class="desc">기숙사 정리 필수템</h3>
-                        <p class="time">6시간 전</p>
-                        <p>기숙사 정리가 너무 어려워서 물건을 살펴보다가, 가격도 적당하고 딱 정리하기 좋을 것 같아 구매해봤는데 튼튼하고 제가 딱 원하던 크기라 너무 좋아요! 제품 팔아주셔서 감사합니다.</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="product">
-                <div class="review">
-                    <div>
-                        <a href="/review_detail/{{ product_id }}" target="_blank">
-                            <img src="../static/images/keyring.png" alt="Northern Lights" width="300" height="200">
-                        </a>
-                        <h3 class="product-name">미니 딸기 케이크 인형 키링</h3>
-                        <p class="cost">3000원</p>
-                    </div>
-                    <div class="product-info">
-                        <form class="mb-3" name="myform" id="myform" method="post">
-                            <fieldset>
-                                <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-                                <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-                                <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                                <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-                                <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
-                            </fieldset>
-                        </form>
-                        <h3 class="desc">넘 기여워서 쪼물딱</h3>
-                        <p class="time">1시간 전</p>
-                        <p>너무 귀여워서 입으로 앙 깨물어버리고 싶어요. 어떻게 이런 걸 만들 생각을 하셨나요.. 감사합니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>  
-    </main>  
-    
-  <!-- 페이징 버튼 추가 -->
-  <div class="page-wrap">
-    <div class="page-nation">
       <ul>
         <li>
-          {% for i in range(page_count)%}
-            <a href="{{url_for('view_reviews', page=i)}}" color="black">{{i}}</a>
-          {% endfor %}
+            <a href="#">디지털 악세사리</a>
         </li>
+        <li>
+            <a href="#">패션 악세사리</a>
+        </li>
+        <li>
+            <a href="#">테이블웨어</a>
+        </li>
+        <li>
+          <a href="#">스테이셔너리</a>
+      </li>
       </ul>
+    </aside>
+  
+    <main>
+      <section id="head">
+        <p class="title">전체 상품 조회</p>
+        <div class="array">
+            <button class="review" data-value="review">리뷰 많은 순</button>
+            <button class="rate" data-value="rate">높은 평점 순</button>
+            <button class="recent" data-value="recent">최신순</button>
+        </div>
+    </section>
+
+        {% if total > 0 %}
+        <p>
+            현재까지 {{total}}개 리뷰 등록됨
+        </p>
+            <table>
+                <tr>
+                    {% for key, value in row1 %}
+                      <td>
+                        <div class="layer">
+                            <div class="product-item">
+                                <div class="product-image">
+                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
+                                </div>
+                                <div class="product-title">
+                                  제목: {{ value.title }}
+                                </div>
+                                <div class="price">
+                                    {{ value.price }}
+                                </div>
+                              </div>
+                              <div class="description">
+                                  <div class="grade">
+                                    <span>★★★★★</span>
+                                  </div>
+                                  <div class="des-title">
+                                    선물용으로 좋아요
+                                  </div>
+                                  <div>
+                                    설명설명설명
+                                  </div>
+                              </div>
+                        </div>
+                      </td>
+                    {% endfor %}
+                  </tr>
+
+                  <tr>
+                    {% for key, value in row2 %}
+                      <td>
+                        <div class="layer">
+                            <div class="product-item">
+                                <div class="product-image">
+                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
+                                </div>
+                                <div class="product-title">
+                                  제목: {{ value.title }}
+                                </div>
+                                <div class="price">
+                                    {{ value.price }}
+                                </div>
+                              </div>
+                              <div class="description">
+                                  <div class="grade">
+                                    <span>★★★★★</span>
+                                  </div>
+                                  <div class="des-title">
+                                    선물용으로 좋아요
+                                  </div>
+                                  <div>
+                                    설명설명설명
+                                  </div>
+                              </div>
+                        </div>
+                      </td>
+                    {% endfor %}
+                  </tr>
+            </table>
+
+    <div class="page-wrap">
+      <div class="page-nation">
+        <ul class="pagination">
+          {% for i in range(page_count) %}
+          <li>
+          <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
+
+    {% else %}
+        <p>등록된 상품이 없습니다.</p>
+    {% endif %}
+</main>  
+    
+
 
 {% endblock %}
 
