@@ -11,42 +11,55 @@
   box-sizing: border-box;
 }
 
+.product_container{
+  display: flex;
+  height: 100vh;
+}
+
 /*사이드바 설정*/
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .side-bar{
-  float: left;
-  margin-top: 30px;
-  position: sticky;
-  top: 50px;
-  margin-right: 50px;
+    position: sticky;
+    top: 50px;
+    width: 250px;
+    height: 100vh;
+    margin-right: 20px;
+    background-color: #f4f4f4;
+    padding: 20;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
-ul{
-  list-style-type: none;
-  height: 100%;
-  margin: 0;
-  width: auto;
-  overflow: auto;
+.side-bar ul{
+    list-style-type: none;
+    padding: 0;
 }
 
-li  a{
-  text-decoration: none;
+.side-bar li a{
   display: block;
-  color: #000;
   padding: 10px;
+  color: #000;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .side-bar a:hover{
-  color: green;
+    color: green;
 }
 /* 사이드바 끝 */
 
 /*순서배열 버튼*/
+main{
+  flex-grow: 1;
+  padding: 20px;
+  overflow: auto;
+  margin-left: 300px;
+}
+
 .array{
   float: right;
   margin-right: 20px;
@@ -55,6 +68,7 @@ li  a{
   margin-bottom: 10px;
   gap: 10px;
 }
+
 .array button{
   padding: 5px 10px;
   white-space: nowrap;
@@ -63,6 +77,7 @@ li  a{
 /*순서배열 끝*/
 
 /* 전체상품조회 */
+
 .title{
   float: left;
 	text-align:left;
@@ -80,9 +95,7 @@ li  a{
   margin-right:20px;
   font-size: 18px;
 }
-
 .input, .btn{text-align:center;}
-
 /* 상품리스트 */
 
 /* 상품 리스트 테이블 */
@@ -97,7 +110,6 @@ td {
   padding: 15px;
   border: 1px solid #ccc; /* 테두리 */
 }
-
 
 td img {
   width: 200px;
@@ -116,7 +128,6 @@ td .desc, td .price {
   color: red;
 }
 /*상품리스트끝*/
-
 /* 페이징 */
 .page-nation li{
   list-style: none;
@@ -146,12 +157,33 @@ td .desc, td .price {
   text-decoration: none;
   font-weight:bold;
 }
-/* 페이징 끝 */
+
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
 
 .clearfix:after {
   content: "";
   display: table;
   clear: both;
+  }
+
+}
+.navbar__menu.active {
+  display: block;
+}
+
+.navbar__icons.active {
+  display: block;
 }
 
 .red {
