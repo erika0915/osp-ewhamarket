@@ -61,20 +61,21 @@
           {% endfor %}
       </tr>
     </table>
+
+    <div class="page-wrap">
+      <div class="page-nation">
+        <ul class="pagination">
+          {% for i in range(page_count) %}
+          <li>
+          <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    
   </main>
-  
-        <div class="page-wrap">
-          <div class="page-nation">
-            <ul>
-              {% for i in range(page_count) %}
-              <li>
-              <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-  
+
       {% else %}
         <p>등록된 상품이 없습니다.</p>
       {% endif %}
