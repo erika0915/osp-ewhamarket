@@ -1,3 +1,5 @@
+<!--chaewon-->
+
 {% extends "index.html" %}
 
 {%block styles%}
@@ -32,7 +34,7 @@
 
       <hr>
       <h4 class="product-seller">카테고리: {{data.category}}</h4>
-      <div class="product-description">이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</div>
+      <div class="product-description"> {{data.description}}</div>
       <h3 class="product-price">가격 : {{data.price}}</h3>
     </div> #product details 
   <div class="dropdown-label">
