@@ -4,7 +4,10 @@
 
 {%block styles%}
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../static/js/detail.js"></script>
 {% endblock%}
 
 {%block section%}
@@ -27,7 +30,8 @@
 
       <div class="like-container">
         <button class="like-button" onclick="toggleLike(this)">
-          <span class="heart-icon">♥</span>
+          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+          <!--<span class="heart-icon">♥</span>-->
         </button>
           <span class="like-count">(128)</span>
       </div>
@@ -106,4 +110,4 @@
  
 </body>
 {% endblock %} 
-<script src="../static/js/detail.js"></script>
+
