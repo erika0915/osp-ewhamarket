@@ -84,6 +84,11 @@ main {
     font-size: 30px;
 }
 
+.reg-num{
+    margin-top: 100px;
+}
+
+
 /* 상품 리스트 테이블 */
 table {
     width: 100%;
