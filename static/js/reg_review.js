@@ -31,4 +31,6 @@ $(document).ready(function() {
 });
 
 
-3
+function pushRegiButton(){
+    alert("등록되었습니다")
+}
