@@ -152,7 +152,7 @@ td .desc, td .price {
   content: "";
   display: table;
   clear: both;
-  }
+}
 
 .red {
   color: red;
