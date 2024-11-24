@@ -11,13 +11,6 @@
   box-sizing: border-box;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white; /* 배경색 수정 */
-}
-
 /*상품등록 화면*/
 .titleRegister{
   text-align: center;
