@@ -11,41 +11,41 @@
   box-sizing: border-box;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white; /* 배경색 수정 */
+.product_container{
+  display: flex;
+  height: 100vh;
 }
 
 /*사이드바 설정*/
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .side-bar{
-    float: left;
-    margin-top: 30px;
-    position: sticky;
-    top: 50px;
-    margin-right: 50px;
+  position: sticky;
+  top: 50px;
+  width: 250px;
+  height: 100vh;
+  margin-right: 20px;
+  background-color: #f4f4f4;
+  padding: 20;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: 20px;
 }
 
-ul{
+.side-bar ul{
     list-style-type: none;
-    height: 100%;
-    margin: 0;
-    width: auto;
-    overflow: auto;
+    padding: 0;
 }
 
-li  a{
-    text-decoration: none;
-    display: block;
-    color: #000;
-    padding: 10px;
-    font-weight: bold;
+.side-bar li a{
+  display: block;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .side-bar a:hover{
@@ -54,6 +54,12 @@ li  a{
 /* 사이드바 끝 */
 
 /*순서배열 버튼*/
+main{
+  flex-grow: 1;
+  padding: 20px;
+  overflow: auto;
+}
+
 .array{
   float: right;
   margin-right: 20px;
@@ -62,6 +68,7 @@ li  a{
   margin-bottom: 10px;
   gap: 10px;
 }
+
 .array button{
   padding: 5px 10px;
   white-space: nowrap;
@@ -70,10 +77,10 @@ li  a{
 /*순서배열 끝*/
 
 /* 전체상품조회 */
+
 .title{
   float: left;
 	text-align:left;
-  margin-left:180px;
   margin-top:35px;
   color: #000;
   font-size:30px;
@@ -83,13 +90,11 @@ li  a{
 .order{
   float: right;
   text-align: center;
-margin-top:60px;
-margin-right:20px;
+  margin-top:60px;
+  margin-right:20px;
   font-size: 18px;
 }
-
 .input, .btn{text-align:center;}
-
 /* 상품리스트 */
 
 /* 상품 리스트 테이블 */
@@ -104,7 +109,6 @@ td {
   padding: 15px;
   border: 1px solid #ccc; /* 테두리 */
 }
-
 
 td img {
   width: 200px;

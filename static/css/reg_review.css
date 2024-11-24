@@ -12,13 +12,6 @@
     box-sizing: border-box;
 }
 
-.container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white; /* 배경색 수정 */
-  }
-
 
 /*리뷰 작성*/
 .titleReview{
@@ -107,8 +100,6 @@ label {
   flex-shrink: 0; /* 라벨의 너비 고정 */
 }
 
-
-
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -119,7 +110,6 @@ select {
   border:none;
   background-image: url("https://w7.pngwing.com/pngs/532/502/png-transparent-grey-check-illustration-computer-icons-ifp-school-arrow-scrolling-down-arrow-angle-hand-internet.png");  background-repeat: no-repeat;  background-position: 96% center;  background-size: 2rem;
 }
-
 
 textarea {
   resize: vertical;
@@ -236,7 +226,6 @@ textarea {
     font-size: 16px;
     resize: none;
 }
-
 
 .container-photo {
     display: flex;
