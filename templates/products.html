@@ -1,0 +1,100 @@
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
+{% endblock %}
+
+
+{% block section %}
+<div class="container">
+  <aside class="side-bar">
+    <ul>
+      <li>
+          <a href="#">폰 악세사리</a>
+          <ul>
+            <li><a href="#">휴대폰 케이스</a></li>
+            <li><a href="#">에어팟 케이스</a></li>
+            <li><a href="#">스마트 톡</a></li>
+          </ul>
+      </li>
+      <li>
+          <a href="#">리빙&소품</a>
+          <ul>
+              <li><a href="#">오브제</a></li>
+              <li><a href="#">홈패브릭</a></li>
+              <li><a href="#">테이블웨어</a></li>
+              <li><a href="#">조명</a></li>
+              <li><a href="#">키링</a></li>
+          </ul>
+      </li>
+      <li>
+          <a href="#">쥬얼리</a>
+          <ul>
+              <li><a href="#">목걸이</a></li>
+              <li><a href="#">귀걸이</a></li>
+              <li><a href="#">반지</a></li>
+          </ul>
+      </li>
+    </ul>
+  </aside>
+  <main>
+    <section id="head">
+        <p class="title">전체 상품 조회</p>
+        <div class="array">
+            <button class="review" data-value="review">리뷰 많은 순</button>
+            <button class="rate" data-value="rate">높은 평점 순</button>
+            <button class="recent" data-value="recent">최신순</button>
+        </div>
+    </section>
+    
+    {% if total > 0 %}
+      <p>상품리스트 -- 현재까지 {{ total }}개 등록됨</p>
+      <table>
+        <tr>
+          {% for key, value in row1 %}
+          <td>상품이름: {{ key }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+            {% for key, value in row1 %}
+            <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
+              <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+          {% for key, value in row2 %}
+          <td>상품이름: {{ key }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+            {% for key, value in row2 %}
+            <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
+              <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+            </td>
+            {% endfor %}
+        </tr>
+      </table>
+
+      <div class="page-wrap">
+        <div class="page-nation">
+          <ul>
+            {% for i in range(page_count) %}
+            <li>
+            <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    {% else %}
+      <p>등록된 상품이 없습니다.</p>
+    {% endif %}
+
+  </main>
+</div>
+{% endblock %}
+
+<script src="{{ url_for('static', filename='js/list.js') }}"></script>
