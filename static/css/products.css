@@ -24,14 +24,13 @@ a {
 
 .side-bar{
   position: sticky;
-  top: 50px;
+  top: 0px;
   width: 250px;
   height: 100vh;
   margin-right: 20px;
   background-color: #f4f4f4;
   padding: 20;
   box-sizing: border-box;
-  flex-shrink: 0;
   font-size: 20px;
 }
 
