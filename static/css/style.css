@@ -11,6 +11,7 @@ body {
     margin: 0 auto;
     padding: 20px 20px 200px 20px;
     background-color: white; 
+    position: relative;
 }
 
 .navbar {
@@ -52,11 +53,11 @@ body {
 
 .log {
     position: absolute;
-    right: 420px; /* 오른쪽 정렬 */
-    top: 8%; /* 네비게이션 바의 중앙 정렬 */
-    transform: translateY(-50%);
+    top: 20px;
+    right: 30px;
     font-size: 18px;
     color: #787878;
+    z-index: 100;
 }
 
 .log a {
@@ -64,6 +65,11 @@ body {
     color: #787878;
     margin-left: 10px; /* 링크 간 간격 추가 */
 }
+
+.log li {
+    list-style-type: none;
+}
+
 
 .navbar_menu {
     display: flex;

@@ -126,24 +126,29 @@ td .desc, td .price {
   color: red;
 }
 /*상품리스트끝*/
+
 /* 페이징 */
-.page-nation li{
+.page-nation li {
   list-style: none;
+  display: inline-block;
 }
-.page-wrap{
+
+.page-wrap {
   text-align: center;
-  font-size: 0;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: auto; /* 필요한 만큼만 사용 */
 }
-.page-nation{
+
+.page-nation {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  gap: 10px; /* 간격 추가 */
 }
-.page-nation a{
-  display: block;
-  margin: 0 3px;
-  float: left;
+
+.page-nation a {
+  display: inline-block;
   border: 1px solid #e6e6e6;
   width: 28px;
   height: 28px;
@@ -153,8 +158,10 @@ td .desc, td .price {
   font-size: 13px;
   color: black;
   text-decoration: none;
-  font-weight:bold;
+  font-weight: bold;
+  margin: 0; /* 기존 여백 제거 */
 }
+
 
 
 @media only screen and (max-width: 700px) {

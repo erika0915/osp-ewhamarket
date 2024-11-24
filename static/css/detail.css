@@ -161,6 +161,15 @@ hr {
   width:70%;
 }
 
+#heart {
+  color: grey;
+  font-size: 50px;
+}
+
+#heart.red {
+  color: red;
+}
+
 /*별점*/
 .review {
   display: inline-flex;                /* 가로 배치 */
@@ -257,6 +266,7 @@ hr {
   padding: 10px;
   border-radius: 4px;
   margin-top: 15px;
+  margin-left: 0%;
 }
 
 .content-area{
