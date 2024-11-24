@@ -10,36 +10,33 @@ class DBhandler:
         self.db = firebase.database()
     
     # 상품 등록 
-    def insert_item(self, name, data, img_path):
-        item_info ={
-            "userId":data['userId'],
+    def insert_product(self, name, data, productImage):
+        product_info = {
+            "nickname": data ['nickname'],
             "productName" : data ['productName'],
             "price" : data['price'],
             "category":data['category'],
-            "option":data['option'],
             "location":data['location'],
-            "shortDescription":data['shortDescription'],
             "description":data['description'],
-            "img_path":img_path
+            "productImage": productImage
         }
-        self.db.child("item").child(name).set(item_info)
-        print(data, img_path)
+        self.db.child("product").child(name).set(product_info)
+        print(data, productImage)
         return True 
     
     # 상품 전체 조회 
-    def get_items(self):
-        items = self.db.child("item").get().val()
-        return items
+    def get_products(self):
+        products = self.db.child("product").get().val()
+        return products
     
     # 상품 세부 조회 -> 이름으로 조회 
-    def get_item_byname(self, name):
-        items = self.db.child("item").get()
+    def get_product_byname(self, productName):
+        items = self.db.child("product").get()
         target_value=""
-        print("###########", name)
-        for res in items.each():
+        #print("###########", name)
+        for res in products.each():
             key_value = res.key()
-            
-            if key_value == name:
+            if key_value == productName:
                 target_value = res.val()
         return target_value
     

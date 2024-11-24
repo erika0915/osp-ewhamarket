@@ -60,16 +60,18 @@ def reg_product():
 
 # 상품 등록 요청 
 @application.route("/reg_product_post", methods=['POST'])
-def reg_item_submit_post():
+def reg_product_submit_post():
 
-    image_file = request.files["file"]
+    productImage_file = request.files["productImage"]
 
-    image_file.save("static/images/{}".format(image_file.filename))
+    productImage_file.save("static/images/{}".format(productImage_file.filename))
     data = request.form 
     print(request.form)
-    DB.insert_item(data['productName'], data, image_file.filename)
-    return render_template("submit_item_result.html", data=data, img_path = "static/images/{}".format(image_file.filename))
-    #reg_items
+    DB.insert_product(data['productName'], data, productImage_file.filename)
+    #기존 상품 등록 후 뜨던 화면 -> 플래시 메시지 뜨고 전체 상품 화면으로 연결 
+    return render_template("submit_item_result.html", data=data, img_path = "static/images/{}".format(productImage_file.filename))
+    flash ("product successfully registered!")
+    return render_template("products.html")
 
 # 전체 상품 조회 
 @application.route("/products")
@@ -79,7 +81,7 @@ def view_products():
     per_row = 3 
     row_count = int(per_page/per_row)
 
-    data = DB.get_items() 
+    data = DB.get_products() 
     if not data:
         print("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
@@ -87,29 +89,29 @@ def view_products():
     start_idx = per_page * page
     end_idx = per_page * (page+1)
     item_counts = len(data)
-    data = dict(list(data.items())[start_idx:end_idx])
+    data = dict(list(data.products())[start_idx:end_idx])
     tot_count = len(data)
     for i in range(row_count):
         if (i == row_count -1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+            locals()['data_{}'.format(i)] = dict(list(data.products())[i * per_row:])
         else:
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+            locals()['data_{}'.format(i)] = dict(list(data.products())[i * per_row:(i+1) * per_row])
             
-    print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
+    print(f"product_counts: {product_counts}, page_count: {int((product_counts / per_page) + 1)}")
     print(f"data: {data}")
     return render_template(
         "products.html", 
-        datas = data.items(),
-        row1 = locals()['data_0'].items(), 
-        row2 = locals()['data_1'].items(), 
+        datas = data.products(),
+        row1 = locals()['data_0'].products(), 
+        row2 = locals()['data_1'].products(), 
         limit = per_page, 
         page = page, 
-        page_count = int((item_counts / per_page) + 1), 
-        total = item_counts, 
-        m=row_count
+        page_count = int((product_counts / per_page) + 1), 
+        total = product_counts, 
+        m = row_count
     )
 
-    print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
+   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 
 #@application.route('/dynamicurl/<variable_name>/')
@@ -119,10 +121,18 @@ def view_products():
 # 상품 상세 조회 
 @application.route("/products/<name>/")
 def view_product_detail(name):
-    print("###name:", name)
-    data = DB.get_item_byname(str(name))
-    print("###data:", data)
-    return render_template("product_detail.html", name=name, data=data)
+    # print("###name:", name)
+    data = DB.get_product_byname(str(productName))
+    # print("###data:", data)
+    return render_template("product_detail.html", productName=productName, data=data)
+
+# 좋아요 기능 
+@application.route('/show_heart/<name>/', methods=['GET'])
+def show_heart(name):
+    my_heart = DB.get_heart_byname(session['id'],name)
+    return jsonify({'my_heart':my_heart})
+
+#마저 구현해야함 ! 
 
 # 로그인 조회 
 @application.route("/login")
