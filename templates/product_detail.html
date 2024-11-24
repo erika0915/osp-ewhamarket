@@ -15,19 +15,18 @@
   <div class="container">
 
   <div class="row">
-<!--column side-->
   
-    
     <div class="main-image">
       <a target="_blank" href="/static/images/phone0.png">
         <img src="../../static/images/{{data.img_path}}" alt="phone0"> 
       </a> <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
     </div>
-    <div class="column middle">
+
+  <div class="column middle">
+
     <div class="product-details">
-
       <h3 class="product-name">{{data.productName}}</h3>
-
+      
       <div class="like-container">
         <button class="like-button" onclick="toggleLike(this)">
           <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
@@ -40,73 +39,73 @@
       <h4 class="product-seller">카테고리: {{data.category}}</h4>
       <div class="product-description"> {{data.description}}</div>
       <h3 class="product-price">가격 : {{data.price}}</h3>
-    </div> #product details 
-  <div class="dropdown-label">
+    </div> <!--product-details-->
 
-    <div class="dropdown">
-      <button class="dropbtn"> 
+    <div class="dropdown-label">
+
+      <div class="dropdown">
+        <button class="dropbtn"> 
         <span class="dropbtn_icon">색상: Black - 사이즈: S</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">색상: Black - 사이즈: M</a>
-        <a href="#">색상: White - 사이즈: S</a>
-        <a href="#">색상: White - 사이즈: M</a>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">색상: Black - 사이즈: M</a>
+          <a href="#">색상: White - 사이즈: S</a>
+          <a href="#">색상: White - 사이즈: M</a>
+        </div>
       </div>
-    </div>
 
-    <div class="dropdown">
-      <button class="dropbtn"> 
+      <div class="dropdown">
+        <button class="dropbtn"> 
         <span class="dropbtn_icon">1개</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">2개</a>
-        <a href="#">3개</a>
-        <a href="#">4개</a>
-        <a href="#">5개</a>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">2개</a>
+          <a href="#">3개</a>
+          <a href="#">4개</a>
+          <a href="#">5개</a>
+        </div>
       </div>
+
+      <button class="buy" data-value="buy">바로 구매 ></button>
+      <button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록 ></button> <!--week12-->
+    </div><!--dropdown-label-->
+
+    <div class="review">
+      <div class="underline">REVIEW</div>
+        <div class="star_rating">
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star"></span>
+        </div>
+      <div class="star_number">4(5)</div>
     </div>
 
-    <button class="buy" data-value="buy">바로 구매 ></button>
-    <button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록 ></button> <!--week12-->
-  </div><!--dropdown-label-->
+    <div class="product-description2">
+      <h4 class="underline">상세설명</h4>
+      <p>상품 이름 : <b>{{data.productName}}</b> / 상품 위치 : {{data.addr}} </p>
+      <p>카테고리 : {{data.category}} </p>
+      <p>사이즈 : heights 15 / width 10</p>
+      <p>소재 : 에폭시 </p>
+      <p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
+      <p>
+      For payment, the credit card is
+      {% if data['card'] == "Y" %}
+      accepted!
 
-  <div class="review">
-    <div class="underline">REVIEW</div>
-    <div class="star_rating">
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star"></span>
+      {% endif %}
+      {% if data['card'] == "N" %}
+      NOT accepted!
+      {% endif %}
+      </p>
     </div>
-    <div class="star_number">4(5)</div>
-  </div>
-
-  <div class="product-description2">
-  <h4 class="underline">상세설명</h4>
-    <p>상품 이름 : <b>{{data.productName}}</b> / 상품 위치 : {{data.addr}} </p>
-    <p>카테고리 : {{data.category}} </p>
-    <p>사이즈 : heights 15 / width 10</p>
-    <p>소재 : 에폭시 </p>
-    <p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
-    <p>
-    For payment, the credit card is
-    {% if data['card'] == "Y" %}
-    accepted!
-
-    {% endif %}
-    {% if data['card'] == "N" %}
-    NOT accepted!
-    {% endif %}
-    </p>
-  </div>
 
   
 
   </div><!--column middle-->
   </div><!--row-->
   </div><!--container-->
- 
  
 </body>
 {% endblock %} 
