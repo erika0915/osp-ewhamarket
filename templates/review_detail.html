@@ -22,8 +22,12 @@
             </div> 
         </div> <!--product-->
 
+
         <div class="notice">
-            <h3>총 252개의 리뷰가 등록되었습니다.</h3>
+            {% if total > 0 %}
+            <p class="reg-num">
+              현재까지 {{total}}개 리뷰 등록됨
+            </p>
             <div class="rating-statistics">
                 <div class="rating">
                     <span class="stars">★★★★★</span>
@@ -88,8 +92,63 @@
                 <p class="content">기숙사 정리가 너무 어려워서 물건을 살펴보다가, 가격도 적당하고 딱 정리하기 좋을 것 같아 구매해봤는데 튼튼하고 제가 딱 원하던 크기라 너무 좋아요 ! 제품 팔아주셔서 감사합니다.</p>
             </div>
         </div>
-    </div><!--container-->
 
+        
+        <table>
+            <tr>
+              {% for key, value in row1 %}
+              <td onclick="location.href='reviews/{{ key }}/';" style="cursor:pointer;">
+                <img src="{{ url_for('static', filename='Reviewimages/' + value.img_path) }}" width=140, height=200>
+              </td>
+              {% endfor %}
+            </tr>
+
+            <tr>
+                {% for key, value in row1 %}
+                <td>
+                  <div class="product-title">
+                    {{ key }}
+                  </div>
+                </td>
+                {% endfor %}
+            </tr>
+      
+            <tr>
+              {% for key, value in row2 %}
+              <td onclick="location.href='reviews/{{ key }}/';" style="cursor:pointer;">
+                <img src="{{ url_for('static', filename='Reviewimages/' + value.img_path) }}" width=140, height=200>
+              </td>
+              {% endfor %}
+            </tr>
+
+            <tr>
+                {% for key, value in row1 %}
+                <td>
+                  <div class="review-title">
+                    {{ key }}
+                  </div>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+      
+        <div class="page-wrap">
+            <div class="page-nation">
+              <ul class="pagination">
+                {% for i in range(page_count) %}
+                <li>
+                <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      
+            {% else %}
+              <p>등록된 상품이 없습니다.</p>
+            {% endif %}
+
+    </div><!--container-->
 
 <div class="clearfix"></div>
 </body>
