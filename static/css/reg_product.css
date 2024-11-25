@@ -1,3 +1,4 @@
+/*김연우*/
 /* 기본설정 */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @font-face {
@@ -9,13 +10,6 @@
  
 *{
   box-sizing: border-box;
-}
-
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white; /* 배경색 수정 */
 }
 
 /*상품등록 화면*/
