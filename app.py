@@ -30,7 +30,6 @@ def reg_item_submit_post():
     DB.insert_item(data['productName'], data, image_file.filename)
     return render_template("submit_item_result.html", data=data, img_path = "static/images/{}".format(image_file.filename))
 
-
 # 전체 상품 조회 
 @application.route("/products")
 def view_products(): 
@@ -71,7 +70,6 @@ def view_products():
 
     print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
-
 # 상품 등록 조회 
 @application.route('/reg_product')
 def reg_product():
@@ -99,7 +97,6 @@ def view_product_detail(name):
     data = DB.get_item_byname(str(name))
     print("###data:", data)
     return render_template("product_detail.html", name=name, data=data)
-
 
 # 리뷰 전체 조회 
 @application.route('/reviews')
@@ -150,19 +147,27 @@ def view_review_detail(productName):
     data = DB.get_review_byname(productName)
     return render_template("review_detail.html", productName=productName, data=data)
 
-# 상품 세부 조회에서 이름 넘겨주기 
-@application.route("/reg_review_init/<productName>")
-def reg_review_init(productName):
-    return render_template("reg_review.html", productName=productName)
+# 리뷰 등록 조회 
+@application.route("/reg_review/<productName>")
 
-# 상품 상세 조회 
-@application.route("/products/<name>/")
-def view_product_detail(name):
-    # print("###name:", name)
-    data = DB.get_product_byname(str(productName))
-    # print("###data:", data)
-    return render_template("product_detail.html", productName=productName, data=data)
+def reg_review(productName):
+    if request.method=='GET':
+        return render_template("reg_review.html", productName=productName)
+    
+    elif request.method=='POST':
+        # 리뷰 데이터 가져오기 
+        data=request.form 
+        userId=data.get("userId")
 
+        # 이미지 파일 저장 
+        image_file=request.files.get("reviewImage")
+        image_file_path="static/review_images/{}".format(image_file.filename)
+        image_file.save(image_file_path)
+
+        # DB에 리뷰 등록
+        DB.insert_review(productName, userId, data, image_file_path)
+        return redirect(url_for('view_review'))
+      
 # 좋아요 기능 
 @application.route('/show_heart/<name>/', methods=['GET'])
 def show_heart(name):
@@ -170,30 +175,6 @@ def show_heart(name):
     return jsonify({'my_heart':my_heart})
 
 #마저 구현해야함 ! 
-
-# 리뷰 등록 조회 
-@application.route("/reg_review/<productName>")
-def reg_review(productName):
-    return render_template("reg_review.html", productName= productName)
-
-# 리뷰 등록 요청 
-@application.route("/reg_review/<productName>", methods=['POST'])
-def reg_review_post(productName):
-    
-    # 리뷰 데이터 가져오기 
-    data=request.form 
-
-    userId=data.get("userId")
-
-    # 이미지 파일 저장 
-    image_file=request.files.get("reviewImage")
-    image_file_path="static/review_images/{}".format(image_file.filename)
-    image_file.save(image_file_path)
-
-    # DB에 리뷰 등록
-    DB.insert_review(productName, userId, data, image_file_path)
-    return redirect(url_for('view_review'))
-
 
 # 로그인 조회 
 @application.route("/login")
