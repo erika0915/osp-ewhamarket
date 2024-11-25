@@ -126,33 +126,25 @@ def view_review_detail(productName):
     data = DB.get_review_byname(productName)
     return render_template("review_detail.html", productName=productName, data=data)
 
-# 상품 세부 조회에서 이름 넘겨주기 
-@application.route("/reg_review_init/<productName>")
-def reg_review_init(productName):
-    return render_template("reg_review.html", productName=productName)
-
-# 리뷰 등록 조회 
-@application.route("/reg_review/<productName>")
+# 리뷰 등록 
+@application.route("/reg_review/<productName>/", methods=['GET', 'POST'])
 def reg_review(productName):
-    return render_template("reg_review.html", productName= productName)
-
-# 리뷰 등록 요청 
-@application.route("/reg_review/<productName>", methods=['POST'])
-def reg_review_post(productName):
+    if request.method=='GET':
+        return render_template("reg_review.html", productName=productName)
     
-    # 리뷰 데이터 가져오기 
-    data=request.form 
+    elif request.method=='POST':
+        # 리뷰 데이터 가져오기 
+        data=request.form 
+        userId=data.get("userId")
 
-    userId=data.get("userId")
+        # 이미지 파일 저장 
+        image_file=request.files.get("reviewImage")
+        image_file_path="static/review_images/{}".format(image_file.filename)
+        image_file.save(image_file_path)
 
-    # 이미지 파일 저장 
-    image_file=request.files.get("reviewImage")
-    image_file_path="static/review_images/{}".format(image_file.filename)
-    image_file.save(image_file_path)
-
-    # DB에 리뷰 등록
-    DB.insert_review(productName, userId, data, image_file_path)
-    return redirect(url_for('view_review'))
+        # DB에 리뷰 등록
+        DB.insert_review(productName, userId, data, image_file_path)
+        return redirect(url_for('view_review'))
 
 # 로그인 조회 
 @application.route("/login")

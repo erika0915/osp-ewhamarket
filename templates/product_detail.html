@@ -24,7 +24,7 @@
     <div class="column middle">
     <div class="product-details">
 
-      <h3 class="product-name">{{data.productName}}</h3>
+      <h3 class="product-name" name="productName">{{data.productName}}</h3>
 
       <div class="like-container">
         <button class="like-button" onclick="toggleLike(this)">
@@ -64,8 +64,8 @@
       </div>
     </div>
 
-    <button class="buy" data-value="buy">바로 구매 ></button>
-    <button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록 ></button> <!--week12-->
+    <button class="buy" data-value="buy">바로 구매</button>
+    <button onclick="location.href='/reg_review/{{data.productName}}/';">리뷰등록</button> <!--week12-->
   </div><!--dropdown-label-->
 
   <div class="review">
