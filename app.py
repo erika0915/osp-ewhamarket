@@ -178,6 +178,9 @@ def login_user():
     id_=request.form['userId']
     pw=request.form['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    nickname=request.form['nickname']
+    email=request.form['email']
+    phoneNum=request.form['phoneNum']
     if DB.find_user(id_,pw_hash):
         session['id']=id_
         return redirect(url_for('view_products'))
