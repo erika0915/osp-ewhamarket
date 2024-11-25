@@ -1,3 +1,4 @@
+/*김연우*/ 
 /* 기본설정 */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @font-face {
@@ -34,7 +35,7 @@
   background-color: white;
 }
 
-.inid,.inemail,.inph,.month,.day,.year,.inna,
+.username_input,.inemail,.inph,.month,.day,.year,.inna,
 input[type="password"],
 select {
   padding: 10px 35px 10px 10px;
@@ -45,7 +46,8 @@ select {
   background-color: #f5f5f5;
   color:#848484;
 }
-.chk{
+/*아이디 중복확인 체크*/
+.id_overlap_button{
   padding: 10px;
   margin-bottom: 15px;
   border: 2px solid #848484;
@@ -91,6 +93,24 @@ width:50%
   color: #333;
   margin-bottom: 5px;
 }
+/*프로필 이미지 등록*/
+.pp{
+	font-size:20px;
+}
+
+.file-label {
+  background-color: #f5f5f5;
+  color: #848484;
+  text-align: center;
+  padding: 10px 0;
+  width: 30%;
+  border-radius: 15px;
+}
+.file {
+  display: none;
+  gap:20px; 
+}
+
 /*개인정보 수집 및 동의*/
 .agree{
   text-align:right;

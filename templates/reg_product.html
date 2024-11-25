@@ -1,8 +1,10 @@
+<!--김연우-->
+
 {% extends "index.html" %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_items.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_product.css') }}">
 {% endblock %}
 
 {%block section%} 
@@ -14,7 +16,7 @@
       </div>
 
       <div class=form-row>
-        <label for="userId">아이디</label>
+        <label for="userId">닉네임</label>
         <input class="inlg" type="text" id="userId" name = "userId" placeholder="아이디 입력">
       </div>
       
@@ -32,15 +34,10 @@
         <label for="category">카테고리</label>
           <select id="category" name = "category">
             <option value="" disabled selected>카테고리 선택</option>
-            <option value="electronics">전자 제품</option>
-            <option value="fashion">패션</option>
-            <option value="home">가정용품</option>
-          </select>
-        <label for="options">   옵션</label>
-          <select id="options" name="option">
-            <option value="" disabled selected>옵션 추가</option>
-            <option value="option1">옵션 1</option>
-            <option value="option2">옵션 2</option>
+            <option value="electronics">디지털 엑세서리</option>
+            <option value="fashion">패션 엑세서리</option>
+            <option value="table">테이블웨어</option>
+            <option value="stationary">스테이셔너리 </option>
           </select>
       </div>
 
@@ -66,15 +63,17 @@
 
       <div class=form-row7>
         <p class="pp">이미지   </p>
-        <label for="file">choose file</label>
-        <input class="file" type="file" id="file" name= "file"/>
+        <label for="productImage">choose file</label>
+        <input class="file" type="file" id="productImage" name= "productImage"/>
       </div>
 
       <div class="button-group">
-        <button type="button" class="cancel-button">취소</button>
-        <button type="submit" class="submit-button">등록</button>
+        <button type="reset" class="cancel-button" onclock="pushResetButton()">취소</button>
+        <button type="submit" class="submit-button" onclick="pushSubmitButton()">등록</button>
       </div> 
     </form> 
   </div>
 </main> 
 {% endblock section %}
+
+<script src="/static/js/reg_product.js"></script>
