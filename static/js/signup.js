@@ -7,7 +7,7 @@ function id_overlap_check() {
     })
     
     if ($('.username_input').val() == '') {
-        alert('이메일을 입력해주세요.')
+        alert('아이디를 입력해주세요')
         return;
     }
     
@@ -37,4 +37,10 @@ function id_overlap_check() {
     });
 }
 
-    
+function pushRegiButton(){
+	alert("등록되었습니다");
+}
+
+function pushResetButton(){
+	alert("취소되었습니다");
+}
