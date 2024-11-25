@@ -6,24 +6,20 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../static/js/detail.js"></script>
 {% endblock%}
 
 {%block section%}
 <body>
-  <div class="container">
+<div class="container">
 
   <div class="row">
-<!--column side-->
-  
-    
     <div class="main-image">
       <a target="_blank" href="/static/images/phone0.png">
         <img src="../../static/images/{{data.img_path}}" alt="phone0"> 
       </a> <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
     </div>
-    <div class="column middle">
+
+  <div class="column middle">
     <div class="product-details">
 
       <h3 class="product-name">{{data.productName}}</h3>
@@ -40,7 +36,8 @@
       <h4 class="product-seller">카테고리: {{data.category}}</h4>
       <div class="product-description"> {{data.description}}</div>
       <h3 class="product-price">가격 : {{data.price}}</h3>
-    </div> #product details 
+    </div>
+  
   <div class="dropdown-label">
 
     <div class="dropdown">
@@ -105,9 +102,12 @@
 
   </div><!--column middle-->
   </div><!--row-->
-  </div><!--container-->
+</div><!--container-->
  
  
 </body>
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../static/js/detail.js"></script>
 {% endblock %} 
 
