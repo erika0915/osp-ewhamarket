@@ -13,26 +13,6 @@ def hello() :
     #return render_template("index.html")
     return redirect(url_for('view_products'))
 
-# 상품 등록 조회 
-@application.route('/reg_product')
-def reg_product():
-    return render_template('reg_product.html')
-
-# 상품 등록 요청 
-@application.route("/reg_product_post", methods=['POST'])
-def reg_product_submit_post():
-
-    productImage_file = request.files["productImage"]
-
-    productImage_file.save("static/images/{}".format(productImage_file.filename))
-    data = request.form 
-    print(request.form)
-    DB.insert_product(data['productName'], data, productImage_file.filename)
-    #기존 상품 등록 후 뜨던 화면 -> 플래시 메시지 뜨고 전체 상품 화면으로 연결 
-    return render_template("submit_item_result.html", data=data, img_path = "static/images/{}".format(productImage_file.filename))
-    flash ("product successfully registered!")
-    return render_template("products.html")
-
 # 전체 상품 조회 
 @application.route("/products")
 def view_products(): 
@@ -41,67 +21,11 @@ def view_products():
     per_row = 3 
     row_count = int(per_page/per_row)
 
+    # 데이터베이스에서 상품 가져오기 
     data = DB.get_products() 
     if not data:
         print("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
-
-    start_idx = per_page * page
-    end_idx = per_page * (page+1)
-    item_counts = len(data)
-    data = dict(list(data.products())[start_idx:end_idx])
-    tot_count = len(data)
-    for i in range(row_count):
-        if (i == row_count -1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.products())[i * per_row:])
-        else:
-            locals()['data_{}'.format(i)] = dict(list(data.products())[i * per_row:(i+1) * per_row])
-            
-    print(f"product_counts: {product_counts}, page_count: {int((product_counts / per_page) + 1)}")
-    print(f"data: {data}")
-    return render_template(
-        "products.html", 
-        datas = data.products(),
-        row1 = locals()['data_0'].products(), 
-        row2 = locals()['data_1'].products(), 
-        limit = per_page, 
-        page = page, 
-        page_count = int((product_counts / per_page) + 1), 
-        total = product_counts, 
-        m = row_count
-    )
-
-   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
-
-# 상품 상세 조회 
-@application.route("/products/<name>/")
-def view_product_detail(name):
-    # print("###name:", name)
-    data = DB.get_product_byname(str(productName))
-    # print("###data:", data)
-    return render_template("product_detail.html", productName=productName, data=data)
-
-# 좋아요 기능 
-@application.route('/show_heart/<name>/', methods=['GET'])
-def show_heart(name):
-    my_heart = DB.get_heart_byname(session['id'],name)
-    return jsonify({'my_heart':my_heart})
-
-#마저 구현해야함 ! 
-
-# 리뷰 전체 조회 
-@application.route('/reviews')
-def view_reviews():
-    page = request.args.get("page", 0, type = int) # 현재 페이지 번호 
-    per_page = 4 # 페이지 당 항목 수 
-    per_row = 2  # 한 행에 표시할 항목 수 
-    row_count = int(per_page/per_row) # 행의 개수 계산 
-
-    # db에 모든 리뷰 데이터 조회 
-    data = DB.get_items() 
-    if not data:
-        print("DB에 데이터가 없습니다.")
-        return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
     # 페이지네이션 처리 
     start_idx = per_page * page
@@ -117,8 +41,9 @@ def view_reviews():
             
     print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
     print(f"data: {data}")
+
     return render_template(
-        "reviews.html", 
+        "products.html", 
         datas = data.items(),
         row1 = locals()['data_0'].items(), 
         row2 = locals()['data_1'].items(), 
@@ -128,7 +53,82 @@ def view_reviews():
         total = item_counts, 
         m=row_count
     )
+
     print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
+
+# 상품 등록
+@application.route('/reg_product', methods=['GET', 'POST'])
+def reg_product():
+    if request.method=='GET': 
+        return render_template('reg_product.html')
+
+    elif request.method=='POST':
+        # 이미지 파일 저장 
+        image_file = request.files.get("productImage")
+        image_file.save("static/images/{}".format(image_file.filename))
+
+        # 폼 데이터 처리 
+        data = request.form 
+        print(data)
+
+        # 데이터베이스에 상품 정보 저장 
+        DB.insert_product(data['productName'], data, image_file.filename)
+
+        # 플래시 메시지 
+        flash ("상품이 성공적으로 등록되었습니다!")
+
+        # 전체 상품 페이지로 리디렉션 
+        return redirect(url_for('view_products'))
+ 
+# 상품 상세 조회 
+@application.route("/products/<name>/")
+def view_product_detail(name):
+    print("###name:", name)
+    data = DB.get_item_byname(str(name))
+    print("###data:", data)
+    return render_template("product_detail.html", name=name, data=data)
+#------------------------------------------------------------------------------------------
+# 리뷰 전체 조회 
+@application.route('/reviews')
+def view_reviews():
+    page = request.args.get("page", 0, type = int) # 현재 페이지 번호 
+    per_page = 4 # 페이지 당 항목 수 
+    per_row = 2  # 한 행에 표시할 항목 수 
+    row_count = int(per_page/per_row) # 행의 개수 계산 
+    
+    data = DB.get_products()
+    
+    if not data:
+        print("DB에 데이터가 없습니다.")
+        return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
+
+    # 페이지네이션 처리 
+    start_idx = per_page * page
+    end_idx = per_page * (page+1)
+    product_counts = len(data)
+    data = dict(list(data.get_products())[start_idx:end_idx])
+    tot_count = len(data)
+    for i in range(row_count):
+        if (i == row_count -1) and (tot_count % per_row != 0):
+            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:])
+        else:
+            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:(i+1) * per_row])
+            
+    print(f"product_counts: {product_counts}, page_count: {int((product_counts / per_page) + 1)}")
+    print(f"data: {data}")
+    return render_template(
+        "reviews.html", 
+        datas = data.items(),
+        row1 = locals()['data_0'].items(), 
+        row2 = locals()['data_1'].items(), 
+        limit = per_page, 
+        page = page, 
+        page_count = int((product_counts / per_page) + 1), 
+        total = product_counts, 
+        m = row_count
+    )
+
+   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 # 리뷰 상세 조회 
 @application.route("/reviews/<productName>")
@@ -136,34 +136,37 @@ def view_review_detail(productName):
     data = DB.get_review_byname(productName)
     return render_template("review_detail.html", productName=productName, data=data)
 
-# 상품 세부 조회에서 이름 넘겨주기 
-@application.route("/reg_review_init/<productName>")
-def reg_review_init(productName):
-    return render_template("reg_review.html", productName=productName)
-
-# 리뷰 등록 조회 
+# 리뷰 등록
 @application.route("/reg_review/<productName>")
+
 def reg_review(productName):
-    return render_template("reg_review.html", productName= productName)
-
-# 리뷰 등록 요청 
-@application.route("/reg_review/<productName>", methods=['POST'])
-def reg_review_post(productName):
+    if request.method=='GET':
+        return render_template("reg_review.html", productName=productName)
     
-    # 리뷰 데이터 가져오기 
-    data=request.form 
+    elif request.method=='POST':
+        # 리뷰 데이터 가져오기 
+        data=request.form 
+        userId=data.get("userId")
 
-    userId=data.get("userId")
+        # 이미지 파일 저장 
+        image_file=request.files.get("reviewImage")
+        image_file_path="static/review_images/{}".format(image_file.filename)
+        image_file.save(image_file_path)
 
-    # 이미지 파일 저장 
-    image_file=request.files.get("reviewImage")
-    image_file_path="static/review_images/{}".format(image_file.filename)
-    image_file.save(image_file_path)
+        # DB에 리뷰 등록
+        DB.insert_review(productName, userId, data, image_file_path)
+        return redirect(url_for('view_review'))
+      
+#------------------------------------------------------------------------------------------  
+# 좋아요 기능 
+@application.route('/show_heart/<name>/', methods=['GET'])
+def show_heart(name):
+    my_heart = DB.get_heart_byname(session['id'],name)
+    return jsonify({'my_heart':my_heart})
 
-    # DB에 리뷰 등록
-    DB.insert_review(productName, userId, data, image_file_path)
-    return redirect(url_for('view_review'))
+#마저 구현해야함 ! 
 
+#------------------------------------------------------------------------------------------
 # 로그인 조회 
 @application.route("/login")
 def login():

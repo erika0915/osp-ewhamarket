@@ -29,9 +29,10 @@ class DBhandler:
         products = self.db.child("product").get().val()
         return products
     
+
     # 상품 세부 조회 -> 이름으로 조회 
     def get_product_byname(self, productName):
-        items = self.db.child("product").get()
+        products = self.db.child("product").get()
         target_value=""
         #print("###########", name)
         for res in products.each():

@@ -10,18 +10,10 @@
 <div class="product_container">
   <aside class="side-bar">
     <ul>
-      <li>
-          <a href="#">디지털 악세사리</a>
-      </li>
-      <li>
-          <a href="#">패션 악세사리</a>
-      </li>
-      <li>
-          <a href="#">테이블웨어</a>
-      </li>
-      <li>
-        <a href="#">스테이셔너리</a>
-    </li>
+      <li><a href="#">디지털 악세사리</a></li>
+      <li><a href="#">패션 악세사리</a></li>
+      <li><a href="#">테이블웨어</a></li>
+      <li><a href="#">스테이셔너리</a></li>
     </ul>
   </aside>
 
@@ -43,7 +35,7 @@
       <tr>
         {% for key, value in row1 %}
         <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
       </tr>
@@ -63,7 +55,7 @@
       <tr>
         {% for key, value in row2 %}
         <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
       </tr>
