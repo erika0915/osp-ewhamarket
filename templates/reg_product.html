@@ -74,6 +74,13 @@
     </form> 
   </div>
 </main> 
+<!--플래시 메시지 필요해서 수정 -->
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 {% endblock section %}
 
 <script src="/static/js/reg_product.js"></script>

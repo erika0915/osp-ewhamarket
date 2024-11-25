@@ -72,19 +72,23 @@ def reg_product():
         print(data)
 
         # 데이터베이스에 상품 정보 저장 
-        DB.insert_product(data['productName'], data, image_file.filename)
+        if DB.insert_product(data['productName'], data, image_file.filename):
+            flash("상품이 성공적으로 등록되었습니다!")
+            return redirect(url_for('view_products'))
 
         # 플래시 메시지 
-        flash ("상품이 성공적으로 등록되었습니다!")
+        #flash("상품이 성공적으로 등록되었습니다!")
 
         # 전체 상품 페이지로 리디렉션 
-        return redirect(url_for('view_products'))
+        #return redirect(url_for('view_products'))
+
+        
  
 # 상품 상세 조회 
 @application.route("/products/<name>/")
 def view_product_detail(name):
     print("###name:", name)
-    data = DB.get_item_byname(str(name))
+    data = DB.get_product_byname(str(name))
     print("###data:", data)
     return render_template("product_detail.html", name=name, data=data)
 #------------------------------------------------------------------------------------------
@@ -128,7 +132,7 @@ def view_reviews():
         m = row_count
     )
 
-   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
+   #print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 # 리뷰 상세 조회 
 @application.route("/reviews/<productName>")
