@@ -1,7 +1,10 @@
+<!--chaewon-->
+
 {% extends "index.html" %}
 
 {%block styles%}
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
 {% endblock%}
 
@@ -10,53 +13,30 @@
   <div class="container">
 
   <div class="row">
-    <div class="column side">
-      <p>
-        <a target="_blank" href="/static/images/phone1.png">
-        <img src="../../static/images/phone1.png" alt="phone1">
-        </a>
-      </p>
-    
-      <p>
-        <a target="_blank" href="/static/images/phone2.png">
-        <img src="../../static/images/phone2.png" alt="phone2">
-        </a>
-      </p>
-      
-      <p>
-        <a target="_blank" href="/static/images/phone3.png">
-        <img src="../../static/images/phone3.png" alt="phone3">
-        </a>
-      </p>
-    
-      <p>
-        <a target="_blank" href="/static/images/phone4.png">
-        <img src="../../static/images/phone4.png" alt="phone4">
-        </a>
-      </p>
-    </div><!--column side-->
+<!--column side-->
   
-    <div class="column middle">
+    
     <div class="main-image">
       <a target="_blank" href="/static/images/phone0.png">
         <img src="../../static/images/{{data.img_path}}" alt="phone0"> 
       </a> <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
     </div>
-    
+    <div class="column middle">
     <div class="product-details">
 
       <h3 class="product-name">{{data.productName}}</h3>
 
       <div class="like-container">
         <button class="like-button" onclick="toggleLike(this)">
-          <span class="heart-icon">♥</span>
+          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+          <!--<span class="heart-icon">♥</span>-->
         </button>
           <span class="like-count">(128)</span>
       </div>
 
       <hr>
       <h4 class="product-seller">카테고리: {{data.category}}</h4>
-      <div class="product-description">이 글은 좌측 상품인 토마토 폰케이스에 대한 소개글을 보여주는 부분입니다. 특수 소재로 제작되어 튼튼하고, 특별히 이화인들에게 인터넷 최저가보다 저렴한 가격으로 받아볼 수 있도록 최선을 다했습니다. 유광소재이고, 충격에 강합니다.</div>
+      <div class="product-description"> {{data.description}}</div>
       <h3 class="product-price">가격 : {{data.price}}</h3>
     </div> #product details 
   <div class="dropdown-label">
@@ -85,7 +65,7 @@
     </div>
 
     <button class="buy" data-value="buy">바로 구매 ></button>
-
+    <button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록 ></button> <!--week12-->
   </div><!--dropdown-label-->
 
   <div class="review">
@@ -127,5 +107,8 @@
  
  
 </body>
-{% endblock %} 
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../static/js/detail.js"></script>
+{% endblock %} 
+
