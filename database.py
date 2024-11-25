@@ -29,9 +29,10 @@ class DBhandler:
         products = self.db.child("product").get().val()
         return products
     
+
     # 상품 세부 조회 -> 이름으로 조회 
     def get_product_byname(self, productName):
-        items = self.db.child("product").get()
+        products = self.db.child("product").get()
         target_value=""
         #print("###########", name)
         for res in products.each():
@@ -40,6 +41,27 @@ class DBhandler:
                 target_value = res.val()
         return target_value
     
+    # 리뷰 등록 
+    def insert_review(self, productName, userId, data, img_path):
+        review_info={
+            "title": data['title'],
+            "content": data['content'],
+            "rate" : data['rate'],
+            "reviewImage": img_path
+        }
+        self.db.child("review").child(productName).child(userId).set(review_info)
+        return True
+    
+    # 리뷰 전체 조회 
+    def get_reviews(self):
+        reviews=self.db.child("review").get().val()
+        return reviews
+    
+    # 리뷰 상세 조회 -> 상품명으로 조회 
+    def get_review_byname(self, productName):
+        reviews=self.db.child("review").child(productName).get().val()
+        return reviews
+
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
