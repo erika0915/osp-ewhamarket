@@ -157,21 +157,10 @@ def reg_review(productName):
         image_file = request.files.get("reviewImage")
         if not image_file or image_file.filename == '':
             return "Image upload failed or no file provided.", 400
-
-        from werkzeug.utils import secure_filename
-        import os
-
-        # 이미지 저장 경로 설정
-        image_dir = "static/images"
-        if not os.path.exists(image_dir):
-            os.makedirs(image_dir)
-
-        filename = secure_filename(image_file.filename)
-        image_file_path = os.path.join(image_dir, filename)
-        image_file.save(image_file_path)
+        image_file.save(f"static/images/{image_file.filename}")
 
         # DB에 리뷰 등록
-        DB.insert_review(productName, userId, data, filename)
+        DB.insert_review(productName, userId, data, image_file.filename)
         return redirect(url_for('view_reviews'))
       
 #------------------------------------------------------------------------------------------  
@@ -182,7 +171,6 @@ def show_heart(name):
     return jsonify({'my_heart':my_heart})
 
 #마저 구현해야함 ! 
-
 #------------------------------------------------------------------------------------------
 # 로그인 조회 
 @application.route("/login")
