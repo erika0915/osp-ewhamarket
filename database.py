@@ -42,25 +42,25 @@ class DBhandler:
         return target_value
 #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
-    def insert_review(self, productName, userId, data, img_path):
+    def insert_review(self, productName, data, img_path):
         review_info={
+            "userId": data.get("userId"),
             "title": data.get('title'),
             "content": data.get('content'),
             "rate" : data.get('reviewStar'),
             "reviewImage": img_path
         }
-        self.db.child("review").child(productName).child(userId).set(review_info)
-        return True
+        self.db.child("review").child(productName).push(review_info)
     
     # 리뷰 전체 조회 
     def get_reviews(self):
         reviews=self.db.child("review").get().val()
         return reviews
     
-    # 리뷰 상세 조회 -> 상품명으로 조회 
-    def get_review_byname(self, productName):
-        reviews=self.db.child("review").child(productName).get().val()
-        return reviews
+    # 리뷰 상세 조회
+    def get_review_by_id(self, productName, review_id):
+        review = self.db.child("review").child(productName).child(review_id).get().val()
+        return review
 #------------------------------------------------------------------------------------------  
     # 로그인 검증 
     def find_user(self, id_, pw_):
