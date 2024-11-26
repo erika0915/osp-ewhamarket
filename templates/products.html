@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
 {% endblock %}
 
@@ -55,6 +56,10 @@
                 {{ value.price }}
               </div>
             </div>
+            <div class="like-container">
+              <button class="like-button" onclick="toggleLike(this)">
+                <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+              </button>
           </td>
           {% endfor %}
       </tr>
@@ -75,6 +80,10 @@
                 {{ value.price }}
               </div>
             </div>
+            <div class="like-container">
+              <button class="like-button" onclick="toggleLike(this)">
+                <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+              </button>
           </td>
           {% endfor %}
       </tr>
@@ -98,8 +107,8 @@
         <p>등록된 상품이 없습니다.</p>
       {% endif %}
   
-  </div>
-
+</div>
+<script src="../static/js/products.js"></script>
 {% endblock %}
 
 <script src="{{ url_for('static', filename='js/list.js') }}"></script>
