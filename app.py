@@ -38,9 +38,6 @@ def view_products():
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
         else:
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
-            
-    print(f"item_counts: {item_counts}, page_count: {int((item_counts / per_page) + 1)}")
-    print(f"data: {data}")
 
     return render_template(
         "products.html", 
@@ -53,8 +50,6 @@ def view_products():
         total = item_counts, 
         m=row_count
     )
-
-    print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 # 상품 등록
 @application.route('/reg_product', methods=['GET', 'POST'])
@@ -78,9 +73,7 @@ def reg_product():
 # 상품 상세 조회 
 @application.route("/products/<name>/")
 def view_product_detail(name):
-    print("###name:", name)
     data = DB.get_product_byname(str(name))
-    print("###data:", data)
     return render_template("product_detail.html", name=name, data=data)
 #------------------------------------------------------------------------------------------
 # 리뷰 전체 조회 
@@ -98,12 +91,14 @@ def view_reviews():
         print("DB에 데이터가 없습니다.")
         return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
-    # 상품 별 리뷰 데이터를 리스트로 변환 
+    # 리뷰 데이터를 리스트로 변환 
     all_reviews = []
-    for product, users in data.items():
-        for user, review in users.items():
+    for product, reviews in data.items():
+        for review_id, review in reviews.items():
             all_reviews.append({
                 "product":product,
+                "review_id": review_id,
+                "userId" : review.get("userId"),
                 "title": review.get("title"),
                 "content":review.get("content"),
                 "rate" : review.get("rate"),
@@ -135,19 +130,19 @@ def view_reviews():
     )
 
 # 리뷰 상세 조회 
-@application.route("/reviews/<productName>")
-def view_review_detail(productName):
-    data = DB.get_review_byname(productName)
-    return render_template("review_detail.html", productName=productName, data=data)
+@application.route("/reviews/<productName>/<review_id>")
+def view_review_detail(productName, review_id):
+    data = DB.get_review_by_id(productName, review_id)
+    return render_template("review_detail.html", productName=productName,  review_id=review_id, data=data)
 
 # 리뷰 등록
 @application.route("/reg_review/<productName>", methods=['GET', 'POST'])
 def reg_review(productName):
-    print("Received productName:", productName)  
     if request.method=='GET':
         return render_template("reg_review.html", productName=productName)
     
     elif request.method=='POST':
+
         # 리뷰 데이터 가져오기 
         data=request.form 
         userId=data.get("userId")
@@ -159,7 +154,7 @@ def reg_review(productName):
         image_file.save(f"static/images/{image_file.filename}")
 
         # DB에 리뷰 등록
-        DB.insert_review(productName, userId, data, image_file.filename)
+        DB.insert_review(productName, data, image_file.filename)
         return redirect(url_for('view_reviews'))
       
 #------------------------------------------------------------------------------------------  
