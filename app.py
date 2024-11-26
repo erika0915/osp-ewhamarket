@@ -72,17 +72,12 @@ def reg_product():
         print(data)
 
         # 데이터베이스에 상품 정보 저장 
-        if DB.insert_product(data['productName'], data, image_file.filename):
-            flash("상품이 성공적으로 등록되었습니다!")
-            return redirect(url_for('view_products'))
+        DB.insert_product(data['productName'], data, image_file.filename)
 
-        # 플래시 메시지 
-        #flash("상품이 성공적으로 등록되었습니다!")
 
-        # 전체 상품 페이지로 리디렉션 
-        #return redirect(url_for('view_products'))
-
-        
+    if DB.insert_product(data['productName'], data, image_file.filename): 
+        flash("상품이 성공적으로 등록되었습니다!")
+        return redirect(url_for('view_products'))        
  
 # 상품 상세 조회 
 @application.route("/products/<name>/")

@@ -8,6 +8,7 @@
 {% endblock %}
 
 {%block section%} 
+
 <main>
   <div class="form-container">
     <form action = "/reg_product" method= "POST" enctype="multipart/form-data">
@@ -74,12 +75,6 @@
     </form> 
   </div>
 </main> 
-<!--플래시 메시지 필요해서 수정 -->
-{% with mesg = get_flashed_messages() %}
-{% if mesg !=[] %}
-  <script>alert("{{mesg[0]}}") </script>
-{% endif %}
-{% endwith %}
 
 {% endblock section %}
 
