@@ -7,6 +7,13 @@
 {% endblock %}
 
 {% block section %}
+<!--플래시 메시지 필요해서 수정 -->
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 <div class="product_container">
   <aside class="side-bar">
     <ul>

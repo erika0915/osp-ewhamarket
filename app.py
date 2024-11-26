@@ -71,11 +71,10 @@ def reg_product():
         data = request.form 
         print(data)
 
-        # 데이터베이스에 상품 정보 저장 
-        if DB.insert_product(data['productName'], data, image_file.filename):
-            flash("상품이 성공적으로 등록되었습니다!")
-            return redirect(url_for('view_products'))
-
+    if DB.insert_product(data['productName'], data, image_file.filename): 
+        flash("상품이 성공적으로 등록되었습니다!")
+        return redirect(url_for('view_products'))        
+ 
 # 상품 상세 조회 
 @application.route("/products/<name>/")
 def view_product_detail(name):
