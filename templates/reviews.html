@@ -10,18 +10,10 @@
 <div class="product_container">
     <aside class="side-bar">
       <ul>
-        <li>
-            <a href="#">디지털 악세사리</a>
-        </li>
-        <li>
-            <a href="#">패션 악세사리</a>
-        </li>
-        <li>
-            <a href="#">테이블웨어</a>
-        </li>
-        <li>
-          <a href="#">스테이셔너리</a>
-      </li>
+        <li><a href="#">디지털 악세사리</a></li>
+        <li><a href="#">패션 악세사리</a></li>
+        <li><a href="#">테이블웨어</a></li>
+        <li><a href="#">스테이셔너리</a></li>
       </ul>
     </aside>
   
@@ -40,67 +32,40 @@
             현재까지 {{total}}개 리뷰 등록됨
         </p>
             <table>
-                <tr>
-                    {% for key, value in row1 %}
-                      <td>
-                        <div class="layer">
-                            <div class="product-item">
-                                <div class="product-image">
-                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
-                                </div>
-                                <div class="product-title">
-                                  {{ key }}
-                                </div>
-                                <div class="price">
-                                    {{ value.price }}
-                                </div>
-                              </div>
-                              <div class="description">
-                                  <div class="grade">
-                                    <span>★★★★★</span>
-                                  </div>
-                                  <div class="des-title">
-                                    선물용으로 좋아요
-                                  </div>
-                                  <div>
-                                    설명설명설명
-                                  </div>
-                              </div>
-                        </div>
-                      </td>
-                    {% endfor %}
-                  </tr>
-
-                  <tr>
-                    {% for key, value in row2 %}
-                      <td>
-                        <div class="layer">
-                            <div class="product-item">
-                                <div class="product-image">
-                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
-                                </div>
-                                <div class="product-title">
-                                  {{ key }}
-                                </div>
-                                <div class="price">
-                                    {{ value.price }}
-                                </div>
-                              </div>
-                              <div class="description">
-                                  <div class="grade">
-                                    <span>★★★★★</span>
-                                  </div>
-                                  <div class="des-title">
-                                    선물용으로 좋아요
-                                  </div>
-                                  <div>
-                                    설명설명설명
-                                  </div>
-                              </div>
-                        </div>
-                      </td>
-                    {% endfor %}
-                  </tr>
+              <tr>
+                {% for review in row1 %}
+                <td>
+                  <div class="review-item">
+                    {% if review.reviewImage %}
+                    <div class="review-image">
+                      <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200">
+                    </div>
+                    {% endif %}
+                    <div class="review-title">{{ review.title }}</div>
+                    <div class="review-content">{{ review.content }}</div>
+                    <div class="review-rate">평점: {{ review.rate }}</div>
+                    <div class="review-product">상품명: {{ review.product }}</div>
+                  </div>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for review in row2 %}
+                <td>
+                  <div class="review-item">
+                    {% if review.reviewImage %}
+                    <div class="review-image">
+                      <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200">
+                    </div>
+                    {% endif %}
+                    <div class="review-title">{{ review.title }}</div>
+                    <div class="review-content">{{ review.content }}</div>
+                    <div class="review-rate">평점: {{ review.rate }}</div>
+                    <div class="review-product">상품명: {{ review.product }}</div>
+                  </div>
+                </td>
+                {% endfor %}
+              </tr>
             </table>
 
     <div class="page-wrap">
