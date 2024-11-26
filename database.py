@@ -82,7 +82,7 @@ class DBhandler:
        "phoneNum":data['phoneNum']
         }
         if self.user_duplicate_check(str(data['userId'])):
-           self.db.child("user").push(user_info)
+           self.db.child("user").child(data['userId']).set(user_info)
            print(data)
            return True
         else:
