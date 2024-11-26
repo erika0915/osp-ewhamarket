@@ -108,10 +108,77 @@
 }
 
 /*버튼*/
-.button {
-  margin-left: 60px;
-  margin-right: 60px;
+button {
+  padding: 10px 20px; /* 버튼 안의 텍스트 공간 */
+  font-size: 16px; /* 텍스트 크기 */
+  border: 1px solid #ddd; /* 외곽선 */
+  border-radius: 5px; /* 둥근 모서리 */
+  background-color: #f5f5f5; /* 배경색 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 호버 애니메이션 */
+  margin-right: 20px;
 }
+
+
+/*개수 선택 dropdown*/
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+  margin-left: 60px;
+}
+
+.dropbtn_icon{
+  font-family : 'Material Icons';
+}
+
+.dropbtn{
+  border : 1px solid rgb(37, 37, 37);
+  border-radius : 4px;
+  background-color: #f5f5f5;
+  font-weight: 400;
+  color : rgb(37, 37, 37);
+  padding : 12px;
+  width :50px;
+  text-align: left;
+  cursor : pointer;
+  font-size : 12px;
+  margin-right:15px;
+}
+
+.dropdown-content{
+  display : none;
+  position : absolute;
+  z-index : 1; /*다른 요소들보다 앞에 배치*/
+  font-weight: 400;
+  background-color: #f9f9f9;
+  min-width : 40px;
+}
+
+.dropdown-content a{
+  display : block;
+  text-decoration : none;
+  color : rgb(37, 37, 37);
+  font-size: 12px;
+  padding : 12px 20px;
+}
+
+.dropdown-content a:hover{
+  background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-label {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
 
 /*좋아요 기능*/
 .like-container {
@@ -165,7 +232,9 @@ hr {
   display: inline-flex;                /* 가로 배치 */
   align-items: center;           /* 세로 가운데 정렬 */
   margin-top: 20px;
+  margin-left: 60px;
 }
+
 /* 별점 전체 컨테이너 */
 .star_rating {
   width: 100%; 
