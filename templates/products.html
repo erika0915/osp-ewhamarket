@@ -29,7 +29,7 @@
   
   {% if total > 0 %}
   <p class="reg-num">
-    현재까지 {{total}}개 리뷰 등록됨
+    현재까지 {{total}}개 상품 등록됨
   </p>
     <table>
       <tr>
@@ -60,7 +60,7 @@
         {% endfor %}
       </tr>
       <tr>
-          {% for key, value in row1 %}
+          {% for key, value in row2 %}
           <td>
             <div class="product-title">
               {{ key }}
