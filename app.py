@@ -87,6 +87,7 @@ def view_product_detail(name):
     data = DB.get_item_byname(str(name))
     print("###data:", data)
     return render_template("product_detail.html", name=name, data=data)
+
 #------------------------------------------------------------------------------------------
 # 리뷰 전체 조회 
 @application.route('/reviews')
@@ -96,26 +97,30 @@ def view_reviews():
     per_row = 2  # 한 행에 표시할 항목 수 
     row_count = int(per_page/per_row) # 행의 개수 계산 
     
-    data = DB.get_products()
-    
+    # 데이터베이스에서 리뷰 가져오기 
+    data = DB.get_reviews()
     if not data:
         print("DB에 데이터가 없습니다.")
         return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
+    # 데이터 딕셔너리를 리스트 형태로 변환하여 슬라이싱 
+    data_items = list(data.items())
+
     # 페이지네이션 처리 
     start_idx = per_page * page
     end_idx = per_page * (page+1)
-    product_counts = len(data)
-    data = dict(list(data.get_products())[start_idx:end_idx])
-    tot_count = len(data)
+    data = dict(data_items[start_idx:end_idx])
+
+    review_counts = len(data) # 전체 리뷰 개수 
     for i in range(row_count):
-        if (i == row_count -1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:])
+        if (i == row_count - 1) and (len(data) % per_row != 0):
+            locals()[f'data_{i}'] = dict(data_items[start_idx + i * per_row:])
         else:
-            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:(i+1) * per_row])
-            
-    print(f"product_counts: {product_counts}, page_count: {int((product_counts / per_page) + 1)}")
+            locals()[f'data_{i}'] = dict(data_items[start_idx + i * per_row:start_idx + (i + 1) * per_row])
+
+    print(f"product_counts: {review_counts}, page_count: {int((review_counts / per_page) + 1)}")
     print(f"data: {data}")
+
     return render_template(
         "reviews.html", 
         datas = data.items(),
@@ -123,12 +128,10 @@ def view_reviews():
         row2 = locals()['data_1'].items(), 
         limit = per_page, 
         page = page, 
-        page_count = int((product_counts / per_page) + 1), 
-        total = product_counts, 
+        page_count = int((review_counts / per_page) + 1), 
+        total = review_counts, 
         m = row_count
     )
-
-   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 # 리뷰 상세 조회 
 @application.route("/reviews/<productName>")
