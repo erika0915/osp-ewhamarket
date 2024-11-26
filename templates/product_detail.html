@@ -32,24 +32,12 @@
     </div>
 
       <hr>
-      <h4 class="product-seller">카테고리: {{data.category}}</h4>
       <div class="product-description">
         <h4 class="underline">상세설명</h4>
-        <p>상품 이름 : <b>{{data.productName}}</b> / 상품 위치 : {{data.addr}} </p>
+        <p>상품 이름 : <b>{{data.productName}}</b>
+        <p>상품 위치 : {{data.location}} </p>
         <p>카테고리 : {{data.category}} </p>
         <p>설명 : {{data.description}} </p>
-        <p>소재 : 에폭시 </p>
-        <p>제작기간 : 3-10일 소요 (공휴일/주말 제외) </p>
-        <p>
-        For payment, the credit card is
-        {% if data['card'] == "Y" %}
-        accepted!
-    
-        {% endif %}
-        {% if data['card'] == "N" %}
-        NOT accepted!
-        {% endif %}
-        </p>
       </div>
       <h3 class="product-price">가격 : {{data.price}}</h3>
     </div> 
