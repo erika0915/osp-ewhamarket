@@ -62,6 +62,27 @@ class DBhandler:
         review = self.db.child("review").child(productName).child(review_id).get().val()
         return review
 #------------------------------------------------------------------------------------------  
+    def get_heart_byname(self, uid, productName):
+        hearts = self.db.child("heart").child(uid).get()
+        target_value =""
+        if hearts.val() == None:
+            return target_value
+        
+        for res in hearts.each():
+            key_value = res.key()
+            
+            if key_value == productName:
+                target_value = res.val()
+        return target_value
+    
+    def update_heart(self, userId, isHeart, productName):
+        heart_info={
+            "interested" : isHeart
+        }
+        self.db.child("heart").child(userId).child(productName).set(heart_info)
+        return True
+
+#------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()

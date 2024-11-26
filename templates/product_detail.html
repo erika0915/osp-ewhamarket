@@ -4,18 +4,17 @@
 
 {%block styles%}
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
 {% endblock%}
 
 {%block section%}
+
 <body>
   <div class="container">
   <div class="row">  
     <div class="main-image">
-      <a target="_blank" href="/static/images/phone0.png">
-        <img src="../../static/images/{{data.img_path}}" alt="phone0"> 
-      </a> <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
+      <img src="{{ url_for('static', filename='images/' + data.productImage) }}">
+       <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
     </div>
 
   <div class="column middle">
@@ -24,10 +23,13 @@
     <h3 class="product-name" name="productName">{{data.productName}}</h3>
 
     <div class="like-container">
-    <button class="like-button" onclick="toggleLike(this)">
-      <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+    <!-- <button class="like-button" onclick="toggleLike(this)">-->
+      <!--<i class="fa fa-heart" id="heart" ></i>--> <!--12주차 좋아요 기능 구현-->
       <!--<span class="heart-icon">♥</span>-->
-    </button>
+    <!--</button>-->
+
+    <i class="fa fa-heart" id="heart"></i>
+   
     <span class="like-count">(128)</span>
     </div>
 
@@ -74,10 +76,66 @@
   </div><!--row-->
   </div><!--container-->
  
- 
 </body>
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+  const productName = "{{ data.productName }}";
+  function showHeart() {
+    $.ajax({
+      type: 'GET',
+      url: '/show_heart/{{ data.productName }}/',
+      data: {},
+      success: function (response) {
+        let my_heart = response['my_heart'];
+        if (my_heart['interested'] == 'Y')
+        {
+          $("#heart").css("color","red");
+          $("#heart").attr("onclick","unlike()");
+       }
+        else
+        {
+          $("#heart").css("color","grey");
+          $("#heart").attr("onclick","like()");
+        }
+        //alert("showheart!")
+    }
+    });
+  }
+  
+  function like() {
+    $.ajax({
+    type: 'POST',
+    url: '/like/{{data.productName}}/',
+    data: {
+      interested : "Y"
+    },
+    success: function (response) {
+      alert(response['msg']);
+      window.location.reload()
+    }
+    });
+  }
+  
+  function unlike() {
+    $.ajax({
+      type: 'POST',
+      url: '/unlike/{{data.productName}}/',
+      data: {
+        interested : "N"
+      },
+    success: function (response) {
+      alert(response['msg']);
+      window.location.reload()
+    }
+    });
+  }
+  $(document).ready(function () {
+    showHeart();
+  });
+  </script>
+
+
 <script src="../static/js/detail.js"></script>
+
 {% endblock %} 
 
