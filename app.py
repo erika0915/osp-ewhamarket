@@ -179,6 +179,7 @@ def login_user():
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
     if DB.find_user(id_,pw_hash):
         session['id']=id_
+        flash("로그인 되었습니다")
         return redirect(url_for('view_products'))
     else:
         flash("Wrong ID or PW!")
