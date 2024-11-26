@@ -199,7 +199,7 @@ def logout_user():
 @application.route("/signup")
 def signup():
     return render_template("signup.html")
-
+ 
 # 회원가입 요청 
 @application.route("/signup_post", methods=['POST'])
 def register_user():
