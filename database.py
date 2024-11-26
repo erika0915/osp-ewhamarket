@@ -97,7 +97,7 @@ class DBhandler:
         else:
             for res in users.each():
                 value = res.val()
-            if value['id'] == id_string:
-                return False
-        return True
+                if 'id'in value and value['id'] == id_string:
+                   return False
+            return True
     
