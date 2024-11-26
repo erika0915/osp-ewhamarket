@@ -71,20 +71,15 @@ def reg_product():
         data = request.form 
         print(data)
 
-        # 데이터베이스에 상품 정보 저장 
-        DB.insert_product(data['productName'], data, image_file.filename)
-
-        # 플래시 메시지 
-        flash ("상품이 성공적으로 등록되었습니다!")
-
-        # 전체 상품 페이지로 리디렉션 
-        return redirect(url_for('view_products'))
+    if DB.insert_product(data['productName'], data, image_file.filename): 
+        flash("상품이 성공적으로 등록되었습니다!")
+        return redirect(url_for('view_products'))        
  
 # 상품 상세 조회 
 @application.route("/products/<name>/")
 def view_product_detail(name):
     print("###name:", name)
-    data = DB.get_item_byname(str(name))
+    data = DB.get_product_byname(str(name))
     print("###data:", data)
     return render_template("product_detail.html", name=name, data=data)
 #------------------------------------------------------------------------------------------
@@ -96,39 +91,48 @@ def view_reviews():
     per_row = 2  # 한 행에 표시할 항목 수 
     row_count = int(per_page/per_row) # 행의 개수 계산 
     
-    data = DB.get_products()
-    
+    # 데이터베이스에서 리뷰 가져오기 
+    data = DB.get_reviews()
+    print(data)
     if not data:
         print("DB에 데이터가 없습니다.")
         return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
+    # 상품 별 리뷰 데이터를 리스트로 변환 
+    all_reviews = []
+    for product, users in data.items():
+        for user, review in users.items():
+            all_reviews.append({
+                "product":product,
+                "title": review.get("title"),
+                "content":review.get("content"),
+                "rate" : review.get("rate"),
+                "reviewImage": review.get("reviewImage")
+            })
+
     # 페이지네이션 처리 
     start_idx = per_page * page
     end_idx = per_page * (page+1)
-    product_counts = len(data)
-    data = dict(list(data.get_products())[start_idx:end_idx])
-    tot_count = len(data)
-    for i in range(row_count):
-        if (i == row_count -1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:])
-        else:
-            locals()['data_{}'.format(i)] = dict(list(data.get_products())[i * per_row:(i+1) * per_row])
-            
-    print(f"product_counts: {product_counts}, page_count: {int((product_counts / per_page) + 1)}")
-    print(f"data: {data}")
+    paginated_reviews = all_reviews[start_idx:end_idx] # 현재 페이지 데이터 슬라이싱 
+
+    # 행 단위로 나누기 
+    rows = [paginated_reviews[i * per_row:(i + 1) * per_row] for i in range(row_count)] 
+     
+    # 총 리뷰 개수 및 페이지 수 계산 
+    tot_count = len(all_reviews) 
+    page_count = (tot_count + per_page -1)// per_page 
+
     return render_template(
         "reviews.html", 
-        datas = data.items(),
-        row1 = locals()['data_0'].items(), 
-        row2 = locals()['data_1'].items(), 
+        datas = paginated_reviews,
+        row1=rows[0] if len(rows) > 0 else [],
+        row2=rows[1] if len(rows) > 1 else [],
         limit = per_page, 
         page = page, 
-        page_count = int((product_counts / per_page) + 1), 
-        total = product_counts, 
+        page_count = page_count,
+        total = tot_count, 
         m = row_count
     )
-
-   # print(f"item_counts: {item_counts}, per_page: {per_page}, page_count: {page_count}")
 
 # 리뷰 상세 조회 
 @application.route("/reviews/<productName>")
@@ -137,9 +141,9 @@ def view_review_detail(productName):
     return render_template("review_detail.html", productName=productName, data=data)
 
 # 리뷰 등록
-@application.route("/reg_review/<productName>")
-
+@application.route("/reg_review/<productName>", methods=['GET', 'POST'])
 def reg_review(productName):
+    print("Received productName:", productName)  
     if request.method=='GET':
         return render_template("reg_review.html", productName=productName)
     
@@ -148,14 +152,15 @@ def reg_review(productName):
         data=request.form 
         userId=data.get("userId")
 
-        # 이미지 파일 저장 
-        image_file=request.files.get("reviewImage")
-        image_file_path="static/review_images/{}".format(image_file.filename)
-        image_file.save(image_file_path)
+        # 이미지 파일 처리
+        image_file = request.files.get("reviewImage")
+        if not image_file or image_file.filename == '':
+            return "Image upload failed or no file provided.", 400
+        image_file.save(f"static/images/{image_file.filename}")
 
         # DB에 리뷰 등록
-        DB.insert_review(productName, userId, data, image_file_path)
-        return redirect(url_for('view_review'))
+        DB.insert_review(productName, userId, data, image_file.filename)
+        return redirect(url_for('view_reviews'))
       
 #------------------------------------------------------------------------------------------  
 # 좋아요 기능 
@@ -165,7 +170,6 @@ def show_heart(name):
     return jsonify({'my_heart':my_heart})
 
 #마저 구현해야함 ! 
-
 #------------------------------------------------------------------------------------------
 # 로그인 조회 
 @application.route("/login")

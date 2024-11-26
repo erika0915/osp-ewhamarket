@@ -40,13 +40,13 @@ class DBhandler:
             if key_value == productName:
                 target_value = res.val()
         return target_value
-    
+#------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, productName, userId, data, img_path):
         review_info={
-            "title": data['title'],
-            "content": data['content'],
-            "rate" : data['rate'],
+            "title": data.get('title'),
+            "content": data.get('content'),
+            "rate" : data.get('reviewStar'),
             "reviewImage": img_path
         }
         self.db.child("review").child(productName).child(userId).set(review_info)
@@ -61,7 +61,7 @@ class DBhandler:
     def get_review_byname(self, productName):
         reviews=self.db.child("review").child(productName).get().val()
         return reviews
-
+#------------------------------------------------------------------------------------------  
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
@@ -72,7 +72,7 @@ class DBhandler:
                 return True
         return False
     
-        # 회원가입 
+    # 회원가입 
     def insert_user(self, data, pw):
         user_info ={
         "id": data['userId'],
