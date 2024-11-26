@@ -77,7 +77,9 @@ class DBhandler:
         user_info ={
         "id": data['userId'],
         "pw": pw,
-       "nickname": data['nickname']
+       "nickname": data['nickname'],
+       "email": data['email'],
+       "phoneNum":data['phoneNum']
         }
         if self.user_duplicate_check(str(data['userId'])):
            self.db.child("user").push(user_info)
