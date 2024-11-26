@@ -20,7 +20,7 @@
  <form action="/signup_post" method="post">
     <div class="form-row">
         <label class="mkIDc" for="mkId">아이디</label>
-        <input type="text" class="usernmae_input" id="mkId" name="username" placeholder="아이디 입력(6-20자)" check_result="fail" required/> 
+        <input type="text" class="username_input" id="mkId" name="username" placeholder="아이디 입력(6-20자)" check_result="fail" required/> 
         <button type="button" class="id_overlap_button" onclick="id_overlap_check()">ID 중복확인</button>
         <img id="id_check_success" style="display: none;">
     </div>
@@ -69,8 +69,8 @@
         </div>
     </div>
     <div class="button-group">
-        <button type="button" class="cancel-button">취소</button>
-        <button type="submit" class="submit-button">등록</button>
+        <button type="reset" class="cancel-button" onclick="pushResetButton()">취소</button>
+        <button type="submit" class="submit-button" onclick="pushRegiButton()">등록</button>
     </div> 
 </form>
 </div>
