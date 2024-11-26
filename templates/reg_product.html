@@ -8,16 +8,17 @@
 {% endblock %}
 
 {%block section%} 
+
 <main>
   <div class="form-container">
-    <form action = "/reg_product_post" method= "POST" enctype="multipart/form-data">
+    <form action = "/reg_product" method= "POST" enctype="multipart/form-data">
       <div class="titleRegister">
         <p>상품 등록</p>
       </div>
 
       <div class=form-row>
-        <label for="userId">닉네임</label>
-        <input class="inlg" type="text" id="userId" name = "userId" placeholder="아이디 입력">
+        <label for="nickname">닉네임</label>
+        <input class="inlg" type="text" id="nickname" name = "nickname" placeholder="아이디 입력">
       </div>
       
       <div class=form-row2>
@@ -63,8 +64,8 @@
 
       <div class=form-row7>
         <p class="pp">이미지   </p>
-        <label for="file">choose file</label>
-        <input class="file" type="file" id="file" name= "file"/>
+        <label for="productImage">choose file</label>
+        <input class="file" type="file" id="productImage" name= "productImage"/>
       </div>
 
       <div class="button-group">
@@ -74,6 +75,7 @@
     </form> 
   </div>
 </main> 
+
 {% endblock section %}
 
 <script src="/static/js/reg_product.js"></script>

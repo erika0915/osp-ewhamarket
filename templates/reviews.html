@@ -41,29 +41,29 @@
         </p>
             <table>
                 <tr>
-                    {% for key, value in row1 %}
-                      <td>
+                    {% for review in row1 %}
+                    <td onclick="location.href='reviews/{{ review.title }}/';" style="cursor:pointer;">
                         <div class="layer">
                             <div class="product-item">
                                 <div class="product-image">
-                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
+                                  <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" />
                                 </div>
                                 <div class="product-title">
-                                  {{ key }}
+                                  {{ review.product }}
                                 </div>
                                 <div class="price">
-                                    {{ value.price }}
+                                   <!-- price 추가 {{ review.price }} -->
                                 </div>
                               </div>
                               <div class="description">
                                   <div class="grade">
-                                    <span>★★★★★</span>
+                                    <span>★★★★★ {{ review.rate }} </span>
                                   </div>
                                   <div class="des-title">
-                                    선물용으로 좋아요
+                                    {{ review.title }}
                                   </div>
                                   <div>
-                                    설명설명설명
+                                    {{ review.content }}
                                   </div>
                               </div>
                         </div>
@@ -72,29 +72,29 @@
                   </tr>
 
                   <tr>
-                    {% for key, value in row2 %}
-                      <td>
+                    {% for review in row2 %}
+                    <td onclick="location.href='reviews/{{ review.title }}/';" style="cursor:pointer;">
                         <div class="layer">
                             <div class="product-item">
                                 <div class="product-image">
-                                  <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width="140" height="200" />
+                                  <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" />
                                 </div>
                                 <div class="product-title">
-                                  {{ key }}
+                                  {{ review.product }}
                                 </div>
                                 <div class="price">
-                                    {{ value.price }}
+                                   <!-- price 추가 {{ review.price }} -->
                                 </div>
                               </div>
                               <div class="description">
                                   <div class="grade">
-                                    <span>★★★★★</span>
+                                    <span>★★★★★ {{ review.rate }} </span>
                                   </div>
                                   <div class="des-title">
-                                    선물용으로 좋아요
+                                    {{ review.title }}
                                   </div>
                                   <div>
-                                    설명설명설명
+                                    {{ review.content }}
                                   </div>
                               </div>
                         </div>

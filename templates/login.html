@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <!--연우-->
+=======
+<!--김연우-->
+>>>>>>> 8b77ccdc6fa4dd24b836b876e862a1133ee0cc71
 {% extends "index.html" %}
 
 {% block styles %}
@@ -6,7 +10,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
 
-{% block section %} <!-- 안되길래 block content -> block section -->
+{% block section %} 
 {% with mesg = get_flashed_messages() %}
 {% if mesg !=[] %}
     <script>alert("{{ mesg[0] }}")</script>
