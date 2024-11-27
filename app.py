@@ -132,8 +132,8 @@ def view_reviews():
 # 리뷰 상세 조회 
 @application.route("/reviews/<productName>/<review_id>")
 def view_review_detail(productName, review_id):
-    data = DB.get_review_by_id(productName, review_id)
-    return render_template("review_detail.html", productName=productName,  review_id=review_id, data=data)
+    review  = DB.get_review_by_id(productName, review_id)
+    return render_template("review_detail.html", review=review)
 
 # 리뷰 등록
 @application.route("/reg_review/<productName>", methods=['GET', 'POST'])
