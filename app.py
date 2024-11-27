@@ -57,7 +57,7 @@ def view_products():
         row2 = locals()['data_1'].items(), 
         limit = per_page, 
         page = page, 
-        page_count = int(math.ceil(item_counts / per_page)), 
+        page_count = int(math.ceil(item_counts/per_page)), 
         total = item_counts, 
         category=category,
         m=row_count
