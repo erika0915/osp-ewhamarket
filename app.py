@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from database import DBhandler
 import hashlib
 import sys 
+import math
 
 application  = Flask(__name__, static_folder='static')
 application.config["SECRET_KEY"]="helloosp"
@@ -17,6 +18,7 @@ def hello() :
 @application.route("/products")
 def view_products(): 
     page = request.args.get("page", 0, type = int) 
+    category = request.args.get("category", "all")
     per_page = 6 
     per_row = 3 
     row_count = int(per_page/per_row)
@@ -26,12 +28,21 @@ def view_products():
     if not data:
         print("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
-
-    # 페이지네이션 처리 
+    
+    
+    # 페이지네이션 처리 + 정렬
     start_idx = per_page * page
     end_idx = per_page * (page+1)
+    if category=="all":
+        data=DB.get_products()
+    else:
+        data=DB.get_products_bycategory(category)
+    data=dict(sorted(data.items(),key=lambda x: x[0], reverse=False))
     item_counts = len(data)
-    data = dict(list(data.items())[start_idx:end_idx])
+    if item_counts<=per_page:
+        data=dict(list(data.items())[:item_counts])
+    else:
+        data = dict(list(data.items())[start_idx:end_idx])
     tot_count = len(data)
     for i in range(row_count):
         if (i == row_count -1) and (tot_count % per_row != 0):
@@ -46,10 +57,13 @@ def view_products():
         row2 = locals()['data_1'].items(), 
         limit = per_page, 
         page = page, 
-        page_count = int((item_counts / per_page) + 1), 
+        page_count = int(math.ceil(item_counts / per_page) + 1), 
         total = item_counts, 
+        category=category,
         m=row_count
     )
+
+
 
 # 상품 등록
 @application.route('/reg_product', methods=['GET', 'POST'])

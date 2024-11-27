@@ -17,11 +17,12 @@
 
 <div class="product_container">
   <aside class="side-bar">
-    <ul>
-      <li><a href="#">디지털 악세사리</a></li>
-      <li><a href="#">패션 악세사리</a></li>
-      <li><a href="#">테이블웨어</a></li>
-      <li><a href="#">스테이셔너리</a></li>
+    <ul id="category">
+      <!--url 추가-->
+      <li> <a href="{{ url_for('view_products', page=i, category='electronics')}}">디지털 악세서리</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='table') }}">테이블웨어</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
     </ul>
   </aside>
 
@@ -102,9 +103,9 @@
     </div>
     
   </main>
-
+      <!--id 추가 (css도 추가)-->
       {% else %}
-        <p>등록된 상품이 없습니다.</p>
+        <br><br><br><br><p id="noproductsmessage">등록된 상품이 없습니다.</p>
       {% endif %}
   
 </div>
