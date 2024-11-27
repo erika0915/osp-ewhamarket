@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, session
+from flask import Flask, render_template, request, flash, redirect, url_for, session, jsonify
 from database import DBhandler
 import hashlib
 import sys 
@@ -74,7 +74,7 @@ def reg_product():
 @application.route("/products/<name>/")
 def view_product_detail(name):
     data = DB.get_product_byname(str(name))
-    return render_template("product_detail.html", name=name, data=data)
+    return render_template("product_detail.html", name= name, data=data)
 #------------------------------------------------------------------------------------------
 # 리뷰 전체 조회 
 @application.route('/reviews')
@@ -159,12 +159,20 @@ def reg_review(productName):
       
 #------------------------------------------------------------------------------------------  
 # 좋아요 기능 
-@application.route('/show_heart/<name>/', methods=['GET'])
-def show_heart(name):
-    my_heart = DB.get_heart_byname(session['id'],name)
+@application.route('/show_heart/<productName>/', methods=['GET'])
+def show_heart(productName):
+    my_heart = DB.get_heart_byname(session['id'],productName)
     return jsonify({'my_heart':my_heart})
 
-#마저 구현해야함 ! 
+@application.route('/like/<productName>/', methods =['POST'])
+def like(productName):
+    my_heart = DB.update_heart(session['id'], 'Y', productName)
+    return jsonify({'msg': '좋아요 완료!'})
+
+@application.route('/unlike/<productName>/', methods = ['POST'])
+def unlike(productName):
+    my_heart = DB.update_heart(session['id'], 'N', productName)
+    return jsonify({'msg': '안좋아요 완료!'})
 #------------------------------------------------------------------------------------------
 # 로그인 조회 
 @application.route("/login")

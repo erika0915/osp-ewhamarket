@@ -187,7 +187,7 @@ button {
 }
 
 
-/*좋아요 기능*/
+/*좋아요 기능
 .like-container {
   display: flex;
   align-items: center;
@@ -224,6 +224,7 @@ hr {
   margin: 0;
   width:70%;
 }
+*/
 
 #heart {
   color: grey;
@@ -234,6 +235,7 @@ hr {
 #heart.red {
   color: red;
 }
+
 
 /*별점*/
 .review {
