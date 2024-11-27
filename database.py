@@ -59,7 +59,11 @@ class DBhandler:
     
     # 리뷰 상세 조회
     def get_review_by_id(self, productName, review_id):
+        print(f"Fetching review for product: {productName}, review_id: {review_id}")
         review = self.db.child("review").child(productName).child(review_id).get().val()
+        print(f"Fetched review: {review}")
+        if not review:
+            raise ValueError("Review not found")  # 예외를 발생시키거나 기본 값을 반환
         return review
 #------------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
