@@ -125,7 +125,7 @@ def view_reviews():
         limit = per_page, 
         page = page, 
         page_count = page_count,
-        total = tot_count, 
+        total = tot_count,
         m = row_count
     )
 

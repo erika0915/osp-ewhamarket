@@ -38,7 +38,6 @@
                                 <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
                             </div>
                             <div class="product-title">{{ review['product'] }}</div>
-                            <div class="price">{{ review['price'] or "가격 정보 없음" }}</div>
                         </div>
                         <div class="description">
                             <div class="grade">★★★★★ {{ review['rate'] }}</div>
@@ -59,7 +58,6 @@
                                 <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
                             </div>
                             <div class="product-title">{{ review['product'] }}</div>
-                            <div class="price">{{ review['price'] or "가격 정보 없음" }}</div>
                         </div>
                         <div class="description">
                             <div class="grade">★★★★★ {{ review['rate'] }}</div>
