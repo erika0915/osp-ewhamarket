@@ -40,7 +40,7 @@ class DBhandler:
             if key_value == productName:
                 target_value = res.val()
         return target_value
-    
+
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("product").get()
@@ -57,8 +57,7 @@ class DBhandler:
         for k,v in zip(target_key,target_value):
             new_dict[k]=v
         return new_dict
-
-#------------------------------------------------------------------------------------------   
+    #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, productName, data, img_path):
         review_info={
@@ -80,7 +79,7 @@ class DBhandler:
         review = self.db.child("review").child(productName).child(review_id).get().val()
         review['productName']=productName
         return review
-#------------------------------------------------------------------------------------------  
+    #------------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
         target_value =""
@@ -101,7 +100,7 @@ class DBhandler:
         self.db.child("heart").child(userId).child(productName).set(heart_info)
         return True
 
-#------------------------------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
