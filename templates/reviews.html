@@ -75,7 +75,7 @@
                 <ul class="pagination">
                     {% for i in range(page_count) %}
                     <li>
-                        <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+                        <a href="{{ url_for('view_reviews', page=i) }}" style="color:black;">{{ i + 1 }}</a>
                     </li>
                     {% endfor %}
                 </ul>
