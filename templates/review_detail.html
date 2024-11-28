@@ -2,7 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='/css/new_review_detail.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/review_detail.css') }}">
 {% endblock %}
 
 {% block section %}
@@ -14,21 +14,51 @@
 
         <div class="title">
             <div>
-                <div class="grade">
-                    <span>★★★★★</span>
+                <div class="rating-container">
+                    <div class="grade" id="star-rating">
+                    <!--<span>★★★★★</span>--> 
+                    </div>
+                    <div class="review-rate"> ( {{ review.rate }} )</div>
                 </div>
-                <div class="review-title">{{ review.title}}</div>
-                <div class="review-content">{{ review.content}}</div>
+                <div class="review-title">{{ review.title }}</div>
+                <div class="review-content">{{ review.content }}</div>
             </div>
             <div>
                 <div class="review-image">
                     <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
                 </div>
-                <div class="review-rate">평점: {{ review.rate}}</div>
                 <div class="review-product">상품명: {{ review.productName }}</div>
             </div>
         </div>
     </div>
 </main>
+
+<script>
+const starRating = parseInt("{{ review.rate }}");
+ 
+ // 별점 생성 함수
+function generateStars(rating) {
+    const starContainer = document.getElementById("star-rating");
+    starContainer.innerHTML = ""; // 기존 내용을 초기화
+ 
+for (let i = 0; i < 5; i++) {
+    const star = document.createElement("span");
+    if (i < rating) {
+        star.textContent = "★"; // 채워진 별
+        star.style.color = "#FFD700"; // 금색
+    } else {
+        star.textContent = "☆"; // 빈 별
+        star.style.color = "#ddd"; // 회색
+    }
+    star.style.fontSize = "20px";
+    star.style.marginRight = "5px";
+    starContainer.appendChild(star);
+    }
+}
+ 
+ // 별점 적용
+generateStars(starRating);
+</script>
+<!--<script src="{{ url_for('static', filename='/js/review_detail.js') }}"></script>-->
 {% endblock %}
 
