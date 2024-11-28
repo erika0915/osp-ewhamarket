@@ -1,10 +1,9 @@
-<!--chaewon-->
-
+<!--채원-->
 {% extends "index.html" %}
 
 {%block styles%}
-<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
 {% endblock%}
 
 {%block section%}
@@ -61,7 +60,9 @@
   </div><!--dropdown-label-->
 
   <div class="review">
-    <div class="underline">REVIEW</div>
+    <div class="underline">
+      <button onclick="location.href='/reviews/{{data.productName}}';">REVIEW</button>
+    </div>
     <div class="star_rating">
       <span class="star on"></span>
       <span class="star on"></span>

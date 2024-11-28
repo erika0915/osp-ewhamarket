@@ -1,4 +1,4 @@
-<!-- 서영 -->
+<!--서영-->
 {% extends "index.html" %}
 
 {% block styles %}
@@ -37,9 +37,7 @@
   </section>
   
   {% if total > 0 %}
-  <p class="reg-num">
-    현재까지 {{total}}개 상품 등록됨
-  </p>
+  <p class="reg-num">현재까지 {{total}}개 상품 등록됨</p>
     <table>
       <tr>
         {% for key, value in row1 %}
@@ -48,19 +46,18 @@
         </td>
         {% endfor %}
       </tr>
+
       <tr>
           {% for key, value in row1 %}
           <td>
-            <div class="product-title">
-              {{ key }}
-              <div class="price">
-                {{ value.price }}
-              </div>
+            <div class="product-title">{{ key }}
+              <div class="price">{{ value.price }}</div>
             </div>
             <div class="like-container">
               <button class="like-button" onclick="toggleLike(this)">
                 <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
               </button>
+            </div>
           </td>
           {% endfor %}
       </tr>
@@ -72,6 +69,7 @@
         </td>
         {% endfor %}
       </tr>
+
       <tr>
           {% for key, value in row2 %}
           <td>
@@ -85,6 +83,7 @@
               <button class="like-button" onclick="toggleLike(this)">
                 <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
               </button>
+            </div>
           </td>
           {% endfor %}
       </tr>

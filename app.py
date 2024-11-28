@@ -143,12 +143,6 @@ def view_reviews():
         m = row_count
     )
 
-# 리뷰 상세 조회 
-@application.route("/reviews/<productName>/<review_id>")
-def view_review_detail(productName, review_id):
-    review  = DB.get_review_by_id(productName, review_id)
-    return render_template("review_detail.html", review=review)
-
 # 리뷰 등록
 @application.route("/reg_review/<productName>", methods=['GET', 'POST'])
 def reg_review(productName):
@@ -170,7 +164,22 @@ def reg_review(productName):
         # DB에 리뷰 등록
         DB.insert_review(productName, data, image_file.filename)
         return redirect(url_for('view_reviews'))
-      
+    
+# 리뷰 상세 조회 
+@application.route("/reviews/<productName>/<review_id>")
+def view_review_detail(productName, review_id):
+    review  = DB.get_review_by_id(productName, review_id)
+    return render_template("review_detail.html", review=review)
+
+# 'REVIEW' 버튼 누르면 상품 별 리뷰 목록으로 이동 
+@application.route("/reviews/<productName>")    
+def view_product_reviews(productName):
+    reviews, product_image = DB.get_review_by_name(productName)
+    return render_template(
+        "product_review_details.html", 
+        productName = productName, 
+        reviews=reviews,
+        productImage = product_image)
 #------------------------------------------------------------------------------------------  
 # 좋아요 기능 
 @application.route('/show_heart/<productName>/', methods=['GET'])

@@ -79,6 +79,34 @@ class DBhandler:
         review = self.db.child("review").child(productName).child(review_id).get().val()
         review['productName']=productName
         return review
+    
+    # 상품 별 리뷰 상세 조회 
+    def get_review_by_name(self, productName):
+        # Firebase에서 데이터 가져오기
+        reviews = self.db.child("review").child(productName).get().val()
+        product_data = self.db.child("product").child(productName).get().val()
+
+        # 리뷰 데이터 처리
+        if not reviews:
+            reviews = []  # 리뷰가 없으면 빈 리스트 반환
+        else:
+            reviews = [
+                {
+                    "review_id": review_id,
+                    "rate": int(review_data.get("rate", 0)),  # 문자열을 정수로 변환
+                    "title": review_data.get("title"),
+                    "content": review_data.get("content"),
+                    "reviewImage": review_data.get("reviewImage"),
+                }
+                for review_id, review_data in reviews.items()
+            ]
+
+        # 제품 이미지 처리
+        product_image = product_data.get("productImage") if product_data else "default.jpg"
+        # 두 값을 함께 반환
+        return reviews, product_image
+
+
     #------------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
