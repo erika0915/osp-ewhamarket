@@ -19,10 +19,10 @@
   <aside class="side-bar">
     <ul id="category">
       <!--url 추가-->
-      <li> <a href="{{ url_for('view_products', page=i, category='electronics')}}">디지털 악세서리</a></li>
-      <li> <a href="{{ url_for('view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
-      <li> <a href="{{ url_for('view_products', page=i, category='table') }}">테이블웨어</a></li>
-      <li> <a href="{{ url_for('view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='electronics')}}">디지털 악세서리</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='table') }}">테이블웨어</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
     </ul>
   </aside>
 
@@ -41,7 +41,7 @@
     <table>
       <tr>
         {% for key, value in row1 %}
-        <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
+        <td onclick="location.href='{{ url_for('products.view_product_detail', name=key) }}';" style="cursor:pointer;">
           <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
@@ -64,7 +64,7 @@
 
       <tr>
         {% for key, value in row2 %}
-        <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
+        <td onclick="location.href='{{ url_for('products.view_product_detail', name=key) }}';" style="cursor:pointer;">
           <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
@@ -94,7 +94,7 @@
         <ul class="pagination">
           {% for i in range(page_count) %}
           <li>
-          <a href="{{ url_for('view_products', page=i, category=category) }}" style="color:black;">{{ i + 1 }}</a>
+          <a href="{{ url_for('products.view_products', page=i, category=category) }}" style="color:black;">{{ i + 1 }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -108,5 +108,5 @@
       {% endif %}
   
 </div>
-<script src="../static/js/products.js"></script>
+<script src="{{ url_for('static', filename='js/products.js') }}"></script>
 {% endblock %}

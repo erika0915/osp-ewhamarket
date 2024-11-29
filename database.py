@@ -105,8 +105,6 @@ class DBhandler:
         product_image = product_data.get("productImage") if product_data else "default.jpg"
         # 두 값을 함께 반환
         return reviews, product_image
-
-
     #------------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()

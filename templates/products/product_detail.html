@@ -2,8 +2,8 @@
 {% extends "index.html" %}
 
 {%block styles%}
-  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='/css/detail.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
 {% endblock%}
 
 {%block section%}
@@ -56,12 +56,12 @@
       </div>
     </div>
     <button class="buy" data-value="buy">바로 구매</button>
-    <button onclick="location.href='/reg_review/{{data.productName}}';">리뷰등록</button> <!--week12-->
+    <button onclick="location.href='{{ url_for("reviews.reg_review", productName=data.productName) }}';">리뷰등록</button>
   </div><!--dropdown-label-->
 
   <div class="review">
     <div class="underline">
-      <button onclick="location.href='/reviews/{{data.productName}}';">REVIEW</button>
+      <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productName=data.productName) }}';">REVIEW</button>
     </div>
     <div class="star_rating">
       <span class="star on"></span>
@@ -84,7 +84,7 @@
   function showHeart() {
     $.ajax({
       type: 'GET',
-      url: '/show_heart/{{ data.productName }}/',
+      url: '/likes/show_heart/{{ data.productName }}/',
       data: {},
       success: function (response) {
         let my_heart = response['my_heart'];
@@ -106,7 +106,7 @@
   function like() {
     $.ajax({
     type: 'POST',
-    url: '/like/{{data.productName}}/',
+    url: '/likes/like/{{data.productName}}/',
     data: {
       interested : "Y"
     },
@@ -120,7 +120,7 @@
   function unlike() {
     $.ajax({
       type: 'POST',
-      url: '/unlike/{{data.productName}}/',
+      url: '/likes/unlike/{{data.productName}}/',
       data: {
         interested : "N"
       },

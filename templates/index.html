@@ -20,9 +20,9 @@
     <div class="container">
         <div class="log">
             {% if session['id'] %}
-                <li><a href="/logout"><b>{{ session['id'] }}님 반갑습니다!</b> logout</a></li>
+                <li><a href="/auth/logout"><b>{{ session['id'] }}님 반갑습니다!</b> logout</a></li>
             {% else %}
-                <li><a href="/login">로그인</a>&nbsp;<a href="/signup">회원가입</a></li>
+                <li><a href="/auth/login">로그인</a>&nbsp;<a href="/auth/signup">회원가입</a></li>
             {% endif %}
         </div>        
         <nav class="navbar">
@@ -31,7 +31,7 @@
             </div>
             <ul class="navbar_menu">
                 <li><a href="/products">전체상품</a></li>
-                <li><a href="/reg_product">상품등록</a></li>
+                <li><a href="/products/reg_product">상품등록</a></li>
                 <li><a href="/reviews">리뷰 조회</a></li>
                 <li><a href="/mypage">마이페이지</a></li>
             </ul>
