@@ -31,7 +31,7 @@
         <table>
             <tr>
                 {% for review in row1 %}
-                <td onclick="location.href='{{ url_for('view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
+                <td onclick="location.href='{{ url_for('reviews.view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
                     <div class="layer">
                         <div class="product-item">
                             <div class="product-image">
@@ -51,7 +51,7 @@
 
             <tr>
                 {% for review in row2 %}
-                <td onclick="location.href='{{ url_for('view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
+                <td onclick="location.href='{{ url_for('reviews.view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
                     <div class="layer">
                         <div class="product-item">
                             <div class="product-image">
@@ -75,14 +75,14 @@
                 <ul class="pagination">
                     {% for i in range(page_count) %}
                     <li>
-                        <a href="{{ url_for('view_reviews', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+                        <a href="{{ url_for('reviews.view_reviews', page=i) }}" style="color:black;">{{ i + 1 }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
         {% else %}
-        <p>등록된 상품이 없습니다.</p>
+        <p>등록된 리뷰가 없습니다.</p>
         {% endif %}
     </main>
 </div>

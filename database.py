@@ -79,6 +79,32 @@ class DBhandler:
         review = self.db.child("review").child(productName).child(review_id).get().val()
         review['productName']=productName
         return review
+    
+    # 상품 별 리뷰 상세 조회 
+    def get_review_by_name(self, productName):
+        # Firebase에서 데이터 가져오기
+        reviews = self.db.child("review").child(productName).get().val()
+        product_data = self.db.child("product").child(productName).get().val()
+
+        # 리뷰 데이터 처리
+        if not reviews:
+            reviews = []  # 리뷰가 없으면 빈 리스트 반환
+        else:
+            reviews = [
+                {
+                    "review_id": review_id,
+                    "rate": int(review_data.get("rate", 0)),  # 문자열을 정수로 변환
+                    "title": review_data.get("title"),
+                    "content": review_data.get("content"),
+                    "reviewImage": review_data.get("reviewImage"),
+                }
+                for review_id, review_data in reviews.items()
+            ]
+
+        # 제품 이미지 처리
+        product_image = product_data.get("productImage") if product_data else "default.jpg"
+        # 두 값을 함께 반환
+        return reviews, product_image
     #------------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
@@ -102,34 +128,40 @@ class DBhandler:
 
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
-    def find_user(self, id_, pw_):
-        users = self.db.child("user").get()
-        target_value=[]
-        for res in users.each():
-            value = res.val()
-            if value['id'] == id_ and value['pw'] == pw_:
+    def find_user(self, userId, pw_hash):
+        # 모든 사용자 데이터를 가져옴 
+        users = self.db.child("users").get()
+
+        # 모든 사용자 데이터에서 userId와 비밀번호 확인 
+        for user in users.each():
+            value = user.val()
+            if value['userId'] == userId and value['pw'] == pw_hash:
                 return True
         return False
     
     # 회원가입 
-    def insert_user(self, data, pw):
+    def insert_user(self, data, pw_hash):
         user_info ={
-        "id": data['userId'],
-        "pw": pw,
-       "nickname": data['nickname'],
-       "email": data['email'],
-       "phoneNum":data['phoneNum']
+        "userId": data['userId'],
+        "pw": pw_hash,
+        "nickname": data['nickname'],
+        "email": data['email'],
+        "phoneNum":data['phoneNum'],
+        "purchasedProducts" : {} # 빈 구매 목록 
         }
-        if self.user_duplicate_check(str(data['userId'])):
-           self.db.child("user").child(data['userId']).set(user_info)
-           print(data)
+
+        # nickname을 최상위 키로 사용 
+        nickname = data["nickname"] 
+
+        # 사용자 중복 여부 확인 
+        if self.user_duplicate_check(nickname):
+           self.db.child("users").child(nickname).set(user_info)
            return True
-        else:
-            return False
+        return False
 
     # 중복된 사용자 ID 체크 
     def user_duplicate_check(self, id_string):
-        users = self.db.child("user").get()
+        users = self.db.child("users").get()
         print("users###",users.val())
         if str(users.val()) == "None": # first registration
             return True

@@ -11,10 +11,11 @@
     <script>alert("{{ mesg[0] }}")</script>
 {% endif %}
 {% endwith %}
+
 <main>
     <div class="form-container">
         <p class="titleLogin">ⓒ1886 EWHA</p>
-        <form action = "/login_confirm" method="post"> <!-- #->/login_confirm -->
+        <form action="{{ url_for('auth.login') }}" method="post">
             <div class="input"> <!-- request 받기 위해 name추가 -->
                 <input type="text" id="ID" name="userId" placeholder="아이디를 입력하세요">
                 <input type="password" id="etrpswd" name="pw" placeholder="비밀번호를 입력하세요"><br>
@@ -26,9 +27,9 @@
             </div>
 
             <div class="btn">
-                <button class="blgin" onclick="location.href='/products'" onclick="pushLoginButton()">로그인</button><br><br>
+                <button type="submit" class="blgin">로그인</button><br><br>
                 <div class="udr">
-                    <a href="/signup">| 회원가입 |</a> <!--불필요한 부분 약간 수정-->
+                    <a href="{{ url_for('auth.signup') }}">| 회원가입 |</a>
                     <br><br><br> <!--여백 늘리기-->
                 </div>
             </div> 
