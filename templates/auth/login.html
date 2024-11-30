@@ -15,7 +15,7 @@
 <main>
     <div class="form-container">
         <p class="titleLogin">ⓒ1886 EWHA</p>
-        <form action="{{ url_for('auth.login_user') }}" method="post"> <!-- #->/login_confirm -->
+        <form action="{{ url_for('auth.login') }}" method="post">
             <div class="input"> <!-- request 받기 위해 name추가 -->
                 <input type="text" id="ID" name="userId" placeholder="아이디를 입력하세요">
                 <input type="password" id="etrpswd" name="pw" placeholder="비밀번호를 입력하세요"><br>

@@ -128,34 +128,40 @@ class DBhandler:
 
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
-    def find_user(self, id_, pw_):
-        users = self.db.child("user").get()
-        target_value=[]
-        for res in users.each():
-            value = res.val()
-            if value['id'] == id_ and value['pw'] == pw_:
+    def find_user(self, userId, pw_hash):
+        # 모든 사용자 데이터를 가져옴 
+        users = self.db.child("users").get()
+
+        # 모든 사용자 데이터에서 userId와 비밀번호 확인 
+        for user in users.each():
+            value = user.val()
+            if value['userId'] == userId and value['pw'] == pw_hash:
                 return True
         return False
     
     # 회원가입 
-    def insert_user(self, data, pw):
+    def insert_user(self, data, pw_hash):
         user_info ={
-        "id": data['userId'],
-        "pw": pw,
-       "nickname": data['nickname'],
-       "email": data['email'],
-       "phoneNum":data['phoneNum']
+        "userId": data['userId'],
+        "pw": pw_hash,
+        "nickname": data['nickname'],
+        "email": data['email'],
+        "phoneNum":data['phoneNum'],
+        "purchasedProducts" : {} # 빈 구매 목록 
         }
-        if self.user_duplicate_check(str(data['userId'])):
-           self.db.child("user").child(data['userId']).set(user_info)
-           print(data)
+
+        # nickname을 최상위 키로 사용 
+        nickname = data["nickname"] 
+
+        # 사용자 중복 여부 확인 
+        if self.user_duplicate_check(nickname):
+           self.db.child("users").child(nickname).set(user_info)
            return True
-        else:
-            return False
+        return False
 
     # 중복된 사용자 ID 체크 
     def user_duplicate_check(self, id_string):
-        users = self.db.child("user").get()
+        users = self.db.child("users").get()
         print("users###",users.val())
         if str(users.val()) == "None": # first registration
             return True
