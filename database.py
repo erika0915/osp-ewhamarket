@@ -40,7 +40,24 @@ class DBhandler:
             if key_value == productName:
                 target_value = res.val()
         return target_value
-#------------------------------------------------------------------------------------------   
+
+    #카테고리별 상품리스트 보여주기
+    def get_products_bycategory(self, cate):
+        items = self.db.child("product").get()
+        target_value=[]
+        target_key=[]
+        for res in items.each():
+            value = res.val()
+            key_value = res.key()
+            if value['category'] == cate:
+                target_value.append(value)
+                target_key.append(key_value)
+        print("######target_value",target_value)
+        new_dict={}
+        for k,v in zip(target_key,target_value):
+            new_dict[k]=v
+        return new_dict
+    #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, productName, data, img_path):
         review_info={
@@ -60,8 +77,30 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, productName, review_id):
         review = self.db.child("review").child(productName).child(review_id).get().val()
+        review['productName']=productName
         return review
-#------------------------------------------------------------------------------------------  
+    #------------------------------------------------------------------------------------------  
+    def get_heart_byname(self, uid, productName):
+        hearts = self.db.child("heart").child(uid).get()
+        target_value =""
+        if hearts.val() == None:
+            return target_value
+        
+        for res in hearts.each():
+            key_value = res.key()
+            
+            if key_value == productName:
+                target_value = res.val()
+        return target_value
+    
+    def update_heart(self, userId, isHeart, productName):
+        heart_info={
+            "interested" : isHeart
+        }
+        self.db.child("heart").child(userId).child(productName).set(heart_info)
+        return True
+
+    #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()

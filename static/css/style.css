@@ -53,8 +53,8 @@ body {
 
 .log {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 65px;
+    right: 70px;
     font-size: 18px;
     color: #787878;
     z-index: 100;
@@ -63,7 +63,7 @@ body {
 .log a {
     text-decoration: none;
     color: #787878;
-    margin-left: 10px; /* 링크 간 간격 추가 */
+    margin-left: 20px; /* 링크 간 간격 추가 */
 }
 
 .log li {

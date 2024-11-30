@@ -236,3 +236,11 @@ td .desc, td .price {
 .red {
   color: red;
 }
+
+/*등록된상품이없습니다 메세지*/
+#noproductsmessage {
+  text-align: center;
+    font-size: 19px;
+    color: grey;
+    margin-top: 50px;
+}
