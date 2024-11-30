@@ -58,6 +58,7 @@ input[type="text"], input[type="password"]{ /*.inID -> input[type="text"]*/
 .chkblg{
   margin-left:130px; /*180->130:조금 더 왼쪽으로*/
   text-align:left;
+  cursor: pointer;
 }
 
 
@@ -72,6 +73,7 @@ input[type="text"], input[type="password"]{ /*.inID -> input[type="text"]*/
   background-color:black;
   color:white;
   font-style:bold;
+  cursor: pointer;
 } 
 
 

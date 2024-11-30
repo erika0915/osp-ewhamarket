@@ -51,3 +51,7 @@ function unlike() {
 $(document).ready(function () {
     showHeart();
 });
+
+$(document).ready(function () { 
+    $('#category option:conatins("{{category")').prop("selected",true);
+});

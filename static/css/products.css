@@ -14,6 +14,8 @@
 .product_container{
   display: flex;
   height: 100vh;
+  overflow: visible;
+  align-items: stretch;
 }
 
 /*사이드바 설정*/
@@ -26,16 +28,17 @@ a {
   position: sticky;
   top: 0px;
   width: 250px;
-  height: 100vh;
+  height: 100%;
   margin-right: 20px;
   padding: 20;
   box-sizing: border-box;
   font-size: 20px;
+  background-color: #EEEE;
 }
 
 .side-bar ul{
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .side-bar li a{
@@ -71,6 +74,7 @@ main{
   padding: 5px 10px;
   white-space: nowrap;
   text-align: center;
+  cursor: pointer;
 }
 /*순서배열 끝*/
 
@@ -235,4 +239,12 @@ td .desc, td .price {
 
 .red {
   color: red;
+}
+
+/*등록된상품이없습니다 메세지*/
+#noproductsmessage {
+  text-align: center;
+    font-size: 19px;
+    color: grey;
+    margin-top: 50px;
 }
