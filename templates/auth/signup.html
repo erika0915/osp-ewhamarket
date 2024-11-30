@@ -17,7 +17,7 @@
 </div>
 
 <div class="form-container">
-    <form action="{{ url_for('auth.register_user') }}" method="post">
+    <form action="{{ url_for('auth.signup') }}" method="post" enctype="multipart/form-data">
     <div class="form-row">
         <label class="mkIDc" for="mkId">아이디</label>
         <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)" check_result="fail" required/> 

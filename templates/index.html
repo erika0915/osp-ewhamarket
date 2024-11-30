@@ -19,8 +19,8 @@
 <body>
     <div class="container">
         <div class="log">
-            {% if session['id'] %}
-                <li><a href="/auth/logout"><b>{{ session['id'] }}님 반갑습니다!</b> logout</a></li>
+            {% if session['userId'] %}
+                <li><a href="/auth/logout"><b>{{ session['userId'] }}님 반갑습니다!</b> logout</a></li>
             {% else %}
                 <li><a href="/auth/login">로그인</a>&nbsp;<a href="/auth/signup">회원가입</a></li>
             {% endif %}
