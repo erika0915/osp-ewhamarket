@@ -1,6 +1,6 @@
 import pyrebase 
 import json 
-
+from datetime import datetime 
 class DBhandler:
     def __init__(self):
         with open('authentication/firebase_auth.json') as f:
@@ -8,6 +8,9 @@ class DBhandler:
 
         firebase = pyrebase.initialize_app(config)
         self.db = firebase.database()
+    
+    def child(self, node_name):
+        return self.db.child(node_name)
     
     # 상품 등록 
     def insert_product(self, name, data, productImage):
@@ -59,15 +62,23 @@ class DBhandler:
         return new_dict
     #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
-    def insert_review(self, productName, data, img_path):
+    def insert_review(self, data, img_path):
+        # 상품 정보 가져오기 
+        productId = data.get("productId")
+        product = self.db.child("products").child(productId).get().val() 
+        productName = product.get("productName")
+
         review_info={
+            "productId" : data.get("productId"), 
+            "productName": productName,
             "userId": data.get("userId"),
-            "title": data.get('title'),
-            "content": data.get('content'),
-            "rate" : data.get('reviewStar'),
+            "title": data.get("title"),
+            "content": data.get("content"),
+            "rate" : int(data.get("reviewStar")),
+            "createdAt" : data.get("createdAt", datetime.utcnow().isoformat()),
             "reviewImage": img_path
         }
-        self.db.child("review").child(productName).push(review_info)
+        self.db.child("reviews").push(review_info)
     
     # 리뷰 전체 조회 
     def get_reviews(self):
@@ -75,37 +86,39 @@ class DBhandler:
         return reviews
     
     # 리뷰 상세 조회
-    def get_review_by_id(self, productName, review_id):
-        review = self.db.child("review").child(productName).child(review_id).get().val()
-        review['productName']=productName
+    def get_review_by_id(self, reviewId):
+        review = self.db.child("reviews").child(reviewId).get().val()
         return review
     
     # 상품 별 리뷰 상세 조회 
-    def get_review_by_name(self, productName):
+    def get_review_by_product(self, productId):
         # Firebase에서 데이터 가져오기
-        reviews = self.db.child("review").child(productName).get().val()
-        product_data = self.db.child("product").child(productName).get().val()
+        allReviews = self.db.child("reviews").get().val()
 
-        # 리뷰 데이터 처리
-        if not reviews:
-            reviews = []  # 리뷰가 없으면 빈 리스트 반환
-        else:
-            reviews = [
-                {
-                    "review_id": review_id,
-                    "rate": int(review_data.get("rate", 0)),  # 문자열을 정수로 변환
-                    "title": review_data.get("title"),
-                    "content": review_data.get("content"),
-                    "reviewImage": review_data.get("reviewImage"),
-                }
-                for review_id, review_data in reviews.items()
-            ]
+        # 리뷰가 없으면 빈 리스트와 기본 이미지 반환 
+        if not allReviews:
+            return [], "default.jpg"
+        
+        # productId를 기준으로 리뷰 필터링 
+        productReviews = [
+            {
+                "reviewId" : reviewId,
+                "rate": int(reviewData.get("reviewStar")),
+                "title": reviewData.get("title"),
+                "content" : reviewData.get("content"),
+                "reviewImage" : reviewData.get("reviewImage"),
+            }
+            for reviewId, reviewData in allReviews.items()
+            if reviewData.get("productId") == productId
+        ]
 
-        # 제품 이미지 처리
-        product_image = product_data.get("productImage") if product_data else "default.jpg"
-        # 두 값을 함께 반환
-        return reviews, product_image
-    #------------------------------------------------------------------------------------------  
+        # 제품 데이터 가져오기 
+        productData = self.db.child("products").child(productId).get().val()
+        productImage = productData.get("productImage") if productData else "default.jpg"
+
+        # 리뷰와 제품 이미지 반환 
+        return productReviews, productImage
+    #-----------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
         target_value =""
