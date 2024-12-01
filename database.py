@@ -158,12 +158,15 @@ class DBhandler:
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, userId, pw_hash):
-        # 특정 사용자 데이터를 가져옴 
-        user = self.db.child("users").child(userId).get().val()
+        # 모든 사용자 데이터를 가져옴 
+        users = self.db.child("users").get()
 
-        if user and user['pw'] == pw_hash:
-            return True
-        return False
+        # 모든 사용자 데이터에서 userId와 비밀번호 확인 
+        for user in users.each():
+            value = user.val()
+            if value['userId'] == userId and value['pw'] == pw_hash:
+                return value.get('nickname', None)
+        return None
     
     # 회원가입 
     def insert_user(self, data, pw_hash, profile_image):
