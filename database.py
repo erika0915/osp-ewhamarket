@@ -1,4 +1,4 @@
-import pyrebase 
+import pyrebase
 import json 
 
 class DBhandler:
@@ -10,20 +10,27 @@ class DBhandler:
         self.db = firebase.database()
     
     # 상품 등록 
-    def insert_product(self, name, data, productImage):
+    def insert_product(self, userId, data, productImage):
         product_info = {
-            "nickname": data ['nickname'],
             "productName" : data ['productName'],
             "price" : data['price'],
             "category":data['category'],
             "location":data['location'],
             "description":data['description'],
-            "productImage": productImage
+            "productImage": productImage,
+            "createdAt": data['createdAt'],
+            "reviewCount": 0,
+            "userId": userId
         }
-        self.db.child("product").child(name).set(product_info)
+        
+        product_ref = self.db.child("products").child(userId).push(product_info)
+        productId = product_ref['name']
+        # print(f"Product ID: {productId} 등록 성공") 
+        # print(f"Nickname: {nickname}") #nickname이 넘어오지 않는 상태! 
         print(data, productImage)
         return True 
     
+
     # 상품 전체 조회 
     def get_products(self):
         products = self.db.child("product").get().val()

@@ -1,6 +1,7 @@
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, session 
 from . import products_bp
 import math
+from datetime import datetime
 
 # 전체 상품 조회
 @products_bp.route("/")
@@ -65,14 +66,25 @@ def view_product_detail(name):
 # 상품 등록
 @products_bp.route("/reg_product", methods=["GET", "POST"])
 def reg_product():
+     # 로그인해야 상품 등록 할 수 있도록 
+    userId = session.get('userId')
+    #nickname = session.get("nickname")
+    if not userId:
+        flash("로그인 후에 상품 등록이 가능합니다!")
+        return redirect(url_for("auth.login"))
+
     if request.method == "GET":
         return render_template("reg_product.html")
 
     elif request.method == "POST":
         image_file = request.files.get("productImage")
         image_file.save(f"static/images/{image_file.filename}")
-        data = request.form
-
-    if products_bp.db.insert_product(data["productName"], data, image_file.filename):
+        #to_dict로 수정해서 키값을 통해 data['price']처럼 쉽게 정보 가져올 수 있음 
+        data = request.form.to_dict()
+        #등록 시간 서버 자동 저장 
+        current_time = datetime.utcnow().isoformat() 
+        data['createdAt'] = current_time 
+     
+    if products_bp.db.insert_product(userId, data, image_file.filename):
         flash("상품이 성공적으로 등록되었습니다!")
         return redirect(url_for("products.view_products"))
