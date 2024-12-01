@@ -11,3 +11,97 @@
     box-sizing: border-box;
 }
 
+.hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 0;
+    width: 70%;
+    
+}
+
+/* 전체 레이아웃 설정 */
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 제목*/
+.titleRanking {
+    text-align: left;
+    font-size: 24px;
+    margin: 5px;
+}
+
+.titleRanking p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+}
+
+/* 폼 컨데이너 */
+.form-container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto; 
+    padding: 30px 90px 30px 90px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+}
+/*좋아요*/
+.like-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+}
+.like-count {
+    font-size: 14px;
+    color: #666;
+}
+  
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 0;
+    width: 70%;
+}
+  
+  
+  #heart {
+    color: grey;
+    font-size: 23px;
+    margin-left: 70px;
+    margin-bottom: -20px;
+}
+  
+  #heart.red {
+    color: red;
+}
+
+/*마켓 컨데이너 */
+.market-container1, .market-container2, .market-container3 {
+    width: 80%; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    text-align: center; 
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+}  
+.market-images1,.market-images2,.market-images3 {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /*flex-wrap: wrap;*/ /* 화면이 작을 때 줄 바꿈 */
+    padding-top: 10px;
+}
+
+.market-images1 img,.market-images2 img,.market-images3 img {
+    border-radius: 10px; 
+    transition: transform 0.3s ease; 
+}
+
+
