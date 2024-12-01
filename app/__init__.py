@@ -13,18 +13,21 @@ def create_app():
     from app.reviews import reviews_bp
     from app.auth import auth_bp
     from app.likes import likes_bp 
+    from app.mypage import mypage_bp
     
     # Blueprint에 DB 핸들러 전달
     products_bp.db = db
     reviews_bp.db = db
     auth_bp.db = db
     likes_bp.db = db 
+    mypage_bp.db = db 
 
     # Blueprint 등록
     app.register_blueprint(products_bp, url_prefix="/products")
     app.register_blueprint(reviews_bp, url_prefix="/reviews")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(likes_bp, url_prefix="/likes")
+    app.register_blueprint(mypage_bp, url_prefix="/mypage")
 
     # 메인 라우트
     @app.route("/")
