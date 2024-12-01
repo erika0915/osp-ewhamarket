@@ -78,10 +78,10 @@ def view_products():
     )
 
 # 상품 상세 조회
-@products_bp.route("/<name>/")
-def view_product_detail(name):
-    data = products_bp.db.get_product_byname(str(name))
-    return render_template("product_detail.html", name=name, data=data)
+@products_bp.route("/<productId>/")
+def view_product_detail(productId):
+    data = products_bp.db.get_product_byId(productId)
+    return render_template("product_detail.html", productId=productId, data=data)
 
 # 상품 등록
 @products_bp.route("/reg_product", methods=["GET", "POST"])
