@@ -1,5 +1,6 @@
 import pyrebase 
-import json 
+import json
+from datetime import datetime,timezone
 
 class DBhandler:
     def __init__(self):
@@ -18,7 +19,8 @@ class DBhandler:
             "category":data['category'],
             "location":data['location'],
             "description":data['description'],
-            "productImage": productImage
+            "productImage": productImage,
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         self.db.child("product").child(name).set(product_info)
         print(data, productImage)
@@ -34,14 +36,14 @@ class DBhandler:
     def get_product_byname(self, productName):
         products = self.db.child("product").get()
         target_value=""
-        #print("###########", name)
+        #print("###########", products)
         for res in products.each():
             key_value = res.key()
             if key_value == productName:
                 target_value = res.val()
         return target_value
 
-    #카테고리별 상품리스트 보여주기
+      #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("product").get()
         target_value=[]

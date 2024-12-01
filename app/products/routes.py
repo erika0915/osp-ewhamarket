@@ -1,12 +1,14 @@
 from flask import render_template, request, flash, redirect, url_for
 from . import products_bp
 import math
+from datetime import datetime,timezone
 
 # 전체 상품 조회
 @products_bp.route("/")
 def view_products():
     page = request.args.get("page", 0, type=int)
     category = request.args.get("category", "all")
+    sort_by = request.args.get("sort", "all")
     per_page = 6
     per_row = 3
     row_count = int(per_page / per_row)
@@ -24,7 +26,24 @@ def view_products():
         data = products_bp.db.get_products()
     else:
         data = products_bp.db.get_products_bycategory(category)
-    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False))
+  
+    # 버튼별 정렬 
+    for key, value in data.items():
+        if "created_at" not in value or not value["created_at"]:
+            value["created_at"] = datetime.now(timezone.utc).isoformat() 
+    def safe_datetime(value):
+        try:
+            return datetime.fromisoformat(value)
+        except (ValueError, TypeError):
+             datetime.min
+
+    if sort_by=="all":
+        # 기본 정렬
+        data=dict(sorted(data.items(), key=lambda x: x[0]))
+    elif sort_by == "recent":
+        # 최신순
+        data=dict(sorted(data.items(), key=lambda x: datetime.fromisoformat(x[1]["created_at"]), reverse=True))
+    #data = dict(sorted(data.items(), key=lambda x: x[0]["created_at"], reverse=False))
     item_counts = len(data)
 
     # 현재 페이지 데이터
@@ -53,6 +72,7 @@ def view_products():
         page_count=int(math.ceil(item_counts / per_page)),
         total=item_counts,
         category=category,
+        sort_by=sort_by,
         m=row_count
     )
 
