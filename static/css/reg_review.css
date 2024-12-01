@@ -120,49 +120,6 @@ height: 80px;
 font-size:20px;
 }
 
-.file-label {
-background-color: #f5f5f5;
-color: #848484;
-text-align: center;
-padding: 10px 0;
-width: 30%;
-border-radius: 15px;
-}
-.file {
-display: none;
-gap:20px; 
-}
-
-.button-group {
-text-align:center;
-}
-
-.cancel-button,
-.submit-button {
-width: 20%;
-padding: 10px;
-font-size: 16px;
-border-radius: 15px;
-cursor: pointer;
-border: none;
-margin:10px 0px 10px 0px;
-}
-
-.cancel-button {
-background-color: #e0e0e0;
-color: #000;
-border: 0.5px solid #000;
-}
-
-.submit-button {
-background-color: #000;
-color: #fff;
-}
-
-.discription{
-font-size: 16px;
-}
-
 /*별점*/
 .stars {
     display: flex;
@@ -201,6 +158,60 @@ fieldset{
   border-radius: 5px;
   font-size: 16px;
   resize: none;
+}
+
+/*내용*/
+.discription{
+font-size: 16px;
+}
+
+/*이미지 파일 업로드*/
+.file-label {
+  width: 150px;
+  flex-shrink: 0; /* 라벨의 너비 고정 */
+  display: block;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;}
+.file {
+	display: none;
+}
+.fileTitle{
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 20px; /*10->20*/
+  font-size: 20px;
+  text-align:center;
+  background-color: #f5f5f5;
+  color:black;
+  width:20%
+}
+
+/*취소등록버튼*/
+.button-group {
+text-align:center;
+}
+
+.cancel-button,
+.submit-button {
+width: 20%;
+padding: 10px;
+font-size: 16px;
+border-radius: 15px;
+cursor: pointer;
+border: none;
+margin:10px 0px 10px 0px;
+}
+
+.cancel-button {
+background-color: #e0e0e0;
+color: #000;
+border: 0.5px solid #000;
+}
+
+.submit-button {
+background-color: #000;
+color: #fff;
 }
 
 .container-photo {
