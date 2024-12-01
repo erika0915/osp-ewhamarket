@@ -1,0 +1,79 @@
+/* 기본설정 */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 전체 레이아웃 설정 */
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+  
+/* 리뷰 전체 컨테이너 */
+.form-container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto; /* 중앙 정렬 */
+    padding: 30px 90px 30px 90px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+  }
+  
+
+.rating-container {
+    display: flex;
+    align-items: center;
+}
+  
+/* 제목 섹션 스타일 */
+.titleMypage {
+    text-align: center;
+    font-size: 24px;
+    margin: 5px;
+  }
+
+  
+.titleReview p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+  }
+  
+/* 제목, 내용, 이미지와 평가 등 레이아웃 */
+.title {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+  
+.title > div {
+    flex: 1;
+}
+  
+
+/* 리뷰 제목과 내용 스타일 */
+.review-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+  
+.review-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+  

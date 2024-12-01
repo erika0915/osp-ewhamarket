@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/mypage.css') }}">
+{% endblock %}
+
+{% block section %}
+<main>
+    <div class="title">
+        <p><br>마이페이지</p> <!--위에 여백 추가-->
+    </div>
+    <div class="form-container">
+        <div class="titleMypage">
+            <p>리뷰 상세 조회</p>
+        </div>
+
+        <div class="title">
+            <div>
+                <div class="rating-container">
+                    <div class="grade" id="star-rating">
+                    <!--<span>★★★★★</span>--> 
+                    </div>
+                    <div class="review-rate"> ( {{ review.rate }} )</div>
+                </div>
+                <div class="review-title">{{ review.title }}</div>
+                <div class="review-content">{{ review.content }}</div>
+            </div>
+            <div>
+                <div class="review-image">
+                    <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
+                </div>
+                <div class="review-product">상품명: {{ review.productName }}</div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
