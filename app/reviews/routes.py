@@ -60,9 +60,13 @@ def view_review_detail(reviewId):
 # 리뷰 등록
 @reviews_bp.route("/reg_review/<productName>", methods=["GET", "POST"])
 def reg_review(productName):
-    # 상품 ID 조회 
+    # 상품 이름이 전달된 값과 같은 데이터를 조회 
     product = reviews_bp.db.child("products").order_by_child("productName").equal_to(productName).get().val()
+    
+    # 조회된 결과의 상품 ID를 가져옴 
     productId = list(product.keys())[0]
+
+    # 상품 ID를 사용해 해당 상품의 데이터를 조회 
     productData = product[productId]
 
     if request.method == "GET":
@@ -90,8 +94,10 @@ def reg_review(productName):
 # 상품 별 리뷰 상세 조회
 @reviews_bp.route("/<productName>")
 def view_product_reviews(productName):
-    # 상품 ID 조회 
+    # 상품 명을 통해서 상품 ID 조회 
     product = reviews_bp.db.child("products").order_by_child("productName").equal_to(productName).get().val()
+    
+    # 상품 ID 가져오기 
     productId = list(product.keys())[0]
 
     # 리뷰 조회 
