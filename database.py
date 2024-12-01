@@ -37,13 +37,18 @@ class DBhandler:
 
     # 상품 전체 조회 
     def get_products(self):
-        products = self.db.child("product").get().val()
-        return products
+        products = self.db.child("products").get().val()
+
+        flat_products={}
+        for userId, userProducts in products.items():
+            for productId, productData in userProducts.items():
+                flat_products[productId] = productData
+        return flat_products
     
 
     # 상품 세부 조회 -> 이름으로 조회 
     def get_product_byname(self, productName):
-        products = self.db.child("product").get()
+        products = self.db.child("products").get()
         target_value=""
         #print("###########", products)
         for res in products.each():
@@ -52,7 +57,7 @@ class DBhandler:
                 target_value = res.val()
         return target_value
 
-      #카테고리별 상품리스트 보여주기
+    #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("product").get()
         target_value=[]
@@ -73,13 +78,16 @@ class DBhandler:
     def insert_review(self, data, img_path):
         # 상품 정보 가져오기 
         productId = data.get("productId")
-        product = self.db.child("products").child(productId).get().val() 
+        userId = data.get("userId")
+
+        product = self.db.child("products").child(userId).child(productId).get().val() 
         productName = product.get("productName")
 
+        # 리뷰 데이터 생성 
         review_info={
-            "productId" : data.get("productId"), 
+            "productId" : productId,
             "productName": productName,
-            "userId": data.get("userId"),
+            "userId": userId,
             "title": data.get("title"),
             "content": data.get("content"),
             "rate" : int(data.get("reviewStar")),
@@ -90,7 +98,7 @@ class DBhandler:
     
     # 리뷰 전체 조회 
     def get_reviews(self):
-        reviews=self.db.child("review").get().val()
+        reviews=self.db.child("reviews").get().val()
         return reviews
     
     # 리뷰 상세 조회
@@ -161,35 +169,70 @@ class DBhandler:
         return None
     
     # 회원가입 
-    def insert_user(self, data, pw_hash):
+    def insert_user(self, data, pw_hash, profile_image):
         user_info ={
         "userId": data['userId'],
         "pw": pw_hash,
         "nickname": data['nickname'],
         "email": data['email'],
         "phoneNum":data['phoneNum'],
+        "profileImage": profile_image,
         "purchasedProducts" : {} # 빈 구매 목록 
         }
 
-        # nickname을 최상위 키로 사용 
-        nickname = data["nickname"] 
-
         # 사용자 중복 여부 확인 
-        if self.user_duplicate_check(nickname):
-           self.db.child("users").child(nickname).set(user_info)
+        if self.user_duplicate_check(data['userId']):
+           self.db.child("users").child(data['userId']).set(user_info)
            return True
         return False
 
     # 중복된 사용자 ID 체크 
-    def user_duplicate_check(self, id_string):
-        users = self.db.child("users").get()
-        print("users###",users.val())
-        if str(users.val()) == "None": # first registration
-            return True
-        else:
-            for res in users.each():
-                value = res.val()
-                if 'id'in value and value['id'] == id_string:
-                   return False
-            return True
+    def user_duplicate_check(self, userId):
+        user = self.db.child("users").child(userId).get().val()
+        if user:
+            return False
+        return True
     
+    #------------------------------------------------------------------------------------------
+    # 사용자 정보 조회 
+    def get_user_info(self, userId):
+        user= self.db.child("users").child(userId).get().val()
+        if not user:
+            return None 
+        return{
+            "nickname":user.get("nickname"),
+            "email":user.get("email"),
+            "profileImage": user.get("profileImage")
+        }
+    
+    # 구매 목록 조회 
+    def get_purchased_list(self, userId):
+        userPurchased = self.db.child("users").child(userId).child("purchasedProducts").get().val()
+
+        # 구매 목록이 없으면 빈 리스트 반환 
+        if not userPurchased:
+            return []
+        
+        # 구매 목록 반환 
+        return[
+            {
+                "productImage":item.get("productImage")
+            }
+            for item in userPurchased.values()
+        ]
+
+    # 판매 목록 조회 
+    def get_sell_list(self, userId):
+        # 사용자가 등록한 상품 데이터 가져오기 
+        products = self.db.child("products").child(userId).get().val()
+
+        # 등록된 상품이 없으면 빈 리스트 반환 
+        if not products:
+            return []
+        # 상품 목록을 리스트로 변환 
+        return[
+            {
+                "productImage": productData.get("productImage")
+            }
+            for productId, productData  in products.items()
+        ]
