@@ -1,6 +1,7 @@
-import pyrebase
-import json 
-from datetime import datetime 
+import pyrebase 
+import json
+from datetime import datetime,timezone
+
 class DBhandler:
     def __init__(self):
         with open('authentication/firebase_auth.json') as f:
@@ -21,7 +22,7 @@ class DBhandler:
             "location":data['location'],
             "description":data['description'],
             "productImage": productImage,
-            "createdAt": data['createdAt'],
+            "createdAt": datetime.now(timezone.utc).isoformat()
             "reviewCount": 0,
             "userId": userId
         }
@@ -44,14 +45,14 @@ class DBhandler:
     def get_product_byname(self, productName):
         products = self.db.child("product").get()
         target_value=""
-        #print("###########", name)
+        #print("###########", products)
         for res in products.each():
             key_value = res.key()
             if key_value == productName:
                 target_value = res.val()
         return target_value
 
-    #카테고리별 상품리스트 보여주기
+      #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("product").get()
         target_value=[]
