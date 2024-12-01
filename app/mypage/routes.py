@@ -21,6 +21,7 @@ def view_mypage():
 
     return render_template("mypage.html",
                            nickname=userInfo.get("nickname"),
+                           email=userInfo.get("email"),
                            profileImage = userInfo.get("profileImage"),
                            purchasedList=purchasedList,
                            sellList=sellList)
