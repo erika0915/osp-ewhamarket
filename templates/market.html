@@ -1,0 +1,121 @@
+<!--김연우-->
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/market.css') }}">
+{% endblock %}
+<body>
+    <div class="titleRanking">
+        <p>마켓 랭킹</p> 
+        <hr>
+    </div>
+
+    <div class="form-container">
+        <div class="market-conatiner1">
+            <div class="like-container">
+                <h3 class="market-name" name=1."marketName">{{data.marketName}}</h3>
+                <i class="fa fa-heart" id="heart"></i>
+                <span class="like-count"></span>
+            </div>
+            <hr>
+            <div class="market-images1">
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            </div>
+        </div>
+        <div class="market-conatiner2">
+            <div class="like-container">
+                <h3 class="market-name" name="marketName">2.{{data.marketName}}</h3>
+                <i class="fa fa-heart" id="heart"></i>
+                <span class="like-count"></span>
+            </div>
+            <hr>
+            <div class="market-images2">
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            </div>
+        </div>
+        <div class="market-conatiner3">
+            <div class="like-container">
+                <h3 class="market-name" name="marketName">3.{{data.marketName}}</h3>
+                <i class="fa fa-heart" id="heart"></i>
+                <span class="like-count"></span>
+            </div>
+            <hr>
+            <div class="market-images3">
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            </div>
+        </div>
+      
+    </div>
+</body>
+<script>
+    const marketName = "{{ data.marketName }}";
+    function showHeart() {
+      $.ajax({
+        type: 'GET',
+        url: '/likes/show_heart/{{ data.marketName }}/',
+        data: {},
+        success: function (response) {
+          let my_heart = response['my_heart'];
+          if (my_heart['interested'] == 'Y')
+          {
+            $("#heart").css("color","red");
+            $("#heart").attr("onclick","unlike()");
+         }
+          else
+          {
+            $("#heart").css("color","grey");
+            $("#heart").attr("onclick","like()");
+          }
+          //alert("showheart!")
+      }
+      });
+    }
+    
+    function like() {
+      $.ajax({
+      type: 'POST',
+      url: '/likes/like/{{data.marketName}}/',
+      data: {
+        interested : "Y"
+      },
+      success: function (response) {
+        alert(response['msg']);
+        window.location.reload()
+      }
+      });
+    }
+    
+    function unlike() {
+      $.ajax({
+        type: 'POST',
+        url: '/likes/unlike/{{data.marketName}}/',
+        data: {
+          interested : "N"
+        },
+      success: function (response) {
+        alert(response['msg']);
+        window.location.reload()
+      }
+      });
+    }
+    $(document).ready(function () {
+      showHeart();
+    });
+</script>
+  
+{% endblock %}   
+{% block section %}
+
