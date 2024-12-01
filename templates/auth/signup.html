@@ -11,76 +11,72 @@
     <script>alert("{{ mesg[0] }}")</script>
 {% endif %}
 {% endwith %}
-
 <div class="title">
     <p><br>회원가입을 위해 정보를 입력해주세요</p> <!--위에 여백 추가-->
 </div>
 
-
-
 <div class="form-container">
     <form action="{{ url_for('auth.signup') }}" method="post" enctype="multipart/form-data">
    
-    <div class="form-row0">
-        <label class="nickc" for="nickname">닉네임</label>
-        <input class="inni" type="text" id="nickname" name="nickname" placeholder="별명을 입력해주세요. 마켓의 이름으로 사용됩니다."> 
-    </div>
-
-    <div class="form-row">
-        <label class="mkIDc" for="mkId">아이디</label>
-        <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)" check_result="fail" required/> 
-        <button type="button" class="id_overlap_button" onclick="id_overlap_check()">ID 중복확인</button>
-        <img id="id_check_success" style="display: none;">
-    </div>
-
-    <div class="form-row2">
-        <label class="pswdc" for="pswd">비밀번호</label>
-        <input type="password" id="pswd" name="pw" placeholder="비밀번호 입력 (문자,숫자,특수문자 포함 8-12자)"> <!--name="pw"추가-->
-    </div>
-
-    <div class="form-row3">
-        <label class="chkpswdc" for="chkpswd">비밀번호 확인</label>
-        <input type="password" id="chkpswd" name = "chkpswd" placeholder="비밀번호 재입력">
-    </div> 
-
-    <div class="form-row4">
-        <label class="namec" for="name">이름</label>
-        <input class="inna" type="text" id="name" name="nickname" placeholder="이름을 입력해주세요"> 
-    </div>
-
-    <div class="form-row5">
-        <label class="phnumc" for="phnum">전화번호</label>
-        <input class="inph" type="text" id="phnum" name="phoneNum" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
-    </div>
-
-    <div class="form-row6">
-        <label class="emailc" for="email">이메일 주소</label>
-        <input class="inemail" type="text" id="email" name="email" placeholder="">
-        <p class="ewhaemail">@ewha.ac.kr</p>
-    </div>
-
-    <div class="form-row7">
-        <label class="bdayc" for="bday">생년월일</label>
-        <input class="year" type="text" id="bday" placeholder="연도">
-        <input class="month" type="text" id="bday" placeholder="월">
-        <input class="day" type="text" id="bday" placeholder="일">
-    </div>
-
-    <div class="form-row8">
-        <label class="profileImagec" for="bday">프로필 이미지</label>
-            <p class="pp">이미지   </p>
-            <label for="file">choose file</label>
-            <input class="file" type="file" id="file" name= "file"/>
-        <div class="agree">
-            <input type="checkbox" id="agree" name="agree">
-            <label for="agree">개인정보 수집 및 이용동의</label>
+        <div class="form-row0">
+            <label class="nickc" for="nickname">닉네임</label>
+            <input class="inni" type="text" id="nickname" name="nickname" placeholder="별명을 입력해주세요"> 
         </div>
-    </div>
-    <div class="button-group">
-        <button type="reset" class="cancel-button">취소</button>
-        <button type="submit" class="submit-button">등록</button>
-    </div> 
-</form>
+
+        <div class="form-row">
+            <label class="mkIDc" for="mkId">아이디</label>
+            <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)" value="{{userId}}"/> 
+            <button type="button" class="id_overlap_button" onclick="id_overlap_check()">ID 중복확인</button>
+        </div>
+
+        <div class="form-row2">
+            <label class="pswdc" for="pswd">비밀번호</label>
+            <input type="password" id="pswd" name="pw" placeholder="비밀번호 입력 (문자,숫자,특수문자 포함 8-12자)"> <!--name="pw"추가-->
+        </div>
+
+        <div class="form-row3">
+            <label class="chkpswdc" for="chkpswd">비밀번호 확인</label>
+            <input type="password" id="chkpswd" name = "chkpswd" placeholder="비밀번호 재입력">
+        </div> 
+
+        <div class="form-row4">
+            <label class="namec" for="name">이름</label>
+            <input class="inna" type="text" id="name" name="nickname" placeholder="이름을 입력해주세요"> 
+        </div>
+
+        <div class="form-row5">
+            <label class="phnumc" for="phnum">전화번호</label>
+            <input class="inph" type="text" id="phnum" name="phoneNum" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+        </div>
+
+        <div class="form-row6">
+            <label class="emailc" for="email">이메일 주소</label>
+            <input class="inemail" type="text" id="email" name="email" placeholder="">
+            <p class="ewhaemail">@ewha.ac.kr</p>
+        </div>
+
+        <div class="form-row7">
+            <label class="bdayc" for="bday">생년월일</label>
+            <input type="date" class="inbc" id="bday" name="bday-calendar" value="2024-12-01" min="1900-01-01" max="2100-12-31" />
+        </div>
+
+        <div class="form-row8">
+            <label class="profileImagec" for="profileimage">프로필 이미지</label>  
+            <label class="fileTitle" for="file">choose file</label>
+                <input class="uploadfile" type="file" id="file" name= "file"/>
+        </div>
+        
+        <div class="form-row9">     
+            <div class="agree">
+                <input type="checkbox" id="agree" name="agree">
+                <label for="agree">개인정보 수집 및 이용동의</label>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="reset" class="cancel-button">취소</button>
+            <button type="submit" class="submit-button">등록</button>
+        </div> 
+    </form>
 </div>
 {% endblock section %}
 
