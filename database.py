@@ -157,8 +157,8 @@ class DBhandler:
         for user in users.each():
             value = user.val()
             if value['userId'] == userId and value['pw'] == pw_hash:
-                return True
-        return False
+                return value.get('nickname', None)
+        return None
     
     # 회원가입 
     def insert_user(self, data, pw_hash):

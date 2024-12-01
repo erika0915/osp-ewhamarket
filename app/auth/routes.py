@@ -12,9 +12,11 @@ def login():
         userId = request.form["userId"]
         pw = request.form["pw"]
         pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
-
-        if auth_bp.db.find_user(userId, pw_hash):
-            session["userId"] = userId
+        nickname = auth_bp.db.find_user(userId, pw_hash)
+        if nickname:
+        #if auth_bp.db.find_user(userId, pw_hash):
+            session["userId"]=userId
+            session["nickname"] = nickname
             flash("로그인 되었습니다")
             return redirect(url_for("products.view_products"))
         else:
