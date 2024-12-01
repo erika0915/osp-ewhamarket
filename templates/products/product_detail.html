@@ -3,79 +3,82 @@
 
 {%block styles%}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
 {% endblock%}
 
 {%block section%}
 
 <body>
-  <div class="container">
+<div class="container">
+
   <div class="row">  
     <div class="main-image">
       <img src="{{ url_for('static', filename='images/' + data.productImage) }}">
        <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
     </div>
 
-  <div class="column middle">
-    <div class="product-details">
+    <div class="column middle">
 
-    <h3 class="product-name" name="productName">{{data.productName}}</h3>
+      <div class="product-details">
+        <div class="like-container">
+          <h3 class="product-name" name="productName">{{data.productName}}</h3>
+        <!-- <button class="like-button" onclick="toggleLike(this)">-->
+          <!--<i class="fa fa-heart" id="heart" ></i>--> <!--12주차 좋아요 기능 구현-->
+          <!--<span class="heart-icon">♥</span>-->
+        <!--</button>-->
+          <i class="fa fa-heart" id="heart"></i>
+          <span class="like-count"></span>
+        </div>
 
-    <div class="like-container">
-    <!-- <button class="like-button" onclick="toggleLike(this)">-->
-      <!--<i class="fa fa-heart" id="heart" ></i>--> <!--12주차 좋아요 기능 구현-->
-      <!--<span class="heart-icon">♥</span>-->
-    <!--</button>-->
+        <hr>  <!--수평선-->
 
-    <i class="fa fa-heart" id="heart"></i>
-   
-    <span class="like-count">(128)</span>
-    </div>
+        <div class="product-description">
+          <h4 class="underline">상세설명</h4>
+          <p>category : {{data.category}} </p>
+          <p>{{data.productName}}은 {{data.location}}에서 거래 가능합니다. </p>
+          <p>{{data.description}} </p>
+        </div>
 
-      <hr>
-      <div class="product-description">
-        <h4 class="underline">상세설명</h4>
-        <p>상품 이름 : <b>{{data.productName}}</b>
-        <p>상품 위치 : {{data.location}} </p>
-        <p>카테고리 : {{data.category}} </p>
-        <p>설명 : {{data.description}} </p>
-      </div>
-      <h3 class="product-price">가격 : {{data.price}}</h3>
-    </div> 
+        <h3 class="product-price">가격 : {{data.price}} 원</h3>
 
-  <div class="button">
-    <div class="dropdown">
-      <button class="dropbtn"> 
-        <span class="dropbtn_icon">1개</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">2개</a>
-        <a href="#">3개</a>
-        <a href="#">4개</a>
-        <a href="#">5개</a>
-      </div>
-    </div>
-    <button class="buy" data-value="buy">바로 구매</button>
-    <button onclick="location.href='{{ url_for("reviews.reg_review", productName=data.productName) }}';">리뷰등록</button>
-  </div><!--dropdown-label-->
+      </div> <!--product-details-->
 
-  <div class="review">
-    <div class="underline">
-      <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productName=data.productName) }}';">REVIEW</button>
-    </div>
-    <div class="star_rating">
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star on"></span>
-      <span class="star"></span>
-      <div class="star_number">4(5)</div>
-    </div>
-  </div>  
+      <div class="button">
+        <div class="dropdown">
+          <button class="dropbtn"> 
+          <span class="dropbtn_icon">1개</span>
+          </button>
 
-  </div><!--column middle-->
+          <div class="dropdown-content">
+            <a href="#">2개</a>
+            <a href="#">3개</a>
+            <a href="#">4개</a>
+            <a href="#">5개</a>
+          </div>
+        </div>
+
+        <button class="buy" data-value="buy">바로 구매</button>
+        <button onclick="location.href='{{ url_for("reviews.reg_review", productName=data.productName) }}';">리뷰등록</button>
+      </div><!--button-->
+
+      <div class="review">
+        <div class="underline">
+          <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productName=data.productName) }}';">REVIEW</button>
+        </div>
+
+        <div class="star_rating">
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star"></span>
+          <div class="star_number">() </div>
+        </div>
+      </div><!--review-->
+
+    </div><!--column middle-->
   </div><!--row-->
-  </div><!--container-->
+</div><!--container-->
  
 </body>
 
