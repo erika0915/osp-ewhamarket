@@ -53,7 +53,7 @@ body {
 
 .log {
     position: absolute;
-    top: 65px;
+    top: 70px;
     right: 70px;
     font-size: 18px;
     color: #787878;
@@ -73,10 +73,11 @@ body {
 
 .navbar_menu {
     display: flex;
-    gap: 50px; /* 여백 감소 */
+    gap: 100px; /* 여백 감소 */
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-left: 100px;
+    margin-top: 30px;
 }
 
 .navbar_menu a {

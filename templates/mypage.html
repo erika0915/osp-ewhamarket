@@ -1,0 +1,58 @@
+<!--금채원-->
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/mypage.css') }}">
+{% endblock %}
+
+{% block section %}
+<main>
+    <div class="titleMypage">
+        <p><br>마이페이지</p> <!--위에 여백 추가-->
+    </div>
+
+    <div class="form-container">
+        <div class="profile-container">
+            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
+            <div class= "profile">
+                <div class="nickName">
+                    <label for="nickName">닉네임</label>
+                    <input class="innn" type="text" id="nickName" name="nickName" value="{{ nickName }}" readonly>
+                </div>
+
+                <div class="email">
+                    <label for="email">이메일</label>
+                    <input class="inem" type="text" id="email" name="email" value="{{ email }}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="purchaseList-container">
+            <h4>구매 항목</h4>
+            <hr>
+            <div class="image-List">
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            </div>
+        </div>
+
+        <div class="sellList-container">
+            <h4>판매 목록</h4>
+            <hr>
+            <div class="image-List">
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
