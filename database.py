@@ -229,7 +229,7 @@ class DBhandler:
         # 상품 목록을 리스트로 변환 
         return[
             {
-                "productImage": product.get("productImage")
+                "productImage": productData.get("productImage")
             }
-            for product in products.items()
+            for productId, productData  in products.items()
         ]
