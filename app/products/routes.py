@@ -108,3 +108,19 @@ def reg_product():
     if products_bp.db.insert_product(userId, data, image_file.filename):
         flash("상품이 성공적으로 등록되었습니다!")
         return redirect(url_for("products.view_products"))
+
+@products_bp.route("/purchase_now",methods=["GET", "POST"])
+def purchase_now():
+    if request.method == "GET":
+        flash("구매 완료")
+        return render_template("product_detail.html")
+
+    elif request.method == "POST":
+        image_file = request.files.get("productImage")
+        image_file.save(f"static/images/{image_file.filename}")
+        #to_dict로 수정해서 키값을 통해 data['price']처럼 쉽게 정보 가져올 수 있음 
+        data = request.form.to_dict()
+        #구매시간 서버 자동 저장 
+        #current_time = datetime.now().isoformat() 
+        #data['purchaseAt'] = current_time 
+        # -> db에 추가해야함... 
