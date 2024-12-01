@@ -58,7 +58,7 @@ select {
   width:20%
 }
 
-#pswd,#chkpswd,#name,#phnum{
+#nickc,#pswd,#chkpswd,#name,#phnum{
 width:90%
 }
 #bday{
@@ -79,13 +79,13 @@ width:50%
  margin-bottom:30px;
 }
 
-.form-row,.form-row2,.form-row3,.form-row4,.form-row5,.form-row6, .form-row7, .form-row8{
+.form-row0,.form-row,.form-row2,.form-row3,.form-row4,.form-row5,.form-row6, .form-row7, .form-row8{
   display: flex;
   align-items: center;
   gap: 20px; /* 라벨과 입력 칸 간격 */
 }
 
-.mkIDc,.pswdc,.chkpswdc,.namec,.phnumc,.emailc,.bdayc{
+.nickc, .mkIDc,.pswdc,.chkpswdc,.namec,.phnumc,.emailc,.bdayc{
   width: 110px;
   flex-shrink: 0; /* 라벨의 너비 고정 */
   display: block;

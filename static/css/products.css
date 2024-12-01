@@ -83,6 +83,42 @@ main{
   color: #000;
   font-size:30px;
 }
+
+/*좋아요 기능*/
+.like-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 10px;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  font-size: 25px;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.heart-icon.active {
+  color: #ff4b4b;
+}
+
+#heart {
+  color: grey;
+  font-size: 25px;
+}
+
+#heart.red {
+  color: red;
+}
 /* 끝 */
 
 .order{
@@ -199,4 +235,12 @@ td .desc, td .price {
 
 .red {
   color: red;
+}
+
+/*등록된상품이없습니다 메세지*/
+#noproductsmessage {
+  text-align: center;
+    font-size: 19px;
+    color: grey;
+    margin-top: 50px;
 }

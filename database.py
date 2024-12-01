@@ -10,39 +10,97 @@ class DBhandler:
         self.db = firebase.database()
     
     # 상품 등록 
-    def insert_item(self, name, data, img_path):
-        item_info ={
-            "userId":data['userId'],
+    def insert_product(self, name, data, productImage):
+        product_info = {
+            "nickname": data ['nickname'],
             "productName" : data ['productName'],
             "price" : data['price'],
             "category":data['category'],
-            "option":data['option'],
             "location":data['location'],
-            "shortDescription":data['shortDescription'],
             "description":data['description'],
-            "img_path":img_path
+            "productImage": productImage
         }
-        self.db.child("item").child(name).set(item_info)
-        print(data, img_path)
+        self.db.child("product").child(name).set(product_info)
+        print(data, productImage)
         return True 
     
     # 상품 전체 조회 
-    def get_items(self):
-        items = self.db.child("item").get().val()
-        return items
+    def get_products(self):
+        products = self.db.child("product").get().val()
+        return products
     
+
     # 상품 세부 조회 -> 이름으로 조회 
-    def get_item_byname(self, name):
-        items = self.db.child("item").get()
+    def get_product_byname(self, productName):
+        products = self.db.child("product").get()
         target_value=""
-        print("###########", name)
+        #print("###########", name)
+        for res in products.each():
+            key_value = res.key()
+            if key_value == productName:
+                target_value = res.val()
+        return target_value
+
+    #카테고리별 상품리스트 보여주기
+    def get_products_bycategory(self, cate):
+        items = self.db.child("product").get()
+        target_value=[]
+        target_key=[]
         for res in items.each():
+            value = res.val()
+            key_value = res.key()
+            if value['category'] == cate:
+                target_value.append(value)
+                target_key.append(key_value)
+        print("######target_value",target_value)
+        new_dict={}
+        for k,v in zip(target_key,target_value):
+            new_dict[k]=v
+        return new_dict
+    #------------------------------------------------------------------------------------------   
+    # 리뷰 등록 
+    def insert_review(self, productName, data, img_path):
+        review_info={
+            "userId": data.get("userId"),
+            "title": data.get('title'),
+            "content": data.get('content'),
+            "rate" : data.get('reviewStar'),
+            "reviewImage": img_path
+        }
+        self.db.child("review").child(productName).push(review_info)
+    
+    # 리뷰 전체 조회 
+    def get_reviews(self):
+        reviews=self.db.child("review").get().val()
+        return reviews
+    
+    # 리뷰 상세 조회
+    def get_review_by_id(self, productName, review_id):
+        review = self.db.child("review").child(productName).child(review_id).get().val()
+        review['productName']=productName
+        return review
+    #------------------------------------------------------------------------------------------  
+    def get_heart_byname(self, uid, productName):
+        hearts = self.db.child("heart").child(uid).get()
+        target_value =""
+        if hearts.val() == None:
+            return target_value
+        
+        for res in hearts.each():
             key_value = res.key()
             
-            if key_value == name:
+            if key_value == productName:
                 target_value = res.val()
         return target_value
     
+    def update_heart(self, userId, isHeart, productName):
+        heart_info={
+            "interested" : isHeart
+        }
+        self.db.child("heart").child(userId).child(productName).set(heart_info)
+        return True
+
+    #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
@@ -53,15 +111,17 @@ class DBhandler:
                 return True
         return False
     
-        # 회원가입 
+    # 회원가입 
     def insert_user(self, data, pw):
         user_info ={
         "id": data['userId'],
         "pw": pw,
-       "nickname": data['nickname']
+       "nickname": data['nickname'],
+       "email": data['email'],
+       "phoneNum":data['phoneNum']
         }
         if self.user_duplicate_check(str(data['userId'])):
-           self.db.child("user").push(user_info)
+           self.db.child("user").child(data['userId']).set(user_info)
            print(data)
            return True
         else:
@@ -76,7 +136,7 @@ class DBhandler:
         else:
             for res in users.each():
                 value = res.val()
-            if value['id'] == id_string:
-                return False
-        return True
+                if 'id'in value and value['id'] == id_string:
+                   return False
+            return True
     

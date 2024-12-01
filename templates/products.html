@@ -3,25 +3,26 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
 {% endblock %}
 
 {% block section %}
+
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 <div class="product_container">
   <aside class="side-bar">
-    <ul>
-      <li>
-          <a href="#">디지털 악세사리</a>
-      </li>
-      <li>
-          <a href="#">패션 악세사리</a>
-      </li>
-      <li>
-          <a href="#">테이블웨어</a>
-      </li>
-      <li>
-        <a href="#">스테이셔너리</a>
-    </li>
+    <ul id="category">
+      <!--url 추가-->
+      <li> <a href="{{ url_for('view_products', page=i, category='electronics')}}">디지털 악세서리</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='table') }}">테이블웨어</a></li>
+      <li> <a href="{{ url_for('view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
     </ul>
   </aside>
 
@@ -37,13 +38,13 @@
   
   {% if total > 0 %}
   <p class="reg-num">
-    현재까지 {{total}}개 리뷰 등록됨
+    현재까지 {{total}}개 상품 등록됨
   </p>
     <table>
       <tr>
         {% for key, value in row1 %}
         <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
       </tr>
@@ -56,6 +57,10 @@
                 {{ value.price }}
               </div>
             </div>
+            <div class="like-container">
+              <button class="like-button" onclick="toggleLike(this)">
+                <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+              </button>
           </td>
           {% endfor %}
       </tr>
@@ -63,12 +68,12 @@
       <tr>
         {% for key, value in row2 %}
         <td onclick="location.href='products/{{ key }}/';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.img_path) }}" width=140, height=200>
+          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
       </tr>
       <tr>
-          {% for key, value in row1 %}
+          {% for key, value in row2 %}
           <td>
             <div class="product-title">
               {{ key }}
@@ -76,6 +81,10 @@
                 {{ value.price }}
               </div>
             </div>
+            <div class="like-container">
+              <button class="like-button" onclick="toggleLike(this)">
+                <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+              </button>
           </td>
           {% endfor %}
       </tr>
@@ -86,7 +95,7 @@
         <ul class="pagination">
           {% for i in range(page_count) %}
           <li>
-          <a href="{{ url_for('view_products', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+          <a href="{{ url_for('view_products', page=i, category=category) }}" style="color:black;">{{ i + 1 }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -94,13 +103,11 @@
     </div>
     
   </main>
-
+      <!--id 추가 (css도 추가)-->
       {% else %}
-        <p>등록된 상품이 없습니다.</p>
+        <br><br><br><br><p id="noproductsmessage">등록된 상품이 없습니다.</p>
       {% endif %}
   
-  </div>
-
+</div>
+<script src="../static/js/products.js"></script>
 {% endblock %}
-
-<script src="{{ url_for('static', filename='js/list.js') }}"></script>
