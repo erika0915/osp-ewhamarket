@@ -9,7 +9,7 @@ from datetime import datetime,timezone
 def view_products():
     page = request.args.get("page", 0, type=int)
     category = request.args.get("category", "all")
-    sort_by = request.args.get("sort", "all")
+    sort_by = request.args.get("sort", "recent")
     per_page = 6
     per_row = 3
     row_count = int(per_page / per_row)
