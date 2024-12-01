@@ -9,7 +9,6 @@ def login():
         return render_template("login.html")
     
     if request.method == "POST": 
-        
         userId = request.form["userId"]
         pw = request.form["pw"]
         pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
