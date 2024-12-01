@@ -34,9 +34,9 @@
 .main-image {
   flex: 0 0 auto;
   width: 320px;
-  margin-top : 40px;
-  margin-right : 40px;
-  margin-left : 40px;
+  margin-top : 30px;
+  margin-right : 70px;
+  margin-left : 50px;
 }
 
 /* Product details container */
@@ -74,6 +74,7 @@
 .product-name {
   font-size: 24px;
   margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 .product-seller {
@@ -88,20 +89,20 @@
 }
 
 .product-description {
-  width: 550px;      /* 가로 크기 */
+  width: 530px;      /* 가로 크기 */
   height: 200px;     /* 세로 크기 */
-  padding: 20px;     /* 내부 여백 */
+  padding: 25px;     /* 내부 여백 */
   border: 1px solid #ccc;
   border-radius: 15px;
+  margin-top: 10px;
   background-color: rgb(234, 233, 233);
   overflow-y: auto;  /* 내용이 넘칠 경우 세로 스크롤 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  line-height: 1.5;
 }
 
 .product-description p {
   margin: 0px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .product-description h4 {
@@ -187,14 +188,14 @@ button {
   margin-top: 15px;
 }
 
-
-/*좋아요 기능
 .like-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 4px;
 }
 
+/*좋아요 기능
 .like-button {
   background: none;
   border: none;
@@ -213,6 +214,7 @@ button {
 .heart-icon.active {
   color: #ff4b4b;
 }
+*/
 
 .like-count {
   font-size: 14px;
@@ -223,14 +225,15 @@ hr {
   border: none;
   border-top: 1px solid #ddd;
   margin: 0;
-  width:70%;
+  width: 70%;
 }
-*/
+
 
 #heart {
   color: grey;
-  font-size: 25px;
-  margin-bottom: 5px;
+  font-size: 23px;
+  margin-left: 70px;
+  margin-bottom: -20px;
 }
 
 #heart.red {
@@ -260,7 +263,7 @@ hr {
 .star_rating .star {
   width: 25px; 
   height: 25px; 
-  margin-right: 10px;
+  margin-right: 8px;
   display: inline-block; 
   background: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE2bww%2FbtsviSSBz4Q%2F5UYnwSWgTlFt6CEFZ1L3Q0%2Fimg.png') no-repeat; 
   background-size: 100%; 
