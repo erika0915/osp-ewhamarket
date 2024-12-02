@@ -7,7 +7,7 @@
 
 {%block section%} 
 <main>
-  <form method="POST" action="{{ url_for('reviews.reg_review', productName=productName) }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ url_for('reviews.reg_review', productId=productId) }}" enctype="multipart/form-data">
     <div class="form-container">
       <div class="titleReview">
         <p>리뷰 작성</p>

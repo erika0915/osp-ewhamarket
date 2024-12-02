@@ -75,16 +75,13 @@ class DBhandler:
     def insert_review(self, data, img_path):
         # 상품 정보 가져오기 
         productId = data.get("productId")
-        userId = data.get("userId")
 
-        product = self.db.child("products").child(userId).child(productId).get().val() 
-        productName = product.get("productName")
+        product = self.db.child("products").child(productId).get().val() 
 
         # 리뷰 데이터 생성 
         review_info={
             "productId" : productId,
-            "productName": productName,
-            "userId": userId,
+            "userId": data.get("userId"),  # 현재 로그인한 사용자 ID
             "title": data.get("title"),
             "content": data.get("content"),
             "rate" : int(data.get("reviewStar")),

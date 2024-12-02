@@ -1,4 +1,4 @@
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, session 
 from . import reviews_bp
 import os 
 from datetime import datetime 
@@ -58,38 +58,44 @@ def view_review_detail(reviewId):
     return render_template("review_detail.html", review=review)
 
 # 리뷰 등록
-@reviews_bp.route("/reg_review/<productName>", methods=["GET", "POST"])
-def reg_review(productName):
-    # 상품 이름이 전달된 값과 같은 데이터를 조회 
-    product = reviews_bp.db.child("products").order_by_child("productName").equal_to(productName).get().val()
+@reviews_bp.route("/reg_review/<productId>", methods=["GET", "POST"])
+def reg_review(productId):
+    # 로그인 여부 확인 
+    userId = session.get("userId")
+    if not userId:
+        flash("로그인이 필요합니다.")
+        return redirect(url_for("auth.login"))
     
-    # 조회된 결과의 상품 ID를 가져옴 
-    productId = list(product.keys())[0]
+    # 상품 데이터 가져오기 
+    products = reviews_bp.db.child("products").get().val()
 
-    # 상품 ID를 사용해 해당 상품의 데이터를 조회 
-    productData = product[productId]
+    # 사용자별로 productId 탐색 
+    for userProducts in products.values():
+        if productId in userProducts:
+            productData = userProducts[productId]
+            break
+    productName = productData.get("productName")
 
     if request.method == "GET":
         return render_template("reg_review.html", 
                                productId = productId, 
-                               productName=productData.get("productName"))
+                               productName=productName)
 
     elif request.method == "POST":
         image_file = request.files.get("reviewImage")
-        if not image_file:
-            flash("이미지 파일을 업로드해주세요.")
-            return redirect(url_for("reviews.reg_review", productName=productName))
-        image_file.save(f"static/images/{image_file.filename}")
+        if image_file:
+            image_file.save(f"static/images/{image_file.filename}")
 
         # 리뷰 데이터 구성 
-        data = request.form
+        data = request.form.to_dict()
         data["productId"] = productId
+        data["userId"] = userId  # 로그인한 사용자 ID 추가
         data["createdAt"] = datetime.utcnow().isoformat() 
 
         # 리뷰 저장 
         reviews_bp.db.insert_review(data, image_file.filename)
         flash("리뷰가 성공적으로 등록되었습니다!")
-        return redirect(url_for("reviews.view_reviews"))
+        return redirect(url_for("reviews.view_reviews", productId=productId))
 
 # 상품 별 리뷰 상세 조회
 @reviews_bp.route("/<productName>")
