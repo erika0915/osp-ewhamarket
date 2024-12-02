@@ -57,6 +57,15 @@ class DBhandler:
             if key_value == productName:
                 target_value = res.val()
         return target_value
+    
+    # 상품 이름과 사용자 ID 기반으로 조회 
+    def get_product_by_user_and_name(self, user_id, product_name):
+        products = self.db.child("products").child(user_id).get()
+        for product in products.each():
+            value = product.val()
+            if value["productName"] == product_name:
+                return value
+        return None
 
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
@@ -74,6 +83,17 @@ class DBhandler:
         for k,v in zip(target_key,target_value):
             new_dict[k]=v
         return new_dict
+    
+    # 데이터베이스에서 특정 상품정보 업데이트
+    def update_product(self, user_id, product_name, updated_data):
+        products = self.db.child("products").child(user_id).get()
+        for product in products.each():
+            key = product.key()
+            value = product.val()
+            if value["productName"] == product_name:
+                self.db.child("products").child(user_id).child(key).update(updated_data)
+                return True
+        return False 
     #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, data, img_path):

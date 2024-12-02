@@ -111,7 +111,7 @@ def reg_product():
 
 @products_bp.route("/purchase_now",methods=["GET", "POST"])
 def purchase_now():
-    #purchaseCount 
+    purchaseCount +=1
     if request.method == "GET":
         flash("구매 완료")
         return render_template("product_detail.html")
@@ -121,6 +121,23 @@ def purchase_now():
         image_file.save(f"static/images/{image_file.filename}")
         #to_dict로 수정해서 키값을 통해 data['price']처럼 쉽게 정보 가져올 수 있음 
         data = request.form.to_dict()
+        product_name = data["productName"] 
+        user_id = session.get("userId") 
+
+        # 데이터베이스에서 해당 상품의 purchaseCount 가져오기
+        product = products_bp.db.get_product_by_user_and_name(user_id, product_name)
+        if not product:
+            flash("상품을 찾을 수 없습니다.")
+            return redirect(url_for("products.view_products"))
+
+        # purchaseCount 업데이트
+        current_count = product.get("purchaseCount", 0)
+        updated_count = current_count + 1
+
+        # 데이터베이스에 업데이트된 값 저장
+        product["purchaseCount"] = updated_count
+        products_bp.db.update_product(user_id, product_name, product)
+
         #구매시간 서버 자동 저장 
         #current_time = datetime.now().isoformat() 
         #data['purchaseAt'] = current_time 
