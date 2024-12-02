@@ -80,7 +80,7 @@ def view_products():
 # 상품 상세 조회
 @products_bp.route("/<productId>/")
 def view_product_detail(productId):
-    data = products_bp.db.get_product_byId(productId)
+    data = products_bp.db.get_product_by_id(productId)
     return render_template("product_detail.html", productId=productId, data=data)
 
 # 상품 등록
