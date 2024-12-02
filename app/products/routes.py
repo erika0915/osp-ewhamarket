@@ -113,8 +113,7 @@ def reg_product():
 def purchase_now():
     purchaseCount +=1
     if request.method == "GET":
-        flash("구매 완료")
-        return render_template("product_detail.html")
+        return render_template("products.html")
 
     elif request.method == "POST":
         image_file = request.files.get("productImage")
@@ -123,7 +122,11 @@ def purchase_now():
         data = request.form.to_dict()
         product_name = data["productName"] 
         user_id = session.get("userId") 
-
+        user_id = session.get("userId")
+        if not user_id:
+            flash("로그인이 필요합니다.")
+            return redirect(url_for("login"))
+        
         # 데이터베이스에서 해당 상품의 purchaseCount 가져오기
         product = products_bp.db.get_product_by_user_and_name(user_id, product_name)
         if not product:
@@ -138,6 +141,15 @@ def purchase_now():
         product["purchaseCount"] = updated_count
         products_bp.db.update_product(user_id, product_name, product)
 
+        # 상품 정보를 사용자의 purchasedProducts에 추가
+        result = products_bp.db.add_purchased_product(user_id, data)
+        if result:
+            flash("구매가 완료되었습니다! 구매 내역에 추가되었습니다.")
+        else:
+            flash("구매 처리 중 오류가 발생했습니다.")
+
+        return redirect(url_for("products.view_products"))
+    
         #구매시간 서버 자동 저장 
         #current_time = datetime.now().isoformat() 
         #data['purchaseAt'] = current_time 
