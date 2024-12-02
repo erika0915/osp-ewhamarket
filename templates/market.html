@@ -5,63 +5,71 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='/css/market.css') }}">
 {% endblock %}
+
+{% block section %}
 <body>
     <div class="titleRanking">
         <p>마켓 랭킹</p> 
         <hr>
     </div>
 
+  
     <div class="form-container">
+      
         <div class="market-conatiner1">
             <div class="like-container">
-                <h3 class="market-name" name=1."marketName">{{data.marketName}}</h3>
+                <h3 class="market-name" name=1.marketName>{{ top_user_data.nickname}}</h3>
                 <i class="fa fa-heart" id="heart"></i>
                 <span class="like-count"></span>
             </div>
             <hr>
-            <div class="market-images1">
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+            {% if sellList %}
+            <div class="image-List">
+                {% for item in sellList %}
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
         <div class="market-conatiner2">
             <div class="like-container">
-                <h3 class="market-name" name="marketName">2.{{data.marketName}}</h3>
+                <h3 class="market-name" name="marketName">2.{{nickname}}</h3>
                 <i class="fa fa-heart" id="heart"></i>
                 <span class="like-count"></span>
             </div>
             <hr>
             <div class="market-images2">
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
             </div>
         </div>
         <div class="market-conatiner3">
             <div class="like-container">
-                <h3 class="market-name" name="marketName">3.{{data.marketName}}</h3>
+                <h3 class="market-name" name="marketName">3.{{nickname}}</h3>
                 <i class="fa fa-heart" id="heart"></i>
                 <span class="like-count"></span>
             </div>
             <hr>
             <div class="market-images3">
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
+                <img src="{{ url_for('static', filename='images/' + productImage) }}" width=70, height=100>
             </div>
         </div>
       
     </div>
 </body>
 <script>
-    const marketName = "{{ data.marketName }}";
+    const marketName = "{{ nickname }}";
     function showHeart() {
       $.ajax({
         type: 'GET',
@@ -117,5 +125,5 @@
 </script>
   
 {% endblock %}   
-{% block section %}
+
 

@@ -14,6 +14,7 @@ def create_app():
     from app.auth import auth_bp
     from app.likes import likes_bp 
     from app.mypage import mypage_bp
+    from app.market import market_bp
     
     # Blueprint에 DB 핸들러 전달
     products_bp.db = db
@@ -21,6 +22,7 @@ def create_app():
     auth_bp.db = db
     likes_bp.db = db 
     mypage_bp.db = db 
+    market_bp.db = db
 
     # Blueprint 등록
     app.register_blueprint(products_bp, url_prefix="/products")
@@ -28,6 +30,7 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(likes_bp, url_prefix="/likes")
     app.register_blueprint(mypage_bp, url_prefix="/mypage")
+    app.register_blueprint(market_bp, url_prefix="/market")
 
     # 메인 라우트
     @app.route("/")

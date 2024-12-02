@@ -58,15 +58,23 @@ class DBhandler:
                 target_value = res.val()
         return target_value
     
-    # 상품 이름과 사용자 ID 기반으로 조회 
-    def get_product_by_user_and_name(self, user_id, product_name):
+    # userId로 조회
+    def get_product_byId(self, productId):
+        products = self.db.child("products").get().val()
+        for userId, userProducts in products.items():
+            if productId in userProducts: 
+                return userProducts[productId]
+        return None
+
+    # 상품 이름과 userId 기반으로 조회 
+    def get_product_by_userId_and_name(self, user_id, product_name):
         products = self.db.child("products").child(user_id).get()
         for product in products.each():
             value = product.val()
             if value["productName"] == product_name:
                 return value
-        return None
-
+        return None 
+ 
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("products").get()
