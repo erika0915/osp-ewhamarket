@@ -23,6 +23,7 @@ class DBhandler:
             "description":data['description'],
             "productImage": productImage,
             "createdAt": datetime.now(timezone.utc).isoformat(),
+            "purchaseCount":0,
             "reviewCount": 0,
             "userId": userId
         }
@@ -59,15 +60,15 @@ class DBhandler:
 
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
-        items = self.db.child("product").get()
+        items = self.db.child("products").get()
         target_value=[]
         target_key=[]
-        for res in items.each():
-            value = res.val()
-            key_value = res.key()
-            if value['category'] == cate:
-                target_value.append(value)
-                target_key.append(key_value)
+        for user in items.each():  # 각 userId를 순회
+            user_data = user.val()  # userId 아래의 데이터를 가져옴
+            for product_key, product_value in user_data.items():  # userId 아래의 상품 데이터 순회
+                if product_value.get("category") == cate:  # category가 cate와 일치하는지 확인
+                    target_value.append(product_value)
+                    target_key.append(product_key)
         print("######target_value",target_value)
         new_dict={}
         for k,v in zip(target_key,target_value):

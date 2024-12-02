@@ -111,6 +111,7 @@ def reg_product():
 
 @products_bp.route("/purchase_now",methods=["GET", "POST"])
 def purchase_now():
+    #purchaseCount 
     if request.method == "GET":
         flash("구매 완료")
         return render_template("product_detail.html")
