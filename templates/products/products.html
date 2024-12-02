@@ -30,10 +30,15 @@
     <section id="head">
       <p class="title">전체 상품 조회</p>
       <div class="array">
-          <button class="review" data-value="review">리뷰 많은 순</button>
-          <button class="rate" data-value="rate">높은 평점 순</button>
-          <button class="recent" data-value="recent">최신순</button>
-      </div>
+        <a href="{{ url_for('products.view_products', page=page, category=category, sort='review') }}">
+          <button class="sort_button">리뷰 많은 순</button>
+      </a>
+      <a href="{{ url_for('products.view_products', page=page, category=category, sort='name') }}">
+          <button class="sort_button">높은 평점 순</button>
+      </a>
+      <a href="{{ url_for('products.view_products', page=page, category=category, sort='recent') }}">
+          <button class="sort_button">최신순</button>
+      </a> </div>
   </section>
   
   {% if total > 0 %}
