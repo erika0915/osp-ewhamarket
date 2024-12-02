@@ -57,13 +57,19 @@
           </div>
         </div>
 
-        <button onclick="location.href='{{ url_for("purchase_now", class="buy" data-value="buy")}}';">바로 구매</button>
-        <button onclick="location.href='{{ url_for("reviews.resg_review", productName=data.productName) }}';">리뷰등록</button>
+        <form id="purchaseForm" action="{{ url_for('products.purchase_now',productId=productId)  }}" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="productName" value="{{ data['productName'] }}">
+          <input type="hidden" name="price" value="{{ data['price'] }}">
+          <input type="hidden" name="category" value="{{ data['category'] }}">
+          <input type="hidden" name="productImage" value="{{ data['productImage'] }}">
+          <button type="submit" class="buy-button">바로 구매</button>
+      </form>        
+      <button onclick="location.href='{{ url_for('reviews.reg_review', productName=data.productName) }}';">리뷰등록</button>
       </div><!--button-->
 
       <div class="review">
         <div class="underline">
-          <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productName=data.productName) }}';">REVIEW</button>
+          <button onclick="location.href='{{ url_for('reviews.view_product_reviews', productName=data.productName) }}';">REVIEW</button>
         </div>
 
         <div class="star_rating">
@@ -136,6 +142,8 @@
   $(document).ready(function () {
     showHeart();
   });
+
+  
   </script>
 {% endblock %} 
 

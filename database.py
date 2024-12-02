@@ -58,12 +58,21 @@ class DBhandler:
                 target_value = res.val()
         return target_value
     
-    # userId로 조회
+    # productId로 조회
     def get_product_byId(self, productId):
-        products = self.db.child("products").get().val()
-        for userId, userProducts in products.items():
-            if productId in userProducts: 
-                return userProducts[productId]
+        products = self.db.child("products").get()
+
+        # products가 비어 있으면 None 반환
+        if not products or not products.val():
+            return None
+        for userId, userProducts in products.val().items():
+            print(f"Checking userId: {userId}")
+        
+        # 각 사용자(userId) 아래에서 상품(productId) 검색
+        for userId, userProducts in products.val().items():
+            if productId in userProducts:
+                return userProducts[productId]  # 상품 데이터 반환
+        # productId를 찾지 못한 경우 None 반환
         return None
 
     # 상품 이름과 userId 기반으로 조회 
@@ -93,15 +102,29 @@ class DBhandler:
         return new_dict
     
     # 데이터베이스에서 특정 상품정보 업데이트
-    def update_product(self, user_id, product_name, updated_data):
-        products = self.db.child("products").child(user_id).get()
-        for product in products.each():
-            key = product.key()
-            value = product.val()
-            if value["productName"] == product_name:
-                self.db.child("products").child(user_id).child(key).update(updated_data)
+    def update_product(self, productId, updated_data):
+        products = self.db.child("products").get()
+
+        for userId, userProducts in products.val().items():
+            if productId in userProducts:
+                self.db.child("products").child(userId).child(productId).update(updated_data)
                 return True
-        return False 
+
+        return False
+    
+    # 구매 정보를 사용자 데이터에 집어넣어
+    def add_purchased_product(self, user_id, product_info):
+        user = self.db.child("users").child(user_id).get()
+
+        if not user or not user.val():
+            return False
+
+        purchased_products = user.val().get("purchasedProducts", {})
+        product_id = f"product_{len(purchased_products) + 1}"
+        purchased_products[product_id] = product_info
+
+        self.db.child("users").child(user_id).update({"purchasedProducts": purchased_products})
+        return True
     #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, data, img_path):
