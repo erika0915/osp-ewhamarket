@@ -39,7 +39,6 @@ class DBhandler:
     # 상품 전체 조회 
     def get_products(self):
         products = self.db.child("products").get().val()
-
         flat_products={}
         for userId, userProducts in products.items():
             for productId, productData in userProducts.items():

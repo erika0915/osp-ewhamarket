@@ -19,6 +19,34 @@ def view_products():
     if not data:
         flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
+    item_counts = len(data)
+    print(f"Raw data:{data}")
+
+    # 버튼별 정렬 
+    for key, value in data.items():
+         if "createdAt" not in value:
+            try:
+                # 'createdAt'을 기준으로 변환
+                value["createdAt"] = datetime.fromisoformat(value["createdAt"]).isoformat()
+            except (KeyError, ValueError, TypeError):
+             # 유효하지 않은 경우 현재 시간 설정
+                value["createdAt"] = datetime.now(timezone.utc).isoformat()
+    for key, value in data.items():
+        print(f"Before Sorting - Product ID: {key}, Created At: {value['createdAt']}")
+
+    def safe_datetime(value):
+        try:
+            return datetime.fromisoformat(value)
+        except (ValueError, TypeError,AttributeError):
+             datetime.min
+
+    if sort_by == "recent":
+        # 최신순
+        data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
+    else:
+        data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
+    for key, value in data.items():
+        print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -27,25 +55,6 @@ def view_products():
         data = products_bp.db.get_products()
     else:
         data = products_bp.db.get_products_bycategory(category)
-  
-    # 버튼별 정렬 
-    for key, value in data.items():
-        if "created_at" not in value or not value["created_at"]:
-            value["created_at"] = datetime.now(timezone.utc).isoformat() 
-    def safe_datetime(value):
-        try:
-            return datetime.fromisoformat(value)
-        except (ValueError, TypeError):
-             datetime.min
-
-    if sort_by=="all":
-        # 기본 정렬
-        data=dict(sorted(data.items(), key=lambda x: x[0]))
-    elif sort_by == "recent":
-        # 최신순
-        data=dict(sorted(data.items(), key=lambda x: datetime.fromisoformat(x[1]["created_at"]), reverse=True))
-    #data = dict(sorted(data.items(), key=lambda x: x[0]["created_at"], reverse=False))
-    item_counts = len(data)
 
     # 현재 페이지 데이터
     if item_counts <= per_page:
