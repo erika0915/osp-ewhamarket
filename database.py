@@ -47,16 +47,13 @@ class DBhandler:
     
 
     # 상품 세부 조회 -> 이름으로 조회 
-    def get_product_byname(self, productName):
-        products = self.db.child("products").get()
-        target_value=""
-        #print("###########", products)
-        for res in products.each():
-            key_value = res.key()
-            if key_value == productName:
-                target_value = res.val()
-        return target_value
-
+    def get_product_byId(self, productId):
+        products = self.db.child("products").get().val()
+        for userId, userProducts in products.items():
+            if productId in userProducts: 
+                return userProducts[productId]
+        return None 
+ 
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
         items = self.db.child("product").get()

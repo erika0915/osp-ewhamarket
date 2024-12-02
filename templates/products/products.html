@@ -46,7 +46,7 @@
     <table>
       <tr>
         {% for key, value in row1 %}
-        <td onclick="location.href='{{ url_for('products.view_product_detail', name=key) }}';" style="cursor:pointer;">
+        <td onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
           <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
@@ -55,7 +55,7 @@
       <tr>
           {% for key, value in row1 %}
           <td>
-            <div class="product-title">{{ key }}
+            <div class="product-title">{{ value.productName }}
               <div class="price">{{ value.price }}</div>
             </div>
             <div class="like-container">
@@ -69,7 +69,7 @@
 
       <tr>
         {% for key, value in row2 %}
-        <td onclick="location.href='{{ url_for('products.view_product_detail', name=key) }}';" style="cursor:pointer;">
+        <td onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
           <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
         </td>
         {% endfor %}
@@ -79,7 +79,7 @@
           {% for key, value in row2 %}
           <td>
             <div class="product-title">
-              {{ key }}
+              {{ value.productName }}
               <div class="price">
                 {{ value.price }}
               </div>
