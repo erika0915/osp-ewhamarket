@@ -31,7 +31,7 @@
         <table>
             <tr>
                 {% for review in row1 %}
-                <td onclick="location.href='{{ url_for('reviews.view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
+                <td onclick="location.href='{{ url_for('reviews.view_review_detail', reviewId=review['reviewId']) }}';" style="cursor:pointer;">
                     <div class="layer">
                         <div class="product-item">
                             <div class="product-image">
@@ -51,7 +51,7 @@
 
             <tr>
                 {% for review in row2 %}
-                <td onclick="location.href='{{ url_for('reviews.view_review_detail', productName=review['product'], review_id=review['review_id']) }}';" style="cursor:pointer;">
+                <td onclick="location.href='{{ url_for('reviews.view_review_detail',reviewId=review['reviewId']) }}';" style="cursor:pointer;">
                     <div class="layer">
                         <div class="product-item">
                             <div class="product-image">

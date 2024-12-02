@@ -25,7 +25,7 @@ def view_reviews():
             "userId" : review.get("userId"),
             "title" : review.get("title"),
             "content": review.get("content"),
-            "rate" : review.get("reviewStar"),
+            "rate" : review.get("rate"),
             "reviewImage" : review.get("reviewImage")
         }
         for reviewId, review in all_reviews.items()
@@ -94,7 +94,6 @@ def reg_review(productId):
 
         # 리뷰 저장 
         reviews_bp.db.insert_review(data, image_file.filename)
-        flash("리뷰가 성공적으로 등록되었습니다!")
         return redirect(url_for("reviews.view_reviews", productId=productId))
 
 # 상품 별 리뷰 상세 조회
