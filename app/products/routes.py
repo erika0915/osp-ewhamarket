@@ -88,7 +88,7 @@ def view_products():
 # 상품 상세 조회
 @products_bp.route("/<productId>/")
 def view_product_detail(productId):
-    data = products_bp.db.get_product_byId(productId)
+    data = products_bp.db.get_product_by_id(productId)
     if not data:
         flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))

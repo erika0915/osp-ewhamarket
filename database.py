@@ -46,8 +46,8 @@ class DBhandler:
         return flat_products
     
 
-    # 상품 세부 조회 -> 이름으로 조회 
-    def get_product_byname(self, productName):
+    # 상품 세부 조회
+    def get_product_by_name(self, productName):
         products = self.db.child("products").get()
         target_value=""
         #print("###########", products)
@@ -58,7 +58,7 @@ class DBhandler:
         return target_value
     
     # productId로 조회
-    def get_product_byId(self, productId):
+    def get_product_by_id(self, productId):
         products = self.db.child("products").get()
 
         # products가 비어 있으면 None 반환
@@ -81,7 +81,6 @@ class DBhandler:
             value = product.val()
             if value["productName"] == product_name:
                 return value
-        return None 
  
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
@@ -129,19 +128,16 @@ class DBhandler:
     def insert_review(self, data, img_path):
         # 상품 정보 가져오기 
         productId = data.get("productId")
-        userId = data.get("userId")
 
-        product = self.db.child("products").child(userId).child(productId).get().val() 
-        productName = product.get("productName")
+        product = self.db.child("products").child(productId).get().val() 
 
         # 리뷰 데이터 생성 
         review_info={
             "productId" : productId,
-            "productName": productName,
-            "userId": userId,
+            "userId": data.get("userId"),  # 현재 로그인한 사용자 ID
             "title": data.get("title"),
             "content": data.get("content"),
-            "rate" : int(data.get("reviewStar")),
+            "rate" : data.get("rate"),
             "createdAt" : data.get("createdAt", datetime.utcnow().isoformat()),
             "reviewImage": img_path
         }
@@ -155,36 +151,28 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
         review = self.db.child("reviews").child(reviewId).get().val()
+        print(f"Debug: Retrieved review for reviewId {reviewId}: {review}")
         return review
     
-    # 상품 별 리뷰 상세 조회 
+    # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
-        # Firebase에서 데이터 가져오기
         allReviews = self.db.child("reviews").get().val()
-
-        # 리뷰가 없으면 빈 리스트와 기본 이미지 반환 
         if not allReviews:
-            return [], "default.jpg"
-        
-        # productId를 기준으로 리뷰 필터링 
-        productReviews = [
-            {
-                "reviewId" : reviewId,
-                "rate": int(reviewData.get("reviewStar")),
-                "title": reviewData.get("title"),
-                "content" : reviewData.get("content"),
-                "reviewImage" : reviewData.get("reviewImage"),
-            }
-            for reviewId, reviewData in allReviews.items()
-            if reviewData.get("productId") == productId
-        ]
+            return []  # 리뷰 데이터가 없으면 빈 리스트 반환
 
-        # 제품 데이터 가져오기 
-        productData = self.db.child("products").child(productId).get().val()
-        productImage = productData.get("productImage") if productData else "default.jpg"
+        productReviews = []
+        for reviewId, reviewData in allReviews.items():
+            if reviewData and reviewData.get("productId") == productId: 
+                productReviews.append({
+                    "reviewId": reviewId,
+                    "rate": int(reviewData.get("rate")),
+                    "title": reviewData.get("title"), 
+                    "content": reviewData.get("content"), 
+                    "reviewImage": reviewData.get("reviewImage"),  
+                    "createdAt": reviewData.get("createdAt"),  
+                })
 
-        # 리뷰와 제품 이미지 반환 
-        return productReviews, productImage
+        return productReviews
     #-----------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
