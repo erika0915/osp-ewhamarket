@@ -22,15 +22,22 @@ def view_products():
     item_counts = len(data)
     print(f"Raw data:{data}")
 
+    # 페이지네이션 처리 및 정렬
+    start_idx = per_page * page
+    end_idx = per_page * (page + 1)
+    if category == "all":
+        data = products_bp.db.get_products()
+    else:
+        data = products_bp.db.get_products_bycategory(category)
+
     # 버튼별 정렬 
     for key, value in data.items():
-         if "createdAt" not in value:
-            try:
-                # 'createdAt'을 기준으로 변환
-                value["createdAt"] = datetime.fromisoformat(value["createdAt"]).isoformat()
-            except (KeyError, ValueError, TypeError):
-             # 유효하지 않은 경우 현재 시간 설정
-                value["createdAt"] = datetime.now(timezone.utc).isoformat()
+        # 두 필드를 모두 확인
+        if "createdAt" not in value and "created_at" not in value:
+            value["createdAt"] = datetime.now(timezone.utc).isoformat()
+        elif "created_at" in value:
+            # created_at 값을 createdAt으로 변환
+            value["createdAt"] = value.pop("created_at")
     for key, value in data.items():
         print(f"Before Sorting - Product ID: {key}, Created At: {value['createdAt']}")
 
@@ -47,14 +54,7 @@ def view_products():
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
         print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
-
-    # 페이지네이션 처리 및 정렬
-    start_idx = per_page * page
-    end_idx = per_page * (page + 1)
-    if category == "all":
-        data = products_bp.db.get_products()
-    else:
-        data = products_bp.db.get_products_bycategory(category)
+    item_counts = len(data)
 
     # 현재 페이지 데이터
     if item_counts <= per_page:
@@ -70,19 +70,18 @@ def view_products():
             row_data.append(dict(list(paginated_data.items())[i * per_row:]))
         else:
             row_data.append(dict(list(paginated_data.items())[i * per_row:(i + 1) * per_row]))
-
     # 템플릿 렌더링
     return render_template(
         "products.html",
-        datas=paginated_data.items(),
+        datas=list(paginated_data.items()),
         row1=row_data[0].items() if len(row_data) > 0 else [],
         row2=row_data[1].items() if len(row_data) > 1 else [],
         limit=per_page,
         page=page,
         page_count=int(math.ceil(item_counts / per_page)),
         total=item_counts,
-        category=category,
         sort_by=sort_by,
+        category=category,
         m=row_count
     )
 
