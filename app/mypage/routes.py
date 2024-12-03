@@ -20,8 +20,6 @@ def view_mypage():
     sellList = mypage_bp.db.get_sell_list(userId)
 
     return render_template("mypage.html",
-                           nickname=userInfo.get("nickname"),
-                           email=userInfo.get("email"),
-                           profileImage = userInfo.get("profileImage"),
+                           userInfo=userInfo,
                            purchasedList=purchasedList,
                            sellList=sellList)
