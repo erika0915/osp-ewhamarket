@@ -58,15 +58,5 @@ def signup():
         else:
             flash("이미 존재하는 userId 입니다.")
             return render_template("signup.html")
+ 
         
-#회원가입 아이디 중복 체크 
-@auth_bp.route("/check_duplicate", methods=["POST"])
-def check_duplicate():
-    username = request.form.get('username')
-    
-    # Use the user_duplicate_check method from your database handler
-    is_available = auth_bp.db.user_duplicate_check(username)
-    
-    return jsonify({
-        'available': is_available
-    })
