@@ -5,3 +5,46 @@ function pushRegiButton(){
 function pushResetButton(){
 	alert("취소되었습니다");
 }
+/*        <div class="form-row">
+            <label class="mkIDc" for="mkId">아이디</label>
+            <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)"> 
+            <button type="button" class="id_overlap_button" onclick="id_overlap_check()">ID 중복확인</button>
+        </div>
+*/
+
+function id_overlap_check() {
+	const usernameInput = document.getElementById('mkId');
+	const username = usernameInput.value.trim();
+	
+	if (username.length == 0){
+		alert('아이디를 입력하세요');
+		usernameInput.setAttribute('check_result', 'fail');
+		return;
+	}
+
+	if (username.length < 6 || username.length > 20) {
+		alert('아이디는 6-20자 사이여야 합니다.');
+		usernameInput.setAttribute('check_result', 'fail');
+		return;
+	}
+
+
+	$.ajax({
+		url: '/check_duplicate',
+		type: 'POST',
+		data: { username: username },
+		success: function(response) {
+			if (response.available) {
+				alert('사용 가능한 아이디입니다.');
+				usernameInput.setAttribute('check_result', 'success');
+			} else {
+				alert('다른 아이디를 입력해주세요.');
+				usernameInput.setAttribute('check_result', 'fail');
+			}
+		},
+		error: function() {
+			alert('오류가 발생했습니다. 다시 시도해주세요.');
+			usernameInput.setAttribute('check_result', 'fail');
+		}
+	});
+}
