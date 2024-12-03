@@ -161,7 +161,7 @@ def purchase_now(productId):
 
         # 데이터베이스에 업데이트된 값 저장
         product["purchaseCount"] = updated_count
-        products_bp.db.update_product(user_id, product_name, product)
+        products_bp.db.update_product(product_name, product)
 
         # 상품 정보를 사용자의 purchasedProducts에 추가
         result = products_bp.db.add_purchased_product(user_id, data)
