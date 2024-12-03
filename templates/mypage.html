@@ -17,13 +17,18 @@
             <img src="{{ url_for('static', filename='images/' + profileImage) }}" width=140, height=200>
             <div class= "profile">
                 <div class="nickName">
-                    <label for="nickName">닉네임</label>
+                    <label for="nickName">닉네임 </label>
                     <input class="innn" type="text" id="nickName" name="nickName" value=" {{ nickname }}" readonly>
                 </div>
 
                 <div class="email">
-                    <label for="email">이메일</label>
+                    <label for="email">이메일 </label>
                     <input class="inem" type="text" id="email" name="email" value=" {{ email }}@ewha.ac.kr" readonly>
+                </div>
+
+                <div class="phoneNumber">
+                    <label for="phoneNumber">전화번호</label>
+                    <input class="intel" type="text" id="phoneNumber" name="phoneNumber" value=" {{ phonenumber }}" readonly>
                 </div>
                 
             </div>
