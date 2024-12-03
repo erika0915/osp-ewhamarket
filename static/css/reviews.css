@@ -84,8 +84,9 @@ main {
     font-size: 30px;
 }
 
-.reg-num{
+.reg_num{
     margin-top: 100px;
+    color: #333;
 }
 
 
