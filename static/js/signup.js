@@ -10,7 +10,7 @@ function pushResetButton(){
             <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)"> 
             <button type="button" class="id_overlap_button" onclick="id_overlap_check()">ID 중복확인</button>
         </div>
-*/
+
 
 function pushRegiButton(){
     alert("등록되었습니다");
@@ -85,3 +85,4 @@ function id_overlap_check() {
         usernameInput.setAttribute('check_result', 'fail');
     });
 }
+*/
