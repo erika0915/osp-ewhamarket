@@ -150,7 +150,7 @@ def purchase_now(productId):
             return redirect(url_for("auth.login"))
         
         # 데이터베이스에서 해당 상품의 purchaseCount 가져오기
-        product = products_bp.db.get_product_by_userId_and_name(user_id, product_name)
+        product = products_bp.db.get_product_by_productname(product_name)
         if not product:
             flash("상품을 찾을 수 없습니다.")
             return redirect(url_for("products.view_products"))

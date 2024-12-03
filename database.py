@@ -75,12 +75,26 @@ class DBhandler:
         return None
 
     # 상품 이름과 userId 기반으로 조회 
-    def get_product_by_userId_and_name(self, user_id, product_name):
-        products = self.db.child("products").child(user_id).get()
+    #def get_product_by_userId_and_name(self, user_id, product_name):
+        products = self.db.child("products").get()
         for product in products.each():
             value = product.val()
             if value["productName"] == product_name:
                 return value
+    def get_product_by_productname(self, product_name):
+        products = self.db.child("products").get()
+
+        if not products or not products.val():
+            return None
+
+        # 모든 사용자의 상품 데이터 순회
+        for user_id, user_products in products.val().items():
+            for product_id, product_info in user_products.items():
+                if product_info.get("productName") == product_name:
+                    return product_info
+
+        # 상품이 발견되지 않은 경우
+        return None
  
     #카테고리별 상품리스트 보여주기
     def get_products_bycategory(self, cate):
