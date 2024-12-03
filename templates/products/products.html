@@ -33,8 +33,8 @@
         <a href="{{ url_for('products.view_products', page=page, category=category, sort='review') }}">
           <button class="sort_button">리뷰 많은 순</button>
       </a>
-      <a href="{{ url_for('products.view_products', page=page, category=category, sort='name') }}">
-          <button class="sort_button">높은 평점 순</button>
+      <a href="{{ url_for('products.view_products', page=page, category=category, sort='purchase') }}">
+          <button class="sort_button">판매량순</button>
       </a>
       <a href="{{ url_for('products.view_products', page=page, category=category, sort='recent') }}">
           <button class="sort_button">최신순</button>
