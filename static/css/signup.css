@@ -97,7 +97,7 @@ width:90%
 }
 
 .profileImagec,.nickc, .mkIDc,.pswdc,.chkpswdc,.namec,.phnumc,.emailc,.bdayc{
-  width: 300px;
+  width: 180px;
   flex-shrink: 0; /* 라벨의 너비 고정 */
   display: block;
   font-size: 20px;

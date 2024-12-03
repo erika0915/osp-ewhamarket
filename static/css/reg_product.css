@@ -67,7 +67,7 @@ width:50%
 }
 
 label {
-  width: 80px;
+  width: 180px;
   flex-shrink: 0; /* 라벨의 너비 고정 */
 }
 
