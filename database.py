@@ -212,8 +212,10 @@ class DBhandler:
         "userId": data['userId'],
         "pw": pw_hash,
         "nickname": data['nickname'],
+        "name":data['name'],
         "email": data['email'],
         "phoneNum":data['phoneNum'],
+        "bday":data['bday'],
         "profileImage": profile_image,
         "purchasedProducts" : {} # 빈 구매 목록 
         }

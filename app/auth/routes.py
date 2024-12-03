@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import jsonify, render_template, request, redirect, url_for, session, flash
 from . import auth_bp
 import hashlib
 
@@ -58,3 +58,18 @@ def signup():
         else:
             flash("이미 존재하는 userId 입니다.")
             return render_template("signup.html")
+        
+#Id 중복체크버튼
+@auth_bp.route("/idcheck", methods=["GET"])
+def id_check():
+    user_id = request.args.get("userId")  # 쿼리 문자열에서 userId를 가져옵니다
+    if not user_id:
+        return jsonify({"success": False, "message": "아이디를 입력하세요."}), 400
+
+    is_available = auth_bp.db.user_duplicate_check(user_id)  # 중복 여부 확인
+    if is_available:
+        return jsonify({"success": True, "message": f"'{user_id}'는 사용 가능한 ID입니다."})
+    else:
+        return jsonify({"success": False, "message": f"'{user_id}'는 이미 사용 중인 ID입니다."}), 409
+
+
