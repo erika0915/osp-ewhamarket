@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg_review.css') }}">
+{% endblock %}
+
+{%block section%} 
+<body> 
+  <main>
+    <form method="POST" action="{{ url_for('reviews.reg_review', productName=productName) }}" enctype="multipart/form-data">
+      <div class="form-container">
+        <div class="titleReview">
+          <p>리뷰 작성</p>
+          <p class="discription">제품에 대한 리뷰를 작성해주세요.</p>
+        </div>
+        
+        <div class="left">
+          <div class="form-row">
+            <label for="productName">상품명</label>
+            <input class="inlg" type="text" id="productName" name="productName" value="{{ productName }}" readonly>
+          </div>
+      
+          <div class="form-row2">
+            <label for="title">제목</label>
+            <input class="inpn" type="text" id="title" name="title" placeholder="제목을 입력하세요.">
+          </div>
+      
+          <div class="form-row3">
+            <label for="star">평점</label>
+            <fieldset>
+              <span class="text-bold">별점을 선택해주세요</span>
+              <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        
+        <br>
+        <div class="form-row4">
+          <label for="content">내용</label>
+          <textarea class="content-area" id="content" name="content" placeholder="최소 20자 이상 작성해주세요." rows="6"></textarea>
+        </div>
+    
+    
+        <div class="form-row6">
+          <label class="file-label" for="reviewImage">이미지</label>
+          <label class="fileTitle" for="reviewImage">choose file</label>
+          <input class="file" type="file" id="reviewImage" name="reviewImage" accept="image/*">
+        </div>
+    
+        <div class="button-group">
+          <button type="button" class="cancel-button">취소</button>
+          <button type="submit" class="submit-button">등록</button>
+        </div>
+      </div>
+    </form>
+  </main>
+</body>
+<script>
+document.querySelectorAll('.star').forEach(($star) => {
+  $star.addEventListener('click', ({ target }) => {
+    // 모든 .star에서 .active 삭제
+    document.querySelectorAll('.star').forEach(($star) => {
+      $star.classList.remove('active');
+    });
+    // 클릭한 .star에 .active 추가
+    target.classList.add('active');
+  });
+});
+</script>
+{% endblock %}

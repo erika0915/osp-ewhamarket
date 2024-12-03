@@ -1,0 +1,152 @@
+<!--채원-->
+{% extends "index.html" %}
+
+{%block styles%}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
+{% endblock%}
+
+{%block section%}
+
+<body>
+<div class="container">
+
+  <div class="row">  
+    <div class="main-image">
+      <img src="{{ url_for('static', filename='images/' + data.productImage) }}">
+       <!--lecture 11에서 추가된 부분 (상품세부화면 연결 경로 생성)-->
+    </div>
+
+    <div class="column middle">
+
+      <div class="product-details">
+        <div class="like-container">
+          <h3 class="product-name" name="productName">{{data.productName}}</h3>
+        <!-- <button class="like-button" onclick="toggleLike(this)">-->
+          <!--<i class="fa fa-heart" id="heart" ></i>--> <!--12주차 좋아요 기능 구현-->
+          <!--<span class="heart-icon">♥</span>-->
+        <!--</button>-->
+          <i class="fa fa-heart" id="heart"></i>
+          <span class="like-count"></span>
+        </div>
+
+        <hr>  <!--수평선-->
+
+        <div class="product-description">
+          <h4 class="underline">상세설명</h4>
+          <p>category : {{data.category}} </p>
+          <p>{{data.productName}}은 {{data.location}}에서 거래 가능합니다. </p>
+          <p>{{data.description}} </p>
+        </div>
+
+        <h3 class="product-price">가격 : {{data.price}} 원</h3>
+
+      </div> <!--product-details-->
+
+      <div class="button">
+        <div class="dropdown">
+          <button class="dropbtn"> 
+          <span class="dropbtn_icon">1개</span>
+          </button>
+
+          <div class="dropdown-content">
+            <a href="#">2개</a>
+            <a href="#">3개</a>
+            <a href="#">4개</a>
+            <a href="#">5개</a>
+          </div>
+        </div>
+
+
+        <form id="purchaseForm" action="{{ url_for('products.purchase_now',productId=productId)  }}" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="productName" value="{{ data['productName'] }}">
+          <input type="hidden" name="price" value="{{ data['price'] }}">
+          <input type="hidden" name="category" value="{{ data['category'] }}">
+          <input type="hidden" name="productImage" value="{{ data['productImage'] }}">
+          <button type="submit" class="buy-button">바로 구매</button>
+      </form>        
+        <button onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}';">리뷰등록</button>
+      </div><!--button-->
+
+      <div class="review">
+        <div class="underline">
+
+          <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productId=productId) }}';">REVIEW</button>
+        </div>
+
+        <div class="star_rating">
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star on"></span>
+          <span class="star"></span>
+          <div class="star_number">() </div>
+        </div>
+      </div><!--review-->
+
+    </div><!--column middle-->
+  </div><!--row-->
+</div><!--container-->
+ 
+</body>
+
+<script>
+  const productName = "{{ data.productName }}";
+  function showHeart() {
+    $.ajax({
+      type: 'GET',
+      url: '/likes/show_heart/{{ data.productName }}/',
+      data: {},
+      success: function (response) {
+        let my_heart = response['my_heart'];
+        if (my_heart['interested'] == 'Y')
+        {
+          $("#heart").css("color","red");
+          $("#heart").attr("onclick","unlike()");
+       }
+        else
+        {
+          $("#heart").css("color","grey");
+          $("#heart").attr("onclick","like()");
+        }
+        //alert("showheart!")
+    }
+    });
+  }
+  
+  function like() {
+    $.ajax({
+    type: 'POST',
+    url: '/likes/like/{{data.productName}}/',
+    data: {
+      interested : "Y"
+    },
+    success: function (response) {
+      alert(response['msg']);
+      window.location.reload()
+    }
+    });
+  }
+  
+  function unlike() {
+    $.ajax({
+      type: 'POST',
+      url: '/likes/unlike/{{data.productName}}/',
+      data: {
+        interested : "N"
+      },
+    success: function (response) {
+      alert(response['msg']);
+      window.location.reload()
+    }
+    });
+  }
+  $(document).ready(function () {
+    showHeart();
+  });
+
+  
+  </script>
+{% endblock %} 
+
+
