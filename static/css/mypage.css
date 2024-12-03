@@ -15,6 +15,7 @@
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 20px;
 }
@@ -36,6 +37,7 @@ main {
 
 /* 마이페이지 전체 컨테이너 */
 .form-container {
+    justify-content: flex-start; /* 수평 정렬: 좌측 */
     width: 80%;
     max-width: 1000px;
     margin: 20px auto; /* 중앙 정렬 */
@@ -44,42 +46,43 @@ main {
     border-radius: 10px;
     background-color: white;
 }
+
+.form-container h4 {
+    font-size: 18px;
+    margin-bottom: 12px; 
+    font-size: 18px;
+    color: #333;
+}
   
 /* 상단 프로필 컨테이너( 사진 + 내정보 ) */
 .profile-container {
-    display: flex;
-    align-items: center;
-    gap:20px;
-    width: 30%;
-    max-width: 100px;
-    margin: 20px auto; /* 중앙 정렬 */
-    padding: 5px 10px 5px 10px;
-    border: 1px solid #ddd;
+    display: flex; /* 플렉스박스 레이아웃 */
+    justify-content: flex-start; /* 수평 정렬: 좌측 */
+    align-items: flex-start; /* 수직 정렬: 상단 */
+    gap: 20px; /* 이미지와 텍스트 간 간격 */
+    padding: 10px;
     border-radius: 10px;
     background-color: white;
+    margin: 20px auto;
 }
 
 
 .profile-container img {
-    border-radius: 8px; /* 이미지 모서리 둥글게 */
-    object-fit: cover; /* 이미지 비율 유지 */
+    align-self: flex-start; /* 이미지를 상단 정렬 */
+    display: block; /* 불필요한 수직 정렬 제거 */
+    width: 160px; /* 명시된 이미지 크기 */
+    height: 200px; /* 명시된 이미지 크기 */
 }
 
 .profile {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-}
-
-.profile div {
-    margin-bottom: 15px; /* 각 항목 간격 */
-    display: flex;
-    align-items: center; /* 레이블과 필드 수직 정렬 */
+    flex-direction: column; /* 텍스트 내용을 세로 정렬 */
+    gap: 10px; /* 각 텍스트 간 간격 */
 }
 
 .profile label {
     width: 80px; /* 레이블 너비 고정 */
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     color: #333; /* 텍스트 색상 */
     margin-right: 10px; /* 입력 필드와 간격 */
@@ -99,36 +102,26 @@ main {
     cursor: not-allowed; /* 커서 변경 */
 }
 
-.nickName, .email {
-    margin: 10px;
+.nickName {
+    margin: 15px 0 0 10px;
 }
 
-.innn, .inem {
+.email {
+    margin: 0 0 0 10px;
+}
+
+.profile .innn, .profile .inem {
     padding: 10px 35px 10px 10px;
     margin-bottom: 15px;
     border:none;
     border-radius: 15px;
-    font-size: 20px;
+    font-size: 18px;
     background-color: #f5f5f5;
     color:#848484;
 }
 
 
 /*컨테이너 공통 부분*/
-.purchaseList-container-h4, .sellList-container-h4 {
-    margin-bottom: 10px; 
-    font-size: 18px;
-    color: #333;
-}
-
-.hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 0;
-    width: 70%;
-    
-}
-
 .image-List {
     display: flex;
     justify-content: center;
@@ -144,10 +137,10 @@ main {
 
 /* 구매, 판매항목 컨테이너 */
 .purchaseList-container, .sellList-container {
-    width: 80%; /* 컨테이너 너비 */
-    max-width: 800px; /* 최대 너비 제한 */
-    margin: 0 auto; /* 가운데 정렬 */
-    text-align: center; /* 제목 가운데 정렬 */
+    width: 150%; /* 컨테이너 너비 */
+    max-width: 850px; /* 최대 너비 제한 */
+    margin: auto; /* 가운데 정렬 */
+    text-align: left;
     padding: 20px;
     border: 1px solid #ddd; /* 선택 사항: 테두리 */
     border-radius: 10px; /* 선택 사항: 둥근 모서리 */

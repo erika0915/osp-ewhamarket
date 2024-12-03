@@ -18,19 +18,19 @@
             <div class= "profile">
                 <div class="nickName">
                     <label for="nickName">닉네임</label>
-                    <input class="innn" type="text" id="nickName" name="nickName" value="{{ nickname }}" readonly>
+                    <input class="innn" type="text" id="nickName" name="nickName" value=" {{ nickname }}" readonly>
                 </div>
 
                 <div class="email">
                     <label for="email">이메일</label>
-                    <input class="inem" type="text" id="email" name="email" value="{{ email }}" readonly>
+                    <input class="inem" type="text" id="email" name="email" value=" {{ email }}@ewha.ac.kr" readonly>
                 </div>
+                
             </div>
         </div>
 
+        <h4>구매 항목</h4>
         <div class="purchaseList-container">
-            <h4>구매 항목</h4>
-            <hr>
             {% if purchasedList %}
             <div class="image-List">
                 {% for item in purchasedList%}
@@ -44,9 +44,8 @@
             {% endif %}
         </div>
 
+        <h4>판매 목록</h4>
         <div class="sellList-container">
-            <h4>판매 목록</h4>
-            <hr>
             {% if sellList %}
             <div class="image-List">
                 {% for item in sellList %}

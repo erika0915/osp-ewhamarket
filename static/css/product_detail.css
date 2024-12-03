@@ -35,8 +35,8 @@
   flex: 0 0 auto;
   width: 320px;
   margin-top : 30px;
-  margin-right : 70px;
-  margin-left : 50px;
+  margin-right : 80px;
+  margin-left : 120px;
 }
 
 /* Product details container */
@@ -126,6 +126,11 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease; /* 호버 애니메이션 */
   margin-right: 15px;
+}
+
+.btn {
+  display: flex;
+  gap: 15px;
 }
 
 
@@ -225,14 +230,15 @@ hr {
   border: none;
   border-top: 1px solid #ddd;
   margin: 0;
-  width: 70%;
+  width: 78%;
 }
 
 
 #heart {
+  cursor: pointer;
   color: grey;
   font-size: 23px;
-  margin-left: 70px;
+  margin-left: 260px;
   margin-bottom: -20px;
 }
 
