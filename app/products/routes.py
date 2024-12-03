@@ -19,6 +19,8 @@ def view_products():
     if not data:
         flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
+    item_counts = len(data)
+    print(f"Raw data:{data}")
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -27,24 +29,31 @@ def view_products():
         data = products_bp.db.get_products()
     else:
         data = products_bp.db.get_products_bycategory(category)
-  
+
     # 버튼별 정렬 
     for key, value in data.items():
-        if "created_at" not in value or not value["created_at"]:
-            value["created_at"] = datetime.now(timezone.utc).isoformat() 
+        # 두 필드를 모두 확인
+        if "createdAt" not in value and "created_at" not in value:
+            value["createdAt"] = datetime.now(timezone.utc).isoformat()
+        elif "created_at" in value:
+            # created_at 값을 createdAt으로 변환
+            value["createdAt"] = value.pop("created_at")
+    for key, value in data.items():
+        print(f"Before Sorting - Product ID: {key}, Created At: {value['createdAt']}")
+
     def safe_datetime(value):
         try:
             return datetime.fromisoformat(value)
-        except (ValueError, TypeError):
+        except (ValueError, TypeError,AttributeError):
              datetime.min
 
-    if sort_by=="all":
-        # 기본 정렬
-        data=dict(sorted(data.items(), key=lambda x: x[0]))
-    elif sort_by == "recent":
+    if sort_by == "recent":
         # 최신순
-        data=dict(sorted(data.items(), key=lambda x: datetime.fromisoformat(x[1]["created_at"]), reverse=True))
-    #data = dict(sorted(data.items(), key=lambda x: x[0]["created_at"], reverse=False))
+        data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
+    else:
+        data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
+    for key, value in data.items():
+        print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
     item_counts = len(data)
 
     # 현재 페이지 데이터
@@ -61,19 +70,18 @@ def view_products():
             row_data.append(dict(list(paginated_data.items())[i * per_row:]))
         else:
             row_data.append(dict(list(paginated_data.items())[i * per_row:(i + 1) * per_row]))
-
     # 템플릿 렌더링
     return render_template(
         "products.html",
-        datas=paginated_data.items(),
+        datas=list(paginated_data.items()),
         row1=row_data[0].items() if len(row_data) > 0 else [],
         row2=row_data[1].items() if len(row_data) > 1 else [],
         limit=per_page,
         page=page,
         page_count=int(math.ceil(item_counts / per_page)),
         total=item_counts,
-        category=category,
         sort_by=sort_by,
+        category=category,
         m=row_count
     )
 
@@ -81,6 +89,9 @@ def view_products():
 @products_bp.route("/<productId>/")
 def view_product_detail(productId):
     data = products_bp.db.get_product_by_id(productId)
+    if not data:
+        flash("상품 정보를 찾을 수 없습니다.")
+        return redirect(url_for("products.view_products"))
     return render_template("product_detail.html", productId=productId, data=data)
 
 # 상품 등록
@@ -108,3 +119,48 @@ def reg_product():
     if products_bp.db.insert_product(userId, data, image_file.filename):
         flash("상품이 성공적으로 등록되었습니다!")
         return redirect(url_for("products.view_products"))
+
+@products_bp.route("/<productId>/purchase_now",methods=["POST"])
+def purchase_now(productId):
+        print(f"Form Data: {request.form.to_dict()}")  # 폼 데이터 확인
+
+    #if request.method == "GET":
+        image_file = request.files.get("productImage")
+        #image_file.save(f"static/images/{image_file.filename}")
+        #to_dict로 수정해서 키값을 통해 data['price']처럼 쉽게 정보 가져올 수 있음 
+        data = request.form.to_dict()
+        print(request.form.to_dict())
+
+        product_name = data["productName"] 
+        user_id = session.get("userId") 
+        if not user_id:
+            flash("로그인이 필요합니다.")
+            return redirect(url_for("auth.login"))
+        
+        # 데이터베이스에서 해당 상품의 purchaseCount 가져오기
+        product = products_bp.db.get_product_by_userId_and_name(user_id, product_name)
+        if not product:
+            flash("상품을 찾을 수 없습니다.")
+            return redirect(url_for("products.view_products"))
+
+        # purchaseCount 업데이트
+        current_count = product.get("purchaseCount", 0)
+        updated_count = current_count + 1
+
+        # 데이터베이스에 업데이트된 값 저장
+        product["purchaseCount"] = updated_count
+        products_bp.db.update_product(user_id, product_name, product)
+
+        # 상품 정보를 사용자의 purchasedProducts에 추가
+        result = products_bp.db.add_purchased_product(user_id, data)
+        if result:
+            flash("구매가 완료되었습니다! 구매 내역에 추가되었습니다.")
+        else:
+            flash("구매 처리 중 오류가 발생했습니다.")
+
+        return redirect(url_for("products.view_products"))
+    
+        #구매시간 서버 자동 저장 
+        #current_time = datetime.now().isoformat() 
+        #data['purchaseAt'] = current_time 
+        # -> db에 추가해야함... 

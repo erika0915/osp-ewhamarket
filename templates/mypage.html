@@ -51,10 +51,6 @@
             <div class="image-List">
                 {% for item in sellList %}
                 <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
                 {% endfor %}
             </div>
             {% endif %}
