@@ -70,6 +70,17 @@ def view_products():
             row_data.append(dict(list(paginated_data.items())[i * per_row:]))
         else:
             row_data.append(dict(list(paginated_data.items())[i * per_row:(i + 1) * per_row]))
+    
+    # 카테고리 이름 변경 
+    category_names = {
+    "all": "전체 상품 조회",
+    "fashion": "패션 악세서리",
+    "digital": "디지털 악세서리",
+    "tableware": "테이블웨어",
+    "stationary": "스테이셔너리"
+    }
+    current_category_name = category_names.get(category)
+    
     # 템플릿 렌더링
     return render_template(
         "products.html",
@@ -82,7 +93,8 @@ def view_products():
         total=item_counts,
         sort_by=sort_by,
         category=category,
-        m=row_count
+        m=row_count,
+        current_category_name=current_category_name  
     )
 
 # 상품 상세 조회

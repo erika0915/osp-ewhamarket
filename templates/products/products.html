@@ -21,14 +21,14 @@
       <!--url 추가-->
       <li> <a href="{{ url_for('products.view_products', page=i, category='digital')}}">디지털 악세서리</a></li>
       <li> <a href="{{ url_for('products.view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
-      <li> <a href="{{ url_for('products.view_products', page=i, category='table') }}">테이블웨어</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='tableware') }}">테이블웨어</a></li>
       <li> <a href="{{ url_for('products.view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
     </ul>
   </aside>
 
   <main>
     <section id="head">
-      <p class="title">전체 상품 조회</p>
+      <p class="title">{{ current_category_name }}</p>
       <div class="array">
         <a href="{{ url_for('products.view_products', page=page, category=category, sort='review') }}">
           <button class="sort_button">리뷰 많은 순</button>

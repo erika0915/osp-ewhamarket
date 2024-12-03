@@ -94,7 +94,6 @@ class DBhandler:
                 if product_value.get("category") == cate:  # category가 cate와 일치하는지 확인
                     target_value.append(product_value)
                     target_key.append(product_key)
-        print("######target_value",target_value)
         new_dict={}
         for k,v in zip(target_key,target_value):
             new_dict[k]=v
