@@ -9,13 +9,14 @@ def login():
         return render_template("login.html")
     
     if request.method == "POST": 
-        
         userId = request.form["userId"]
         pw = request.form["pw"]
         pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
-
-        if auth_bp.db.find_user(userId, pw_hash):
-            session["userId"] = userId
+        nickname = auth_bp.db.find_user(userId, pw_hash)
+        if nickname:
+        #if auth_bp.db.find_user(userId, pw_hash):
+            session["userId"]=userId
+            session["nickname"] = nickname
             flash("로그인 되었습니다")
             return redirect(url_for("products.view_products"))
         else:
@@ -38,12 +39,20 @@ def signup():
     if request.method == "POST":    
         data = request.form
         pw = data.get("pw")
+        profile_image = request.files.get("file")
         
         # 비밀번호 해싱 
         pw_hash = hashlib.sha256(pw.encode("utf-8")).hexdigest()
 
-        # 사용자 추가 
-        if auth_bp.db.insert_user(data, pw_hash):
+        # 프로필 이미지 저장 
+        if profile_image:
+            image_path = f"static/images/{profile_image.filename}"
+            profile_image.save(image_path)
+        else:
+            image_path = "static/images/profiles/default.jpg"  
+    
+        # 사용자 데이터 추가  
+        if auth_bp.db.insert_user(data, pw_hash, profile_image.filename):
             flash("회원가입이 완료되었습니다.")
             return redirect(url_for("auth.login"))
         else:
