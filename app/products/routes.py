@@ -50,6 +50,8 @@ def view_products():
     if sort_by == "recent":
         # 최신순
         data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
+    elif sort_by == "purchase":
+        data = dict(sorted(data.items(), key=lambda x: int(x[1].get("purchaseCount", 0)), reverse=True))
     else:
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
@@ -150,7 +152,7 @@ def purchase_now(productId):
             return redirect(url_for("auth.login"))
         
         # 데이터베이스에서 해당 상품의 purchaseCount 가져오기
-        product = products_bp.db.get_product_by_userId_and_name(user_id, product_name)
+        product = products_bp.db.get_product_by_productname(product_name)
         if not product:
             flash("상품을 찾을 수 없습니다.")
             return redirect(url_for("products.view_products"))
@@ -161,7 +163,7 @@ def purchase_now(productId):
 
         # 데이터베이스에 업데이트된 값 저장
         product["purchaseCount"] = updated_count
-        products_bp.db.update_product(user_id, product_name, product)
+        products_bp.db.update_product(productId, product)
 
         # 상품 정보를 사용자의 purchasedProducts에 추가
         result = products_bp.db.add_purchased_product(user_id, data)
