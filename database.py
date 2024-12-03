@@ -131,6 +131,8 @@ class DBhandler:
             return False
 
         purchased_products = user.val().get("purchasedProducts", {})
+        # 구매시간 추가 
+        product_info["purchaseTime"] = datetime.now(timezone.utc).isoformat()
         product_id = f"product_{len(purchased_products) + 1}"
         purchased_products[product_id] = product_info
 
