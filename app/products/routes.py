@@ -38,10 +38,13 @@ def view_products():
 
     # 데이터베이스에서 상품 가져오기
     data = products_bp.db.get_products() 
+<<<<<<< Updated upstream
     if not data:
         # flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
     print(f"Raw data:{data}")
+=======
+>>>>>>> Stashed changes
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -78,7 +81,11 @@ def view_products():
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
         print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
+<<<<<<< Updated upstream
   
+=======
+
+>>>>>>> Stashed changes
     item_counts = len(data)
     # 현재 페이지 데이터
     if item_counts <= per_page:

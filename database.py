@@ -84,12 +84,10 @@ class DBhandler:
     # 데이터베이스에서 특정 상품정보 업데이트
     def update_product(self, productId, updated_data):
         products = self.db.child("products").get()
-        print(f"Debug: All products data: {products}")  # 모든 상품 데이터 출력
         for userId, userProducts in products.val().items():
             if productId in userProducts:
                 self.db.child("products").child(userId).child(productId).update(updated_data)
                 return True
-        print(f"Debug: Product with ID {productId} not found.")
         return None
     
 
