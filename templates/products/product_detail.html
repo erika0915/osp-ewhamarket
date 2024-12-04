@@ -91,6 +91,11 @@
     <div class="column bottom">
       <div class="review2">
         <h3>사용자 리뷰</h3>
+        {% if average_rate %}
+        {{average_rate|round(1)}}/5
+        {% else %}
+        아직 리뷰가 없습니다.
+        {% endif %}
         {% if reviews %}
         {% for review in reviews %}
         <div class="content">
