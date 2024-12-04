@@ -40,7 +40,7 @@
                     return;
                 }
                 // 서버로 요청 보내기
-                fetch(`/auth/idcheck?userId=${encodeURIComponent(nickname)}`, {
+                fetch(`/auth/nickcheck?=${encodeURIComponent(nickname)}`, {
                     method: "GET"
                 })
                 .then(response => response.json()) // JSON 응답 처리
@@ -160,7 +160,7 @@
 
         <div class="form-row8">
             <label class="profileImagec" for="profileimage">프로필 이미지</label>  
-            <label class="fileTitle" for="file">choose file</label>
+            <label class="fileTitle" for="file">Choose File</label>
                 <input class="uploadfile" type="file" id="file" name= "file"/>
         </div>
         
