@@ -7,8 +7,9 @@
 {% endblock %}
 
 {% block section %}
-<body>
-  <div class="titleRanking">
+
+<div class="titleRanking">
+    <hr>
     <p>마켓 랭킹</p> 
     <hr>
 </div>
@@ -57,32 +58,31 @@
       {% endfor %}
     </tr>
    </table>
-</div>
+  </div>
 
-<div class="market-container3">
-  <tr>
-    {% for key, value in row3 %}
-      <h3 class="nickname1">{{value.nickname}}</h3>
-      <div class="like-container">
-        <button class="like-button" onclick="toggleLike(this)">
-          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
-        </button>
-      </div> 
-    {% endfor %}
-  </tr>    
-  <table>
+  <div class="market-container3">
     <tr>
       {% for key, value in row3 %}
-      <td>
-        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-      </td>
+        <h3 class="nickname1">{{value.nickname}}</h3>
+        <div class="like-container">
+          <button class="like-button" onclick="toggleLike(this)">
+            <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
+          </button>
+        </div> 
       {% endfor %}
-    </tr>
-  </table>
+    </tr>    
+    <table>
+      <tr>
+        {% for key, value in row3 %}
+        <td>
+          <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+        </td>
+        {% endfor %}
+      </tr>
+    </table>
+  </div>
 </div>
 
-</div>
-</body>
 <script src="{{ url_for('static', filename='js/market.js') }}"></script>
 {% endblock %}   
 
