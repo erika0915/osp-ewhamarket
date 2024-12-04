@@ -13,8 +13,24 @@
   <p>마켓 랭킹</p> 
   <hr>
 </div>
-
-<div class="form-container">
+{% for user in top_users %}
+    <div class="user">
+        <h2>{{ user.nickname }}</h2>
+        <div class="sellList-container">
+            {% if user.products %}
+            <div class="image-List">
+                {% for product in user.products %}
+                <img src="{{ url_for('static', filename='images/' + product['productImage']) }}" alt="Product Image">
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No products available.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    
+<!--<div class="form-container">
     <div class="market-container1">
       <table>
         {% for key, value in row1 %}
@@ -35,7 +51,7 @@
             {% endif %}
         </tr>
       </table> 
-    </div>
+    </div>-->
 <!--
    <div class="market-container2">
     <table>
