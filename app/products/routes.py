@@ -18,7 +18,6 @@ def view_products():
     if not data:
         # flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
-    item_counts = len(data)
     print(f"Raw data:{data}")
 
     # 페이지네이션 처리 및 정렬
@@ -51,6 +50,8 @@ def view_products():
         data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
     elif sort_by == "purchase":
         data = dict(sorted(data.items(), key=lambda x: int(x[1].get("purchaseCount", 0)), reverse=True))
+    elif sort_by=="review":
+        data = dict(sorted(data.items(), key=lambda x: int(x[1].get("reviewCount", 0)), reverse=True))
     else:
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
