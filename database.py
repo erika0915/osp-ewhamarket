@@ -13,6 +13,7 @@ class DBhandler:
     def child(self, node_name):
         return self.db.child(node_name)
     
+    #------------------------------------------------------------------------------------------   
     # 상품 등록 
     def insert_product(self, userId, data, productImage):
         product_info = {

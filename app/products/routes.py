@@ -3,7 +3,6 @@ from . import products_bp
 import math
 from datetime import datetime,timezone
 
-
 # 전체 상품 조회
 @products_bp.route("/")
 def view_products():
@@ -15,9 +14,9 @@ def view_products():
     row_count = int(per_page / per_row)
 
     # 데이터베이스에서 상품 가져오기
-    data = products_bp.db.get_products()  # 데이터베이스 핸들러에서 데이터를 가져옵니다
+    data = products_bp.db.get_products() 
     if not data:
-        flash("DB에 데이터가 없습니다.")
+        # flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
     item_counts = len(data)
     print(f"Raw data:{data}")
