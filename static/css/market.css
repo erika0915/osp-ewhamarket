@@ -28,7 +28,7 @@ main {
 
 /* 제목*/
 .titleRanking {
-    text-align: left;
+    text-align: center;
     font-size: 24px;
     margin: 5px;
 }
