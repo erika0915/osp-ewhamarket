@@ -32,9 +32,8 @@ def reg_review(productId):
         image_file = request.files.get("reviewImage")
         image_file.save(f"static/images/{image_file.filename}")
 
-        rate = data.get("rate")
-
         data = request.form.to_dict()
+        rate = data.get("rate")
         data["productId"] = productId
         data["userId"] = userId  
         data["createdAt"] = datetime.utcnow().isoformat() 

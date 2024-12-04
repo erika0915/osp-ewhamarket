@@ -65,9 +65,7 @@
           <input type="hidden" name="category" value="{{ data['category'] }}">
           <input type="hidden" name="productImage" value="{{ data['productImage'] }}">
           <button type="submit" class="buy-button">바로 구매</button>
-        </form>        
-        <button class="reviewReg", onclick="reviewReg", location.href='{{ url_for("reviews.reg_review", productId=productId) }}'>리뷰등록</button>
-
+        </form>       
       </div><!--button-->
 
       <div class="review">
@@ -84,9 +82,7 @@
           <span class="star"></span>
           <div class="star_number">({{ review_count }}) </div>
         </div>
-
-        <button class="reviewAll",onclick="reviewAll", location.href='{{ url_for("reviews.view_product_reviews", productId=productId) }}'>리뷰 전체 보기 ></button>
-        
+        <button class="reviewReg" onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}'">리뷰등록</button>
       </div><!--review-->
     
     </div><!--column middle-->
