@@ -76,41 +76,28 @@
         </div> 
   
         
-          <script>
-            function checkpswd(){
-                var p1 = document.getElementById('pswd').value;
-                if(p1.length < 8 || p1.legth>20) {
-                    alert('비밀번호는 8글자 이상 20글자 이하여야 합니다');
-                    return false;
-                }
+        <script>
+        function checkpswd.onkeyup(){
+            var p1 = document.getElementById('pswd').value;
+            if(p1.length < 8 || p1.legth>20) {
+                alert('비밀번호는 8글자 이상 20글자 이하여야 합니다');
+                return false;
             }
+        }
 
-            function test() {
-              var p1 = document.getElementById('pswd').value;
-              var p2 = document.getElementById('chkpswd').value;   
-                if( p1 != p2 ) {
+        function test.onkeyup() {
+            var p1 = document.getElementById('pswd').value;
+            var p2 = document.getElementById('chkpswd').value;   
+            if( p1 != p2 ) {
                 alert("비밀번호 불일치");
                 return false;
-                } else{
+            } 
+            else{
                 alert("비밀번호가 일치합니다");
                 return true;
-                }
             }
-          </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        </script>
 
 
         <div class="form-row4">
