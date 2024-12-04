@@ -47,13 +47,9 @@ class DBhandler:
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
         products = self.db.child("products").get().val()
-        print(f"Debug: All products data: {products}")  # 모든 상품 데이터 출력
         for userId, userProducts in products.items():
-            print(f"Debug: Checking user {userId}, products: {userProducts.keys()}")
             if productId in userProducts:
-                print(f"Debug: Found product for {productId}: {userProducts[productId]}")
                 return userProducts[productId]
-        print(f"Debug: Product with ID {productId} not found.")
         return None
     
     
@@ -125,7 +121,8 @@ class DBhandler:
             "reviewImage": img_path
         }
         self.db.child("reviews").push(review_info)
-    
+
+
     # 리뷰 전체 조회 
     def get_reviews(self):
         reviews=self.db.child("reviews").get().val()
@@ -134,7 +131,6 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
         all_reviews = self.db.child("reviews").get().val()
-        print(f"Debug: All reviews: {all_reviews}")
         review = all_reviews.get(reviewId) if all_reviews else None
         if not review:
             print(f"Debug: Review with ID {reviewId} not found.")
@@ -161,6 +157,7 @@ class DBhandler:
                 })
         return productReviews
     #-----------------------------------------------------------------------------------------  
+    # 좋아요 기능 
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
         target_value =""
@@ -174,6 +171,7 @@ class DBhandler:
                 target_value = res.val()
         return target_value
     
+
     def update_heart(self, userId, isHeart, productName):
         heart_info={
             "interested" : isHeart
@@ -194,6 +192,7 @@ class DBhandler:
                 return value.get('nickname', None)
         return None
     
+
     # 회원가입 
     def insert_user(self, data, pw_hash, profile_image):
         user_info ={
@@ -214,6 +213,7 @@ class DBhandler:
            return True
         return False
 
+
     # 중복된 사용자 ID 체크 
     def user_duplicate_check(self, userId):
         user = self.db.child("users").child(userId).get().val()
@@ -222,6 +222,7 @@ class DBhandler:
         return True
     
     #------------------------------------------------------------------------------------------
+    # 마이페이지 
     # 사용자 정보 조회 
     def get_user_info(self, userId):
         user= self.db.child("users").child(userId).get().val()
@@ -230,7 +231,9 @@ class DBhandler:
         return{
             "nickname":user.get("nickname"),
             "email":user.get("email"),
-            "profileImage": user.get("profileImage")
+            "profileImage": user.get("profileImage"),
+            "phoneNum" : user.get("phoneNum"),
+            "userId" : user.get("userId"),
         }
     
     # 구매 목록 조회 

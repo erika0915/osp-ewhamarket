@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block section %}
-
 <body>
   <div class="titleRanking">
       <p>마켓 랭킹</p> 
@@ -27,9 +26,8 @@
       <table>
         <tr>
           {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-          </td>
+          <td>
+            <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
           {% endfor %}
         </tr>
        </table>
@@ -46,13 +44,14 @@
       <table>
         <tr>
           {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+          <td>
+            <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
           </td>
           {% endfor %}
         </tr>
        </table>
     </div>
+
     <div class="market-container3">
       <div class="like-container">
         <h3 class="nickname3">{{value.nickname}}</h3>
@@ -64,8 +63,8 @@
       <table>
         <tr>
           {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+          <td>
+            <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
           </td>
           {% endfor %}
         </tr>

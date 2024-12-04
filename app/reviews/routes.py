@@ -32,10 +32,13 @@ def reg_review(productId):
         image_file = request.files.get("reviewImage")
         image_file.save(f"static/images/{image_file.filename}")
 
+        rate = data.get("rate")
+
         data = request.form.to_dict()
         data["productId"] = productId
         data["userId"] = userId  
         data["createdAt"] = datetime.utcnow().isoformat() 
+        data["rate"]= int(rate)
 
         review_count = productData.get("reviewCount", 0) + 1
         productData["reviewCount"]=review_count
@@ -100,24 +103,3 @@ def view_review_detail(reviewId):
     review = reviews_bp.db.get_review_by_id(reviewId)
     product = reviews_bp.db.get_product_by_id(review.get("productId"))
     return render_template("review_detail.html", review=review, product=product)
-
-
-# 상품 별 리뷰 상세 조회
-@reviews_bp.route("/<productId>/", methods=["GET"])
-def view_product_reviews(productId):
-    product = reviews_bp.db.get_product_by_id(productId)
-    if not product:
-        flash(f"상품 정보를 찾을 수 없습니다. (ID: {productId})")
-        return redirect(url_for("reviews.view_reviews"))  
-    
-    reviews = reviews_bp.db.get_review_by_product(productId)
-    if not reviews:
-        flash(f"'{product.get('productName')}'에 등록된 리뷰가 없습니다.")
-        reviews = []  # 빈 리뷰 리스트를 전달
-
-    return render_template(
-        "product_review_detail.html",
-        product=product,
-        reviews=reviews,
-    )
-
