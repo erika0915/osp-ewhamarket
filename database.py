@@ -31,10 +31,7 @@ class DBhandler:
         
         product_ref = self.db.child("products").child(userId).push(product_info)
         productId = product_ref['name']
-        # print(f"Product ID: {productId} 등록 성공") 
-        # print(f"Nickname: {nickname}") #nickname이 넘어오지 않는 상태! 
-        print(data, productImage)
-        return True 
+        return productId 
     
 
     # 상품 전체 조회 
@@ -49,11 +46,10 @@ class DBhandler:
 
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
-        products = self.db.child("products").get()
-
-        for userId, userProducts in products.val().items():
+        products = self.db.child("products").get().val()
+        for userId, userProducts in products.items():
             if productId in userProducts:
-                return userProducts[productId] 
+                return userProducts[productId]
         return None
     
     
@@ -88,12 +84,11 @@ class DBhandler:
     # 데이터베이스에서 특정 상품정보 업데이트
     def update_product(self, productId, updated_data):
         products = self.db.child("products").get()
-
         for userId, userProducts in products.val().items():
             if productId in userProducts:
                 self.db.child("products").child(userId).child(productId).update(updated_data)
                 return True
-        return False
+        return None
     
 
     # 구매 정보를 사용자 데이터에 집어넣기
@@ -113,18 +108,25 @@ class DBhandler:
         productId = data.get("productId")
         product = self.db.child("products").child(productId).get().val() 
 
+        # 사용자 정보 가져오기 
+        userId = data.get("userId")
+        user=self.db.child("users").child(userId).get().val()
+        nickname = user.get("nickname")
+
         # 리뷰 데이터 생성 
         review_info={
             "productId" : productId,
-            "userId": data.get("userId"),  # 현재 로그인한 사용자 ID
+            "userId": userId,
             "title": data.get("title"),
             "content": data.get("content"),
             "rate" : data.get("rate"),
+            "nickname" : nickname,
             "createdAt" : data.get("createdAt", datetime.utcnow().isoformat()),
             "reviewImage": img_path
         }
         self.db.child("reviews").push(review_info)
-    
+
+
     # 리뷰 전체 조회 
     def get_reviews(self):
         reviews=self.db.child("reviews").get().val()
@@ -132,30 +134,40 @@ class DBhandler:
     
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
-        review = self.db.child("reviews").child(reviewId).get().val()
-        print(f"Debug: Retrieved review for reviewId {reviewId}: {review}")
+        all_reviews = self.db.child("reviews").get().val()
+        review = all_reviews.get(reviewId) if all_reviews else None
+        if not review:
+            print(f"Debug: Review with ID {reviewId} not found.")
         return review
+
     
     # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
         allReviews = self.db.child("reviews").get().val()
         if not allReviews:
-            return []  # 리뷰 데이터가 없으면 빈 리스트 반환
+            return []  
 
         productReviews = []
         for reviewId, reviewData in allReviews.items():
-            if reviewData and reviewData.get("productId") == productId: 
+            if reviewData.get("productId") == productId: 
+                # 날짜 추출
+                created_at = reviewData.get("createdAt")
+                if created_at:
+                    created_at=datetime.fromisoformat(created_at).date()
+
                 productReviews.append({
                     "reviewId": reviewId,
-                    "rate": int(reviewData.get("rate")),
-                    "title": reviewData.get("title"), 
+                    "userId": reviewData.get("userId"),
+                    "rate": reviewData.get("rate"),
+                    "title": reviewData.get("title"),
+                    "nickname" : reviewData.get("nickname"), 
                     "content": reviewData.get("content"), 
                     "reviewImage": reviewData.get("reviewImage"),  
-                    "createdAt": reviewData.get("createdAt"),  
+                    "createdAt": created_at,
                 })
-
         return productReviews
     #-----------------------------------------------------------------------------------------  
+    # 좋아요 기능 
     def get_heart_byname(self, uid, productName):
         hearts = self.db.child("heart").child(uid).get()
         target_value =""
@@ -169,6 +181,7 @@ class DBhandler:
                 target_value = res.val()
         return target_value
     
+
     def update_heart(self, userId, isHeart, productName):
         heart_info={
             "interested" : isHeart
@@ -189,6 +202,7 @@ class DBhandler:
                 return value.get('nickname', None)
         return None
     
+
     # 회원가입 
     def insert_user(self, data, pw_hash, profile_image):
         user_info ={
@@ -209,6 +223,7 @@ class DBhandler:
            return True
         return False
 
+
     # 중복된 사용자 ID 체크 
     def user_duplicate_check(self, userId):
         user = self.db.child("users").child(userId).get().val()
@@ -217,6 +232,7 @@ class DBhandler:
         return True
     
     #------------------------------------------------------------------------------------------
+    # 마이페이지 
     # 사용자 정보 조회 
     def get_user_info(self, userId):
         user= self.db.child("users").child(userId).get().val()
@@ -225,7 +241,9 @@ class DBhandler:
         return{
             "nickname":user.get("nickname"),
             "email":user.get("email"),
-            "profileImage": user.get("profileImage")
+            "profileImage": user.get("profileImage"),
+            "phoneNum" : user.get("phoneNum"),
+            "userId" : user.get("userId"),
         }
     
     # 구매 목록 조회 

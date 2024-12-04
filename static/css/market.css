@@ -101,8 +101,7 @@ color: red;
     border: 1px solid #ddd; 
 }  
 .sellList-container{
-    width: 80%; 
-    max-width: 800px; 
+    width: 95%; 
     margin: 0 auto; 
     text-align: center; 
     padding: 20px;

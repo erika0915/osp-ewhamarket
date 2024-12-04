@@ -32,13 +32,20 @@ def reg_review(productId):
         image_file = request.files.get("reviewImage")
         image_file.save(f"static/images/{image_file.filename}")
 
+        # 사용자 정보 가져오기 
+        user  = reviews_bp.db.child("users").child(userId).get().val()
+        nickname = user.get("nickname")
+
         data = request.form.to_dict()
+        rate = data.get("rate")
         data["productId"] = productId
         data["userId"] = userId  
+        data["nickname"]=nickname
         data["createdAt"] = datetime.utcnow().isoformat() 
+        data["rate"]= int(rate)
 
         review_count = productData.get("reviewCount", 0) + 1
-        productData["reivewCount"]=review_count
+        productData["reviewCount"]=review_count
         reviews_bp.db.update_product(productId, productData)
 
         # 리뷰 저장 
@@ -99,16 +106,6 @@ def view_reviews():
 def view_review_detail(reviewId):
     review = reviews_bp.db.get_review_by_id(reviewId)
     product = reviews_bp.db.get_product_by_id(review.get("productId"))
-    return render_template("review_detail.html", review=review, product=product)
-
-# 상품 별 리뷰 상세 조회
-@reviews_bp.route("/<productId>")
-def view_product_reviews(productId):
-    product=reviews_bp.db.get_product_by_id(productId)
-    reviews= reviews_bp.db.get_review_by_product(productId)
-    return render_template(
-        "product_review_details.html", 
-        productName=product.get("productName"),
-        productImage=product.get("productImage"),
-        reviews=reviews
-        )
+    return render_template("review_detail.html", 
+                           review=review, 
+                           product=product)

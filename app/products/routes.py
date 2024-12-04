@@ -38,7 +38,8 @@ def view_products():
 
     # 데이터베이스에서 상품 가져오기
     data = products_bp.db.get_products() 
-    item_counts = len(data)
+    if not data:
+        return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -69,11 +70,14 @@ def view_products():
         data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
     elif sort_by == "purchase":
         data = dict(sorted(data.items(), key=lambda x: int(x[1].get("purchaseCount", 0)), reverse=True))
+    elif sort_by=="review":
+        data = dict(sorted(data.items(), key=lambda x: int(x[1].get("reviewCount", 0)), reverse=True))
     else:
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
         print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
 
+    item_counts = len(data)
     # 현재 페이지 데이터
     if item_counts <= per_page:
         paginated_data = dict(list(data.items())[:item_counts])
@@ -115,14 +119,33 @@ def view_products():
         current_category_name=current_category_name  
     )
 
-# 상품 상세 조회
+# 상품 상세 조회 & 상품 별 리뷰 조회
 @products_bp.route("/<productId>/")
 def view_product_detail(productId):
+    from app.reviews.routes import reviews_bp 
     data = products_bp.db.get_product_by_id(productId)
     if not data:
         flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
-    return render_template("product_detail.html", productId=productId, data=data)
+    
+    # 리뷰 데이터 가져오기 
+    reviews = reviews_bp.db.get_review_by_product(productId)
+    if not reviews:
+        reviews =[] 
+
+    # 리뷰 개수 계산 
+    review_count = len(reviews)
+
+    # 평균 리뷰 점수 계산 
+    total_rate = sum(review['rate'] for review in reviews if review.get('rate') is not None)
+    average_rate = total_rate / review_count if review_count > 0 else None 
+
+    return render_template("product_detail.html", 
+                           productId=productId, 
+                           data=data, 
+                           reviews= reviews,
+                           review_count = review_count,
+                           average_rate=average_rate)
 
 
 # 상품 구매 
@@ -160,4 +183,3 @@ def purchase_now(productId):
         flash("구매 처리 중 오류가 발생했습니다.")
 
     return redirect(url_for("products.view_products"))
-    
