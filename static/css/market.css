@@ -99,16 +99,14 @@ color: red;
     text-align: center; 
     padding: 20px;
     border: 1px solid #ddd; 
-    border-radius: 10px; 
 }  
 .sellList-container{
-    width: 70%; 
+    width: 80%; 
     max-width: 800px; 
     margin: 0 auto; 
     text-align: center; 
     padding: 20px;
-    border: 1px solid #ddd; 
-    border-radius: 10px; 
+    border: none; 
 }
 img {
     width: 100px;
