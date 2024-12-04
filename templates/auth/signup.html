@@ -40,7 +40,10 @@
                     resultDiv.textContent = "아이디를 입력하세요.";
                     return;
                 }
-            
+                if (userId.length()< 6 ||userId.length()>20){
+                    resultDiv.textContent = "6-20자로 입력해주세요.";
+                    return;
+                }
                 // 서버로 요청 보내기
                 fetch(`/auth/idcheck?userId=${encodeURIComponent(userId)}`, {
                     method: "GET"
