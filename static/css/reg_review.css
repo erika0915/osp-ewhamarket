@@ -116,17 +116,15 @@ resize: vertical;
 height: 80px;
 }
 
-.pp{
-font-size:20px;
-}
-
 /*별점*/
 .stars {
-    display: flex;
-    
+  display: flex;
+  justify-content: center;
 }
 
-.star { padding: 1px; }
+.star { 
+  padding: 1px; 
+}
 
 .star::after {
   content: '☆';
@@ -144,9 +142,12 @@ font-size:20px;
 .star:hover ~ .star::after {
   content: '☆';
 }
+
 fieldset{
   border: solid 1.5px #e0e0e0;
   border-radius: 5px;
+  width : 50%;
+  text-align :center;
 }
 
 #reviewContents {
@@ -167,12 +168,13 @@ font-size: 16px;
 
 /*이미지 파일 업로드*/
 .file-label {
-  width: 150px;
+  width: 80px;
   flex-shrink: 0; /* 라벨의 너비 고정 */
   display: block;
   font-size: 20px;
   color: #333;
   margin-bottom: 5px;}
+
 .file {
 	display: none;
 }
