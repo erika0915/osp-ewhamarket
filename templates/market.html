@@ -16,9 +16,9 @@
 
 <div class="form-container">
     <div class="market-container1">
-    <table>
+      <table>
         {% for key, value in row1 %}
-          <h3 class="nickname1">{{value.nickname}}</h3>
+          <h3 class="nickname1">{{value.top_user_data.nickname}}</h3>
           <div class="like-container">
             <button class="like-button" onclick="toggleLike(this)">
               <i class="fa fa-heart" id="heart" ></i>
@@ -26,16 +26,17 @@
           </div> 
         {% endfor %}
         <tr>
-          {% if nickname.sellList %}
+          {% if value.top_user_data.sellList %}
             <div class="image-List">
-                {% for item in nickname.sellList %}
+                {% for item in top_user_data.sellList %}
                 <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
                 {% endfor %}
             </div>
             {% endif %}
         </tr>
-    </table> 
-  </div>
+      </table> 
+    </div>
+<!--
    <div class="market-container2">
     <table>
         {% for key, value in row1 %}
@@ -47,7 +48,7 @@
           </div> 
         {% endfor %}
         <tr>
-          {% if nickname.sellList %}
+          {% if nickname.sel_lList %}
           <div class="image-List">
               {% for item in sellList %}
               <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
@@ -77,7 +78,7 @@
           {% endif %}
         </tr>
     </table> 
-  </div>
+  </div>-->
 </div>
 
 <script src="{{ url_for('static', filename='js/market.js') }}"></script>
