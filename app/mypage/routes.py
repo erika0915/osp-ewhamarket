@@ -7,7 +7,7 @@ def view_mypage():
     # 세션에서 현재 로그인된 사용자 정보 가져오기 
     userId = session.get("userId")
     if not userId:
-        flash("로그인 후에 마이페이지를 이용할 수 있습니다.")
+        flash("로그인 후에 마이페이지를 이용할 수 있습니다!")
         return redirect(url_for("auth.login"))
     
     # 사용자 정보 조회 
@@ -20,8 +20,7 @@ def view_mypage():
     sellList = mypage_bp.db.get_sell_list(userId)
 
     return render_template("mypage.html",
-                           nickname=userInfo.get("nickname"),
-                           email=userInfo.get("email"),
+                           userInfo=userInfo,
                            profileImage = userInfo.get("profileImage"),
                            purchasedList=purchasedList,
                            sellList=sellList)
