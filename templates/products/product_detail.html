@@ -59,7 +59,6 @@
           </div>
         </div>
 
-
         <form id="purchaseForm" action="{{ url_for('products.purchase_now',productId=productId)  }}" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="productName" value="{{ data['productName'] }}">
           <input type="hidden" name="price" value="{{ data['price'] }}">
@@ -67,27 +66,60 @@
           <input type="hidden" name="productImage" value="{{ data['productImage'] }}">
           <button type="submit" class="buy-button">바로 구매</button>
         </form>        
-        <button onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}';">리뷰등록</button>
+        <button class="reviewReg", onclick="reviewReg", location.href='{{ url_for("reviews.reg_review", productId=productId) }}'>리뷰등록</button>
 
       </div><!--button-->
 
       <div class="review">
-        <div class="underline">
-          <button onclick="location.href='{{ url_for("reviews.view_product_reviews", productId=productId) }}';">REVIEW</button>
+        <div class = "underline">
+          <h4> REVIEW </h4>
         </div>
-      
+
         <div class="star_rating">
           <span class="star on"></span>
           <span class="star on"></span>
           <span class="star on"></span>
           <span class="star on"></span>
           <span class="star"></span>
-          <div class="star_number">() </div>
+          <div class="star_number">({{ review_count }}) </div>
         </div>
+
+        <button class="reviewAll",onclick="reviewAll", location.href='{{ url_for("reviews.view_product_reviews", productId=productId) }}'>리뷰 전체 보기 ></button>
+        
       </div><!--review-->
     
     </div><!--column middle-->
   </div><!--row-->
+
+    <div class="column bottom">
+      <div class="review2">
+        <h3>사용자 리뷰</h3>
+        {% if reviews %}
+        {% for review in reviews %}
+        <div class="content">
+            <!-- 별점 -->
+            <span class="stars">
+                {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+            </span>
+            <!-- 제목 -->
+            <h3>{{ review.title }}</h3>
+            <!-- 내용 -->
+            <p>{{ review.content }}</p>
+            <!-- 이미지 -->
+            {% if review.reviewImage %}
+            <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" alt="Review Image" width="300">
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p style="text-align: center; color: gray;">등록된 리뷰가 없습니다.</p>
+        {% endif %}
+      </div> <!--review-->
+    </div><!--column bottom-->
+  
+
+  <div>
+  
 </div><!--container-->
  
 </body>
