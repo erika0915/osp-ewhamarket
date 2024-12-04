@@ -5,6 +5,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css') }}">
 {% endblock %}
 
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 {% block section %}
 <div class="product_container">
     <aside class="side-bar">
