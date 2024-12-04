@@ -38,7 +38,10 @@ def view_products():
 
     # 데이터베이스에서 상품 가져오기
     data = products_bp.db.get_products() 
-    item_counts = len(data)
+    if not data:
+        # flash("DB에 데이터가 없습니다.")
+        return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
+    print(f"Raw data:{data}")
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -69,11 +72,14 @@ def view_products():
         data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
     elif sort_by == "purchase":
         data = dict(sorted(data.items(), key=lambda x: int(x[1].get("purchaseCount", 0)), reverse=True))
+    elif sort_by=="review":
+        data = dict(sorted(data.items(), key=lambda x: int(x[1].get("reviewCount", 0)), reverse=True))
     else:
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
     for key, value in data.items():
         print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
-
+  
+    item_counts = len(data)
     # 현재 페이지 데이터
     if item_counts <= per_page:
         paginated_data = dict(list(data.items())[:item_counts])
