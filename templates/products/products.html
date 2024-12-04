@@ -39,10 +39,10 @@
       <a href="{{ url_for('products.view_products', page=page, category=category, sort='recent') }}">
           <button class="sort_button">최신순</button>
       </a> </div>
-  </section>
+    </section>
   
-  {% if total > 0 %}
-  <p class="reg-num">현재까지 {{total}}개 상품 등록됨</p>
+    {% if total > 0 %}
+    <p class="reg-num">총 {{total}}개</p>
     <table>
       <tr>
         {% for key, value in row1 %}
@@ -55,7 +55,7 @@
       <tr>
           {% for key, value in row1 %}
           <td>
-            <div class="product-title">{{ value.productName }}
+            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{ value.productName }}
               <div class="price">{{ value.price }}</div>
             </div>
             <div class="like-container">
@@ -78,7 +78,7 @@
       <tr>
           {% for key, value in row2 %}
           <td>
-            <div class="product-title">
+            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
               {{ value.productName }}
               <div class="price">
                 {{ value.price }}

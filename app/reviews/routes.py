@@ -9,7 +9,7 @@ def reg_review(productId):
     # 로그인 여부 확인 
     userId = session.get("userId")
     if not userId:
-        flash("로그인이 필요합니다.")
+        flash("로그인 후에 리뷰 등록이 가능합니다!")
         return redirect(url_for("auth.login"))
     
     # 상품 데이터 가져오기 
@@ -20,6 +20,7 @@ def reg_review(productId):
         if productId in userProducts:
             productData = userProducts[productId]
             break
+
     productName = productData.get("productName")
 
     if request.method == "GET":
@@ -29,20 +30,23 @@ def reg_review(productId):
 
     elif request.method == "POST":
         image_file = request.files.get("reviewImage")
-        if image_file:
-            image_file.save(f"static/images/{image_file.filename}")
+        image_file.save(f"static/images/{image_file.filename}")
 
-        # 리뷰 데이터 구성 
         data = request.form.to_dict()
         data["productId"] = productId
-        data["userId"] = userId  # 로그인한 사용자 ID 추가
+        data["userId"] = userId  
         data["createdAt"] = datetime.utcnow().isoformat() 
+
+        review_count = productData.get("reviewCount", 0) + 1
+        productData["reivewCount"]=review_count
+        reviews_bp.db.update_product(productId, productData)
 
         # 리뷰 저장 
         reviews_bp.db.insert_review(data, image_file.filename)
+        flash("리뷰가 성공적으로 등록되었습니다!")
         return redirect(url_for("reviews.view_reviews", productId=productId))
     
-# 리뷰 리스트
+# 전체 리뷰 조회 
 @reviews_bp.route("/")
 def view_reviews():
     page = request.args.get("page", 0, type=int)
