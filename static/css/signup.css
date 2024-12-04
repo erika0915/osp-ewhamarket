@@ -58,7 +58,7 @@ select {
 }
 
 /*아이디 중복확인 체크*/
-.id_overlap_button{
+.id_overlap_button,.nick_overlap_button{
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #848484;
