@@ -28,7 +28,7 @@ main {
 
 /* 제목*/
 .titleRanking {
-    text-align: left;
+    text-align: center;
     font-size: 24px;
     margin: 5px;
 }
@@ -45,17 +45,24 @@ main {
     width: 80%;
     max-width: 1000px;
     margin: 20px auto; 
-    padding: 30px 90px 30px 90px;
+    padding: 40px 90px 40px 90px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: white;
 }
-.h2{
-    font-size:15px;
-    font-weight: bold;
+
+/*좋아요*/
+.user-container{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 10px;
+}
+.market-name{
+    font-size:23px;
+    font-weight:bold;
     color:#555;
 }
-/*좋아요*/
 .like-container {
     display: flex;
     align-items: center;
@@ -93,22 +100,19 @@ color: red;
 
 /*마켓 컨데이너 */
 .market-container {
-    width: 80%; 
+    width: 100%; 
     max-width: 800px; 
     margin: 0 auto; 
     text-align: center; 
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #ddd; 
-    border-radius: 10px; 
 }  
 .sellList-container{
-    width: 70%; 
-    max-width: 800px; 
+    width: 95%; 
     margin: 0 auto; 
     text-align: center; 
     padding: 20px;
-    border: 1px solid #ddd; 
-    border-radius: 10px; 
+    border: none; 
 }
 img {
     width: 100px;
