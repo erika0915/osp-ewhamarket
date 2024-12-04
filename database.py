@@ -231,7 +231,9 @@ class DBhandler:
         return{
             "nickname":user.get("nickname"),
             "email":user.get("email"),
-            "profileImage": user.get("profileImage")
+            "profileImage": user.get("profileImage"),
+            "phoneNum" : user.get("phoneNum"),
+            "userId" : user.get("userId"),
         }
     
     # 구매 목록 조회 
