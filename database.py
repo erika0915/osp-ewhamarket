@@ -75,13 +75,7 @@ class DBhandler:
         # productId를 찾지 못한 경우 None 반환
         return None
 
-    # 상품 이름과 userId 기반으로 조회 
-    #def get_product_by_userId_and_name(self, user_id, product_name):
-        products = self.db.child("products").get()
-        for product in products.each():
-            value = product.val()
-            if value["productName"] == product_name:
-                return value
+    # productName으로 조회
     def get_product_by_productname(self, product_name):
         products = self.db.child("products").get()
 

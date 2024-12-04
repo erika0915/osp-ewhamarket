@@ -16,9 +16,7 @@ def view_products():
     # 데이터베이스에서 상품 가져오기
     data = products_bp.db.get_products() 
     if not data:
-        # flash("DB에 데이터가 없습니다.")
         return render_template("products.html", total=0, datas=[], page_count=0, m=row_count)
-    print(f"Raw data:{data}")
 
     # 페이지네이션 처리 및 정렬
     start_idx = per_page * page
@@ -28,6 +26,16 @@ def view_products():
     else:
         data = products_bp.db.get_products_bycategory(category)
 
+    # 카테고리 이름 변경 
+    category_names = {
+    "all": "전체 상품 조회",
+    "fashion": "패션 악세서리",
+    "digital": "디지털 악세서리",
+    "tableware": "테이블웨어",
+    "stationary": "스테이셔너리"
+    }
+    current_category_name = category_names.get(category)
+
     # 버튼별 정렬 
     for key, value in data.items():
         # 두 필드를 모두 확인
@@ -36,8 +44,6 @@ def view_products():
         elif "created_at" in value:
             # created_at 값을 createdAt으로 변환
             value["createdAt"] = value.pop("created_at")
-    for key, value in data.items():
-        print(f"Before Sorting - Product ID: {key}, Created At: {value['createdAt']}")
 
     def safe_datetime(value):
         try:
@@ -45,17 +51,14 @@ def view_products():
         except (ValueError, TypeError,AttributeError):
              datetime.min
 
-    if sort_by == "recent":
-        # 최신순
+    if sort_by == "recent": # 최신순
         data=dict(sorted(data.items(), key=lambda x: safe_datetime(x[1].get("createdAt","")), reverse=True))
-    elif sort_by == "purchase":
+    elif sort_by == "purchase": # 판매량순
         data = dict(sorted(data.items(), key=lambda x: int(x[1].get("purchaseCount", 0)), reverse=True))
-    elif sort_by=="review":
+    elif sort_by=="review": # 리뷰많은순
         data = dict(sorted(data.items(), key=lambda x: int(x[1].get("reviewCount", 0)), reverse=True))
     else:
         data=dict(sorted(data.items(), key=lambda x: x[1].get("productName",""),reverse=False))
-    for key, value in data.items():
-        print(f"Sorted - Product ID: {key}, Created At: {value['createdAt']}, Product Name: {value.get('productName')}")
     item_counts = len(data)
 
     # 현재 페이지 데이터
@@ -71,17 +74,7 @@ def view_products():
         if (i == row_count - 1) and (tot_count % per_row != 0):
             row_data.append(dict(list(paginated_data.items())[i * per_row:]))
         else:
-            row_data.append(dict(list(paginated_data.items())[i * per_row:(i + 1) * per_row]))
-    
-    # 카테고리 이름 변경 
-    category_names = {
-    "all": "전체 상품 조회",
-    "fashion": "패션 악세서리",
-    "digital": "디지털 악세서리",
-    "tableware": "테이블웨어",
-    "stationary": "스테이셔너리"
-    }
-    current_category_name = category_names.get(category)
+            row_data.append(dict(list(paginated_data.items())[i * per_row:(i + 1) * per_row]))    
     
     # 템플릿 렌더링
     return render_template(
