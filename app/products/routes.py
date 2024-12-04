@@ -131,11 +131,17 @@ def view_product_detail(productId):
 
     # 리뷰 개수 계산 
     review_count = len(reviews)
+
+    # 평균 리뷰 점수 계산 
+    total_rate = sum(review['rate'] for review in reviews if review.get('rate') is not None)
+    average_rate = total_rate / review_count 
+
     return render_template("product_detail.html", 
                            productId=productId, 
                            data=data, 
                            reviews= reviews,
-                           review_count = review_count)
+                           review_count = review_count,
+                           average_rate=average_rate)
 
 
 # 상품 구매 
