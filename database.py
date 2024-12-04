@@ -31,10 +31,7 @@ class DBhandler:
         
         product_ref = self.db.child("products").child(userId).push(product_info)
         productId = product_ref['name']
-        # print(f"Product ID: {productId} 등록 성공") 
-        # print(f"Nickname: {nickname}") #nickname이 넘어오지 않는 상태! 
-        print(data, productImage)
-        return True 
+        return productId 
     
 
     # 상품 전체 조회 
@@ -49,11 +46,14 @@ class DBhandler:
 
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
-        products = self.db.child("products").get()
-
-        for userId, userProducts in products.val().items():
+        products = self.db.child("products").get().val()
+        print(f"Debug: All products data: {products}")  # 모든 상품 데이터 출력
+        for userId, userProducts in products.items():
+            print(f"Debug: Checking user {userId}, products: {userProducts.keys()}")
             if productId in userProducts:
-                return userProducts[productId] 
+                print(f"Debug: Found product for {productId}: {userProducts[productId]}")
+                return userProducts[productId]
+        print(f"Debug: Product with ID {productId} not found.")
         return None
     
     
@@ -88,12 +88,13 @@ class DBhandler:
     # 데이터베이스에서 특정 상품정보 업데이트
     def update_product(self, productId, updated_data):
         products = self.db.child("products").get()
-
+        print(f"Debug: All products data: {products}")  # 모든 상품 데이터 출력
         for userId, userProducts in products.val().items():
             if productId in userProducts:
                 self.db.child("products").child(userId).child(productId).update(updated_data)
                 return True
-        return False
+        print(f"Debug: Product with ID {productId} not found.")
+        return None
     
 
     # 구매 정보를 사용자 데이터에 집어넣기
@@ -116,7 +117,7 @@ class DBhandler:
         # 리뷰 데이터 생성 
         review_info={
             "productId" : productId,
-            "userId": data.get("userId"),  # 현재 로그인한 사용자 ID
+            "userId": data.get("userId"),  
             "title": data.get("title"),
             "content": data.get("content"),
             "rate" : data.get("rate"),
@@ -132,28 +133,32 @@ class DBhandler:
     
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
-        review = self.db.child("reviews").child(reviewId).get().val()
-        print(f"Debug: Retrieved review for reviewId {reviewId}: {review}")
+        all_reviews = self.db.child("reviews").get().val()
+        print(f"Debug: All reviews: {all_reviews}")
+        review = all_reviews.get(reviewId) if all_reviews else None
+        if not review:
+            print(f"Debug: Review with ID {reviewId} not found.")
         return review
+
     
     # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
         allReviews = self.db.child("reviews").get().val()
         if not allReviews:
-            return []  # 리뷰 데이터가 없으면 빈 리스트 반환
+            return []  
 
         productReviews = []
         for reviewId, reviewData in allReviews.items():
-            if reviewData and reviewData.get("productId") == productId: 
+            if reviewData.get("productId") == productId: 
                 productReviews.append({
                     "reviewId": reviewId,
-                    "rate": int(reviewData.get("rate")),
+                    "userId": reviewData.get("userId"),
+                    "rate": reviewData.get("rate"),
                     "title": reviewData.get("title"), 
                     "content": reviewData.get("content"), 
                     "reviewImage": reviewData.get("reviewImage"),  
                     "createdAt": reviewData.get("createdAt"),  
                 })
-
         return productReviews
     #-----------------------------------------------------------------------------------------  
     def get_heart_byname(self, uid, productName):
