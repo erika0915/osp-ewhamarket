@@ -129,7 +129,13 @@ def view_product_detail(productId):
     if not reviews:
         reviews =[] 
 
-    return render_template("product_detail.html", productId=productId, data=data, reviews= reviews)
+    # 리뷰 개수 계산 
+    review_count = len(reviews)
+    return render_template("product_detail.html", 
+                           productId=productId, 
+                           data=data, 
+                           reviews= reviews,
+                           review_count = review_count)
 
 
 # 상품 구매 
