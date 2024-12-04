@@ -15,12 +15,17 @@
 </div>
 {% for user in top_users %}
     <div class="user">
+
         <h2>{{ user.nickname }}</h2>
+        <button class="like-button" onclick="toggleLike(this)">
+          <i class="fa fa-heart" id="heart" ></i>
+        </button>
+        
         <div class="sellList-container">
-            {% if user.products %}
+            {% if user.sellList %}
             <div class="image-List">
-                {% for product in user.products %}
-                <img src="{{ url_for('static', filename='images/' + product['productImage']) }}">
+                {% for product in user.sellList %}
+                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}">
                 {% endfor %}
             </div>
             {% else %}
