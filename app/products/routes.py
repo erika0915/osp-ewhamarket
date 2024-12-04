@@ -115,14 +115,21 @@ def view_products():
         current_category_name=current_category_name  
     )
 
-# 상품 상세 조회
+# 상품 상세 조회 & 상품 별 리뷰 조회
 @products_bp.route("/<productId>/")
 def view_product_detail(productId):
+    from app.reviews.routes import reviews_bp 
     data = products_bp.db.get_product_by_id(productId)
     if not data:
         flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
-    return render_template("product_detail.html", productId=productId, data=data)
+    
+    # 리뷰 데이터 가져오기 
+    reviews = reviews_bp.db.get_review_by_product(productId)
+    if not reviews:
+        reviews =[] 
+
+    return render_template("product_detail.html", productId=productId, data=data, reviews= reviews)
 
 
 # 상품 구매 
