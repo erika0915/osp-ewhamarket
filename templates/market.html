@@ -20,7 +20,7 @@
             {% if user.products %}
             <div class="image-List">
                 {% for product in user.products %}
-                <img src="{{ url_for('static', filename='images/' + product['productImage']) }}" alt="Product Image">
+                <img src="{{ url_for('static', filename='images/' + product['productImage']) }}">
                 {% endfor %}
             </div>
             {% else %}
@@ -28,74 +28,8 @@
             {% endif %}
         </div>
     </div>
-    {% endfor %}
-    
-<!--<div class="form-container">
-    <div class="market-container1">
-      <table>
-        {% for key, value in row1 %}
-          <h3 class="nickname1">{{nickname}}</h3>
-          <div class="like-container">
-            <button class="like-button" onclick="toggleLike(this)">
-              <i class="fa fa-heart" id="heart" ></i>
-            </button>
-          </div> 
-        {% endfor %}
-        <tr>
-          {% if sellList %}
-            <div class="image-List">
-                {% for item in sellList %}
-                <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </tr>
-      </table> 
-    </div>-->
-<!--
-   <div class="market-container2">
-    <table>
-        {% for key, value in row1 %}
-          <h3 class="nickname2">{{value.nickname}}</h3>
-          <div class="like-container">
-            <button class="like-button" onclick="toggleLike(this)">
-              <i class="fa fa-heart" id="heart" ></i>
-            </button>
-          </div> 
-        {% endfor %}
-        <tr>
-          {% if nickname.sel_lList %}
-          <div class="image-List">
-              {% for item in sellList %}
-              <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-              {% endfor %}
-          </div>
-          {% endif %}
-        </tr>
-    </table> 
-  </div>
-   <div class="market-container3">
-    <table>
-        {% for key, value in row1 %}
-          <h3 class="nickname3">{{value.nickname}}</h3>
-          <div class="like-container">
-            <button class="like-button" onclick="toggleLike(this)">
-              <i class="fa fa-heart" id="heart" ></i>
-            </button>
-          </div> 
-        {% endfor %}
-        <tr>
-          {% if nickname.sellList %}
-          <div class="image-List">
-              {% for item in nickname.sellList %}
-              <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
-              {% endfor %}
-          </div>
-          {% endif %}
-        </tr>
-    </table> 
-  </div>-->
-</div>
+  {% endfor %}
+
 
 <script src="{{ url_for('static', filename='js/market.js') }}"></script>
 {% endblock %}   
