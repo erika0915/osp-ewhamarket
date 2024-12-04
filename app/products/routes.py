@@ -160,4 +160,3 @@ def purchase_now(productId):
         flash("구매 처리 중 오류가 발생했습니다.")
 
     return redirect(url_for("products.view_products"))
-    
