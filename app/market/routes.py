@@ -34,7 +34,6 @@ def view_marketRanking():
     
     # 데이터를 템플릿으로 전달
     return render_template("market.html", 
-                           userId=top_user_data.userId,
                            nickname=top_user_data.nickname,
                            sellList=top_user_data.sellList,
                            )
