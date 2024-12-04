@@ -31,13 +31,14 @@
             <fieldset>
               <span class="text-bold">별점을 선택해주세요</span>
               <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
+                <div class="star" data-value="1"></div>
+                <div class="star" data-value="2"></div>
+                <div class="star" data-value="3"></div>
+                <div class="star" data-value="4"></div>
+                <div class="star" data-value="5"></div>
               </div>
             </fieldset>
+            <input type="hidden" id="rate" name="rate" value="0">
           </div>
         </div>
         
@@ -62,6 +63,7 @@
     </form>
   </main>
 </body>
+
 <script>
 document.querySelectorAll('.star').forEach(($star) => {
   $star.addEventListener('click', ({ target }) => {
@@ -69,9 +71,15 @@ document.querySelectorAll('.star').forEach(($star) => {
     document.querySelectorAll('.star').forEach(($star) => {
       $star.classList.remove('active');
     });
+
     // 클릭한 .star에 .active 추가
     target.classList.add('active');
+
+    // 선택한 별점의 data-value 값을 숨겨진 input 에 설정 
+    const rateValue = target.getAttribute("data-value");
+    document.getElementById('rate').value=rateValue;
   });
 });
 </script>
+
 {% endblock %}
