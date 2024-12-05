@@ -5,38 +5,34 @@ from . import market_bp
 @market_bp.route("/")
 def view_marketRanking(): 
     products = market_bp.db.get_products() 
-    print("상품데이터:", products)
-
-    # 사용자별 상품 개수 집계
-    user_product_count = {}
+    # 사용자별 등록 상품의 구매 수 집계
+    user_purchase_count = {}
     for productId, product_data in products.items():
         userId = product_data.get("userId")
+        purchase_count = product_data.get("purchaseCount", 0)
         if userId:
-            user_product_count[userId] = user_product_count.get(userId, 0) + 1
-    print("User Product Count:", user_product_count)
+            user_purchase_count[userId] = user_purchase_count.get(userId, 0) + purchase_count
+        print(userId, ":" , user_purchase_count[userId])
 
-    # 사용자별 상품 개수 내림차순 정렬
-    top_users = sorted(user_product_count.items(), key=lambda x: x[1], reverse=True)[:3]
+    # 마켓별 등록 상품 개수 상위 3명 
+    top_users = sorted(user_purchase_count.items(), key=lambda x: x[1], reverse=True)[:3]
     print("Top Users:", top_users) 
-
-    # 상위 3명의 userId와 닉네임, 상품 목록 가져오기
+    
+    # 상위 3명의 닉네임, 상품 목록, 상품 이미지 가져오기
     top_user_data = []
     for userId, product_count in top_users:
         user_info = market_bp.db.get_user_info(userId)
         nickname = user_info.get("nickname") if user_info else "Unknown"
         sell_list = market_bp.db.get_sell_list(userId)
-        top_user_data.append({
-            "userId": userId,
-            "nickname": nickname,
-            "sellList": sell_list
-        })
-        print("top_user_data", top_user_data)
+
+
+        top_user_data.append({"nickname": nickname, "sellList": sell_list})
+        #print("top_user_data", top_user_data)
     
     # 데이터를 템플릿으로 전달
-    return render_template("market.html", top_user_data=top_user_data)
+    return render_template("market.html", top_user_data=top_user_data, top_users=top_users, nickname=nickname, sellList=sell_list)
     
     
-
     
 
     

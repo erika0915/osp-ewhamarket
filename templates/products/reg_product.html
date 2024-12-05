@@ -16,17 +16,17 @@
 
       <div class=form-row>
         <label for="nickname">닉네임</label>
-        <input class="inlg" type="text" id="nickname" name = "nickname" placeholder="아이디 입력">
+        <input class="inlg" type="text" id="nickname" name = "nickname" value="{{ nickname }}" readonly>
       </div>
       
       <div class=form-row2>
         <label for="productName">상품명</label>
-        <input class="inpn" type="text" id="productName" name = "productName" placeholder="상품명을 입력하세요.">
+        <input class="inpn" type="text" id="productName" name = "productName" placeholder="상품명을 입력하세요">
       </div>
 
       <div class=form-row3>
         <label for="price">가격</label>
-        <input class="inpr" type="text" id="price" name= "price" placeholder="가격 입력">
+        <input class="inpr" type="text" id="price" name= "price" placeholder="가격을 입력하세요">
       </div> 
 
       <div class=form-row4>
@@ -52,14 +52,15 @@
 
       <div class=form-row7>
         <label for="description">설명</label>
-        <textarea id="description" name="description" placeholder="상품에 대한 설명을 입력하세요."></textarea>
+        <textarea id="description" name="description" placeholder="상품에 대한 설명을 입력하세요"></textarea>
       </div>
-
-      <div class=form-row7>
-        <p class="pp">이미지   </p>
-        <label for="productImage">choose file</label>
+  
+      <div class="form-row7">
+        <label class="productImagec" for="productImage">프로필 이미지</label>  
+        <label class="fileTitle" for="productImage">choose file</label>
         <input class="file" type="file" id="productImage" name= "productImage"/>
       </div>
+    
 
       <div class="button-group">
         <button type="reset" class="cancel-button" onclock="pushResetButton()">취소</button>

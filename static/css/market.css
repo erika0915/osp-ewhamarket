@@ -11,12 +11,19 @@
     box-sizing: border-box;
 }
 
-.hr {
-    border: none;
-    border-top: 1px solid #ddd;
+hr {
+    border: 1px solid rgb(255,253,241);
+    background-color:rgb(255,253,241);
     margin: 0;
-    width: 70%;
+    width: 100%;
     
+}
+
+.button{
+    border:none;
+    font-size:20px;
+    font-weight:bold;
+    background-color:rgb(255,253,241);
 }
 
 /* 전체 레이아웃 설정 */
@@ -28,7 +35,7 @@ main {
 
 /* 제목*/
 .titleRanking {
-    text-align: left;
+    text-align: center;
     font-size: 24px;
     margin: 5px;
 }
@@ -44,79 +51,72 @@ main {
 .form-container {
     width: 80%;
     max-width: 1000px;
-    margin: 20px auto; 
-    padding: 30px 90px 30px 90px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: white;
+    margin: 20px auto; /* 중앙 정렬 */
+    padding: 45px 90px 45px 90px;
+    border: none;
+    background-color: rgb(0,70,42,0.5);
 }
-/*좋아요*/
-.like-container {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding-left: 10px;
-}
-  
-.like-button {
-background: none;
-border: none;
-cursor: pointer;
-padding: 0;
-display: flex;
-align-items: center;
-}
-  
-.heart-icon {
-font-size: 25px;
-color: #999;
-transition: color 0.2s;
+.market-name{
+    font-size:20px;
+    font-weight:bold;
+    color:rgb(255,253,241);
+    text-align:center;
 }
 
-.heart-icon.active {
-color: #ff4b4b;
-}
-
-#heart {
-color: grey;
-font-size: 25px;
-}
-
-#heart.red {
-color: red;
-}
+/*green rgb(0,70,42);
+grey rgb(185,185,185);
+yellow green rgb(188,201,36);
+pear blossom rgb(255,253,241);*/
 
 /*마켓 컨데이너 */
-.market-container1, .market-container2, .market-container3 {
-    width: 80%; 
-    max-width: 800px; 
+.market-container {
+    width: 100%; 
     margin: 0 auto; 
-    text-align: center; 
-    padding: 20px;
-    border: 1px solid #ddd; 
-    border-radius: 10px; 
+    text-align: left; 
+    padding: 30px;
+    border: none;
+    background: linear-gradient(124.47deg, 
+    rgba(255, 255, 255, 0.2), 
+    rgba(255, 255, 255, 0.0), 
+    rgba(255, 255, 255, 0.2));
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
 }  
-table {
-    width: 100%; /* 테이블을 화면 너비에 맞게 확장 */
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center; /* 중앙 정렬 */
+button{
+    border:none;
+    font-size:20px;
+    font-weight:bold;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px; /*10->20*/
+    font-size: 15px;
+    width:20%;
+    color:white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(124.47deg, 
+          rgba(0,70,42, 0.8), 
+          rgba(0,70,42, 0.6), 
+          rgba(0,70,42, 0.8));
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
 }
-
-td {
-padding: 15px;
-border: 1px solid #ccc; /* 테두리 */
+.sellList-container{
+    width: 95%; 
+    margin: 0 auto; 
+    text-align: left; 
+    padding: 20px;
+    border: none; 
 }
-td img {
-    width: 100px;
-    height: 70px;
-    object-fit: cover; /* 이미지 비율 유지 */
-}
-
-
-.market-images1 img,.market-images2 img,.market-images3 img {
+img {
+    width: 200px;
+    height: 140px;
+    object-fit: cover; 
     border-radius: 10px; 
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
+    margin-right: 10px;
 }
 
 

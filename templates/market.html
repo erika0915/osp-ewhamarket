@@ -8,71 +8,35 @@
 
 {% block section %}
 
-<body>
-  <div class="titleRanking">
-      <p>마켓 랭킹</p> 
-      <hr>
+<div class="titleRanking">
+
+  <br>
+  <p>마켓 랭킹</p> 
+
+</div>
+<div class="form-container">
+  {% for user in top_user_data%}
+      <div class="market-container">
+          <div class="user-container">
+            <button class="market-name">{{ loop.index }}. &nbsp;{{user.nickname}}</button>
+          </div>
+          <hr>
+          <div class="sellList-container">
+              {% if user.sellList %}
+              <div class="image-List">
+                  {% for product in user.sellList %}
+                  <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                  {% endfor %}
+              </div>
+              {% else %}
+              <p>No products available.</p>
+              {% endif %}
+          </div>
+      </div>
+      <br>
+    {% endfor %}
   </div>
 
-
-  <div class="form-container">
-    <div class="market-container1">
-      <div class="like-container">
-        <h3 class="nickname1">{{value.nickname}}</h3>
-        <button class="like-button" onclick="toggleLike(this)">
-          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
-        </button>
-      </div>
-      <hr>
-      <table>
-        <tr>
-          {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-          </td>
-          {% endfor %}
-        </tr>
-       </table>
-    </div>
-      
-    <div class="market-container2">
-      <div class="like-container">
-        <h3 class="nickname2">{{value.nickname}}</h3>
-        <button class="like-button" onclick="toggleLike(this)">
-          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
-        </button>
-      </div>
-      <hr>
-      <table>
-        <tr>
-          {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-          </td>
-          {% endfor %}
-        </tr>
-       </table>
-    </div>
-    <div class="market-container3">
-      <div class="like-container">
-        <h3 class="nickname3">{{value.nickname}}</h3>
-        <button class="like-button" onclick="toggleLike(this)">
-          <i class="fa fa-heart" id="heart" ></i> <!--12주차 좋아요 기능 구현-->
-        </button>
-      </div>
-      <hr>
-      <table>
-        <tr>
-          {% for key, value in row1 %}
-          <td onclick="location href='{{url_for('products.view_product_detail', productId=key)}}';" style="cursor:pointer;">
-            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
-          </td>
-          {% endfor %}
-        </tr>
-       </table>
-    </div>
-  </div>
-</body>
 <script src="{{ url_for('static', filename='js/market.js') }}"></script>
 {% endblock %}   
 

@@ -43,7 +43,7 @@
 .product-details {
   flex: 1;
   padding-top: 10px;
-  margin-top:-30px;
+  margin-top:-20px;
   margin-left: 60px;
   justify-content: space-between;
 }
@@ -89,7 +89,7 @@
 }
 
 .product-description {
-  width: 530px;      /* 가로 크기 */
+  width: 580px;      /* 가로 크기 */
   height: 200px;     /* 세로 크기 */
   padding: 25px;     /* 내부 여백 */
   border: 1px solid #ccc;
@@ -111,13 +111,14 @@
   line-height: 1.5;
 }
 
-.underline{
-  text-decoration: underline;
-  font-size:large;
+.underline {
+  text-decoration: underline !important;
+  font-size: large;
 }
 
 /*버튼*/
 button {
+  display: inline-block;
   padding: 10px 20px; /* 버튼 안의 텍스트 공간 */
   font-size: 16px; /* 텍스트 크기 */
   border: 1px solid #ddd; /* 외곽선 */
@@ -126,11 +127,21 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease; /* 호버 애니메이션 */
   margin-right: 15px;
+  white-space: nowrap;
+}
+
+.reviewAll {
+  margin-left: 160px;
+}
+
+button:hover {
+  background-color: #e0e0e0; /* 호버 시 배경색 */
 }
 
 .btn {
   display: flex;
   gap: 15px;
+  margin-top: 15px;
 }
 
 
@@ -230,7 +241,7 @@ hr {
   border: none;
   border-top: 1px solid #ddd;
   margin: 0;
-  width: 78%;
+  width: 97%;
 }
 
 
@@ -238,7 +249,7 @@ hr {
   cursor: pointer;
   color: grey;
   font-size: 23px;
-  margin-left: 260px;
+  margin-left: 300px;
   margin-bottom: -20px;
 }
 
@@ -251,7 +262,7 @@ hr {
 .review {
   display: inline-flex;                /* 가로 배치 */
   align-items: center;           /* 세로 가운데 정렬 */
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 60px;
 }
 
@@ -291,4 +302,89 @@ hr {
   width: 300px;
   font-family:'Pretendard-Regular';
   margin-left:10px;
+}
+
+/* 전체 리뷰 섹션 스타일 */
+.column-bottom {
+  padding: 20px;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.review2 {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  justify-content: center;
+}
+
+/* 리뷰 제목 */
+.review2 h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* 개별 리뷰 스타일 */
+.content {
+  margin-bottom: 20px; /* 리뷰 간 간격 */
+  padding: 15px; /* 내부 여백 */
+  border: 1px solid #ddd; /* 외곽선 */
+  border-radius: 8px; 
+  background-color: #fff;
+  width: 800px;
+  height: inherit;
+  
+}
+
+/* 별점 스타일 */
+.stars {
+  display: block; /* 별점 줄바꿈 */
+  font-size: 20px; /* 별 크기 */
+  color: #ffc107; /* 별 색상 (황금색) */
+  margin: 0 0 10px 10px;
+}
+
+/* 리뷰 제목 스타일 */
+.content h3 {
+  font-size: 20px; /* 제목 크기 */
+  font-weight: bold; /* 굵은 텍스트 */
+  color: #555; /* 텍스트 색상 */
+  align-items: flex-start;
+  margin: 0 0 10px 10px;
+}
+
+/* 리뷰 내용 스타일 */
+.reviewcontent p {
+  font-size: 16px; /* 내용 크기 */
+  line-height: 1.5; /* 줄 간격 */
+  color: #666; /* 텍스트 색상 */
+  align-items: flex-start;
+  margin-bottom: 5px; /* 아래 간격 */
+}
+
+/* 리뷰 이미지 스타일 */
+.content img {
+  display: block; /* 이미지가 독립된 줄에 위치 */
+  margin: 10px 20px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
+  max-width: 20%; /* 이미지 크기를 컨테이너에 맞게 제한 */
+  border-radius: 5px; /* 모서리를 둥글게 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+
+.reviewcontent {
+  text-align: left;
+}
+/* 등록된 리뷰 없음 스타일 */
+.noreview {
+  text-align: center; /* 텍스트 중앙 정렬 */
+  color: gray; /* 텍스트 색상 */
+  font-style: italic; /* 기울임 */
+}
+
+.reviewbox {
+  display: flex;
 }

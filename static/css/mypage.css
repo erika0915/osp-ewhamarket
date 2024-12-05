@@ -70,11 +70,14 @@ main {
 .profile-container img {
     align-self: flex-start; /* 이미지를 상단 정렬 */
     display: block; /* 불필요한 수직 정렬 제거 */
-    width: 160px; /* 명시된 이미지 크기 */
+    width: 180px; /* 명시된 이미지 크기 */
     height: 200px; /* 명시된 이미지 크기 */
+    margin: 15px 10px 0 0;
 }
 
 .profile {
+    border: 1px solid #ddd;
+    border-radius: 10px;
     display: flex;
     flex-direction: column; /* 텍스트 내용을 세로 정렬 */
     gap: 10px; /* 각 텍스트 간 간격 */
@@ -91,7 +94,7 @@ main {
 .profile input {
     flex: 1; /* 입력 필드가 남은 공간을 차지 */
     height: 30px;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     border: 1px solid #ccc; /* 테두리 색상 */
     border-radius: 5px; /* 모서리 둥글게 */
     background-color: #f5f5f5; /* 읽기 전용 필드 배경색 */
@@ -103,16 +106,21 @@ main {
 }
 
 .nickName {
-    margin: 15px 0 0 10px;
+    margin: 20px 40px 0 30px;
 }
 
 .email {
-    margin: 0 0 0 10px;
+    margin: 0 40px 0px 30px;
 }
 
-.profile .innn, .profile .inem {
+.phoneNumber {
+    margin: 0 40px 5px 30px;
+}
+
+.profile .innn, .profile .inem, .profile .intel {
     padding: 10px 35px 10px 10px;
-    margin-bottom: 15px;
+    margin: 10px;
+    width: 500px;
     border:none;
     border-radius: 15px;
     font-size: 18px;
@@ -122,16 +130,25 @@ main {
 
 
 /*컨테이너 공통 부분*/
-.image-List {
+.image-List-pur, .image-List-sell {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    /*flex-wrap: wrap;*/ /* 화면이 작을 때 줄 바꿈 */
-    padding-top: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* 왼쪽부터 채우기 */
+    padding: 10px;
+    width: fit-content;
 }
 
-.image-List img {
-    border-radius: 5px; /* 선택 사항: 이미지 모서리 둥글게 */
+.image-wrapper img {
+    width: 135px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-left: 5px;
     transition: transform 0.3s ease; /* 선택 사항: 호버 애니메이션 */
 }
 
@@ -143,5 +160,41 @@ main {
     text-align: left;
     padding: 20px;
     border: 1px solid #ddd; /* 선택 사항: 테두리 */
-    border-radius: 10px; /* 선택 사항: 둥근 모서리 */
+    border-radius: 10px; 
 }  
+
+/*페이징*/
+.pagination-container-pur, .pagination-container-sell {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination-container-pur button, .pagination-container-sell button  {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.pagination-container-pur button.active {
+    background-color: rgb(0, 70, 42);
+    color: white;
+    border-color: rgb(0, 70, 42);
+}
+
+.pagination-container-sell button.active {
+    background-color: rgb(0, 70, 42);
+    color: white;
+    border-color: rgb(0, 70, 42);
+}
+
+.pagination-container-pur button:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.pagination-container-sell button:hover:not(.active) {
+    background-color: #ddd;
+}

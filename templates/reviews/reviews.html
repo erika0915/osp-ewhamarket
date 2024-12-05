@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block section %}
+
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 <div class="product_container">
     <aside class="side-bar">
         <ul>
