@@ -261,6 +261,7 @@ class DBhandler:
         # 구매 목록 반환 
         return[
             {
+                "productId" : item.get("productId"),
                 "productName" : item.get("productName"),
                 "productImage":item.get("productImage")
             }
