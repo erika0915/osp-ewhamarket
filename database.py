@@ -261,6 +261,7 @@ class DBhandler:
         # 구매 목록 반환 
         return[
             {
+                "productName" : item.get("productName"),
                 "productImage":item.get("productImage")
             }
             for item in userPurchased.values()
@@ -276,8 +277,25 @@ class DBhandler:
             return []
         # 상품 목록을 리스트로 변환 
         return[
-            {
+            {   
+                "productName" : productData.get("productName"),
                 "productImage": productData.get("productImage")
             }
             for productId, productData  in products.items()
         ]
+    
+    # 좋아요 목록 조회 
+    def get_heart_list(self, userId):
+        hearts= self.db.child("heart").child(userId).get().val()
+
+        if not hearts:
+            return []
+        
+        heart_list=[]
+        for productName, heartData in hearts.items():
+            if heartData.get("interested") == 'Y':
+                heart_list.append({
+                    "productName" : productName,
+                    "interested": heartData.get("interested")
+                })
+        return heart_list
