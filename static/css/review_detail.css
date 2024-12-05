@@ -27,7 +27,7 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     width: 100%;
-    padding: 20px;
+    padding: 30px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -49,11 +49,11 @@ main {
 }
 
   
-.titleReview p {
+.titleReview h3 {
     font-size: 24px;
     font-weight: bold;
     color: #555;
-    margin: 0;
+    margin: 5px 0 10px 0;
 }
   
 /* 제목, 내용, 이미지와 평가 등 레이아웃 */
@@ -90,7 +90,7 @@ main {
 /* 리뷰 이미지 스타일 */
 .review-image img {
     display: block; /* 이미지가 독립된 줄에 위치 */
-    margin: 10px 20px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
+    margin: 20px 30px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
     max-width: 150%; /* 이미지 크기를 컨테이너에 맞게 제한 */
     border-radius: 5px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
