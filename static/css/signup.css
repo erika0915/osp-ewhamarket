@@ -22,6 +22,7 @@
 /*회원가입 화면*/
 .title{
   text-align: center;
+  font-weight:bold;
   font-size: 24px;
 }
 /*폼 컨테이너*/
@@ -29,7 +30,7 @@
   width: 80%;
   max-width: 1000px;
   margin: 20px auto; /* 중앙 정렬 */
-  padding: 30px 90px 30px 90px;
+  padding: 45px 90px 45px 90px;
   border: none;
   border-radius: 10px;
   background-color: rgb(0,70,42,0.5);
@@ -118,7 +119,7 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
 }
 
 #pswd,#chkpswd,#phnum{
-  width:55%;
+  width:60%;
 }
 #nickc{
   width:90%;
@@ -199,13 +200,13 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   text-align:center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   background: linear-gradient(124.47deg, 
-  rgba(0,70,42, 0.8), 
-  rgba(0,70,42, 0.6), 
-  rgba(0,70,42, 0.8));
-border: 1px solid rgba(255, 255, 255, 0.3);
-border-radius: 50px;
-color: rgba(255, 255, 255, 0.9);
-transition: 0.5s;
+        rgba(0,70,42, 0.8), 
+        rgba(0,70,42, 0.6), 
+        rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
   width:20%
 }
 

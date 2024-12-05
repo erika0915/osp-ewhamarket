@@ -16,23 +16,25 @@
 .titleRegister{
   text-align: center;
   font-size: 24px;
+  font-weight:bold;
+  color:white;
 }
 
 .form-container {
   width: 80%;
   max-width: 1000px;
-  margin: 20px auto; /* 중앙 정렬 */
-  padding: 30px 90px 30px 90px;
-  border: 1px solid #ddd;
+  margin: 50px auto; /*위여백 20px->50px*/
+  padding: 20px 90px 30px 90px; /*위내부여백 30px->20px*/
+  border: none;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(0,70,42,0.5);
 }
 
 
 label {
   display: block;
   font-size: 20px;
-  color: #333;
+  color: white;
   margin-bottom: 5px;
 }
 
@@ -45,10 +47,27 @@ select {
   font-family:'Pretendard-Regular';
   border-radius: 15px;
   font-size: 20px;
-  background-color: #f5f5f5;
-  color:#848484;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  color:white;
+  
 }
-
+.inlg:hover,.inpr:hover,.inpn:hover,.in1ln:hover,
+textarea:hover,
+select:hover {
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.2), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.2));
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: 0.5s;
+}
 #userID,#price, #category, #options{
 width:30%;
 }
@@ -78,10 +97,15 @@ select {
   -moz-appearance: none;
   width:30%;
   appearance: none;
-  background-color: #f5f5f5;
-  color:#848484;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  color:white;
   border:none;
-  background-image: url("https://w7.pngwing.com/pngs/532/502/png-transparent-grey-check-illustration-computer-icons-ifp-school-arrow-scrolling-down-arrow-angle-hand-internet.png");  background-repeat: no-repeat;  background-position: 96% center;  background-size: 2rem;
+
 }
 
 
@@ -90,62 +114,115 @@ textarea {
   height: 80px;
 }
 
-.fileTitle-label {
-  background-color: #f5f5f5;
-  color: #848484;
+productImage-label {
   text-align: center;
   padding: 10px 0;
+  font-weight:bold;
   width: 30%;
-  border-radius: 15px;
-}
-.uploadfile {
-  display: none;
-  gap:20px; 
-}
-.fileTitle{
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #848484;
-  border-radius: 20px; /*10->20*/
-  font-size: 20px;
-  text-align:center;
-  background-color: #f5f5f5;
-  color:black;
-  width:20%
-}
-.file-label {
-  background-color: #f5f5f5;
-  color: #848484;
-  text-align: center;
-  padding: 10px 0;
-  width: 30%;
-  border-radius: 15px;
+
 }
 .file {
   display: none;
   gap:20px; 
 }
 
+.fileTitle{
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  border-radius: 15px;
+  font-style:bold;
+  text-align:center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color:white;
+  width:20%
+}
+.fileTitle:hover{
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  border-radius: 15px;
+  font-style:bold;
+  text-align:center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+  rgba(0,70,42, 0.8), 
+  rgba(0,70,42, 0.6), 
+  rgba(0,70,42, 0.8));
+border: 1px solid rgba(255, 255, 255, 0.3);
+border-radius: 50px;
+color: rgba(255, 255, 255, 0.9);
+transition: 0.5s;
+  width:20%
+}
+
 /*상품등록 버튼*/
+/*회원가입 및 취소 버튼*/
 .button-group {
- text-align:center;
+  display:flex;
+  justify-content: space-between;
 }
 
 .cancel-button,
 .submit-button {
   width: 20%;
-  padding: 10px;
+  padding:10px;
   font-size: 16px;
   border-radius: 15px;
   cursor: pointer;
-  border: none;
-  margin:10px;
+  margin:10px 0px 10px 0px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.cancel-button:hover,
+.submit-button:hover {
+  width: 20%;
+  padding:10px;
+  font-size: 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin:10px 0px 10px 0px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+          rgba(0,70,42, 0.8), 
+          rgba(0,70,42, 0.6), 
+          rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
 
+
 .cancel-button {
-  background-color: #e0e0e0;
-  color: #333;
-}
+  border:1px solid white;
+  background-color: #fff;
+  color: #848484;
+} 
 
 .submit-button {
   background-color: #000;
