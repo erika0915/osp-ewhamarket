@@ -64,7 +64,6 @@ def view_reviews():
     # 데이터베이스에서 리뷰 가져오기
     all_reviews = reviews_bp.db.get_reviews()
     if not all_reviews:
-        flash("등록된 상품이 없습니다.")
         return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
     # 데이터 변환

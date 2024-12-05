@@ -129,7 +129,6 @@ def view_product_detail(productId):
     from app.reviews.routes import reviews_bp 
     data = products_bp.db.get_product_by_id(productId)
     if not data:
-        flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
     
     # 리뷰 데이터 가져오기 
@@ -168,7 +167,6 @@ def purchase_now(productId):
     product_name = data['productName']
     product = products_bp.db.get_product_by_productName(product_name)
     if not product:
-        flash("상품을 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
 
     # purchaseCount 업데이트
