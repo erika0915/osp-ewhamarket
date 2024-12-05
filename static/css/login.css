@@ -18,7 +18,11 @@
   padding: 20px;
   background-color: white; /* 배경색 수정 */
 }
-
+input::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:20px;
+}
 /*로그인 화면*/
 .titleLogin{
 	text-align:center;
