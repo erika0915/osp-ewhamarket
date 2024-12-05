@@ -48,7 +48,7 @@
             
                     if (data.success) {
                         resultDiv.textContent = data.message;
-                        resultDiv.style.color = "green";
+                        resultDiv.style.color = "#00462A";
                         return true;
                     } else {
                         resultDiv.textContent = data.message;
@@ -97,7 +97,7 @@
             
                     if (data.success) {
                         resultDiv.textContent = data.message;
-                        resultDiv.style.color = "green";
+                        resultDiv.style.color = "#00462A";
                         return true;
                     } else {
                         resultDiv.textContent = data.message;
@@ -142,7 +142,7 @@
                     return false;
                 }
             
-                $('#pwConfirm1').text('').css('color', 'green');
+                $('#pwConfirm1').text('').css('color', '#00462A');
                 if (pw1 === pw2) {
                     $('#pwConfirm2').text('비밀번호 일치').css('color', '#00462A');
                     return true;
@@ -173,7 +173,7 @@
                     return false;
                 }
             
-                $('#phnumConfirm').text('').css('color', 'green');
+                $('#phnumConfirm').text('').css('color', '#00462A');
                 return true;
             }            
         </script>
