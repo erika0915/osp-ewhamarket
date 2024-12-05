@@ -23,7 +23,7 @@ hr {
     border:none;
     font-size:20px;
     font-weight:bold;
-    background-color:none;
+    background-color:rgb(255,253,241);
 }
 
 /* 전체 레이아웃 설정 */
@@ -64,7 +64,7 @@ main {
     text-align:center;
 }
 
-/*green (0,70,42);
+/*green rgb(0,70,42);
 grey rgb(185,185,185);
 yellow green rgb(188,201,36);
 pear blossom rgb(255,253,241);*/
