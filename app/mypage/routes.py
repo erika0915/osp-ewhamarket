@@ -19,8 +19,12 @@ def view_mypage():
     # 판매 목록 조회 
     sellList = mypage_bp.db.get_sell_list(userId)
 
+    # 좋아요 목록 조회 
+    likedList = mypage_bp.db.get_heart_list(userId)
+
     return render_template("mypage.html",
                            userInfo=userInfo,
                            profileImage = userInfo.get("profileImage"),
                            purchasedList=purchasedList,
-                           sellList=sellList)
+                           sellList=sellList,
+                           likedList= likedList)
