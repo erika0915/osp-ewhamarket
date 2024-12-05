@@ -11,6 +11,7 @@
     <script>alert("{{ mesg[0] }}")</script>
 {% endif %}
 {% endwith %}
+
 <div class="title">
     <p><br>회원가입을 위해 정보를 입력해주세요</p> <!--위에 여백 추가-->
 </div>
@@ -21,12 +22,49 @@
    
         <div class="form-row0">
             <label class="nickc" for="nickname">닉네임</label>
-            <input class="inni" type="text" id="nickname" name="nickname" placeholder="별명을 입력해주세요"> 
+            <input class="inni" type="text" id="nickname" name="nickname" placeholder="닉네임 입력(10자 이내)" required> 
+            <button type="button" class="nick_overlap_button" onclick="checkNick()">닉네임 중복확인</button>        
+            <div id="nickCheckResult" style="margin-top: 10px; color: red;"></div> <!-- 결과 표시 영역 -->
         </div>
+        <script>
+            function checkNick() {
+                const userId = document.getElementById("nickname").value; // 입력된 ID 가져오기
+                const resultDiv = document.getElementById("nickCheckResult"); // 결과를 표시할 요소
+            
+                // 입력값 검증
+                if (!nickname) {
+                    resultDiv.textContent = "닉네임을 입력하세요";
+                    return;
+                }
+                if (nickname.length>10){
+                    resultDiv.textContent = "10자 이내로 입력해주세요";
+                    return;
+                }
+                // 서버로 요청 보내기
+                fetch(`/auth/nickcheck?=${encodeURIComponent(nickname)}`, {
+                    method: "GET"
+                })
+                .then(response => response.json()) // JSON 응답 처리
+                .then(data => {
+                    if (data.success) {
+                        resultDiv.textContent = data.message; // 사용 가능 메시지 표시
+                        resultDiv.style.color = "green";
+                    } else {
+                        resultDiv.textContent = data.message; // 사용 불가 메시지 표시
+                        resultDiv.style.color = "red";
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    resultDiv.textContent = "서버 요청 중 오류가 발생했습니다";
+                    resultDiv.style.color = "red";
+                });
+            }
+            </script>
 
         <div class="form-row">
             <label class="mkIDc" for="mkId">아이디</label>
-            <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)"> 
+            <input type="text" class="username_input" id="mkId" name="userId" placeholder="아이디 입력(6-20자)"required> 
             <button type="button" class="id_overlap_button" onclick="checkId()">ID 중복확인</button>        
             <div id="idCheckResult" style="margin-top: 10px; color: red;"></div> <!-- 결과 표시 영역 -->
         </div>
@@ -37,10 +75,13 @@
             
                 // 입력값 검증
                 if (!userId) {
-                    resultDiv.textContent = "아이디를 입력하세요.";
+                    resultDiv.textContent = "아이디를 입력하세요";
                     return;
                 }
-            
+                if (userId.length< 6 ||userId.length>20){
+                    resultDiv.textContent = "6-20자로 입력해주세요";
+                    return;
+                }
                 // 서버로 요청 보내기
                 fetch(`/auth/idcheck?userId=${encodeURIComponent(userId)}`, {
                     method: "GET"
@@ -57,45 +98,70 @@
                 })
                 .catch(error => {
                     console.error(error);
-                    resultDiv.textContent = "서버 요청 중 오류가 발생했습니다.";
+                    resultDiv.textContent = "서버 요청 중 오류가 발생했습니다";
                     resultDiv.style.color = "red";
                 });
             }
             </script>
+
         <div class="form-row2">
             <label class="pswdc" for="pswd">비밀번호</label>
-            <input type="password" id="pswd" name="pw" placeholder="비밀번호 입력 (문자,숫자,특수문자 포함 8-12자)"> <!--name="pw"추가-->
+            <input type="password" id="pswd" name="pw" onkeyup="checkpswd.onekeyup()" placeholder="비밀번호 입력 (문자,숫자,특수문자 포함 8-20자)"required> <!--name="pw"추가-->
         </div>
-
         <div class="form-row3">
             <label class="chkpswdc" for="chkpswd">비밀번호 확인</label>
-            <input type="password" id="chkpswd" name = "chkpswd" placeholder="비밀번호 재입력">
+            <input type="password" id="chkpswd" onkeyup="test.onkeyup()" name = "chkpswd" placeholder="비밀번호 재입력"required>
         </div> 
+  
+        
+        <script>
+        function checkpswd(){
+            var p1 = document.getElementById('pswd').value;
+            if(p1.length < 8 || p1.legth>20) {
+                alert('비밀번호는 8글자 이상 20글자 이하여야 합니다');
+                return false;
+            }
+        }
+
+        function test() {
+            var p1 = document.getElementById('pswd').value;
+            var p2 = document.getElementById('chkpswd').value;   
+            if( p1 != p2 ) {
+                alert("비밀번호 불일치");
+                return false;
+            } 
+            else{
+                alert("비밀번호가 일치합니다");
+                return true;
+            }
+        }
+        </script>
+
 
         <div class="form-row4">
             <label class="namec" for="name">이름</label>
-            <input class="inna" type="text" id="name" name="name" placeholder="이름을 입력해주세요"> 
+            <input class="inna" type="text" id="name" name="name" placeholder="이름을 입력해주세요"required> 
         </div>
 
         <div class="form-row5">
             <label class="phnumc" for="phnum">전화번호</label>
-            <input class="inph" type="text" id="phnum" name="phoneNum" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+            <input class="inph" type="text" id="phnum" name="phoneNum" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)"required>
         </div>
 
         <div class="form-row6">
             <label class="emailc" for="email">이메일 주소</label>
-            <input class="inemail" type="text" id="email" name="email" placeholder="">
+            <input class="inemail" type="text" id="email" name="email" placeholder=""required>
             <p class="ewhaemail">@ewha.ac.kr</p>
         </div>
 
         <div class="form-row7">
             <label class="bdayc" for="bday">생년월일</label>
-            <input type="date" class="inbc" id="bday" name="bday" value="2024-12-01" min="1900-01-01" max="2100-12-31" />
+            <input type="date" class="inbc" id="bday" name="bday" value="2024-12-01" min="1900-01-01" max="2100-12-31" required />
         </div>
 
         <div class="form-row8">
             <label class="profileImagec" for="profileimage">프로필 이미지</label>  
-            <label class="fileTitle" for="file">choose file</label>
+            <label class="fileTitle" for="file">Choose File</label>
                 <input class="uploadfile" type="file" id="file" name= "file"/>
         </div>
         

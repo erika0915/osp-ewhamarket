@@ -28,7 +28,7 @@ main {
 
 /* 제목*/
 .titleRanking {
-    text-align: left;
+    text-align: center;
     font-size: 24px;
     margin: 5px;
 }
@@ -45,12 +45,24 @@ main {
     width: 80%;
     max-width: 1000px;
     margin: 20px auto; 
-    padding: 30px 90px 30px 90px;
+    padding: 40px 90px 40px 90px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: white;
 }
+
 /*좋아요*/
+.user-container{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 10px;
+}
+.market-name{
+    font-size:23px;
+    font-weight:bold;
+    color:#555;
+}
 .like-container {
     display: flex;
     align-items: center;
@@ -87,34 +99,25 @@ color: red;
 }
 
 /*마켓 컨데이너 */
-.market-container1, .market-container2, .market-container3 {
-    width: 80%; 
+.market-container {
+    width: 100%; 
     max-width: 800px; 
     margin: 0 auto; 
     text-align: center; 
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #ddd; 
-    border-radius: 10px; 
 }  
-table {
-    width: 100%; /* 테이블을 화면 너비에 맞게 확장 */
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center; /* 중앙 정렬 */
+.sellList-container{
+    width: 95%; 
+    margin: 0 auto; 
+    text-align: center; 
+    padding: 20px;
+    border: none; 
 }
-
-td {
-padding: 15px;
-border: 1px solid #ccc; /* 테두리 */
-}
-td img {
+img {
     width: 100px;
     height: 70px;
-    object-fit: cover; /* 이미지 비율 유지 */
-}
-
-
-.market-images1 img,.market-images2 img,.market-images3 img {
+    object-fit: cover; 
     border-radius: 10px; 
     transition: transform 0.3s ease; 
 }
