@@ -23,7 +23,7 @@
 .titleLogin{
 	text-align:center;
 	font-family: 'Bad Script', serif;
-  color: #000;
+  color: white;
   font-size:40px;
 }
 
@@ -32,9 +32,9 @@
   max-width: 1000px;
   margin: 50px auto; /*위여백 20px->50px*/
   padding: 20px 90px 30px 90px; /*위내부여백 30px->20px*/
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(0,70,42,0.5);
 }
 
 
@@ -47,8 +47,22 @@ input[type="text"], input[type="password"]{ /*.inID -> input[type="text"]*/
   border:none;
   border-radius: 15px;
   font-size: 20px;
-  background-color: #f5f5f5;
-  color:#848484;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  color:white;
+}
+input[type="text"]:hover, input[type="password"]:hover{
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.2), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.2));
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
 }
 
 .input, .btn{text-align:center;}
@@ -69,12 +83,38 @@ input[type="text"], input[type="password"]{ /*.inID -> input[type="text"]*/
   border:none;
   border-radius: 15px;
   font-size: 15px;
-  background-color:black;
   color:white;
   font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+
 } 
 
-
+.blgin:hover{
+  text-align:center;
+  padding: 10px 40px; /*양옆간격 25->40*/
+  margin:15px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+          rgba(0,70,42, 0.8), 
+          rgba(0,70,42, 0.6), 
+          rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+} 
 /*언더바*/
 .udr{
 text-align:center;
