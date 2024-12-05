@@ -18,7 +18,11 @@
   padding: 20px;
   background-color: white; /* 배경색 수정 */
 }
-
+input::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:20px;
+}
 /*로그인 화면*/
 .titleLogin{
 	text-align:center;
@@ -63,6 +67,7 @@ input[type="text"]:hover, input[type="password"]:hover{
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
+  transition: 0.7s;
 }
 
 .input, .btn{text-align:center;}
@@ -115,6 +120,7 @@ input[type="text"]:hover, input[type="password"]:hover{
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 } 
 /*언더바*/
 .udr{

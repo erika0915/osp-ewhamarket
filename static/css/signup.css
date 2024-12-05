@@ -22,19 +22,20 @@
 /*회원가입 화면*/
 .title{
   text-align: center;
+  font-weight:bold;
   font-size: 24px;
 }
-
+/*폼 컨테이너*/
 .form-container {
   width: 80%;
   max-width: 1000px;
   margin: 20px auto; /* 중앙 정렬 */
-  padding: 30px 90px 30px 90px;
+  padding: 45px 90px 45px 90px;
   border: none;
   border-radius: 10px;
   background-color: rgb(0,70,42,0.5);
 }
-
+/*각종 입력 창*/
 .username_input,.inemail,.inph,.inna,.inni,
 input[type="password"],
 select {
@@ -59,6 +60,17 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
+  transition: 0.5s;
+}
+input::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:18px;
+}
+textarea::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:18px;
 }
 
 /*날짜 선택*/
@@ -66,6 +78,7 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   padding: 10px 35px 10px 10px;
   margin-bottom: 15px;
   font-size: 15px;
+  text-align:center;
   border-radius: 20px;
   border:none;
   background: linear-gradient(124.47deg, 
@@ -112,9 +125,11 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
+
 #pswd,#chkpswd,#phnum{
-  width:55%;
+  width:60%;
 }
 #nickc{
   width:90%;
@@ -155,13 +170,26 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   margin-bottom: 5px;
 }
 /*프로필 이미지 등록*/
-.fileTitle-label {
 
+.fileTitle-label {
   text-align: center;
   padding: 10px 0;
+  font-weight:bold;
   width: 30%;
+
+}
+.uploadfile {
+  display: none;
+  gap:20px; 
+}
+
+.fileTitle{
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
   border-radius: 15px;
   font-style:bold;
+  text-align:center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   background: linear-gradient(124.47deg, 
             rgba(0,70,42, 0.2), 
@@ -171,23 +199,26 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color:white;
-}
-.uploadfile {
-  display: none;
-  gap:20px; 
-}
-.fileTitle{
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #848484;
-  border-radius: 20px; /*10->20*/
-  font-size: 15px;
-  text-align:center;
-  background-color: #f5f5f5;
-  color:black;
   width:20%
 }
-
+.fileTitle:hover{
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-radius: 15px;
+  font-style:bold;
+  text-align:center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+        rgba(0,70,42, 0.8), 
+        rgba(0,70,42, 0.6), 
+        rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
+  width:20%
+}
 
 /*개인정보 수집 및 동의*/
 .agree{
@@ -244,6 +275,7 @@ input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,i
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
 
 
