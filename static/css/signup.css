@@ -68,9 +68,14 @@ select {
   color:black;
   width:15%;
 }
-
-#nickc,#pswd,#chkpswd,#name,#phnum{
-width:90%
+#pswd,#chkpswd,#phnum{
+  width:55%;
+}
+#nickc{
+  width:90%;
+}
+#name{
+  width:35%;
 }
 #bday{
   width: 20% 
@@ -82,7 +87,7 @@ width:90%
   width:100%
 }
 #email{
-  width:50%
+  width:60%
 }
 .ewhaemail{
   color:#848484;
