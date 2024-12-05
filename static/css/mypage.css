@@ -20,21 +20,6 @@ main {
     padding: 20px;
 }
 
-/* 제목 섹션 스타일 */
-.titleMypage {
-    text-align: center;
-    font-size: 24px;
-    margin: 5px;
-}
-
-  
-.titleMypage p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #555;
-    margin: 0;
-}
-
 /* 마이페이지 전체 컨테이너 */
 .form-container {
     justify-content: flex-start; /* 수평 정렬: 좌측 */
@@ -72,7 +57,8 @@ main {
     display: block; /* 불필요한 수직 정렬 제거 */
     width: 180px; /* 명시된 이미지 크기 */
     height: 200px; /* 명시된 이미지 크기 */
-    margin: 15px 10px 0 0;
+    margin: 25px 10px 0 0;
+    border-radius: 5px; 
 }
 
 .profile {
@@ -96,7 +82,7 @@ main {
     height: 30px;
     padding: 5px 10px;
     border: 1px solid #ccc; /* 테두리 색상 */
-    border-radius: 5px; /* 모서리 둥글게 */
+    border-radius: 5px; 
     background-color: #f5f5f5; /* 읽기 전용 필드 배경색 */
     color: #333; /* 텍스트 색상 */
 }

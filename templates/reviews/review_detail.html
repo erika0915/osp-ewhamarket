@@ -8,28 +8,44 @@
 {% block section %}
 <main>
     <div class="form-container">
-        <div class="titleReview">
-            <p>리뷰 상세 조회</p>
-        </div>
-
-        <div class="title">
-            <div>
-                <div class="rating-container">
-                    <div class="grade" id="star-rating">
-                    <!--<span>★★★★★</span>--> 
+        <div class="review2">
+            <h3>사용자 리뷰 [ 평균 별점 
+            {% if average_rate %}
+            {{average_rate|round(1)}} / 5 ]
+            {% else %}
+            아직 리뷰가 없습니다.
+            {% endif %}</h3>
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="content">
+                
+                <!-- 별점 -->
+                <span class="stars">
+                    {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+                </span>            
+    
+                <!-- 제목 -->
+                <h3>{{ review.title }}</h3>
+                
+                <div class="reviewbox">
+                  <!-- 이미지 -->
+                  {% if review.reviewImage %}
+                  <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" alt="Review Image" width="300">
+                  {% endif %}
+    
+                  <!-- 내용 -->
+                    <div class="reviewcontent">
+                        <p> {{ review.nickname }} 벗께서 {{ review.createdAt}}에 구매하신 후기입니다.</p>
+                        <p> {{ review.content }} </p>
                     </div>
-                    <div class="review-rate"> ( {{ review.rate }} )</div>
                 </div>
-                <div class="review-title">{{ review.title }}</div>
-                <div class="review-content">{{ review.content }}</div>
+    
             </div>
-            <div>
-                <div class="review-image">
-                    <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
-                </div>
-                <div class="review-product">상품명: {{ product.productName }}</div>
-            </div>
-        </div>
+            {% endfor %}
+            {% else %}
+            <p class= noreview style="text-align: center; color: gray;">등록된 리뷰가 없습니다.</p>
+            {% endif %}
+        </div> <!--review2-->
     </div>
 </main>
 

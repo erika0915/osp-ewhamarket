@@ -8,10 +8,6 @@
 
 {% block section %}
 <main>
-    <div class="titleMypage">
-        <p><br>마이페이지</p> <!--위에 여백 추가-->
-    </div>
-
     <div class="form-container">
         <div class="profile-container">
             <img src="{{ url_for('static', filename='images/' + profileImage) }}" width=140, height=200>
@@ -28,7 +24,7 @@
 
                 <div class="phoneNumber">
                     <label for="phoneNumber">전화번호</label>
-                    <input class="intel" type="text" id="phoneNumber" name="phoneNumber" value=" {{ userInfo.phonenumber }}" readonly>
+                    <input class="intel" type="text" id="phoneNumber" name="phoneNumber" value=" {{ userInfo.phoneNum }}" readonly>
                 </div>
                 
             </div>
@@ -126,4 +122,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 {% endblock %}
-

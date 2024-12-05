@@ -106,4 +106,83 @@ main {
     font-size: 24px;
     margin-right: 4px;
 }
+
+
+/*변경된 div에 따른 css*/
+.review2 {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    justify-content: center;
+}
+
+.review2 h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* 개별 리뷰 스타일 */
+.content {
+    margin-bottom: 20px; /* 리뷰 간 간격 */
+    padding: 15px; /* 내부 여백 */
+    border: 1px solid #ddd; /* 외곽선 */
+    border-radius: 8px; 
+    background-color: #fff;
+    width: 800px;
+    height: inherit;
+    
+}
+
+/* 별점 스타일 */
+.stars {
+    display: block; /* 별점 줄바꿈 */
+    font-size: 20px; 
+    color: #ffc107; 
+    margin: 0 0 10px 10px;
+  }
+  
+/* 리뷰 제목 스타일 */
+.content h3 {
+    font-size: 20px; 
+    font-weight: bold; 
+    color: #555; 
+    align-items: flex-start;
+    margin: 0 0 10px 10px;
+}
+  
+  /* 리뷰 내용 스타일 */
+.reviewcontent p {
+    font-size: 16px; 
+    line-height: 1.5; 
+    color: #666; 
+    align-items: flex-start;
+    margin-bottom: 5px; 
+}
+  
+/* 리뷰 이미지 스타일 */
+.content img {
+    display: block; /* 이미지가 독립된 줄에 위치 */
+    margin: 10px 20px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
+    max-width: 20%; /* 이미지 크기를 컨테이너에 맞게 제한 */
+    border-radius: 5px; /* 모서리를 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+  
+.reviewcontent {
+    text-align: left;
+}
+/* 등록된 리뷰 없음 스타일 */
+.noreview {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    color: gray; /* 텍스트 색상 */
+    font-style: italic; /* 기울임 */
+}
+  
+.reviewbox {
+    display: flex;
+  }
   
