@@ -279,6 +279,7 @@ class DBhandler:
         # 상품 목록을 리스트로 변환 
         return[
             {   
+                "productId" : productId,
                 "productName" : productData.get("productName"),
                 "productImage": productData.get("productImage")
             }
