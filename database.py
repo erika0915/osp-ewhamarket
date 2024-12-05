@@ -231,6 +231,10 @@ class DBhandler:
             return False
         return True
     
+    # 사용자 정보 ID로 가져오기 
+    def get_user_by_id(self, userId):
+        user= self.db.child("users").child(userId).get().val()
+        return user
     #------------------------------------------------------------------------------------------
     # 마이페이지 
     # 사용자 정보 조회 

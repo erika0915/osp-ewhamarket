@@ -12,8 +12,12 @@ def reg_product():
         flash("로그인 후에 상품 등록이 가능합니다!")
         return redirect(url_for("auth.login"))
 
+    # 사용자 닉네임 가져오기 
+    user = products_bp.db.get_user_by_id(userId)
+    nickname=user.get("nickname")
+
     if request.method == "GET":
-        return render_template("reg_product.html")
+        return render_template("reg_product.html", nickname=nickname)
 
     elif request.method == "POST":
         image_file = request.files.get("productImage")
