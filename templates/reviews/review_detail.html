@@ -9,26 +9,35 @@
 <main>
     <div class="form-container">
         <div class="titleReview">
-            <p>리뷰 상세 조회</p>
+            <h3>상세 리뷰 페이지</h3>
         </div>
-
-        <div class="title">
-            <div>
-                <div class="rating-container">
-                    <div class="grade" id="star-rating">
-                    <!--<span>★★★★★</span>--> 
-                    </div>
-                    <div class="review-rate"> ( {{ review.rate }} )</div>
+            
+        <div class="content">
+                
+            <!-- 별점 -->
+            <div class="rating-container">
+                <div class="grade" id="star-rating">
+                <!--<span>★★★★★</span>--> 
                 </div>
-                <div class="review-title">{{ review.title }}</div>
-                <div class="review-content">{{ review.content }}</div>
-            </div>
-            <div>
+                <div class="review-rate"> ( {{ review.rate }} )</div>
+            </div>          
+    
+            <!-- 제목 -->
+            <h3>{{ review.title }}</h3>
+                
+            <div class="reviewbox">
+                <!-- 이미지 -->
                 <div class="review-image">
                     <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
                 </div>
-                <div class="review-product">상품명: {{ product.productName }}</div>
+
+                <!-- 내용 -->
+                <div class="reviewcontent">
+                    <p> {{ review.nickname }} 벗께서 {{ review.createdAt }}에 구매하신 후기입니다.</p>
+                    <p> {{ review.content }} </p>
+                </div>
             </div>
+    
         </div>
     </div>
 </main>
