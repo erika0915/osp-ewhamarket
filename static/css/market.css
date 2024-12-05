@@ -43,7 +43,7 @@ main {
 .titleRanking p {
     font-size: 24px;
     font-weight: bold;
-    color: #555;
+    color: white;
     margin: 0;
 }
 
@@ -52,9 +52,10 @@ main {
     width: 80%;
     max-width: 1000px;
     margin: 20px auto; /* 중앙 정렬 */
-    padding: 45px 90px 45px 90px;
+    padding: 30px 90px 30px 90px;
     border: none;
-    background-color: rgb(0,70,42,0.5);
+    border-radius: 10px;
+    background-color: rgb(0,70,42,0.7);
 }
 .market-name{
     font-size:20px;

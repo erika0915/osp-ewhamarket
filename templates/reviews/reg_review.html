@@ -8,13 +8,16 @@
 {%block section%} 
 <body> 
   <main>
+    <br>
     <form method="POST" action="{{ url_for('reviews.reg_review', productId=productId) }}" enctype="multipart/form-data">
       <div class="form-container">
         <div class="titleReview">
           <p>리뷰 작성</p>
-          <p class="discription">제품에 대한 리뷰를 작성해주세요.</p>
+          <p class="discription">제품에 대한 리뷰를 작성해주세요</p>
         </div>
-        
+        <hr>
+        <br>
+        <br>
         <div class="left">
           <div class="form-row">
             <label for="productName">상품명</label>
@@ -23,7 +26,7 @@
       
           <div class="form-row2">
             <label for="title">제목</label>
-            <input class="inpn" type="text" id="title" name="title" placeholder="제목을 입력하세요.">
+            <input class="inpn" type="text" id="title" name="title" placeholder="제목을 입력하세요">
           </div>
       
           <div class="form-row3">
