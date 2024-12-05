@@ -9,27 +9,23 @@
 {% block section %}
 
 <div class="titleRanking">
+
   <br>
   <p>마켓 랭킹</p> 
 
 </div>
 <div class="form-container">
-  {% for user in top_users%}
+  {% for user in top_user_data%}
       <div class="market-container">
           <div class="user-container">
-            <p class="market-name">{{nickname}}</p>
-            <div class="like-container">
-              <button class="like-button" onclick="toggleLike(this)">
-                <i class="fa fa-heart" id="heart" ></i>
-              </button>
-            </div>
+            <button class="market-name">{{ loop.index }}. &nbsp;{{user.nickname}}</button>
           </div>
           <hr>
           <div class="sellList-container">
               {% if user.sellList %}
               <div class="image-List">
                   {% for product in user.sellList %}
-                  <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=70, height=100>
+                  <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
                   {% endfor %}
               </div>
               {% else %}

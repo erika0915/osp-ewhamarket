@@ -22,19 +22,20 @@
 /*회원가입 화면*/
 .title{
   text-align: center;
+  font-weight:bold;
   font-size: 24px;
 }
-
+/*폼 컨테이너*/
 .form-container {
   width: 80%;
   max-width: 1000px;
   margin: 20px auto; /* 중앙 정렬 */
-  padding: 30px 90px 30px 90px;
-  border: 1px solid #ddd;
+  padding: 45px 90px 45px 90px;
+  border: none;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(0,70,42,0.5);
 }
-
+/*각종 입력 창*/
 .username_input,.inemail,.inph,.inna,.inni,
 input[type="password"],
 select {
@@ -43,34 +44,98 @@ select {
   border:none;
   border-radius: 15px;
   font-size: 20px;
-  background-color: #f5f5f5;
-  color:#848484;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  color:white;
 }
+input[type="password"]:hover,input[type="text"]:hover,input[type="date"]:hover,input[type="placeholder"]:hover{
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.2), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.2));
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: 0.5s;
+}
+input::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:18px;
+}
+textarea::placeholder{
+  color:rgb(255,253,241);
+  font-style: italic;
+  font-size:18px;
+}
+
 /*날짜 선택*/
 .inbc{
   padding: 10px 35px 10px 10px;
   margin-bottom: 15px;
-  border: 1px solid #848484;
   font-size: 15px;
+  text-align:center;
   border-radius: 20px;
-  background-color: #f5f5f5;
-  color:black;
+  border:none;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  color:white;
 }
 
 /*아이디 중복확인 체크*/
 .id_overlap_button,.nick_overlap_button{
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #848484;
   border-radius: 20px; /*10->20*/
   font-size: 15px;
-  background-color: #f5f5f5;
-  color:black;
   width:15%;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.id_overlap_button:hover,.nick_overlap_button:hover{
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 20px; /*10->20*/
+  font-size: 15px;
+  width:15%;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+  rgba(0,70,42, 0.8), 
+  rgba(0,70,42, 0.6), 
+  rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
 
-#nickc,#pswd,#chkpswd,#name,#phnum{
-width:90%
+#pswd,#chkpswd,#phnum{
+  width:60%;
+}
+#nickc{
+  width:90%;
+}
+#name{
+  width:35%;
 }
 #bday{
   width: 20% 
@@ -82,10 +147,10 @@ width:90%
   width:100%
 }
 #email{
-  width:50%
+  width:60%
 }
 .ewhaemail{
-  color:#848484;
+  color:white;
   font-size: 20px;
   margin-bottom:30px;
 }
@@ -101,34 +166,59 @@ width:90%
   flex-shrink: 0; /* 라벨의 너비 고정 */
   display: block;
   font-size: 20px;
-  color: #333;
+  color:white;
   margin-bottom: 5px;
 }
 /*프로필 이미지 등록*/
+
 .fileTitle-label {
-  background-color: #f5f5f5;
-  color: #848484;
   text-align: center;
   padding: 10px 0;
+  font-weight:bold;
   width: 30%;
-  border-radius: 15px;
+
 }
 .uploadfile {
   display: none;
   gap:20px; 
 }
+
 .fileTitle{
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #848484;
-  border-radius: 20px; /*10->20*/
-  font-size: 15px;
+  font-size: 18px;
+  border-radius: 15px;
+  font-style:bold;
   text-align:center;
-  background-color: #f5f5f5;
-  color:black;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color:white;
   width:20%
 }
-
+.fileTitle:hover{
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-radius: 15px;
+  font-style:bold;
+  text-align:center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+        rgba(0,70,42, 0.8), 
+        rgba(0,70,42, 0.6), 
+        rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
+  width:20%
+}
 
 /*개인정보 수집 및 동의*/
 .agree{
@@ -147,15 +237,52 @@ width:90%
   padding:10px;
   font-size: 16px;
   border-radius: 15px;
-  border: 2px solid;
   cursor: pointer;
   margin:10px 0px 10px 0px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.2), 
+            rgba(0,70,42, 0.0), 
+            rgba(0,70,42, 0.2));
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.cancel-button:hover,
+.submit-button:hover {
+  width: 20%;
+  padding:10px;
+  font-size: 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin:10px 0px 10px 0px;
+  border:none;
+  border-radius: 15px;
+  font-size: 15px;
+  color:white;
+  font-style:bold;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(124.47deg, 
+          rgba(0,70,42, 0.8), 
+          rgba(0,70,42, 0.6), 
+          rgba(0,70,42, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
 
+
 .cancel-button {
+  border:1px solid white;
   background-color: #fff;
   color: #848484;
-  border: 1px solid #000;
 } 
 
 .submit-button {

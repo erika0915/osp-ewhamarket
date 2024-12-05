@@ -12,8 +12,12 @@ def reg_product():
         flash("로그인 후에 상품 등록이 가능합니다!")
         return redirect(url_for("auth.login"))
 
+    # 사용자 닉네임 가져오기 
+    user = products_bp.db.get_user_by_id(userId)
+    nickname=user.get("nickname")
+
     if request.method == "GET":
-        return render_template("reg_product.html")
+        return render_template("reg_product.html", nickname=nickname)
 
     elif request.method == "POST":
         image_file = request.files.get("productImage")
@@ -125,7 +129,6 @@ def view_product_detail(productId):
     from app.reviews.routes import reviews_bp 
     data = products_bp.db.get_product_by_id(productId)
     if not data:
-        flash("상품 정보를 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
     
     # 리뷰 데이터 가져오기 
@@ -164,7 +167,6 @@ def purchase_now(productId):
     product_name = data['productName']
     product = products_bp.db.get_product_by_productName(product_name)
     if not product:
-        flash("상품을 찾을 수 없습니다.")
         return redirect(url_for("products.view_products"))
 
     # purchaseCount 업데이트
