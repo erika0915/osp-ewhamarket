@@ -204,7 +204,7 @@ textarea::placeholder{
 .fileTitle:hover{
   padding: 10px;
   margin-bottom: 15px;
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 15px;
   font-style:bold;
   text-align:center;
