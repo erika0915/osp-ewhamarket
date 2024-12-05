@@ -35,8 +35,10 @@
             {% if purchasedList %}
             <div id="image-List-pur" class="image-List-pur">
                 {% for item in purchasedList%}
-                <div class="image-wrapper">
-                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <div class="image-wrapper" onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}'" style="cursor:pointer;">
+                    <a href="reg_review.html"style="display: block; text-decoration: none; color: inherit;">
+                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
