@@ -41,20 +41,7 @@
       </div> <!--product-details-->
 
       <div class="btn">
-
-        <div class="dropdown">
-          <button class="dropbtn"> 
-            <span class="dropbtn_icon">1개</span>
-          </button>
-
-          <div class="dropdown-content">
-            <a href="#">2개</a>
-            <a href="#">3개</a>
-            <a href="#">4개</a>
-            <a href="#">5개</a>
-          </div>
-        </div>
-
+        
         <form id="purchaseForm" action="{{ url_for('products.purchase_now',productId=productId)  }}" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="productName" value="{{ data['productName'] }}">
           <input type="hidden" name="price" value="{{ data['price'] }}">
@@ -70,11 +57,10 @@
 
     <div class="column-bottom">
       <div class="review2">
-        <h3>사용자 리뷰 [ 평균 별점 
+        <h3> 
         {% if average_rate %}
-        {{average_rate|round(1)}} / 5 ]
+        사용자 리뷰 평균 별점 : [ {{average_rate|round(1)}} / 5 ]
         {% else %}
-        아직 리뷰가 없습니다.
         {% endif %}</h3>
         {% if reviews %}
         {% for review in reviews %}
