@@ -55,11 +55,11 @@ def view_products():
 
     # 카테고리 이름 변경 
     category_names = {
-    "all": "전체 상품 조회",
-    "fashion": "패션 악세서리",
-    "digital": "디지털 악세서리",
-    "tableware": "테이블웨어",
-    "stationary": "스테이셔너리"
+    "all": "ALL",
+    "fashion": "FASHION",
+    "digital": "DIGITAL",
+    "tableware": "TABLEWARE",
+    "stationary": "STATIONARY"
     }
     current_category_name = category_names.get(category)
 
