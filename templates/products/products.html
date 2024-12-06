@@ -19,10 +19,10 @@
   <aside class="side-bar">
     <ul id="category">
       <!--url 추가-->
-      <li> <a href="{{ url_for('products.view_products', page=i, category='digital')}}">디지털 악세서리</a></li>
-      <li> <a href="{{ url_for('products.view_products', page=i, category='fashion')}}">패션 악세서리</a></li>
-      <li> <a href="{{ url_for('products.view_products', page=i, category='tableware') }}">테이블웨어</a></li>
-      <li> <a href="{{ url_for('products.view_products', page=i, category='stationary') }}">스테이셔너리</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='digital')}}">DIGITAL</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='fashion')}}">FASHION</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='tableware') }}">TABLEWARE</a></li>
+      <li> <a href="{{ url_for('products.view_products', page=i, category='stationary') }}">STATIONARY</a></li>
     </ul>
   </aside>
 
@@ -42,7 +42,7 @@
     </section>
   
     {% if total > 0 %}
-    <p class="reg-num">총 {{total}}개</p>
+    <p class="reg-num">{{total}}개</p>
     <table>
       <tr>
         {% for key, value in row1 %}
@@ -61,7 +61,7 @@
           </td>
           {% endfor %}
           {% for i in range(3 - row1|length) %}
-          <td></td> <!-- 빈 칸 추가 -->
+          <td></td> 
           {% endfor %}  
       </tr>
 
@@ -84,6 +84,9 @@
             </div>
           </td>
           {% endfor %}
+          {% for i in range(3 - row1|length) %}
+          <td></td> 
+          {% endfor %}  
       </tr>
     </table>
 
@@ -100,7 +103,6 @@
     </div>
     
   </main>
-      <!--id 추가 (css도 추가)-->
       {% else %}
         <br><br><br><br><p id="noproductsmessage">등록된 상품이 없습니다.</p>
       {% endif %}

@@ -34,12 +34,6 @@ main {
     max-width: 60%;
     justify-content: center;
 }
-
-.rating-container {
-    display: flex;
-    align-items: center;
-    margin: 0 0 10px 10px;
-}
   
 /* 상세리뷰 페이지(전체 제목) 섹션 스타일 */
 .titleReview {
@@ -55,17 +49,11 @@ main {
     color: #555;
     margin: 5px 0 10px 0;
 }
-  
-/* 제목, 내용, 이미지와 평가 등 레이아웃 */
-.title {
+
+.rating-container {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-  
-.title > div {
-    flex: 1;
+    align-items: center;
+    margin: 0 0 10px 10px;
 }
   
 /* 별점 스타일 */
@@ -73,22 +61,29 @@ main {
     font-size: 20px;
     color: #FFD700;
 }
-  
-/* 리뷰 제목과 내용 스타일 */
-.review-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-  
-.review-content {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #666;
+
+#star-rating span {
+    font-size: 24px;
+    margin-right: 4px;
 }
 
-.reviewDB {
-    margin-top:30px;
+.review-rate{
+    font-size: 16px;
+    color: #444;
+    margin-top: 5px;
+    margin-bottom: 6px;
+}
+
+.content h3 {
+    font-size: 20px; 
+    font-weight: bold; 
+    color: #555; 
+    align-items: flex-start;
+    margin: 0 0 10px 10px;
+}
+
+.reviewbox {
+    display: flex;
 }
 
 /* 리뷰 이미지 스타일 */
@@ -99,36 +94,19 @@ main {
     border-radius: 5px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
 }
-
-.review-rate{
+  
+.review-content {
     font-size: 16px;
-    color: #444;
-    margin-top: 5px;
-    margin-bottom: 6px;
+    line-height: 1.6;
+    color: #666;
 }
 
-.review-product {
-    font-size: 16px;
-    color: #444;
-    margin-top: 10px;
-}
-  
-#star-rating span {
-    font-size: 24px;
-    margin-right: 4px;
+
+.reviewDB {
+    margin-top:30px;
 }
 
-  
-/* 리뷰 제목 스타일 */
-.content h3 {
-    font-size: 20px; 
-    font-weight: bold; 
-    color: #555; 
-    align-items: flex-start;
-    margin: 0 0 10px 10px;
-}
-  
-  /* 리뷰 내용 스타일 */
+/* 리뷰 내용 스타일 */
 .reviewcontent p {
     font-size: 16px; 
     line-height: 1.5; 
@@ -137,12 +115,9 @@ main {
     margin-bottom: 5px; 
 }
   
-/* 리뷰 이미지 스타일 */  
 .reviewcontent {
     text-align: left;
 }
 
-.reviewbox {
-    display: flex;
-}
+
   
