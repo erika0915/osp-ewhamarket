@@ -89,8 +89,9 @@
                     resultDiv.style.color = "red";
                     return false;
                 }
-            }            
+            }      
         </script>
+       
 
         <div class="form-row">
             <label class="mkIDc" for="mkId">아이디</label>
@@ -213,6 +214,7 @@
                     return false;
                 }
             }            
+        
         </script>
 
 
@@ -227,6 +229,7 @@
             <span id="phnumConfirm"></span>
         </div>
         <script>
+        
             function phnumCheck() {
                 const ph = document.getElementById('phnum').value;
             
@@ -238,6 +241,7 @@
                 $('#phnumConfirm').text('').css('color', '#00462A');
                 return true;
             }            
+            
         </script>
 
         <div class="form-row6">
@@ -268,6 +272,7 @@
             <button type="submit" class="submit-button">등록</button>
         </div> 
         <script>
+            
             document.querySelector('form').addEventListener('submit', async function (event) {
                 event.preventDefault(); // 폼 제출 중단
             
@@ -283,6 +288,7 @@
                     alert("모든 칸을 정확히 입력하세요");
                 }
             });            
+    
         </script>
     </form>
 </div>
