@@ -110,13 +110,13 @@
                 }
             
                 if (userId.length < 5 || userId.length > 20) {
-                    resultDiv.textContent = "아이디는 5~20자로 입력하세요";
+                    resultDiv.textContent = "5-20자로 입력하세요";
                     resultDiv.style.color = "red";
                     return false;
                 }
             
                 if (!/^[A-Za-z0-9]+$/.test(userId)) {
-                    resultDiv.textContent = "아이디는 영문과 숫자만 사용할 수 있습니다";
+                    resultDiv.textContent = "형식에 맞게 입력하세요";
                     resultDiv.style.color = "red";
                     return false;
                 }
