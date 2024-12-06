@@ -174,7 +174,7 @@ def purchase_now(productId):
     products_bp.db.update_product(productId, product)
 
     # 상품 정보를 사용자의 purchasedProducts에 추가
-    result = products_bp.db.add_purchased_product(user_id, data)
+    result = products_bp.db.add_purchased_product(user_id, data,productId)
     if result:
         flash("구매가 완료되었습니다! 구매 내역에 추가되었습니다.")
     else:
