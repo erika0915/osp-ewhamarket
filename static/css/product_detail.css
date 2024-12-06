@@ -175,7 +175,7 @@ button:hover {
   justify-content: center;
 }
 
-.review2 {
+.review {
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -184,7 +184,7 @@ button:hover {
 }
 
 /* 리뷰 제목 */
-.review2 h3 {
+.review h3 {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
@@ -229,10 +229,18 @@ button:hover {
 .reviewcontent p {
   font-size: 16px; /* 내용 크기 */
   line-height: 1.5; /* 줄 간격 */
-  color: #666; /* 텍스트 색상 */
   align-items: flex-start;
   margin-bottom: 5px; /* 아래 간격 */
 }
+
+.reviewcontent_DB {
+  color: #848484;
+}
+
+.reviewcontent_content {
+  color: black;
+}
+
 
 /* 리뷰 이미지 스타일 */
 .content img {
