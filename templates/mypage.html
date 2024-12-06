@@ -42,7 +42,7 @@
                              alt="{{ item['productName'] }}" 
                              width="70" 
                              height="100">
-                    </a>
+                    </a> 
                 </div>
                 {% endfor %}
             </div>
@@ -57,7 +57,9 @@
             <div id="image-List-sell" class="image-List-sell">
                 {% for item in sellList %}
                 <div class="image-wrapper">
-                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    <a href="{{ url_for('products.view_product_detail', productId=item['productId']) }}">
+                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
