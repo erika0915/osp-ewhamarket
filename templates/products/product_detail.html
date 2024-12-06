@@ -56,7 +56,7 @@
   </div><!--row-->
 
     <div class="column-bottom">
-      <div class="review2">
+      <div class="review">
         <h3> 
         {% if average_rate %}
         사용자 리뷰 평균 별점 : [ {{average_rate|round(1)}} / 5 ]
@@ -82,8 +82,8 @@
 
               <!-- 내용 -->
               <div class="reviewcontent">
-                <p> {{ review.nickname }} 벗께서 {{ review.createdAt}}에 구매하신 후기입니다.</p>
-                <p> {{ review.content }} </p>
+                <p class="reviewcontent_DB"> {{ review.nickname }} 벗께서 {{ review.createdAt}}에 구매하신 후기입니다.</p>
+                <p class="reviewcontent_content"> {{ review.content }} </p>
               </div>
             </div>
 
