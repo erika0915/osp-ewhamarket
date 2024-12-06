@@ -12,11 +12,10 @@
 }
 
 hr {
-    border: 1px solid rgb(255,253,241);
-    background-color:rgb(255,253,241);
+    border: 1px solid rgb(0,70,42,0.5);
+    background-color:rgb(0,70,42,0.5);
     margin: 0;
     width: 100%;
-    
 }
 
 .button{
@@ -43,7 +42,7 @@ main {
 .titleRanking p {
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: #555;
     margin: 0;
 }
 
@@ -55,7 +54,8 @@ main {
     padding: 30px 90px 30px 90px;
     border: none;
     border-radius: 10px;
-    background-color: rgb(0,70,42,0.5);
+    background-color: white;
+ 
 }
 .market-name{
     font-size:20px;
@@ -74,7 +74,7 @@ pear blossom rgb(255,253,241);*/
     width: 100%; 
     margin: 0 auto; 
     text-align: left; 
-    padding: 30px;
+    padding: 20px;
     border: none;
     background: linear-gradient(124.47deg, 
     rgba(255, 255, 255, 0.2), 
@@ -87,12 +87,14 @@ pear blossom rgb(255,253,241);*/
 button{
     border:none;
     font-size:20px;
+    cursor: pointer;
     font-weight:bold;
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 10px; /*10->20*/
     font-size: 15px;
-    width:20%;
+    flex-shrink: 0;
+    width:25%;
     color:white;
     flex-shrink: 0;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -104,20 +106,40 @@ button{
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: rgba(255, 255, 255, 0.9);
 }
-.sellList-container{
-    width: 95%; 
-    margin: 0 auto; 
-    text-align: left; 
+
+
+.image-List {
+    display: flex; /* 가로로 정렬 */
+    flex-wrap: nowrap; /* 한 줄에 표시 */
+    overflow: hidden; /* 넘치는 이미지는 숨기기 */
+    gap: 10px; /* 이미지 간격 */
+    padding: 10px;
+    max-width: 630px; /* (150px * 4) + (10px * 3) */
+}
+
+.sellList-container {
+    width: 100%;
+    margin: 0 auto;
     padding: 20px;
-    border: none; 
+    display: flex; /* 레이아웃 유지 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    overflow: hidden; /* 넘치는 내용 숨기기 */
+    border: none;
+    position: relative; /* 자식의 overflow를 위해 */
 }
+
 img {
-    width: 200px;
-    height: 140px;
-    object-fit: cover; 
-    border-radius: 10px; 
-    transition: transform 0.3s ease;
+    width: 150px; /* 고정 너비 */
+    height: 105px; /* 고정 높이 */
+    object-fit: cover; /* 비율 유지하며 자르기 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    cursor: pointer;
     margin-right: 10px;
+    transition: transform 0.3s ease; /* 애니메이션 효과 */
 }
+
+
+
 
 

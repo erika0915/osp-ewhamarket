@@ -8,7 +8,7 @@
 {% block section %} 
 {% with mesg = get_flashed_messages() %}
 {% if mesg !=[] %}
-    <script>alert("{{ mesg[0] }}")</script>
+    <script>alert("{{ mesg[0] }}s")</script>
 {% endif %}
 {% endwith %}
 
@@ -37,4 +37,6 @@
         </form>
     </div>
 </main>
+<br><br><br>
+<br><br><br>
 {% endblock section %}
