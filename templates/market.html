@@ -8,17 +8,18 @@
 
 {% block section %}
 
-<div class="titleRanking">
-
-  <br>
-  <p>마켓 랭킹</p> 
-
-</div>
+<br>
 <div class="form-container">
+  <div class="titleRanking">
+    <br>
+    <p>마켓 랭킹</p> 
+  </div>
+  <br>
+  <br>
   {% for user in top_user_data%}
       <div class="market-container">
           <div class="user-container">
-            <button class="market-name">{{ loop.index }}. &nbsp;{{user.nickname}}</button>
+            <button class="market-name">{{ loop.index }}.&nbsp; &nbsp;{{user.nickname}}</button>
           </div>
           <hr>
           <div class="sellList-container">
