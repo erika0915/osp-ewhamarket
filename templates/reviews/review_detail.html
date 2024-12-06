@@ -23,13 +23,12 @@
     
             <!-- 제목 -->
             <h3>{{ review.title }}</h3>
-                
+            {{product.productName}}
             <div class="reviewbox">
                 <!-- 이미지 -->
                 <div class="review-image">
                     <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
                 </div>
-
                 <!-- 내용 -->
                 <div class="reviewcontent">
                     <p class="reviewDB"> {{ review.nickname }} 벗께서 {{ review.createdAt }}에 구매하신 후기입니다.</p>
