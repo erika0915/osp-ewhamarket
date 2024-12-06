@@ -72,6 +72,12 @@ main{
   white-space: nowrap;
   text-align: center;
 }
+
+.array button:hover {
+  background-color:darkgreen;
+  color:#e6e6e6;
+  transition: 0.5s;
+}
 /*순서배열 끝*/
 
 /* 전체상품조회 */
@@ -82,6 +88,7 @@ main{
   margin-top:35px;
   color: #000;
   font-size:30px;
+  font-weight: bold;
 }
 
 /*좋아요 기능*/
@@ -162,8 +169,8 @@ td:empty {
 }
 
 td img {
-  width: 200px;
-  height: 140px;
+  width: 250px;
+  height: 180px;
   object-fit: cover; /* 이미지 비율 유지 */
 }
 
