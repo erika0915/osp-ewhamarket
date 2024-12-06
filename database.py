@@ -231,6 +231,21 @@ class DBhandler:
             return False
         return True
     
+    # 중복된 nickname 체크
+    def nickname_duplicate_check(self, nickname):
+        # users 경로에서 모든 데이터를 가져옵니다.
+        users = self.db.child("users").get().val()
+
+        # 데이터가 없으면 중복될 가능성이 없으므로 True 반환
+        if not users:
+            return True
+
+        # 모든 userid를 순회하며 nickname 확인
+        for userid, user_data in users.items():
+            if user_data.get("nickname") == nickname:  # nickname이 중복되면 False 반환
+                return False
+        return True 
+    
     # 사용자 정보 ID로 가져오기 
     def get_user_by_id(self, userId):
         user= self.db.child("users").child(userId).get().val()
