@@ -33,7 +33,27 @@ def view_marketRanking():
     return render_template("market.html", top_user_data=top_user_data, top_users=top_users, nickname=nickname, sellList=sell_list)
     
     
+# 특정 사용자 마이페이지 조회
+@market_bp.route("/mypage/<nickname>/")
+def view_user_mypage(nickname):
+    print(f"Received nickname: {nickname}") 
+    # 닉네임으로 사용자 정보 조회
+    userInfo = market_bp.db.get_user_info_by_nickname(nickname)
+    if not userInfo:
+        flash("사용자를 찾을 수 없습니다.")
+        return redirect(url_for("market.view_marketRanking"))
     
+    userId = userInfo.get("userId")
+    purchasedList = market_bp.db.get_purchased_list(userId)
+    sellList = market_bp.db.get_sell_list(userId)
+    likedList = market_bp.db.get_heart_list(userId)
+    
+    return render_template("mypage.html",
+                           userInfo=userInfo,
+                           profileImage=userInfo.get("profileImage"),
+                           purchasedList=purchasedList,
+                           sellList=sellList,
+                           likedList=likedList)
 
     
     
