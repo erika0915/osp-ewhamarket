@@ -11,6 +11,13 @@
 *{
   box-sizing: border-box;
 }
+hr {
+  border: 1px solid rgb(255,253,241);
+  background-color:rgb(255,253,241);
+  margin: 0;
+  width: 100%;
+  
+}
 
 
 /*리뷰 작성*/
@@ -25,7 +32,7 @@ color:white;
   width: 80%;
   max-width: 1000px;
   margin: 20px auto; /* 중앙 정렬 */
-  padding: 45px 90px 45px 90px;
+  padding: 30px 90px 30px 90px;
   border: none;
   border-radius: 10px;
   background-color: rgb(0,70,42,0.5);
@@ -140,6 +147,7 @@ fieldset{
   width : 50%;
   text-align :center;
   border:none;
+  border-radius: 15px;
   background: linear-gradient(124.47deg, 
   rgba(255, 255, 255, 0.0), 
   rgba(255, 255, 255, 0.0), 
