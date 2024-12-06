@@ -326,3 +326,17 @@ class DBhandler:
 
         print(f"[DEBUG] Heart list: {heart_list}")
         return heart_list
+        
+    # 닉네임으로 사용자 정보 조회
+    def get_user_info_by_nickname(self, nickname):
+        users = self.db.child("users").get()
+        for user in users.each():
+            user_data = user.val()
+            if user_data.get("nickname") == nickname:  # 닉네임이 일치하는 경우
+                return {
+                    "nickname": user_data.get("nickname"),
+                    "email": user_data.get("email"),
+                    "profileImage": user_data.get("profileImage"),
+                    "phoneNum": user_data.get("phoneNum"),
+                    "userId": user.key()  # userId는 상위 키로 저장됨
+                }
