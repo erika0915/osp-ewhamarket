@@ -52,9 +52,8 @@
 }
 
 .main-image img {
-  width: 400px;
-  height: 300px;
-  object-fit: cover;
+  width: 120%;
+  height: auto;
   border-radius: 10%;
 }
 

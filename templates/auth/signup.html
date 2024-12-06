@@ -258,8 +258,26 @@
         <div class="form-row8">
             <label class="profileImagec" for="profileimage">프로필 이미지</label>  
             <label class="fileTitle" for="file">choose file</label>
-                <input class="uploadfile" type="file" id="file" name= "file"/>
+            <input class="uploadfile" type="file" onchange="readURL(this);" id="file" name= "file"/>
+            <img id="preview" style="display:none;" />
         </div>
+        <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  var preview = document.getElementById('preview');
+                  preview.src = e.target.result;
+                  preview.style.display = 'block'; // 이미지를 블록으로 표시
+                };
+                reader.readAsDataURL(input.files[0]);
+              } else {
+                var preview = document.getElementById('preview');
+                preview.src = "";
+                preview.style.display = 'none'; // 파일이 없을 때 숨김
+              }
+            }
+          </script>
         
         <div class="form-row9">     
             <div class="agree">
@@ -267,6 +285,7 @@
                 <label for="agree">개인정보 수집 및 이용동의</label>
             </div>
         </div>
+        <br>
         <div class="button-group">
             <button type="reset" class="cancel-button">취소</button>
             <button type="submit" class="submit-button">등록</button>

@@ -12,8 +12,8 @@
   box-sizing: border-box;
 }
 hr {
-  border: 1px solid rgb(255,253,241);
-  background-color:rgb(255,253,241);
+  border: 1px solid rgb(0,70,42,0.5);
+  background-color:rgb(0,70,42,0.5);
   margin: 0;
   width: 100%;
   
@@ -25,7 +25,7 @@ hr {
 text-align: center;
 font-size: 24px;
 font-weight:bold;
-color:white;
+color:#555;
 }
 
 .form-container {
@@ -35,7 +35,13 @@ color:white;
   padding: 30px 90px 30px 90px;
   border: none;
   border-radius: 10px;
-  background-color: rgb(0,70,42,0.5);
+  background-color: white;
+  background: linear-gradient(124.47deg, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
 }
 
 
@@ -61,7 +67,7 @@ select {
   rgba(255, 255, 255, 0.0)); /* 배경색이 투명하게 보이게 한다 */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(0px);
-  color:white;
+  color:#555;
 }
 
 .inlg:hover,.inpn:hover,.inpn:hover,.in1ln:hover,
@@ -79,17 +85,15 @@ select:hover {
 
 
 input::placeholder{
-  color:rgb(255,253,241);
-  font-style: italic;
+  color:#848484;
   font-size:18px;
 }
 textarea::placeholder{
-  color:rgb(255,253,241);
-  font-style: italic;
+  color:#848484;
   font-size:18px;
 }
 
-#productName{
+#productName,#title{
 width:50%
 }
 #shortDescription,textarea{
@@ -105,7 +109,7 @@ gap: 10px; /* 라벨과 입력 칸 간격 */
 label {
   width: 80px;
   flex-shrink: 0; /* 라벨의 너비 고정 */
-  color:white;
+  color:#555;
 }
 
 
@@ -126,7 +130,7 @@ textarea {
 
 .star::after {
   content: '☆';
-  color: rgb(188,201,36);
+  color: #ffd700;
   font-size: 25px;
 }
 
@@ -140,9 +144,11 @@ textarea {
 .star:hover ~ .star::after {
   content: '☆';
 }
-
+.text-bold{
+color:#848484;
+}
 fieldset{
-  color:white;
+  color:#848484;
   border-radius: 5px;
   width : 50%;
   text-align :center;
@@ -170,7 +176,8 @@ fieldset{
 
 /*내용*/
 .discription{
-font-size: 16px;
+  font-size: 16px;
+  color:#848484;
 }
 
 /*이미지 파일 업로드*/
@@ -195,9 +202,9 @@ font-size: 16px;
   text-align:center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   background: linear-gradient(124.47deg, 
-            rgba(0,70,42, 0.2), 
-            rgba(0,70,42, 0.0), 
-            rgba(0,70,42, 0.2));
+            rgba(0,70,42, 0.8), 
+            rgba(0,70,42, 0.6), 
+            rgba(0,70,42, 0.8));
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
@@ -213,16 +220,26 @@ font-size: 16px;
   text-align:center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   background: linear-gradient(124.47deg, 
+        rgba(0,70,42, 1.0), 
         rgba(0,70,42, 0.8), 
-        rgba(0,70,42, 0.6), 
-        rgba(0,70,42, 0.8));
+        rgba(0,70,42, 1.0));
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color: rgba(255, 255, 255, 0.9);
   transition: 0.5s;
   width:20%
 }
-
+#preview {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+  border-radius: 5px;     /* 선택적으로 테두리 둥글게 */
+}
+#fileCount{
+  font-size:15px;
+  color:#848484;
+}
 
 /*취소등록버튼*/
 .button-group {
@@ -245,9 +262,9 @@ font-size: 16px;
   font-style:bold;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   background: linear-gradient(124.47deg, 
+            rgba(0,70,42, 0.4), 
             rgba(0,70,42, 0.2), 
-            rgba(0,70,42, 0.0), 
-            rgba(0,70,42, 0.2));
+            rgba(0,70,42, 0.4));
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
@@ -279,9 +296,8 @@ font-size: 16px;
 
 
 .cancel-button {
-  border:1px solid white;
   background-color: #fff;
-  color: #848484;
+  color: #555;
 } 
 
 .submit-button {
@@ -295,43 +311,4 @@ font-size: 16px;
   height: 100vh;
 }
 
-/* 좌측 영역 스타일 */
-.left-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7;
-}
 
-/* 커스텀 파일 업로드 버튼 스타일 */
-.custom-upload-btn {
-  background-color: #00462a;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.custom-upload-btn:hover {
-  background-color: #00462a;
-}
-
-/* 우측 이미지 미리보기 섹션 스타일 */
-.right-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e0e0e0;
-}
-
-.right-section img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px #e0e0e0;
-}

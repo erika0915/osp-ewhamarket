@@ -160,12 +160,9 @@ td:empty {
   border: none;
 }
 
+
 .product-title{
   float: left;
-}
-
-.product-title:hover {
-  color:darkgreen /* 텍스트 색상 변경 */
 }
 
 .reg-num{

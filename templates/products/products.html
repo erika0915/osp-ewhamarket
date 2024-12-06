@@ -56,7 +56,7 @@
           {% for key, value in row1 %}
           <td>
             <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{ value.productName }}
-              <div class="price">{{ value.price }}원</div>
+              <div class="price">{{ value.price }}</div>
             </div>
           </td>
           {% endfor %}
@@ -79,7 +79,7 @@
             <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
               {{ value.productName }}
               <div class="price">
-                {{ value.price }}원
+                {{ value.price }}
               </div>
             </div>
           </td>
