@@ -50,8 +50,9 @@
 
 /* Main product image styling */
 .main-image img {
-  width: 120%;
-  height: auto;
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
   border-radius: 10%;
 }
 

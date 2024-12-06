@@ -122,7 +122,18 @@ body {
         align-items: flex-start;
         gap: 15px; /* 간격 감소 */
     }
-}}
+}
+
+footer {
+    font-size: 10px;
+}
+
+.company, .member {
+    font-weight: bold;
+}
+
+
+
 
 #reviewContents {
     width: 100%;

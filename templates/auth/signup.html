@@ -11,13 +11,14 @@
     <script>alert("{{ mesg[0] }}")</script>
 {% endif %}
 {% endwith %}
-
-<div class="title">
-    <p><br>회원가입을 위해 정보를 입력해주세요</p> <!--위에 여백 추가-->
-</div>
-
+<br>
 <div class="form-container">
-
+    <div class="title">
+        <p><br>회원가입</p> <!--위에 여백 추가-->
+    </div>
+    <hr>
+    <br>
+    <br>
     <form action="{{ url_for('auth.signup') }}" method="post" enctype="multipart/form-data">
    
         <div class="form-row0">
@@ -191,7 +192,7 @@
 
         <div class="form-row8">
             <label class="profileImagec" for="profileimage">프로필 이미지</label>  
-            <label class="fileTitle" for="file">Choose File</label>
+            <label class="fileTitle" for="file">choose file</label>
                 <input class="uploadfile" type="file" id="file" name= "file"/>
         </div>
         
