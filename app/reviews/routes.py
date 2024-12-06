@@ -16,7 +16,6 @@ def reg_review(productId):
     existing_reviews = reviews_bp.db.get_review_by_product(productId)
     for review in existing_reviews:
         if review["userId"] == userId:
-            flash("이미 리뷰를 작성하셨습니다.")
             return redirect(url_for("reviews.view_review_detail", reviewId=review["reviewId"]))
 
     # 상품 데이터 가져오기 
