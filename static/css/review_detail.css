@@ -86,7 +86,11 @@ main {
     line-height: 1.6;
     color: #666;
 }
-  
+
+.reviewDB {
+    margin-top:30px;
+}
+
 /* 리뷰 이미지 스타일 */
 .review-image img {
     display: block; /* 이미지가 독립된 줄에 위치 */
