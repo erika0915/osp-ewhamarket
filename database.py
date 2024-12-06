@@ -92,12 +92,13 @@ class DBhandler:
     
 
     # 구매 정보를 사용자 데이터에 집어넣기
-    def add_purchased_product(self, user_id, product_info):
+    def add_purchased_product(self, user_id, product_info,product_id):
         user = self.db.child("users").child(user_id).get()
         purchased_products = user.val().get("purchasedProducts", {})
         product_info["purchaseTime"] = datetime.now(timezone.utc).isoformat()
-        product_id = f"product_{len(purchased_products) + 1}"
-        purchased_products[product_id] = product_info
+        product_info["productId"] = product_id  # 여기에 productId 추가
+        product_num = f"product_{len(purchased_products) + 1}"
+        purchased_products[product_num] = product_info
 
         self.db.child("users").child(user_id).update({"purchasedProducts": purchased_products})
         return True
