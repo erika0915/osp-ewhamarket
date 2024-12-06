@@ -52,6 +52,7 @@
 .main-image img {
   width: 120%;
   height: auto;
+  border-radius: 10%;
 }
 
 @media screen and (max-width: 600px) {
