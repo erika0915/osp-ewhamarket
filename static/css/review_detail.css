@@ -122,6 +122,4 @@ main {
 
 .reviewCON {
     text-align: left;
-    top: 150px;          /* 부모의 상단에서 50px 아래로 */
-    left: 100px;        /* 부모의 왼쪽에서 100px 오른쪽으로 */
 }
