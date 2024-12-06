@@ -47,6 +47,10 @@ class DBhandler:
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
         products = self.db.child("products").get().val()
+
+        if not products:
+            print("no products found in database")
+
         for userId, userProducts in products.items():
             if productId in userProducts:
                 return userProducts[productId]
@@ -127,7 +131,6 @@ class DBhandler:
         }
         self.db.child("reviews").push(review_info)
 
-
     # 리뷰 전체 조회 
     def get_reviews(self):
         reviews=self.db.child("reviews").get().val()
@@ -136,11 +139,9 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
         all_reviews = self.db.child("reviews").get().val()
-        review = all_reviews.get(reviewId) if all_reviews else None
-        if not review:
-            print(f"Debug: Review with ID {reviewId} not found.")
-        return review
-
+        if all_reviews and reviewId in all_reviews:
+            return all_reviews[reviewId]
+        return None
     
     # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
@@ -171,7 +172,6 @@ class DBhandler:
     # 좋아요 상태 조회 
     def get_heart_by_Id(self, userId, productId):
         hearts = self.db.child("hearts").child(userId).child(productId).get().val()
-        print(f"[DEBUG] userId: {userId}, productId: {productId}")
         return hearts if hearts else {"interested": "N"}
     
     # 좋아요 상태 업데이트 
@@ -181,7 +181,6 @@ class DBhandler:
         }
         self.db.child("hearts").child(userId).child(productId).set(heart_info)
         save_data = self.db.child("hearts").child(userId).child(productId).get().val()
-        print(f"save_data = {save_data}")
         return True
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
@@ -298,17 +297,14 @@ class DBhandler:
     # 좋아요 목록 
     def get_heart_list(self, userId):
         hearts = self.db.child("hearts").child(userId).get().val()
-        print(f"[DEBUG] Hearts data: {hearts}")
 
         if not hearts:
-            print("[DEBUG] No hearts data found.")
             return []
 
         heart_list = []
         for productId, heartData in hearts.items():
             if heartData.get("interested") == 'Y':
                 products = self.db.child("products").get().val()
-                print(f"[DEBUG] Products data: {products}")
 
                 if not products:
                     continue
