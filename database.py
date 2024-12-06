@@ -172,7 +172,7 @@ class DBhandler:
     def get_heart_by_Id(self, userId, productId):
         hearts = self.db.child("hearts").child(userId).child(productId).get().val()
         print(f"[DEBUG] userId: {userId}, productId: {productId}")
-        return hearts if hearts else ""
+        return hearts if hearts else {"interested": "N"}
     
     # 좋아요 상태 업데이트 
     def update_heart(self, userId, productId, isHeart):
@@ -297,10 +297,11 @@ class DBhandler:
     
     # 좋아요 목록 
     def get_heart_list(self, userId):
-        hearts = self.db.child("heart").child(userId).get().val()
+        hearts = self.db.child("hearts").child(userId).get().val()
         print(f"[DEBUG] Hearts data: {hearts}")
 
         if not hearts:
+            print("[DEBUG] No hearts data found.")
             return []
 
         heart_list = []
@@ -312,7 +313,7 @@ class DBhandler:
                 if not products:
                     continue
 
-                for ownerId, userProducts in products.items():
+                for userId, userProducts in products.items():
                     if productId in userProducts:
                         product = userProducts[productId]
                         heart_list.append({
