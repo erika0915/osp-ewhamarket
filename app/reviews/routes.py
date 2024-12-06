@@ -52,7 +52,7 @@ def reg_review(productId):
         reviews_bp.db.insert_review(data, image_file.filename)
         flash("리뷰가 성공적으로 등록되었습니다!")
         return redirect(url_for("reviews.view_reviews", productId=productId))
-    
+   
 # 전체 리뷰 조회 
 @reviews_bp.route("/")
 def view_reviews():
@@ -70,6 +70,11 @@ def view_reviews():
     review_list=[]
     for reviewId, review in all_reviews.items():
         product = reviews_bp.db.get_product_by_id(review.get("productId"))
+        if product is None:
+            productName = "unknown product"
+        else:
+            productName = product.get("productName")
+            
         review_list.append({
             "reviewId": reviewId,
             "productId": review.get("productId"),
@@ -78,7 +83,7 @@ def view_reviews():
             "content": review.get("content"),
             "rate": review.get("rate"),
             "reviewImage": review.get("reviewImage"),
-            "productName": product.get("productName")
+            "productName": productName
         })
 
 
@@ -99,7 +104,7 @@ def view_reviews():
         row2=rows[1] if len(rows) > 1 else [],
         page=page,
         page_count=(len(all_reviews) + per_page - 1) // per_page,
-        m=row_count,
+        m=row_count
     )
 
 # 리뷰 상세 조회 
