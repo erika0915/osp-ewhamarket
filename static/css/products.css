@@ -142,7 +142,16 @@ table {
 td {
   padding: 15px;
   border: 1px solid #ccc; /* 테두리 */
+  padding: 15px;
+  border: 1px solid #ccc;
+  width: 200px; /* 고정된 너비 */
+  vertical-align: top; /* 내용이 위쪽에 정렬되도록 설정 */
 }
+
+td:empty {
+  border: none;
+}
+
 
 .product-title{
   float: left;
