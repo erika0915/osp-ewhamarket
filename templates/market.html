@@ -24,9 +24,9 @@
           <div class="sellList-container">
               {% if user.sellList %}
               <div class="image-List">
-                  {% for product in user.sellList %}
-                  <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
-                  {% endfor %}
+                {% for product in user.sellList %}
+                <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                {% endfor %}
               </div>
               {% else %}
               <p>No products available.</p>
