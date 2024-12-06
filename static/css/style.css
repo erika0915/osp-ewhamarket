@@ -124,16 +124,14 @@ body {
     }
 }
 
-footer {
+.footer {
+    margin-top: 50px;
     font-size: 10px;
 }
 
 .company, .member {
     font-weight: bold;
 }
-
-
-
 
 #reviewContents {
     width: 100%;
