@@ -182,25 +182,24 @@ button:hover {
   justify-content: center;
 }
 
-/* 리뷰 제목 */
-.review h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-  text-align: left;
-}
-
 /* 개별 리뷰 스타일 */
 .content {
   margin-bottom: 20px; /* 리뷰 간 간격 */
   padding: 15px; /* 내부 여백 */
   border: 1px solid #ddd; /* 외곽선 */
   border-radius: 8px; 
-  background-color: #fff;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   height: inherit;
-  
+  display: flex;
+}
+
+.review-left {
+  flex: 2.4;
+  display: flex;
+  flex-direction: column;
+  margin-left:20px;
+  gap:1px;
 }
 
 /* 별점 스타일 */
@@ -208,51 +207,59 @@ button:hover {
   display: block; /* 별점 줄바꿈 */
   font-size: 20px; /* 별 크기 */
   color: #ffc107; /* 별 색상 (황금색) */
-  margin: 0 0 10px 10px;
+  margin: 10px 0 5px 0;
 }
 
 /* 리뷰 제목 스타일 */
-.content h3 {
-  font-size: 20px; /* 제목 크기 */
-  font-weight: bold; /* 굵은 텍스트 */
-  color: #555; /* 텍스트 색상 */
+.reviewtitle {
+  font-size: 18px; 
+  font-weight: bold; 
+  color: #555; 
   align-items: flex-start;
-  margin: 0 0 10px 10px;
+  margin-bottom: 0%;
+  margin-top: 10px;
+}
+.reviewDB {
+  font-size: 13px;
+  display:flex;
+  justify-content: space-between;
+  margin-top:0%;
 }
 
-.reviewbox {
-  display: flex;
-}
-
-/* 리뷰 내용 스타일 */
-.reviewcontent p {
-  font-size: 16px; /* 내용 크기 */
-  line-height: 1.5; /* 줄 간격 */
-  align-items: flex-start;
-  margin-bottom: 5px; /* 아래 간격 */
-}
-
-.reviewcontent_DB {
+.review-at {
   color: #848484;
 }
 
-.reviewcontent_content {
-  color: black;
+.review-author {
+  margin-right: 5px;
 }
 
 
-/* 리뷰 이미지 스타일 */
-.content img {
-  display: block; /* 이미지가 독립된 줄에 위치 */
-  margin: 10px 20px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
-  max-width: 20%; /* 이미지 크기를 컨테이너에 맞게 제한 */
+/* 리뷰 내용 스타일 */
+.review-content {
+  font-size: 16px; 
+  line-height: 1.5; 
+  align-items: flex-start;
+  margin-top:0%;
+  margin-bottom: 5px; 
+  text-align: left;
+}
+
+/* 이미지 */
+.review-right {
+  flex: 1; 
+  text-align: center;
+}
+
+.review-right img {
+  display: flex; /* 이미지가 독립된 줄에 위치 */
+  margin: 20px 30px 20px 30px; 
+  max-width: 150%; /* 이미지 크기를 컨테이너에 맞게 제한 */
   border-radius: 5px; /* 모서리를 둥글게 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
   object-fit: cover;
-}
-
-.reviewcontent {
-  text-align: left;
+  width: 150px;
+  height: 180px;
 }
 
 /* 등록된 리뷰 없음 스타일 */
