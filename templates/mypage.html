@@ -8,10 +8,6 @@
 
 {% block section %}
 <main>
-    <div class="titleMypage">
-        <p><br>마이페이지</p> <!--위에 여백 추가-->
-    </div>
-
     <div class="form-container">
         <div class="profile-container">
             <img src="{{ url_for('static', filename='images/' + profileImage) }}" width=140, height=200>
@@ -39,14 +35,15 @@
             {% if purchasedList %}
             <div id="image-List-pur" class="image-List-pur">
                 {% for item in purchasedList%}
-                <div class="image-wrapper">
-                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <div class="image-wrapper" onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}'" style="cursor:pointer;">
+                    <a href="reg_review.html"style="display: block; text-decoration: none; color: inherit;">
+                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
 
-            <div id="pagination-container-pur" class="pagination-container-pur">
-            </div>
+            <div id="pagination-container-pur" class="pagination-container-pur"></div>
             {% endif %}
         </div>
 
@@ -60,10 +57,24 @@
                 </div>
                 {% endfor %}
             </div>
-            <div id="pagination-container-sell" class="pagination-container-sell">
-            </div>
+            <div id="pagination-container-sell" class="pagination-container-sell"></div>
             {% endif %}
         </div>
+
+        <h4>{{ userInfo.nickname }}벗의 좋아요 목록</h4>
+        <div class = "likeList-container">
+            {% if likedList %}
+            <div id="image-List-like" class="image-List-like">
+                {% for item in likedList %}
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="pagination-container-like" class="pagination-container-like"></div>
+            {% endif %}
+        </div>
+
     </div>
 </main>
 <script>
@@ -126,4 +137,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 {% endblock %}
-
