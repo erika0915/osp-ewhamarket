@@ -72,7 +72,7 @@ def id_check():
     else:
         return jsonify({"success": False, "message": f"'{user_id}'는 이미 사용 중인 ID입니다."}), 409
     
-#Id 중복체크버튼
+#nickname 중복체크버튼
 @auth_bp.route("/nickcheck", methods=["GET"])
 def nick_chek():
     nickname = request.args.get("nickname")  # 쿼리 문자열에서 nickname을 가져옵니다

@@ -23,7 +23,7 @@ class DBhandler:
             "location":data['location'],
             "description":data['description'],
             "productImage": productImage,
-            "createdAt": userId,#datetime.now(timezone.utc).isoformat(),
+            "createdAt": datetime.now(timezone.utc).isoformat(),
             "purchaseCount":0,
             "reviewCount": 0,
             "userId": userId
