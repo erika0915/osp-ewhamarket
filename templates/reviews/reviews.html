@@ -1,0 +1,95 @@
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css') }}">
+{% endblock %}
+
+{% block section %}
+
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
+<div class="product_container">
+    <main>
+        <section id="head">
+            <p class="title">상품 리뷰 목록</p>
+        </section>
+
+        <div>
+            {% if total > 0 %}
+            <p class="reg-num">총 {{total}}개</p>
+            <table>
+                <tr>
+                    {% for review in row1 %}
+                    <td onclick="location.href='{{ url_for('reviews.view_review_detail', reviewId=review['reviewId']) }}';" style="cursor:pointer;">
+                        <div class="layer">
+                            <div class="product-item">
+                                <div class="product-image">
+                                    <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
+                                </div>
+                                <div class="product-title">{{ review['product'] }}</div>
+                                <div class="price">{{ review['price'] }}</div>
+                            </div>
+                            <div class="description">
+                                <!-- 별점 -->
+                                <span class="stars">
+                                    {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+                                </span> 
+                                <div class="review-title">{{ review['title'] }}</div>
+                                <div class="review-product">{{ review['content'] }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    {% for review in row2 %}
+                    <td onclick="location.href='{{ url_for('reviews.view_review_detail',reviewId=review['reviewId']) }}';" style="cursor:pointer;">
+                        <div class="layer">
+                            <div class="product-item">
+                                <div class="product-image">
+                                    <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
+                                </div>
+                                <div class="product-title">{{ review['product'] }}</div>
+                                <div class="price">{{ review['price'] }}</div>
+                            </div>
+                            <div class="description">
+                                <!-- 별점 -->
+                                <span class="stars">
+                                    {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+                                </span> 
+                                <div class="review-title">{{ review['title'] }}</div>
+                                <div class="review-product">{{ review['content'] }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            {% else %}
+            <p class="reg_num">등록된 리뷰가 없습니다.</p>
+            {% endif %}
+        </div>
+
+        <div class="page-wrap">
+            <div class="page-nation">
+                <ul class="pagination">
+                    {% for i in range(page_count) %}
+                    <li>
+                        <a href="{{ url_for('reviews.view_reviews', page=i) }}" style="color:black;">{{ i + 1 }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='/js/reviews.js') }}"></script>
+
+{% endblock %}

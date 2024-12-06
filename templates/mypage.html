@@ -1,0 +1,139 @@
+<!--금채원-->
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/mypage.css') }}">
+{% endblock %}
+
+{% block section %}
+<main>
+    <div class="form-container">
+        <div class="profile-container">
+            <img src="{{ url_for('static', filename='images/' + profileImage) }}" width=140, height=200>
+            <div class= "profile">
+                <div class="nickName">
+                    <label for="nickName">닉네임 </label>
+                    <input class="innn" type="text" id="nickName" name="nickName" value=" {{ userInfo.nickname }}" readonly>
+                </div>
+
+                <div class="email">
+                    <label for="email">이메일 </label>
+                    <input class="inem" type="text" id="email" name="email" value=" {{ userInfo.email }}@ewha.ac.kr" readonly>
+                </div>
+
+                <div class="phoneNumber">
+                    <label for="phoneNumber">전화번호</label>
+                    <input class="intel" type="text" id="phoneNumber" name="phoneNumber" value=" {{ userInfo.phoneNum }}" readonly>
+                </div>
+                
+            </div>
+        </div>
+
+        <h4>{{ userInfo.nickname }}벗의 구매 항목</h4>
+        <div class="purchaseList-container">
+            {% if purchasedList %}
+            <div id="image-List-pur" class="image-List-pur">
+                {% for item in purchasedList%}
+                <div class="image-wrapper" onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}'" style="cursor:pointer;">
+                    <a href="reg_review.html"style="display: block; text-decoration: none; color: inherit;">
+                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="pagination-container-pur" class="pagination-container-pur"></div>
+            {% endif %}
+        </div>
+
+        <h4>{{ userInfo.nickname }}벗의 판매 목록</h4>
+        <div class="sellList-container">
+            {% if sellList %}
+            <div id="image-List-sell" class="image-List-sell">
+                {% for item in sellList %}
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="pagination-container-sell" class="pagination-container-sell"></div>
+            {% endif %}
+        </div>
+
+        <h4>{{ userInfo.nickname }}벗의 좋아요 목록</h4>
+        <div class = "likeList-container">
+            {% if likedList %}
+            <div id="image-List-like" class="image-List-like">
+                {% for item in likedList %}
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="pagination-container-like" class="pagination-container-like"></div>
+            {% endif %}
+        </div>
+
+    </div>
+</main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const itemsPerPage = 5; // 한 페이지에 표시할 이미지 수
+
+    const setupPagination = (imageListId, paginationContainerId) => {
+        const imageList = document.querySelector(`#${imageListId}`);
+        if (!imageList) {
+            console.warn(`Element with ID '${imageListId}' not found.`);
+            return;
+        }
+
+        const paginationContainer = document.querySelector(`#${paginationContainerId}`);
+        if (!paginationContainer) {
+            console.warn(`Element with ID '${paginationContainerId}' not found.`);
+            return;
+        }
+
+        const images = Array.from(imageList.children);
+        const totalPages = Math.ceil(images.length / itemsPerPage);
+
+        if (totalPages > 1) {
+            paginationContainer.style.visibility = "visible";
+
+            const displayPage = (page) => {
+                images.forEach((image, index) => {
+                    image.style.display =
+                        index >= (page - 1) * itemsPerPage && index < page * itemsPerPage
+                            ? "block"
+                            : "none";
+                });
+
+                Array.from(paginationContainer.children).forEach((btn, idx) => {
+                    btn.classList.toggle("active", idx + 1 === page);
+                });
+            };
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.addEventListener("click", () => displayPage(i));
+                paginationContainer.appendChild(button);
+            }
+
+            displayPage(1); // 첫 페이지 표시
+        } else {
+            images.forEach((image) => {
+                image.style.display = "block";
+            });
+        }
+    };
+
+    // 구매 목록에 대해 페이지네이션 설정
+    setupPagination("image-List-pur", "pagination-container-pur");
+
+    // 판매 목록에 대해 페이지네이션 설정
+    setupPagination("image-List-sell", "pagination-container-sell");
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!--김연우-->
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/market.css') }}">
+{% endblock %}
+
+{% block section %}
+
+<br>
+<div class="form-container">
+  <div class="titleRanking">
+    <p>마켓 랭킹</p> 
+  </div>
+  <br>
+  <br>
+  {% for user in top_user_data%}
+      <div class="market-container">
+          <div class="user-container">
+            <button class="market-name">{{ loop.index }}.&nbsp; &nbsp;{{user.nickname}}</button>
+          </div>
+          <hr>
+          <div class="sellList-container">
+              {% if user.sellList %}
+              <div class="image-List">
+                  {% for product in user.sellList %}
+                  <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                  {% endfor %}
+              </div>
+              {% else %}
+              <p>No products available.</p>
+              {% endif %}
+          </div>
+      </div>
+      <br>
+    {% endfor %}
+  </div>
+
+<script src="{{ url_for('static', filename='js/market.js') }}"></script>
+{% endblock %}   
+
+

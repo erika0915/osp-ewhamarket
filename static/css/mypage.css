@@ -1,0 +1,176 @@
+/* 기본설정 */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 전체 레이아웃 설정 */
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 마이페이지 전체 컨테이너 */
+.form-container {
+    justify-content: flex-start; /* 수평 정렬: 좌측 */
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto; /* 중앙 정렬 */
+    padding: 30px 90px 30px 90px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.form-container h4 {
+    font-size: 18px;
+    margin-bottom: 12px; 
+    font-size: 18px;
+    color: #333;
+}
+  
+/* 상단 프로필 컨테이너( 사진 + 내정보 ) */
+.profile-container {
+    display: flex; /* 플렉스박스 레이아웃 */
+    justify-content: flex-start; /* 수평 정렬: 좌측 */
+    align-items: flex-start; /* 수직 정렬: 상단 */
+    gap: 20px; /* 이미지와 텍스트 간 간격 */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 20px auto;
+}
+
+
+.profile-container img {
+    align-self: flex-start; /* 이미지를 상단 정렬 */
+    display: block; /* 불필요한 수직 정렬 제거 */
+    width: 180px;
+    height: 200px; 
+    margin: 25px 10px 0 0;
+    border-radius: 5px; 
+}
+
+.profile {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* 텍스트 내용을 세로 정렬 */
+    gap: 10px; /* 각 텍스트 간 간격 */
+}
+
+.profile label {
+    width: 80px; /* 레이블 너비 고정 */
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px; /* 입력 필드와 간격 */
+}
+
+.profile input {
+    flex: 1; /* 입력 필드가 남은 공간을 차지 */
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #f5f5f5; /* 읽기 전용 필드 배경색 */
+    color: #333; 
+}
+
+.profile input[readonly] {
+    cursor: not-allowed; /* 커서 변경 */
+}
+
+.nickName {
+    margin: 20px 40px 0 30px;
+}
+
+.email {
+    margin: 0 40px 0px 30px;
+}
+
+.phoneNumber {
+    margin: 0 40px 5px 30px;
+}
+
+.profile .innn, .profile .inem, .profile .intel {
+    padding: 10px 35px 10px 10px;
+    margin: 10px;
+    width: 500px;
+    border:none;
+    border-radius: 15px;
+    font-size: 18px;
+    background-color: #f5f5f5;
+    color:#848484;
+}
+
+
+/*컨테이너 공통 부분*/
+.image-List-pur, .image-List-sell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* 왼쪽부터 채우기 */
+    padding: 10px;
+    width: fit-content;
+}
+
+.image-wrapper img {
+    width: 135px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-left: 5px;
+    transition: transform 0.3s ease; /* 호버 애니메이션 */
+}
+
+/* 구매, 판매, 좋아요 항목 컨테이너 */
+.purchaseList-container, .sellList-container, .likeList-container {
+    width: 150%;
+    max-width: 850px;
+    margin: auto; /* 가운데 정렬 */
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+}  
+
+/*페이징*/
+.pagination-container-pur, .pagination-container-sell, .pagination-container-like {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination-container-pur button, .pagination-container-sell button, .pagination-container-like button  {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.pagination-container-pur button.active, .pagination-container-sell button.active, .pagination-container-like button.active {
+    background-color: rgb(0, 70, 42);
+    color: white;
+    border-color: rgb(0, 70, 42);
+}
+
+.pagination-container-pur button:hover:not(.active), .pagination-container-sell button:hover:not(.active), .pagination-container-like button:hover:not(.active) {
+    background-color: #ddd;
+}

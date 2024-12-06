@@ -1,0 +1,248 @@
+{% extends "index.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+{% endblock %}
+
+{% block section %} 
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+    <script>alert("{{ mesg[0] }}")</script>
+{% endif %}
+{% endwith %}
+<br>
+<div class="form-container">
+    <div class="title">
+        <p><br>회원가입</p> <!--위에 여백 추가-->
+    </div>
+    <hr>
+    <br>
+    <br>
+    <form action="{{ url_for('auth.signup') }}" method="post" enctype="multipart/form-data">
+   
+        <div class="form-row0">
+            <label class="nickc" for="nickname">닉네임</label>
+            <input class="inni" type="text" id="nickname" name="nickname" placeholder="10자 이내" required> 
+            <button type="button" class="nick_overlap_button" onclick="checkNick()">닉네임 중복확인</button>        
+            <div id="nickCheckResult" style="margin-top: 10px; color: red;"></div> <!-- 결과 표시 영역 -->
+        </div>
+        <script>
+            async function checkNick() {
+                const nickname = document.getElementById("nickname").value;
+                const resultDiv = document.getElementById("nickCheckResult");
+            
+                if (!nickname) {
+                    resultDiv.textContent = "닉네임을 입력하세요";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+                if (nickname.length > 10) {
+                    resultDiv.textContent = "10자 이내로 입력해주세요";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+            
+                try {
+                    const response = await fetch(`/auth/nickcheck?nickname=${encodeURIComponent(nickname)}`, { method: "GET" });
+                    const data = await response.json();
+            
+                    if (data.success) {
+                        resultDiv.textContent = data.message;
+                        resultDiv.style.color = "#00462A";
+                        return true;
+                    } else {
+                        resultDiv.textContent = data.message;
+                        resultDiv.style.color = "red";
+                        return false;
+                    }
+                } catch (error) {
+                    console.error(error);
+                    resultDiv.textContent = "서버 요청 중 오류가 발생했습니다";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+            }            
+        </script>
+
+        <div class="form-row">
+            <label class="mkIDc" for="mkId">아이디</label>
+            <input type="text" class="username_input" id="mkId" name="userId" placeholder="영문자, 숫자 조합으로 5-20자"required> 
+            <button type="button" class="id_overlap_button" onclick="checkId()">ID 중복확인</button>        
+            <div id="idCheckResult" style="margin-top: 10px; color: red;"></div> 
+        </div>
+        <script>
+            async function checkId() {
+                const userId = document.getElementById("mkId").value;
+                const resultDiv = document.getElementById("idCheckResult");
+            
+                if (!userId) {
+                    resultDiv.textContent = "아이디를 입력하세요";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+                if (userId.length < 5 || userId.length > 20) {
+                    resultDiv.textContent = "5-20자로 입력하세요";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+                if (!/^[A-Za-z0-9]+$/.test(userId)) {
+                    resultDiv.textContent = "형식에 맞게 입력하세요";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+            
+                try {
+                    const response = await fetch(`/auth/idcheck?userId=${encodeURIComponent(userId)}`, { method: "GET" });
+                    const data = await response.json();
+            
+                    if (data.success) {
+                        resultDiv.textContent = data.message;
+                        resultDiv.style.color = "#00462A";
+                        return true;
+                    } else {
+                        resultDiv.textContent = data.message;
+                        resultDiv.style.color = "red";
+                        return false;
+                    }
+                } catch (error) {
+                    console.error(error);
+                    resultDiv.textContent = "서버 요청 중 오류가 발생했습니다";
+                    resultDiv.style.color = "red";
+                    return false;
+                }
+            }            
+        </script>
+        
+        <div class="form-row2">
+            <label class="pswdc" for="pswd">비밀번호</label>
+            <input type="password" id="pswd" name="pw" oninput="pwCheck()" placeholder="영문자,숫자,특수문자 포함 8-20자"required> 
+            <span id="pwConfirm1"></span>
+        </div>
+        <div class="form-row3">
+            <label class="chkpswdc" for="chkpswd">비밀번호 확인</label>
+            <input type="password" id="chkpswd"  oninput="pwCheck()" name = "chkpswd" placeholder="비밀번호 재입력"required>
+            <span id="pwConfirm2"></span>
+        </div> 
+    
+        <script>
+            function pwCheck() {
+                const pw1 = document.getElementById('pswd').value;
+                const pw2 = document.getElementById('chkpswd').value;
+            
+                if (!pw1) {
+                    $('#pwConfirm1').text('비밀번호를 입력하세요').css('color', 'red');
+                    return false;
+                }
+                if (pw1.length < 8 || pw1.length > 20) {
+                    $('#pwConfirm1').text('8-20자로 입력하세요').css('color', 'red');
+                    return false;
+                }
+                if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(pw1)) {
+                    $('#pwConfirm1').text('영문자,숫자,특수문자를 사용하세요').css('color', 'red');
+                    return false;
+                }
+            
+                $('#pwConfirm1').text('').css('color', '#00462A');
+                if (pw1 === pw2) {
+                    $('#pwConfirm2').text('비밀번호 일치').css('color', '#00462A');
+                    return true;
+                } else {
+                    $('#pwConfirm2').text('비밀번호 불일치').css('color', 'red');
+                    return false;
+                }
+            }            
+        </script>
+
+
+        <div class="form-row4">
+            <label class="namec" for="name">이름</label>
+            <input class="inna" type="text" id="name" name="name" placeholder="이름을 입력해주세요"required> 
+        </div>
+
+        <div class="form-row5">
+            <label class="phnumc" for="phnum">전화번호</label>
+            <input class="inph" type="text" id="phnum" oninput="phnumCheck()" name="phoneNum" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)"required>
+            <span id="phnumConfirm"></span>
+        </div>
+        <script>
+            function phnumCheck() {
+                const ph = document.getElementById('phnum').value;
+            
+                if (!/^\d{11}$/.test(ph)) {
+                    $('#phnumConfirm').text('형식에 맞게 입력하세요').css('color', 'red');
+                    return false;
+                }
+            
+                $('#phnumConfirm').text('').css('color', '#00462A');
+                return true;
+            }            
+        </script>
+
+        <div class="form-row6">
+            <label class="emailc" for="email">이메일 주소</label>
+            <input class="inemail" type="text" id="email" name="email" placeholder=""required>
+            <p class="ewhaemail">@ewha.ac.kr</p>
+        </div>
+
+        <div class="form-row7">
+            <label class="bdayc" for="bday">생년월일</label>
+            <input type="date" class="inbc" id="bday" name="bday" value="2024-12-01" min="1900-01-01" max="2100-12-31" required />
+        </div>
+
+        <div class="form-row8">
+            <label class="profileImagec" for="profileimage">프로필 이미지</label>  
+            <label class="fileTitle" for="file">choose file</label>
+            <input class="uploadfile" type="file" onchange="readURL(this);" id="file" name= "file"/>
+            <img id="preview" style="display:none;" />
+        </div>
+        <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  var preview = document.getElementById('preview');
+                  preview.src = e.target.result;
+                  preview.style.display = 'block'; // 이미지를 블록으로 표시
+                };
+                reader.readAsDataURL(input.files[0]);
+              } else {
+                var preview = document.getElementById('preview');
+                preview.src = "";
+                preview.style.display = 'none'; // 파일이 없을 때 숨김
+              }
+            }
+          </script>
+        
+        <div class="form-row9">     
+            <div class="agree">
+                <input type="checkbox" id="agree" name="agree">
+                <label for="agree">개인정보 수집 및 이용동의</label>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="reset" class="cancel-button">취소</button>
+            <button type="submit" class="submit-button">등록</button>
+        </div> 
+        <!--<script>
+            document.querySelector('form').addEventListener('submit', async function (event) {
+                event.preventDefault(); // 폼 제출 중단
+            
+                const isNickValid = await checkNick();
+                const isIdValid = await checkId();
+                const isPwValid = pwCheck();
+                const isPhoneValid = phnumCheck();
+            
+                if (isNickValid && isIdValid && isPwValid && isPhoneValid) {
+                    alert("등록되었습니다");
+                    event.target.submit(); // 모든 조건이 만족되면 폼 제출
+                } else {
+                    alert("모든 칸을 정확히 입력하세요");
+                }
+            });            
+        </script>-->
+    </form>
+</div>
+{% endblock section %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/signup.js"></script>
