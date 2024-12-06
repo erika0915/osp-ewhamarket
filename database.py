@@ -140,7 +140,13 @@ class DBhandler:
     def get_review_by_id(self, reviewId):
         all_reviews = self.db.child("reviews").get().val()
         if all_reviews and reviewId in all_reviews:
-            return all_reviews[reviewId]
+            review = all_reviews[reviewId]
+
+            # 날짜 변환 
+            createdAt = review.get("createdAt")
+            if createdAt:
+                review["createdAt"] = datetime.fromisoformat(createdAt).date()
+            return review
         return None
     
     # 상품 별 리뷰 목록 조회 
