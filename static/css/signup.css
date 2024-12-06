@@ -139,25 +139,25 @@ textarea::placeholder{
   transition: 0.5s;
 }
 
-#pswd,#chkpswd,#phnum{
+#pswd,#chkpswd,#phnum,#email{
   width:60%;
 }
-#nickc{
-  width:90%;
+#nickc,#mkID{
+  width:100%
 }
 #name{
   width:35%;
 }
 
 #mkID{
-  width:70%
+  width:100%
 }
+
 #shortDescription,textarea{
   width:100%
 }
-#email{
-  width:60%
-}
+
+
 .ewhaemail{
   color:#555;
   font-size: 20px;
@@ -228,6 +228,7 @@ textarea::placeholder{
   transition: 0.5s;
   width:20%
 }
+
 #preview {
   width: 100px;
   height: auto;
