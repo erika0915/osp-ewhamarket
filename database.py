@@ -244,6 +244,7 @@ class DBhandler:
         for userid, user_data in users.items():
             if user_data.get("nickname") == nickname:  # nickname이 중복되면 False 반환
                 return False
+        return True 
     
     # 사용자 정보 ID로 가져오기 
     def get_user_by_id(self, userId):
