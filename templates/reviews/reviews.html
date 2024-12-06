@@ -14,28 +14,14 @@
 {% endwith %}
 
 <div class="product_container">
-    <aside class="side-bar">
-        <ul>
-            <li><a href="#">디지털 악세사리</a></li>
-            <li><a href="#">패션 악세사리</a></li>
-            <li><a href="#">테이블웨어</a></li>
-            <li><a href="#">스테이셔너리</a></li>
-        </ul>
-    </aside>
-
     <main>
         <section id="head">
-            <p class="title">전체 리뷰 조회</p>
-            <div class="array">
-                <button class="review" data-value="review">리뷰 많은 순</button>
-                <button class="rate" data-value="rate">높은 평점 순</button>
-                <button class="recent" data-value="recent">최신순</button>
-            </div>
+            <p class="title">상품 리뷰 목록</p>
         </section>
 
         <div>
             {% if total > 0 %}
-            <p class="reg_num">현재까지 {{ total }}개 리뷰 등록됨</p>
+            <p class="reg-num">총 {{total}}개</p>
             <table>
                 <tr>
                     {% for review in row1 %}
@@ -46,11 +32,15 @@
                                     <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
                                 </div>
                                 <div class="product-title">{{ review['product'] }}</div>
+                                <div class="price">{{ review['price'] }}</div>
                             </div>
                             <div class="description">
-                                <div class="grade">★★★★★ {{ review['rate'] }}</div>
-                                <div class="des-title">{{ review['title'] }}</div>
-                                <div>{{ review['content'] }}</div>
+                                <!-- 별점 -->
+                                <span class="stars">
+                                    {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+                                </span> 
+                                <div class="review-title">{{ review['title'] }}</div>
+                                <div class="review-product">{{ review['content'] }}</div>
                             </div>
                         </div>
                     </td>
@@ -66,11 +56,15 @@
                                     <img src="{{ url_for('static', filename='images/' + review['reviewImage']) }}" width="140" height="200" />
                                 </div>
                                 <div class="product-title">{{ review['product'] }}</div>
+                                <div class="price">{{ review['price'] }}</div>
                             </div>
                             <div class="description">
-                                <div class="grade">★★★★★ {{ review['rate'] }}</div>
-                                <div class="des-title">{{ review['title'] }}</div>
-                                <div>{{ review['content'] }}</div>
+                                <!-- 별점 -->
+                                <span class="stars">
+                                    {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
+                                </span> 
+                                <div class="review-title">{{ review['title'] }}</div>
+                                <div class="review-product">{{ review['content'] }}</div>
                             </div>
                         </div>
                     </td>
@@ -95,4 +89,7 @@
         </div>
     </main>
 </div>
+
+<script src="{{ url_for('static', filename='/js/reviews.js') }}"></script>
+
 {% endblock %}

@@ -52,6 +52,7 @@
 .main-image img {
   width: 120%;
   height: auto;
+  border-radius: 10%;
 }
 
 @media screen and (max-width: 600px) {
@@ -242,6 +243,7 @@ hr {
   border-top: 1px solid #ddd;
   margin: 0;
   width: 97%;
+  position: relative;
 }
 
 
@@ -249,8 +251,9 @@ hr {
   cursor: pointer;
   color: grey;
   font-size: 23px;
-  margin-left: 300px;
+  margin-left: 530px;
   margin-bottom: -20px;
+  position: absolute;
 }
 
 #heart.red {
