@@ -25,7 +25,11 @@
               {% if user.sellList %}
               <div class="image-List">
                 {% for product in user.sellList %}
-                <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                <div class="image-wrapper">
+                  <a href="{{ url_for('products.view_product_detail', productId= product['productId']) }}">
+                    <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                  </a>
+                </div>
                 {% endfor %}
               </div>
               {% else %}
