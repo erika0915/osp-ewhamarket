@@ -134,7 +134,7 @@ hr {
 .product-description p {
   margin: 0px;
   line-height: 1.6;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .product-price { 
