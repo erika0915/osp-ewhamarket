@@ -43,8 +43,7 @@
                 {% endfor %}
             </div>
 
-            <div id="pagination-container-pur" class="pagination-container-pur">
-            </div>
+            <div id="pagination-container-pur" class="pagination-container-pur"></div>
             {% endif %}
         </div>
 
@@ -58,10 +57,24 @@
                 </div>
                 {% endfor %}
             </div>
-            <div id="pagination-container-sell" class="pagination-container-sell">
-            </div>
+            <div id="pagination-container-sell" class="pagination-container-sell"></div>
             {% endif %}
         </div>
+
+        <h4>{{ userInfo.nickname }}벗의 좋아요 목록</h4>
+        <div class = "likeList-container">
+            {% if likedList %}
+            <div id="image-List-like" class="image-List-like">
+                {% for item in likedList %}
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="pagination-container-like" class="pagination-container-like"></div>
+            {% endif %}
+        </div>
+
     </div>
 </main>
 <script>
