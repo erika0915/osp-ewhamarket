@@ -60,11 +60,12 @@ main {
 .grade span {
     font-size: 20px;
     color: #FFD700;
+
 }
 
 #star-rating span {
     font-size: 24px;
-    margin-right: 4px;
+    margin-right: 1px;
 }
 
 .review-rate{
@@ -72,6 +73,7 @@ main {
     color: #444;
     margin-top: 5px;
     margin-bottom: 6px;
+    font-weight: bold;
 }
 
 .content h3 {
@@ -93,6 +95,9 @@ main {
     max-width: 150%; /* 이미지 크기를 컨테이너에 맞게 제한 */
     border-radius: 5px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+    object-fit: cover;
+    width: 150px;
+    height: 180px;
 }
   
 .review-content {
@@ -110,13 +115,16 @@ main {
 .reviewcontent p {
     font-size: 16px; 
     line-height: 1.5; 
-    color: #666; 
     align-items: flex-start;
     margin-bottom: 5px; 
 }
   
 .reviewcontent {
     text-align: left;
+}
+
+.reviewDB {
+    color: lightgray; 
 }
 
 
