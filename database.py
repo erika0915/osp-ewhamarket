@@ -168,28 +168,21 @@ class DBhandler:
                 })
         return productReviews
     #-----------------------------------------------------------------------------------------  
-    # 좋아요 기능 
-    def get_heart_byname(self, uid, productName):
-        hearts = self.db.child("heart").child(uid).get()
-        target_value =""
-        if hearts.val() == None:
-            return target_value
-        
-        for res in hearts.each():
-            key_value = res.key()
-            
-            if key_value == productName:
-                target_value = res.val()
-        return target_value
+    # 좋아요 상태 조회 
+    def get_heart_by_Id(self, userId, productId):
+        hearts = self.db.child("hearts").child(userId).child(productId).get().val()
+        print(f"[DEBUG] userId: {userId}, productId: {productId}")
+        return hearts if hearts else ""
     
-
-    def update_heart(self, userId, isHeart, productName):
+    # 좋아요 상태 업데이트 
+    def update_heart(self, userId, productId, isHeart):
         heart_info={
             "interested" : isHeart
         }
-        self.db.child("heart").child(userId).child(productName).set(heart_info)
+        self.db.child("hearts").child(userId).child(productId).set(heart_info)
+        save_data = self.db.child("hearts").child(userId).child(productId).get().val()
+        print(f"save_data = {save_data}")
         return True
-
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, userId, pw_hash):
@@ -302,18 +295,33 @@ class DBhandler:
             for productId, productData  in products.items()
         ]
     
-    # 좋아요 목록 조회 
+    # 좋아요 목록 
     def get_heart_list(self, userId):
-        hearts= self.db.child("heart").child(userId).get().val()
+        hearts = self.db.child("heart").child(userId).get().val()
+        print(f"[DEBUG] Hearts data: {hearts}")
 
         if not hearts:
             return []
-        
-        heart_list=[]
-        for productName, heartData in hearts.items():
+
+        heart_list = []
+        for productId, heartData in hearts.items():
             if heartData.get("interested") == 'Y':
-                heart_list.append({
-                    "productName" : productName,
-                    "interested": heartData.get("interested")
-                })
+                products = self.db.child("products").get().val()
+                print(f"[DEBUG] Products data: {products}")
+
+                if not products:
+                    continue
+
+                for ownerId, userProducts in products.items():
+                    if productId in userProducts:
+                        product = userProducts[productId]
+                        heart_list.append({
+                            "productId": productId,
+                            "productName": product.get("productName"),
+                            "productImage": product.get("productImage"),
+                            "interested": heartData.get("interested")
+                        })
+                        break
+
+        print(f"[DEBUG] Heart list: {heart_list}")
         return heart_list

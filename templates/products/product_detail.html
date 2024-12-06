@@ -103,33 +103,32 @@
 </body>
 
 <script>
-  const productName = "{{ data.productName }}";
-  function showHeart() {
-    $.ajax({
-      type: 'GET',
-      url: '/likes/show_heart/{{ data.productName }}/',
-      data: {},
-      success: function (response) {
-        let my_heart = response['my_heart'];
-        if (my_heart['interested'] == 'Y')
-        {
-          $("#heart").css("color","red");
-          $("#heart").attr("onclick","unlike()");
-       }
-        else
-        {
-          $("#heart").css("color","grey");
-          $("#heart").attr("onclick","like()");
-        }
-        //alert("showheart!")
+const productId = "{{ productId }}";
+
+function showHeart() {
+  $.ajax({
+    type: 'GET',
+    url: `/likes/show_heart/${productId}/`,  // productId 기반 URL
+    success: function (response) {
+      let my_heart = response['my_heart'];
+      if (my_heart['interested'] == 'Y') {
+        $("#heart").css("color", "red");
+        $("#heart").attr("onclick", "unlike()");
+      } else {
+        $("#heart").css("color", "grey");
+        $("#heart").attr("onclick", "like()");
+      }
+    },
+    error: function () {
+      alert("좋아요 상태를 불러오는 중 오류가 발생했습니다.");
     }
-    });
-  }
+  });
+}
   
-  function like() {
-    $.ajax({
+function like() {
+  $.ajax({
     type: 'POST',
-    url: '/likes/like/{{data.productName}}/',
+    url: `/likes/like/${productId}/`,
     data: {
       interested : "Y"
     },
@@ -143,7 +142,7 @@
   function unlike() {
     $.ajax({
       type: 'POST',
-      url: '/likes/unlike/{{data.productName}}/',
+      url: `/likes/unlike/${productId}/`, 
       data: {
         interested : "N"
       },
