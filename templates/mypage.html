@@ -75,6 +75,7 @@
                 <div class="image-wrapper">
                     <a href="{{ url_for('products.view_product_detail', productId=item['productId']) }}">
                         <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
