@@ -106,6 +106,24 @@ class DBhandler:
 
         self.db.child("users").child(user_id).update({"purchasedProducts": purchased_products})
         return True
+    
+    def update_purchased_product_review(self, userId, productId, reviewId):
+        # 사용자 데이터 가져오기
+        user = self.db.child("users").child(userId).get().val()
+        if not user:
+            print(f"Debug: User {userId} not found.")
+            return False
+
+        # purchasedProducts 데이터 업데이트
+        purchased_products = user.get("purchasedProducts", {})
+        for product_key, product_data in purchased_products.items():
+            if product_data.get("productId") == productId:
+                self.db.child("users").child(userId).child("purchasedProducts").child(product_key).update({"reviewId": reviewId})
+                return True
+
+        print(f"Debug: Product {productId} not found in user's purchased products.")
+        return False
+    
     #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, data, img_path):
@@ -129,7 +147,10 @@ class DBhandler:
             "createdAt" : data.get("createdAt", datetime.utcnow().isoformat()),
             "reviewImage": img_path
         }
-        self.db.child("reviews").push(review_info)
+        review_ref=self.db.child("reviews").push(review_info)
+        reviewId = review_ref['name']
+        return reviewId
+
 
     # 리뷰 전체 조회 
     def get_reviews(self):
