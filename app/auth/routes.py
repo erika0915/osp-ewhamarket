@@ -53,10 +53,8 @@ def signup():
     
         # 사용자 데이터 추가  
         if auth_bp.db.insert_user(data, pw_hash, profile_image.filename):
-            flash("회원가입이 완료되었습니다.")
             return redirect(url_for("auth.login"))
         else:
-            flash("이미 존재하는 userId 입니다.")
             return render_template("signup.html")
 
 #Id 중복체크버튼

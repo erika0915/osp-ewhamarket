@@ -67,18 +67,20 @@ def view_reviews():
         return render_template("reviews.html", total=0, datas=[], page_count=0, m=row_count)
 
     # 데이터 변환
-    review_list = [
-        {
-            "reviewId" : reviewId,
-            "productId" : review.get("productId"),
-            "userId" : review.get("userId"),
-            "title" : review.get("title"),
+    review_list=[]
+    for reviewId, review in all_reviews.items():
+        product = reviews_bp.db.get_product_by_id(review.get("productId"))
+        review_list.append({
+            "reviewId": reviewId,
+            "productId": review.get("productId"),
+            "userId": review.get("userId"),
+            "title": review.get("title"),
             "content": review.get("content"),
-            "rate" : review.get("rate"),
-            "reviewImage" : review.get("reviewImage")
-        }
-        for reviewId, review in all_reviews.items()
-    ]
+            "rate": review.get("rate"),
+            "reviewImage": review.get("reviewImage"),
+            "productName": product.get("productName")
+        })
+
 
     # 페이지네이션 
     start_idx = page * per_page

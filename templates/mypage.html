@@ -35,9 +35,13 @@
             {% if purchasedList %}
             <div id="image-List-pur" class="image-List-pur">
                 {% for item in purchasedList%}
-                <div class="image-wrapper" onclick="location.href='{{ url_for("reviews.reg_review", productId=productId) }}'" style="cursor:pointer;">
-                    <a href="reg_review.html"style="display: block; text-decoration: none; color: inherit;">
-                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                <div class="image-wrapper" style="cursor: pointer;">
+                    <a href="{{ url_for('reviews.reg_review', productId=item['productId']) }}" 
+                       style="display: block; text-decoration: none; color: inherit;">
+                        <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" 
+                             alt="{{ item['productName'] }}" 
+                             width="70" 
+                             height="100">
                     </a>
                 </div>
                 {% endfor %}
@@ -60,7 +64,7 @@
             <div id="pagination-container-sell" class="pagination-container-sell"></div>
             {% endif %}
         </div>
-
+        
         <h4>{{ userInfo.nickname }}벗의 좋아요 목록</h4>
         <div class = "likeList-container">
             {% if likedList %}
@@ -74,6 +78,7 @@
             <div id="pagination-container-like" class="pagination-container-like"></div>
             {% endif %}
         </div>
+    
 
     </div>
 </main>

@@ -15,6 +15,8 @@ def view_mypage():
 
     # 구매 목록 조회 
     purchasedList = mypage_bp.db.get_purchased_list(userId)
+    print("Purchased List:", purchasedList)
+
 
     # 판매 목록 조회 
     sellList = mypage_bp.db.get_sell_list(userId)
