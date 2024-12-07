@@ -24,7 +24,6 @@ def reg_review(productId):
             flash("리뷰는 해당 상품을 구매한 경우에만 작성할 수 있습니다")
             return redirect(url_for("products.view_product_detail", productId = productId))
 
-
     existing_reviews = reviews_bp.db.get_review_by_product(productId)
     for review in existing_reviews:
         if review["userId"] == userId:
