@@ -47,6 +47,10 @@ class DBhandler:
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
         products = self.db.child("products").get().val()
+
+        if not products:
+            print("no products found in database")
+
         for userId, userProducts in products.items():
             if productId in userProducts:
                 return userProducts[productId]
@@ -92,15 +96,34 @@ class DBhandler:
     
 
     # 구매 정보를 사용자 데이터에 집어넣기
-    def add_purchased_product(self, user_id, product_info):
+    def add_purchased_product(self, user_id, product_info,product_id):
         user = self.db.child("users").child(user_id).get()
         purchased_products = user.val().get("purchasedProducts", {})
         product_info["purchaseTime"] = datetime.now(timezone.utc).isoformat()
-        product_id = f"product_{len(purchased_products) + 1}"
-        purchased_products[product_id] = product_info
+        product_info["productId"] = product_id  # 여기에 productId 추가
+        product_num = f"product_{len(purchased_products) + 1}"
+        purchased_products[product_num] = product_info
 
         self.db.child("users").child(user_id).update({"purchasedProducts": purchased_products})
         return True
+    
+    # 사용자 데이터 가져오기
+    def update_purchased_product_review(self, userId, productId, reviewId):
+        user = self.db.child("users").child(userId).get().val()
+        if not user:
+            print(f"Debug: User {userId} not found.")
+            return False
+
+        # purchasedProducts 데이터 업데이트
+        purchased_products = user.get("purchasedProducts", {})
+        for product_key, product_data in purchased_products.items():
+            if product_data.get("productId") == productId:
+                self.db.child("users").child(userId).child("purchasedProducts").child(product_key).update({"reviewId": reviewId})
+                return True
+
+        print(f"Debug: Product {productId} not found in user's purchased products.")
+        return False
+    
     #------------------------------------------------------------------------------------------   
     # 리뷰 등록 
     def insert_review(self, data, img_path):
@@ -124,7 +147,9 @@ class DBhandler:
             "createdAt" : data.get("createdAt", datetime.utcnow().isoformat()),
             "reviewImage": img_path
         }
-        self.db.child("reviews").push(review_info)
+        review_ref=self.db.child("reviews").push(review_info)
+        reviewId = review_ref['name']
+        return reviewId
 
 
     # 리뷰 전체 조회 
@@ -135,11 +160,15 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
         all_reviews = self.db.child("reviews").get().val()
-        review = all_reviews.get(reviewId) if all_reviews else None
-        if not review:
-            print(f"Debug: Review with ID {reviewId} not found.")
-        return review
+        if all_reviews and reviewId in all_reviews:
+            review = all_reviews[reviewId]
 
+            # 날짜 변환 
+            createdAt = review.get("createdAt")
+            if createdAt:
+                review["createdAt"] = datetime.fromisoformat(createdAt).date()
+            return review
+        return None
     
     # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
@@ -167,28 +196,19 @@ class DBhandler:
                 })
         return productReviews
     #-----------------------------------------------------------------------------------------  
-    # 좋아요 기능 
-    def get_heart_byname(self, uid, productName):
-        hearts = self.db.child("heart").child(uid).get()
-        target_value =""
-        if hearts.val() == None:
-            return target_value
-        
-        for res in hearts.each():
-            key_value = res.key()
-            
-            if key_value == productName:
-                target_value = res.val()
-        return target_value
+    # 좋아요 상태 조회 
+    def get_heart_by_Id(self, userId, productId):
+        hearts = self.db.child("hearts").child(userId).child(productId).get().val()
+        return hearts if hearts else {"interested": "N"}
     
-
-    def update_heart(self, userId, isHeart, productName):
+    # 좋아요 상태 업데이트 
+    def update_heart(self, userId, productId, isHeart):
         heart_info={
             "interested" : isHeart
         }
-        self.db.child("heart").child(userId).child(productName).set(heart_info)
+        self.db.child("hearts").child(userId).child(productId).set(heart_info)
+        save_data = self.db.child("hearts").child(userId).child(productId).get().val()
         return True
-
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
     def find_user(self, userId, pw_hash):
@@ -230,6 +250,21 @@ class DBhandler:
         if user:
             return False
         return True
+    
+    # 중복된 nickname 체크
+    def nickname_duplicate_check(self, nickname):
+        # users 경로에서 모든 데이터를 가져옵니다.
+        users = self.db.child("users").get().val()
+
+        # 데이터가 없으면 중복될 가능성이 없으므로 True 반환
+        if not users:
+            return True
+
+        # 모든 userid를 순회하며 nickname 확인
+        for userid, user_data in users.items():
+            if user_data.get("nickname") == nickname:  # nickname이 중복되면 False 반환
+                return False
+        return True 
     
     # 사용자 정보 ID로 가져오기 
     def get_user_by_id(self, userId):
@@ -286,27 +321,38 @@ class DBhandler:
             for productId, productData  in products.items()
         ]
     
-    # 좋아요 목록 조회 
+    # 좋아요 목록 
     def get_heart_list(self, userId):
-        hearts= self.db.child("heart").child(userId).get().val()
+        hearts = self.db.child("hearts").child(userId).get().val()
 
         if not hearts:
             return []
-        
-        heart_list=[]
-        for productName, heartData in hearts.items():
-            if heartData.get("interested") == 'Y':
-                heart_list.append({
-                    "productName" : productName,
-                    "interested": heartData.get("interested")
-                })
-        return heart_list
 
-    
+        heart_list = []
+        for productId, heartData in hearts.items():
+            if heartData.get("interested") == 'Y':
+                products = self.db.child("products").get().val()
+
+                if not products:
+                    continue
+
+                for userId, userProducts in products.items():
+                    if productId in userProducts:
+                        product = userProducts[productId]
+                        heart_list.append({
+                            "productId": productId,
+                            "productName": product.get("productName"),
+                            "productImage": product.get("productImage"),
+                            "interested": heartData.get("interested")
+                        })
+                        break
+
+        print(f"[DEBUG] Heart list: {heart_list}")
+        return heart_list
+        
     # 닉네임으로 사용자 정보 조회
     def get_user_info_by_nickname(self, nickname):
         users = self.db.child("users").get()
-
         for user in users.each():
             user_data = user.val()
             if user_data.get("nickname") == nickname:  # 닉네임이 일치하는 경우
@@ -317,5 +363,3 @@ class DBhandler:
                     "phoneNum": user_data.get("phoneNum"),
                     "userId": user.key()  # userId는 상위 키로 저장됨
                 }
-
-    

@@ -11,23 +11,26 @@
 <br>
 <div class="form-container">
   <div class="titleRanking">
-    <br>
     <p>마켓 랭킹</p> 
   </div>
   <br>
   <br>
-  {% for user in top_user_data%}
+  {% for user in ranking_user_data%}
       <div class="market-container">
           <div class="user-container">
-            <button class="market-name">{{ loop.index }}.&nbsp; &nbsp;{{user.nickname}}</button>
+            <button onclick="location.href='{{ url_for('market.view_user_mypage', nickname=user.nickname) }}';" style="cursor:pointer;"> {{ loop.index }}. &nbsp;{{user.nickname}}</button>
           </div>
           <hr>
           <div class="sellList-container">
               {% if user.sellList %}
               <div class="image-List">
-                  {% for product in user.sellList %}
-                  <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
-                  {% endfor %}
+                {% for product in user.sellList %}
+                <div class="image-wrapper">
+                  <a href="{{ url_for('products.view_product_detail', productId= product['productId']) }}">
+                    <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                  </a>
+                </div>
+                {% endfor %}
               </div>
               {% else %}
               <p>No products available.</p>

@@ -53,8 +53,32 @@ def signup():
     
         # 사용자 데이터 추가  
         if auth_bp.db.insert_user(data, pw_hash, profile_image.filename):
-            flash("회원가입이 완료되었습니다.")
             return redirect(url_for("auth.login"))
         else:
-            flash("이미 존재하는 userId 입니다.")
             return render_template("signup.html")
+
+#Id 중복체크버튼
+@auth_bp.route("/idcheck", methods=["GET"])
+def id_check():
+    user_id = request.args.get("userId")  # 쿼리 문자열에서 userId를 가져옵니다
+    if not user_id:
+        return jsonify({"success": False, "message": "아이디를 입력하세요."}), 400
+
+    is_available = auth_bp.db.user_duplicate_check(user_id)  # 중복 여부 확인
+    if is_available:
+        return jsonify({"success": True, "message": f"'{user_id}'는 사용 가능한 ID입니다."}),200
+    else:
+        return jsonify({"success": False, "message": f"'{user_id}'는 이미 사용 중인 ID입니다."}), 409
+    
+#nickname 중복체크버튼
+@auth_bp.route("/nickcheck", methods=["GET"])
+def nick_chek():
+    nickname = request.args.get("nickname")  # 쿼리 문자열에서 nickname을 가져옵니다
+    if not nickname:
+        return jsonify({"success": False, "message": "닉네임을 입력하세요."}), 400
+
+    is_available = auth_bp.db.nickname_duplicate_check(nickname)  # 중복 여부 확인
+    if is_available:
+        return jsonify({"success": True, "message": f"'{nickname}'는 사용 가능한 닉네임입니다."}),200
+    else:
+        return jsonify({"success": False, "message": f"'{nickname}'는 이미 사용 중인 닉네임입니다."}), 409

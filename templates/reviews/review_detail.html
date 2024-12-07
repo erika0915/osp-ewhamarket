@@ -9,32 +9,34 @@
 {% block section %}
 <main>
     <div class="form-container">
-        <div class="titleReview">
+        <div class="review-top">
             <h3>상세 리뷰 페이지</h3>
+            <p>{{product.productName}}</p>
         </div>
             
         <div class="content">
-                
-            <!-- 별점 -->
-            <div class="rating-container">
-                <div class="grade" id="star-rating"></div>
-                <div class="review-rate"> ( {{ review.rate }} )</div>
-            </div>          
-    
-            <!-- 제목 -->
-            <h3>{{ review.title }}</h3>
-                
-            <div class="reviewbox">
-                <!-- 이미지 -->
-                <div class="review-image">
-                    <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
+            <div class="review-left">
+                <!-- 별점 -->
+                <div class="rating-container">
+                    <div class="grade" id="star-rating"></div>
+                    <div class="review-rate"> ( {{ review.rate }} )</div>
                 </div>
-
+                <!-- 제목 -->
+                <div class="review-title">
+                    <p class="reviewtitle">{{review.title}}</p>
+                    <div class="reviewDB"> 
+                        <p class="review-at">구매 일자 : {{ review.createdAt }}</p>
+                        <p class="review-author">{{ review.nickname }} 벗</p>
+                    </div>
+                </div>
                 <!-- 내용 -->
-                <div class="reviewcontent">
-                    <p class="reviewDB"> {{ review.nickname }} 벗께서 {{ review.createdAt }}에 구매하신 후기입니다.</p>
-                    <p> {{ review.content }} </p>
-                </div>
+                <p class="review-content"> {{ review.content }} </p>
+
+            </div>
+            
+            <!-- 이미지 -->
+            <div class="review-right">
+                <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" width="140" height="200" alt="Review Image">
             </div>
     
         </div>
@@ -59,7 +61,7 @@ for (let i = 0; i < 5; i++) {
         star.style.color = "#ddd"; // 회색
     }
     star.style.fontSize = "20px";
-    star.style.marginRight = "5px";
+    star.style.marginRight = "2px";
     starContainer.appendChild(star);
     }
 }
