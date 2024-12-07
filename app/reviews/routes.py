@@ -29,11 +29,13 @@ def reg_review(productId):
 
     productName = productData.get("productName")
 
+    # GET 요청 처리 
     if request.method == "GET":
         return render_template("reg_review.html", 
                                productId = productId, 
                                productName=productName)
-
+    
+    # POST 요청 처리
     elif request.method == "POST":
         image_file = request.files.get("reviewImage")
         image_file.save(f"static/images/{image_file.filename}")
@@ -97,7 +99,6 @@ def view_reviews():
             "productName": productName
         })
 
-
     # 페이지네이션 
     start_idx = page * per_page
     end_idx = start_idx + per_page
@@ -122,7 +123,11 @@ def view_reviews():
 @reviews_bp.route("/<reviewId>")
 def view_review_detail(reviewId):
     review = reviews_bp.db.get_review_by_id(reviewId)
-    product = reviews_bp.db.get_product_by_id(review.get("productId"))
+    productId = review.get("productId")
+    product = reviews_bp.db.get_product_by_id(productId)
+    if not product:
+        print(f"debug: product with ID {productId}")
+        
     return render_template("review_detail.html", 
                            review=review, 
                            product=product)

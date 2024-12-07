@@ -47,6 +47,10 @@ class DBhandler:
     # 상품 상세 조회 : productId로 조회
     def get_product_by_id(self, productId):
         products = self.db.child("products").get().val()
+
+        if not products:
+            print("no products found in database")
+
         for userId, userProducts in products.items():
             if productId in userProducts:
                 return userProducts[productId]
@@ -146,8 +150,7 @@ class DBhandler:
         review_ref=self.db.child("reviews").push(review_info)
         reviewId = review_ref['name']
         return reviewId
- 
-         
+
 
     # 리뷰 전체 조회 
     def get_reviews(self):
@@ -157,11 +160,15 @@ class DBhandler:
     # 리뷰 상세 조회
     def get_review_by_id(self, reviewId):
         all_reviews = self.db.child("reviews").get().val()
-        review = all_reviews.get(reviewId) if all_reviews else None
-        if not review:
-            print(f"Debug: Review with ID {reviewId} not found.")
-        return review
+        if all_reviews and reviewId in all_reviews:
+            review = all_reviews[reviewId]
 
+            # 날짜 변환 
+            createdAt = review.get("createdAt")
+            if createdAt:
+                review["createdAt"] = datetime.fromisoformat(createdAt).date()
+            return review
+        return None
     
     # 상품 별 리뷰 목록 조회 
     def get_review_by_product(self, productId):
@@ -192,8 +199,7 @@ class DBhandler:
     # 좋아요 상태 조회 
     def get_heart_by_Id(self, userId, productId):
         hearts = self.db.child("hearts").child(userId).child(productId).get().val()
-        print(f"[DEBUG] userId: {userId}, productId: {productId}")
-        return hearts if hearts else ""
+        return hearts if hearts else {"interested": "N"}
     
     # 좋아요 상태 업데이트 
     def update_heart(self, userId, productId, isHeart):
@@ -202,7 +208,6 @@ class DBhandler:
         }
         self.db.child("hearts").child(userId).child(productId).set(heart_info)
         save_data = self.db.child("hearts").child(userId).child(productId).get().val()
-        print(f"save_data = {save_data}")
         return True
     #------------------------------------------------------------------------------------------
     # 로그인 검증 
@@ -318,8 +323,7 @@ class DBhandler:
     
     # 좋아요 목록 
     def get_heart_list(self, userId):
-        hearts = self.db.child("heart").child(userId).get().val()
-        print(f"[DEBUG] Hearts data: {hearts}")
+        hearts = self.db.child("hearts").child(userId).get().val()
 
         if not hearts:
             return []
@@ -328,12 +332,11 @@ class DBhandler:
         for productId, heartData in hearts.items():
             if heartData.get("interested") == 'Y':
                 products = self.db.child("products").get().val()
-                print(f"[DEBUG] Products data: {products}")
 
                 if not products:
                     continue
 
-                for ownerId, userProducts in products.items():
+                for userId, userProducts in products.items():
                     if productId in userProducts:
                         product = userProducts[productId]
                         heart_list.append({
@@ -346,3 +349,17 @@ class DBhandler:
 
         print(f"[DEBUG] Heart list: {heart_list}")
         return heart_list
+        
+    # 닉네임으로 사용자 정보 조회
+    def get_user_info_by_nickname(self, nickname):
+        users = self.db.child("users").get()
+        for user in users.each():
+            user_data = user.val()
+            if user_data.get("nickname") == nickname:  # 닉네임이 일치하는 경우
+                return {
+                    "nickname": user_data.get("nickname"),
+                    "email": user_data.get("email"),
+                    "profileImage": user_data.get("profileImage"),
+                    "phoneNum": user_data.get("phoneNum"),
+                    "userId": user.key()  # userId는 상위 키로 저장됨
+                }

@@ -15,25 +15,37 @@ def view_marketRanking():
         print(userId, ":" , user_purchase_count[userId])
 
     # 마켓별 등록 상품 개수 상위 3명 
-    top_users = sorted(user_purchase_count.items(), key=lambda x: x[1], reverse=True)[:3]
-    print("Top Users:", top_users) 
+    sorted_users = sorted(user_purchase_count.items(), key=lambda x: x[1], reverse=True)
+    print("sorted_users:", sorted_users) 
     
     # 상위 3명의 닉네임, 상품 목록, 상품 이미지 가져오기
-    top_user_data = []
-    for userId, product_count in top_users:
+    ranking_user_data = []
+    for userId, product_count in sorted_users:
         user_info = market_bp.db.get_user_info(userId)
         nickname = user_info.get("nickname") if user_info else "Unknown"
         sell_list = market_bp.db.get_sell_list(userId)
 
 
-        top_user_data.append({"nickname": nickname, "sellList": sell_list})
-        #print("top_user_data", top_user_data)
+        ranking_user_data.append({"nickname": nickname, "sellList": sell_list})
+        print("ranking_user_data", ranking_user_data)
     
     # 데이터를 템플릿으로 전달
-    return render_template("market.html", top_user_data=top_user_data, top_users=top_users, nickname=nickname, sellList=sell_list)
+    return render_template("market.html", ranking_user_data=ranking_user_data, sorted_users=sorted_users, nickname=nickname, sellList=sell_list)
     
-    
-    
+# 특정 사용자 마이페이지 조회
+@market_bp.route("/mypage/<nickname>/")
+def view_user_mypage(nickname):
+    # 닉네임으로 사용자 정보 조회
+    userInfo = market_bp.db.get_user_info_by_nickname(nickname)
 
+    userId = userInfo.get("userId")
+    purchasedList = market_bp.db.get_purchased_list(userId)
+    sellList = market_bp.db.get_sell_list(userId)
+    likedList = market_bp.db.get_heart_list(userId)
     
-    
+    return render_template("mypage.html",
+                           userInfo=userInfo,
+                           profileImage=userInfo.get("profileImage"),
+                           purchasedList=purchasedList,
+                           sellList=sellList,
+                           likedList=likedList)
