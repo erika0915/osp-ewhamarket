@@ -48,6 +48,8 @@
             </div>
 
             <div id="pagination-container-pur" class="pagination-container-pur"></div>
+            {% else %}
+            <div class="none">구매한 상품이 존재하지 않습니다.</div>
             {% endif %}
         </div>
 
@@ -64,6 +66,8 @@
                 {% endfor %}
             </div>
             <div id="pagination-container-sell" class="pagination-container-sell"></div>
+            {% else %}
+            <div class="none">등록된 상품이 존재하지 않습니다.</div>
             {% endif %}
         </div>
         
@@ -75,10 +79,13 @@
                 <div class="image-wrapper">
                     <a href="{{ url_for('products.view_product_detail', productId=item['productId']) }}">
                         <img src="{{ url_for('static', filename='images/' + item['productImage']) }}" width=70, height=100>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
             <div id="pagination-container-like" class="pagination-container-like"></div>
+            {% else %}
+            <div class="none">좋아요 표시한 상품이 존재하지 않습니다.</div>
             {% endif %}
         </div>
     
