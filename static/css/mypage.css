@@ -34,6 +34,7 @@ main {
 
 .form-container h4 {
     font-size: 18px;
+    display: flex;
     margin-bottom: 12px; 
     font-size: 18px;
     color: #333;
@@ -186,4 +187,8 @@ main {
 .none {
     text-align: center;
     color: gray;
+}
+
+.heart {
+    color: red;
 }
