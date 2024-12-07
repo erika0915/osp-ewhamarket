@@ -9,7 +9,7 @@ body {
 .container {
     max-width:1440px;
     margin: 0 auto;
-    padding: 20px 20px 200px 20px;
+    padding: 20px 20px 100px 20px;
     background-color: white; 
     position: relative;
 }
@@ -127,6 +127,10 @@ body {
 .footer {
     margin-top: 50px;
     font-size: 10px;
+}
+
+.company {
+    margin-top:15px;
 }
 
 .company, .member {
