@@ -105,7 +105,7 @@ main {
 }
 
 .review-author {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 /* 내용 */
@@ -126,7 +126,7 @@ main {
 
 .review-right img {
     display: flex; /* 이미지가 독립된 줄에 위치 */
-    margin: 20px 30px 20px 30px; 
+    margin: 60px 30px 20px 30px; 
     max-width: 150%; /* 이미지 크기를 컨테이너에 맞게 제한 */
     border-radius: 5px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
