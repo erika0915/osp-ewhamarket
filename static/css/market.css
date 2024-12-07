@@ -33,14 +33,12 @@ main {
 }
 
 /* 제목*/
-.titleRanking {
-    text-align: center;
-    font-size: 24px;
-    margin: 5px;
-}
+
 
 .titleRanking p {
-    font-size: 24px;
+    text-align: center;
+    font-size: 27px; /* 크기 키움 */
+    margin: 5px;
     font-weight: bold;
     color: #555;
     margin: 0;
@@ -48,8 +46,8 @@ main {
 
 /* 폼 컨데이너 */
 .form-container {
-    width: 80%;
-    max-width: 1000px;
+    width: 90%;
+    max-width: 1110px;
     margin: 20px auto; /* 중앙 정렬 */
     padding: 30px 90px 30px 90px;
     border: none;
@@ -84,17 +82,21 @@ pear blossom rgb(255,253,241);*/
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(5px);
 }  
-button{
+
+
+
+.fourth-button{
     border:none;
-    font-size:20px;
+    font-size:18px;
     cursor: pointer;
-    font-weight:bold;
     padding: 10px;
+    font-weight:bold;
     margin-bottom: 15px;
     border-radius: 10px; /*10->20*/
-    font-size: 15px;
+    text-align:left;
+    font-size: 18px;
     flex-shrink: 0;
-    width:25%;
+    width:20%;
     color:white;
     flex-shrink: 0;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -102,6 +104,30 @@ button{
           rgba(0,70,42, 0.5), 
           rgba(0,70,42, 0.4), 
           rgba(0,70,42, 0.5));
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgb(0,70,42);
+}
+.highlight-button{
+    flex-shrink: 0;
+    border:none;
+    cursor: pointer;
+    padding: 10px;
+    font-weight:bold;
+    margin-bottom: 15px;
+    border-radius: 10px; /*10->20*/
+    text-align:left;
+    font-size: 18px;
+    flex-shrink: 0;
+    width:20%;
+    flex-shrink: 0;
+    font-size:20px;
+    font-weight:bold;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(124.47deg, 
+          rgba(0,70,42, 1.0), 
+          rgba(0,70,42, 0.8), 
+          rgba(0,70,42, 1.0));
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: rgba(255, 255, 255, 0.9);
@@ -112,10 +138,13 @@ button{
     display: flex; /* 가로로 정렬 */
     flex-wrap: nowrap; /* 한 줄에 표시 */
     overflow: hidden; /* 넘치는 이미지는 숨기기 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
     gap: 10px; /* 이미지 간격 */
-    padding: 10px;
-    max-width: 630px; /* (150px * 4) + (10px * 3) */
+    padding: 0px;
 }
+
+
 
 .sellList-container {
     width: 100%;
@@ -123,7 +152,7 @@ button{
     padding: 20px;
     display: flex; /* 레이아웃 유지 */
     justify-content: flex-start; /* 왼쪽 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    align-items: left; /* 세로 가운데 정렬 */
     overflow: hidden; /* 넘치는 내용 숨기기 */
     border: none;
     position: relative; /* 자식의 overflow를 위해 */
@@ -135,11 +164,60 @@ img {
     object-fit: cover; /* 비율 유지하며 자르기 */
     border-radius: 10px; /* 모서리 둥글게 */
     cursor: pointer;
-    margin-right: 10px;
+    margin-right:5px;
+    margin-left:5px;
     transition: transform 0.3s ease; /* 애니메이션 효과 */
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
 }
 
 
+/* 페이지네이션 컨테이너 */
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 좌우 버튼 배치 */
+    background-color:white;
+    gap:10px;
+    width:105%;
+}
 
+/* 버튼 스타일 */
+.pagination-button {
+    position: absolute; /* 위치 절대 설정 */
+    padding:10px;
+    width:10px;
+    border: none;
+    background-color:white;
+    color: rgb(0,70,42);
+    cursor: pointer;
+    font-size: 20px;
+}
 
+.pagination-button:hover {
+    color:rgb(188,201,36);
+}
 
+.pagination-button:disabled {
+    cursor: not-allowed;
+    color:white;
+}
+/* 이전 버튼 */
+.pagination-button.prev-button {
+    left: 0; /* 수평선의 시작 지점에 위치 */
+}
+
+/* 다음 버튼 */
+.pagination-button.next-button {
+    right: 10px; /* 수평선의 끝 지점에 위치 */
+}
+
+/* 이미지 리스트 */
+.image-List {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0px;
+    overflow: hidden; /* 넘치는 이미지는 숨김 */
+    justify-content: center;
+    flex-grow: 1;
+}

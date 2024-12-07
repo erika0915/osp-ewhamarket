@@ -8,6 +8,12 @@
 
 {%block section%}
 
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+  <script>alert("{{mesg[0]}}") </script>
+{% endif %}
+{% endwith %}
+
 <body>
 <div class="container">
 
