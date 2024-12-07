@@ -71,7 +71,10 @@
             {% endif %}
         </div>
         
-        <h4>{{ userInfo.nickname }}벗의 좋아요 목록</h4>
+        <h4>
+            {{ userInfo.nickname }}벗의 좋아요(
+            <span class="heart">♥</span> ) 목록
+        </h4>
         <div class = "likeList-container">
             {% if likedList %}
             <div id="image-List-like" class="image-List-like">
