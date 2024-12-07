@@ -11,27 +11,40 @@
 <br>
 <div class="form-container">
   <div class="titleRanking">
-    <p>마켓 랭킹</p> 
+    <p> 마켓 랭킹 </p> 
   </div>
   <br>
   <br>
   {% for user in ranking_user_data%}
       <div class="market-container">
           <div class="user-container">
-            <button onclick="location.href='{{ url_for('market.view_user_mypage', nickname=user.nickname) }}';" style="cursor:pointer;"> {{ loop.index }}. &nbsp;{{user.nickname}}</button>
-          </div>
+          <button 
+          onclick="location.href='{{ url_for('market.view_user_mypage', nickname=user.nickname) }}';" 
+          style="cursor:pointer;" 
+          class="{% if loop.index <= 3 %}highlight-button{% else %}fourth-button{% endif %}"">
+          {{ loop.index }}. &nbsp;{{ user.nickname }}
+          </button>
+        </div>
           <hr>
-          <div class="sellList-container">
-              {% if user.sellList %}
-              <div class="image-List">
-                {% for product in user.sellList %}
-                <div class="image-wrapper">
-                  <a href="{{ url_for('products.view_product_detail', productId= product['productId']) }}">
-                    <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
-                  </a>
-                </div>
-                {% endfor %}
-              </div>
+              <div class="sellList-container">
+                {% if user.sellList %}
+                  <div class="pagination-container">
+                    <button class="pagination-button prev-button" 
+                            onclick="changePage('{{ user.nickname }}', -1)"> ◁ </button>
+                    <div class="image-List" id="sellList-{{ user.nickname }}">
+                      {% for product in user.sellList %}
+                        <div class="image-wrapper" data-page="{{ loop.index0 // 5 }}">
+                          <a href="{{ url_for('products.view_product_detail', productId=product['productId']) }}">
+                            <img src="{{ url_for('static', filename='images/' + product.productImage) }}">
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+              
+                    <button class="pagination-button next-button" 
+                            onclick="changePage('{{ user.nickname }}', 1)"> ▷ </button>
+                  </div>
+
               {% else %}
               <p>No products available.</p>
               {% endif %}
@@ -40,6 +53,7 @@
       <br>
     {% endfor %}
   </div>
+  
 
 <script src="{{ url_for('static', filename='js/market.js') }}"></script>
 {% endblock %}   
