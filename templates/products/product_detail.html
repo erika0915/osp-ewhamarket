@@ -65,34 +65,38 @@
         {% if reviews %}
         {% for review in reviews %}
         <div class="content">
+          <div class="review-left">
             
             <!-- 별점 -->
             <span class="stars">
                 {{ "★" * review.rate|int }}{{ "☆" * (5 - review.rate|int) }}
             </span>            
-
             <!-- 제목 -->
-            <h3>{{ review.title }}</h3>
-            
-            <div class="reviewbox">
+            <div class="review-title">
+              <p class="reviewtitle">{{review.title}}</p>
+              <div class="reviewDB"> 
+                  <p class="review-at">구매 일자 : {{ review.createdAt }}</p>
+                  <p class="review-author">{{ review.nickname }} 벗</p>
+              </div>
+            </div>
+            <!-- 내용 -->
+            <p class="review-content"> {{ review.content }} </p>
+
+          </div>
+
+          <div class="review-right">
               <!-- 이미지 -->
               {% if review.reviewImage %}
               <img src="{{ url_for('static', filename='images/' + review.reviewImage) }}" alt="Review Image" width="300">
               {% endif %}
-
-              <!-- 내용 -->
-              <div class="reviewcontent">
-                <p class="reviewcontent_DB"> {{ review.nickname }} 벗께서 {{ review.createdAt}}에 구매하신 후기입니다.</p>
-                <p class="reviewcontent_content"> {{ review.content }} </p>
-              </div>
-            </div>
+          </div>
 
         </div>
         {% endfor %}
         {% else %}
         <p class= noreview style="text-align: center; color: gray;">등록된 리뷰가 없습니다.</p>
         {% endif %}
-      </div> <!--review2-->
+      </div> 
     </div><!--column bottom-->
   
 
@@ -103,33 +107,32 @@
 </body>
 
 <script>
-  const productName = "{{ data.productName }}";
-  function showHeart() {
-    $.ajax({
-      type: 'GET',
-      url: '/likes/show_heart/{{ data.productName }}/',
-      data: {},
-      success: function (response) {
-        let my_heart = response['my_heart'];
-        if (my_heart['interested'] == 'Y')
-        {
-          $("#heart").css("color","red");
-          $("#heart").attr("onclick","unlike()");
-       }
-        else
-        {
-          $("#heart").css("color","grey");
-          $("#heart").attr("onclick","like()");
-        }
-        //alert("showheart!")
+const productId = "{{ productId }}";
+
+function showHeart() {
+  $.ajax({
+    type: 'GET',
+    url: `/likes/show_heart/${productId}/`,  // productId 기반 URL
+    success: function (response) {
+      let my_heart = response['my_heart'];
+      if (my_heart['interested'] == 'Y') {
+        $("#heart").css("color", "red");
+        $("#heart").attr("onclick", "unlike()");
+      } else {
+        $("#heart").css("color", "grey");
+        $("#heart").attr("onclick", "like()");
+      }
+    },
+    error: function () {
+      alert("좋아요 상태를 불러오는 중 오류가 발생했습니다.");
     }
-    });
-  }
+  });
+}
   
-  function like() {
-    $.ajax({
+function like() {
+  $.ajax({
     type: 'POST',
-    url: '/likes/like/{{data.productName}}/',
+    url: `/likes/like/${productId}/`,
     data: {
       interested : "Y"
     },
@@ -143,7 +146,7 @@
   function unlike() {
     $.ajax({
       type: 'POST',
-      url: '/likes/unlike/{{data.productName}}/',
+      url: `/likes/unlike/${productId}/`, 
       data: {
         interested : "N"
       },

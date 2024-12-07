@@ -6,12 +6,18 @@ from datetime import datetime
 # 리뷰 등록
 @reviews_bp.route("/reg_review/<productId>", methods=["GET", "POST"])
 def reg_review(productId):
+
     # 로그인 여부 확인 
     userId = session.get("userId")
     if not userId:
         flash("로그인 후에 리뷰 등록이 가능합니다!")
         return redirect(url_for("auth.login"))
-    
+
+    existing_reviews = reviews_bp.db.get_review_by_product(productId)
+    for review in existing_reviews:
+        if review["userId"] == userId:
+            return redirect(url_for("reviews.view_review_detail", reviewId=review["reviewId"]))
+
     # 상품 데이터 가져오기 
     products = reviews_bp.db.child("products").get().val()
 
@@ -23,11 +29,13 @@ def reg_review(productId):
 
     productName = productData.get("productName")
 
+    # GET 요청 처리 
     if request.method == "GET":
         return render_template("reg_review.html", 
                                productId = productId, 
                                productName=productName)
-
+    
+    # POST 요청 처리
     elif request.method == "POST":
         image_file = request.files.get("reviewImage")
         image_file.save(f"static/images/{image_file.filename}")
@@ -44,15 +52,20 @@ def reg_review(productId):
         data["createdAt"] = datetime.utcnow().isoformat() 
         data["rate"]= int(rate)
 
+        # 리뷰 저장 및 reviewId 생성
+        reviewId = reviews_bp.db.insert_review(data, image_file.filename)
+
+        # purchasedProducts에 reviewId 저장
+        reviews_bp.db.update_purchased_product_review(userId, productId, reviewId)
+
+        # 리뷰 카운트 업데이트
         review_count = productData.get("reviewCount", 0) + 1
-        productData["reviewCount"]=review_count
+        productData["reviewCount"] = review_count
         reviews_bp.db.update_product(productId, productData)
 
-        # 리뷰 저장 
-        reviews_bp.db.insert_review(data, image_file.filename)
         flash("리뷰가 성공적으로 등록되었습니다!")
-        return redirect(url_for("reviews.view_reviews", productId=productId))
-    
+        return redirect(url_for("reviews.view_reviews", productId=productId,reviewId=reviewId))
+   
 # 전체 리뷰 조회 
 @reviews_bp.route("/")
 def view_reviews():
@@ -70,6 +83,11 @@ def view_reviews():
     review_list=[]
     for reviewId, review in all_reviews.items():
         product = reviews_bp.db.get_product_by_id(review.get("productId"))
+        if product is None:
+            productName = "unknown product"
+        else:
+            productName = product.get("productName")
+            
         review_list.append({
             "reviewId": reviewId,
             "productId": review.get("productId"),
@@ -78,9 +96,8 @@ def view_reviews():
             "content": review.get("content"),
             "rate": review.get("rate"),
             "reviewImage": review.get("reviewImage"),
-            "productName": product.get("productName")
+            "productName": productName
         })
-
 
     # 페이지네이션 
     start_idx = page * per_page
@@ -99,14 +116,18 @@ def view_reviews():
         row2=rows[1] if len(rows) > 1 else [],
         page=page,
         page_count=(len(all_reviews) + per_page - 1) // per_page,
-        m=row_count,
+        m=row_count
     )
 
 # 리뷰 상세 조회 
 @reviews_bp.route("/<reviewId>")
 def view_review_detail(reviewId):
     review = reviews_bp.db.get_review_by_id(reviewId)
-    product = reviews_bp.db.get_product_by_id(review.get("productId"))
+    productId = review.get("productId")
+    product = reviews_bp.db.get_product_by_id(productId)
+    if not product:
+        print(f"debug: product with ID {productId}")
+        
     return render_template("review_detail.html", 
                            review=review, 
                            product=product)

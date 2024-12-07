@@ -21,7 +21,6 @@ main {
   
 /* 리뷰 전체 컨테이너 */
 .form-container {
-    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,90 +35,106 @@ main {
 }
   
 /* 상세리뷰 페이지(전체 제목) 섹션 스타일 */
-.titleReview {
+.review-top {
     text-align: center;
     font-size: 20px;
     margin: 5px;
 }
 
   
-.titleReview h3 {
+.review-top h3 {
     font-size: 24px;
     font-weight: bold;
-    color: #555;
     margin: 5px 0 10px 0;
 }
 
+.review-top p {
+    font-size: 15px;
+    color: #848484;
+    margin: 20px 0 10px 0;
+}
+
+/*구역 나누기*/
+.content {
+    display: flex;
+}
+
+.review-left {
+    flex: 2.4;
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+    gap:1px;
+}
+
+/*별점*/
 .rating-container {
     display: flex;
     align-items: center;
-    margin: 0 0 10px 10px;
-}
-  
-/* 별점 스타일 */
-.grade span {
-    font-size: 20px;
-    color: #FFD700;
-
 }
 
-#star-rating span {
-    font-size: 24px;
-    margin-right: 1px;
+.grade {
+    margin-right: 5px;
 }
 
 .review-rate{
     font-size: 16px;
-    color: #444;
-    margin-top: 5px;
-    margin-bottom: 6px;
+    color: #848484;
     font-weight: bold;
 }
 
-.content h3 {
-    font-size: 20px; 
+/*제목*/
+.reviewtitle {
+    font-size: 18px; 
     font-weight: bold; 
     color: #555; 
     align-items: flex-start;
-    margin: 0 0 10px 10px;
+    margin-bottom: 0%;
+    margin-top: 10px;
 }
 
-.reviewbox {
-    display: flex;
-    gap: 15px;
+.reviewDB {
+    font-size: 13px;
+    display:flex;
+    justify-content: space-between;
+    margin-top:0%;
 }
 
-/* 리뷰 이미지 스타일 */
-.review-image img {
-    display: block; /* 이미지가 독립된 줄에 위치 */
-    margin: 20px 30px 10px 10px; /* 수평 중앙 정렬 및 위아래 간격 */
+.review-at {
+    color: #848484;
+}
+
+.review-author {
+    margin-right: 10px;
+}
+
+/* 내용 */
+.review-content {
+    font-size: 16px; 
+    line-height: 1.5; 
+    align-items: flex-start;
+    margin-top:0%;
+    margin-bottom: 5px; 
+    text-align: left;
+}
+
+/* 이미지 */
+.review-right {
+    flex: 1; 
+    text-align: center;
+}
+
+.review-right img {
+    display: flex; /* 이미지가 독립된 줄에 위치 */
+    margin: 60px 30px 20px 30px; 
     max-width: 150%; /* 이미지 크기를 컨테이너에 맞게 제한 */
     border-radius: 5px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
     object-fit: cover;
     width: 150px;
     height: 180px;
-    position: relative;
 }
+
+
+
   
-.review-content {
-    line-height: 1.6;
-    position: absolute;
-}
-
-/* 리뷰 내용 스타일 */
-.reviewcontent p {
-    font-size: 16px; 
-    line-height: 1.5; 
-    align-items: flex-start;
-    margin-bottom: 5px; 
-}
-
-.reviewDB {
-    font-size: 16px;
-    color: #848484;
-}
-
-.reviewCON {
-    text-align: left;
-}

@@ -182,3 +182,8 @@ main {
 .pagination-container-pur button:hover:not(.active), .pagination-container-sell button:hover:not(.active), .pagination-container-like button:hover:not(.active) {
     background-color: #ddd;
 }
+
+.none {
+    text-align: center;
+    color: gray;
+}
