@@ -21,9 +21,9 @@ main {
   
 /* 리뷰 전체 컨테이너 */
 .form-container {
-    border: 1px solid #ddd;
+    border: 1px solid lightgray;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
     max-width: 800px;
     width: 100%;
     padding: 30px;
