@@ -56,7 +56,8 @@
           {% for key, value in row1 %}
           <td>
             <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{ value.productName }}
-              <div class="price">{{ value.price }}</div>
+              <div class="marketname">{{value.userId}}</div>
+              <div class="price">{{ value.price }}원</div>
             </div>
           </td>
           {% endfor %}
@@ -78,8 +79,9 @@
           <td>
             <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
               {{ value.productName }}
+              <div class="marketname">{{value.userId}}</div>
               <div class="price">
-                {{ value.price }}
+                {{ value.price}}원
               </div>
             </div>
           </td>
@@ -103,10 +105,10 @@
     </div>
     
   </main>
-      {% else %}
-        <br><br><br><br><p id="noproductsmessage">등록된 상품이 없습니다.</p>
-      {% endif %}
-  
+  <div id="pagination-container-pur" class="pagination-container-pur"></div>
+  {% else %}
+  <div class="none">구매한 상품이 존재하지 않습니다.</div>
+  {% endif %}
 </div>
 <script src="{{ url_for('static', filename='js/products.js') }}"></script>
 {% endblock %}

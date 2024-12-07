@@ -25,7 +25,7 @@ a {
 
 .side-bar{
   position: sticky;
-  top: 0px;
+  margin-top:20px;
   width: 250px;
   height: 100vh;
   margin-right: 20px;
@@ -56,7 +56,7 @@ a {
 main{
   flex-grow: 1;
   padding: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .array{
@@ -65,7 +65,7 @@ main{
   margin-top: 80px;
   display: flex;
   margin-bottom: 10px;
-  gap: 10px;
+  gap: 5px;
 }
 
 .array button{
@@ -73,6 +73,7 @@ main{
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
+  background-color:none;
 }
 
 .array button:hover {
@@ -92,43 +93,6 @@ main{
   font-size:30px;
   font-weight: bold;
 }
-
-/*좋아요 기능*/
-.like-container {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding-left: 10px;
-}
-
-.like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.heart-icon {
-  font-size: 25px;
-  color: #999;
-  transition: color 0.2s;
-}
-
-.heart-icon.active {
-  color: #ff4b4b;
-}
-
-#heart {
-  color: grey;
-  font-size: 25px;
-}
-
-#heart.red {
-  color: red;
-}
-/* 끝 */
 
 .order{
   float: right;
@@ -166,6 +130,7 @@ td:empty {
 .product-title{
   float: left;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .reg-num{
@@ -178,7 +143,7 @@ td img {
   object-fit: cover; /* 이미지 비율 유지 */
 }
 
-td .desc, td .price {
+td .desc, td .price, td .marketname{
   margin-top: 10px;
   text-align: left;
 }
@@ -186,6 +151,10 @@ td .desc, td .price {
 .price{
   font-size: 15px;
   color:darkgreen;
+}
+
+.marketname{
+  font-size:15px;
 }
 /*상품리스트끝*/
 

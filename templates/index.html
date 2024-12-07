@@ -20,14 +20,14 @@
     <div class="container">
         <div class="log">
             {% if session['userId'] %}
-                <li><a href="/auth/logout"><b>{{ session['nickname'] }}님 반갑습니다!</b> logout</a></li>
+                <li><b>{{ session['nickname'] }}님 반갑습니다!</b><a href="/auth/logout">&nbsp;&nbsp; logout</a></li>
             {% else %}
                 <li><a href="/auth/login">로그인</a>&nbsp;<a href="/auth/signup">회원가입</a></li>
             {% endif %}
         </div>        
         <nav class="navbar">
             <div class="navbar_logo">
-                <img id="main_logo" src="/static/images/logo.png">
+                <a href="/products"><img id="main_logo" src="/static/images/logo.png" ></a>
             </div>
             <ul class="navbar_menu">
                 <li><a href="/products">HOME</a></li>
