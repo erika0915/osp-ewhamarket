@@ -107,8 +107,8 @@ class DBhandler:
         self.db.child("users").child(user_id).update({"purchasedProducts": purchased_products})
         return True
     
+    # 사용자 데이터 가져오기
     def update_purchased_product_review(self, userId, productId, reviewId):
-        # 사용자 데이터 가져오기
         user = self.db.child("users").child(userId).get().val()
         if not user:
             print(f"Debug: User {userId} not found.")
