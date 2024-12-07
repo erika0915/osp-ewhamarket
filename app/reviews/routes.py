@@ -13,6 +13,19 @@ def reg_review(productId):
         flash("로그인 후에 리뷰 등록이 가능합니다!")
         return redirect(url_for("auth.login"))
 
+    # 구매 여부 확인
+    user_data = reviews_bp.db.child("users").child(userId).get().val()
+    purchased_products = user_data.get("purchasedProducts", {})
+    product_found = False
+    for product_key, product_data in purchased_products.items():
+        if product_data.get("productId") == productId:
+            product_found = True
+            break
+    
+    if not product_found:
+        flash("리뷰는 상품 구매 후 작성할 수 있습니다!")
+        return redirect(url_for("products.view_products"))
+    
     existing_reviews = reviews_bp.db.get_review_by_product(productId)
     for review in existing_reviews:
         if review["userId"] == userId:
