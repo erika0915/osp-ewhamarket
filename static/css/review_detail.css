@@ -60,7 +60,7 @@ main {
 }
 
 .review-left {
-    flex: 4;
+    flex: 2.4;
     display: flex;
     flex-direction: column;
     margin-left:20px;
