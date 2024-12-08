@@ -44,52 +44,58 @@
     {% if total > 0 %}
     <p class="reg-num">{{total}}개</p>
     <table>
+<!-- 첫 번째 행 -->
       <tr>
         {% for key, value in row1 %}
         <td onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
+            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width="140" height="200">
         </td>
+        {% endfor %}
+        {% for i in range(3 - row1|length) %}
+        <td></td>
+        {% endfor %}
+      </tr>
+      <tr>
+        {% for key, value in row1 %}
+        <td>
+            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
+                {{ value.productName }}
+                <div class="marketname">{{ value.userId }}</div>
+                <div class="price">{{ value.price }}원</div>
+            </div>
+        </td>
+        {% endfor %}
+        {% for i in range(3 - row1|length) %}
+        <td></td>
         {% endfor %}
       </tr>
 
-      <tr>
-          {% for key, value in row1 %}
-          <td>
-            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{value.productName }}
-              <div class="marketname">{{value.userId}}</div>
-              <div class="price">{{ value.price }}원</div>
-            </div>
-          </td>
-          {% endfor %}
-          {% for i in range(3 - row1|length) %}
-          <td></td> 
-          {% endfor %}  
-      </tr>
-
+      <!-- 두 번째 행 -->
       <tr>
         {% for key, value in row2 %}
         <td onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
-          <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width=140, height=200>
+            <img src="{{ url_for('static', filename='images/' + value.productImage) }}" width="140" height="200">
         </td>
+        {% endfor %}
+        {% for i in range(3 - row2|length) %}
+        <td></td>
+        {% endfor %}
+      </tr>
+      <tr>
+        {% for key, value in row2 %}
+        <td>
+            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
+                {{ value.productName }}
+                <div class="marketname">{{ value.userId }}</div>
+                <div class="price">{{ value.price }}원</div>
+            </div>
+        </td>
+        {% endfor %}
+        {% for i in range(3 - row2|length) %}
+        <td></td>
         {% endfor %}
       </tr>
 
-      <tr>
-          {% for key, value in row2 %}
-          <td>
-            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
-              {{value.productName }}
-              <div class="marketname">{{value.userId}}</div>
-              <div class="price">
-                {{value.price}}원
-              </div>
-            </div>
-          </td>
-          {% endfor %}
-          {% for i in range(3 - row1|length) %}
-          <td></td> 
-          {% endfor %}  
-      </tr>
     </table>
 
     <div class="page-wrap">
