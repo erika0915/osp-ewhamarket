@@ -29,6 +29,7 @@ a {
   width: 250px;
   height: 100vh;
   margin-right: 20px;
+  margin-left:30px;
   padding: 20;
   box-sizing: border-box;
   font-size: 20px;
@@ -61,7 +62,7 @@ main{
 
 .array{
   float: right;
-  margin-right: 20px;
+  margin-right: 50px;
   margin-top: 80px;
   display: flex;
   margin-bottom: 10px;
@@ -93,6 +94,7 @@ main{
   color: #000;
   font-size:30px;
   font-weight: bold;
+  margin-left: 50px;
 }
 
 .order{
@@ -143,6 +145,7 @@ td:empty {
 
 .reg-num{
   margin-top: 100px;
+  margin-left: 50px;
 }
 
 td img {
