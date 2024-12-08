@@ -111,5 +111,59 @@ document.querySelectorAll('.star').forEach(($star) => {
   });
 });
 </script>
+<script>
+  document.querySelector('form').addEventListener('submit', function (event) {
+      let isValid = true; // 폼 유효성 플래그
+      const messages = []; // 에러 메시지를 담을 배열
+  
+      // 제목 검증
+      const title = document.getElementById('title').value.trim();
+      if (!title) {
+          isValid = false;
+          messages.push('제목을 입력하세요.');
+      }
+  
+      // 평점 검증
+      const rate = document.getElementById('rate').value;
+      if (rate === "0") {
+          isValid = false;
+          messages.push('별점을 선택해주세요.');
+      }
+  
+      // 내용 검증 (최소 20자)
+      const content = document.getElementById('content').value.trim();
+      if (content.length < 20) {
+          isValid = false;
+          messages.push('내용을 최소 20자 이상 작성해주세요.');
+      }
+  
+      // 이미지 검증 (파일이 1개 이상 선택되어야 함)
+      const image = document.getElementById('reviewImage').files.length;
+      if (image === 0) {
+          isValid = false;
+          messages.push('파일을 최소 1개 이상 선택해주세요.');
+      }
+  
+      // 유효하지 않은 경우 메시지 출력 및 폼 제출 방지
+      if (!isValid) {
+          alert(messages.join('\n'));
+          event.preventDefault(); // 폼 제출 방지
+      }
+  });
+  
+  // 파일 선택 변경 시 선택 상태 표시
+  document.getElementById('reviewImage').addEventListener('change', function () {
+      const fileCount = this.files.length;
+      const fileCountDisplay = document.getElementById('fileCount');
+      if (fileCount > 0) {
+          fileCountDisplay.textContent = `${fileCount}개의 파일이 선택되었습니다.`;
+          fileCountDisplay.style.color = 'green';
+      } else {
+          fileCountDisplay.textContent = '0개의 파일이 선택되었습니다.';
+          fileCountDisplay.style.color = 'red';
+      }
+  });
+  </script>
+  
 
 {% endblock %}
