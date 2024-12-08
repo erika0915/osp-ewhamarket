@@ -59,7 +59,8 @@ main {
     width: 180px;
     height: 200px; 
     margin: -5px 10px 0 0;
-    border-radius: 5px; 
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .profile {
@@ -104,9 +105,20 @@ main {
     margin: 0 40px 5px 30px;
 }
 
-.profile .innn, .profile .inem, .profile .intel {
+.profile .innn, .profile .inem {
     padding: 10px 35px 10px 10px;
-    margin: 10px;
+    margin: 10px 10px 10px 21px;
+    width: 400px;
+    border:none;
+    border-radius: 15px;
+    font-size: 18px;
+    background-color: #f5f5f5;
+    color:#848484;
+}
+
+.profile .intel {
+    padding: 10px 35px 10px 10px;
+    margin: 10px 10px 10px 9px;
     width: 400px;
     border:none;
     border-radius: 15px;
@@ -116,7 +128,7 @@ main {
 }
 
 .profile .innn, .profile .inem {
-    width: 392px;
+    width: 380px;
 }
 
 .profile .intel {
