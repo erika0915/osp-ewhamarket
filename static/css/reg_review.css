@@ -96,8 +96,11 @@ textarea::placeholder{
 #productName,#title{
 width:50%
 }
-#shortDescription,textarea{
+#shortDescription{
 width:100%
+}
+textarea{
+  width:70%
 }
 
 .form-row,.form-row2,.form-row3,.form-row4,.form-row5,.form-row6, .form-row7, .form-row8{
@@ -115,7 +118,7 @@ label {
 
 textarea {
   resize: vertical;
-  height: 80px;
+  height: 120px;
 }
 
 /*별점*/

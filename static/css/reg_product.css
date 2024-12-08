@@ -95,7 +95,10 @@ width:30%;
 #productName{
 width:50%
 }
-#shortDescription,textarea{
+textarea{
+  width:70%
+}
+#shortDescription{
   width:100%
 }
 
@@ -134,7 +137,7 @@ option{
 
 textarea {
   resize: vertical;
-  height: 80px;
+  height: 120px;
 }
 
 productImage-label {
