@@ -22,73 +22,87 @@
         <input class="inlg" type="text" id="nickname" name = "nickname" value="{{ nickname }}" readonly>
       </div>
       
-      <div class=form-row2>
+      <div class="form-row2">
         <label for="productName">상품명</label>
-        <input class="inpn" type="text" id="productName" name = "productName" placeholder="상품명을 입력하세요">
-      </div>
-
-      <div class=form-row3>
+        <input class="inpn" type="text" id="productName" name="productName" placeholder="상품명을 입력하세요">
+        <span id="productNameError" class="error-message"></span>
+    </div>
+    
+    <div class="form-row3">
         <label for="price">가격</label>
-        <input class="inpr" type="text" id="price" name= "price" placeholder="가격을 입력하세요">
-      </div> 
-
-      <div class=form-row4>
+        <input class="inpr" type="text" id="price" name="price" placeholder="가격을 입력하세요">
+        <span id="priceError" class="error-message"></span>
+    </div>
+    
+    <div class="form-row4">
         <label for="category">카테고리</label>
-          <select id="category" name = "category">
+        <select id="category" name="category">
             <option value="" disabled selected>카테고리 선택</option>
             <option value="digital">디지털 엑세서리</option>
             <option value="fashion">패션 엑세서리</option>
             <option value="table">테이블웨어</option>
-            <option value="stationary">스테이셔너리 </option>
-          </select>
-      </div>
-
-      <div class=form-row5>
+            <option value="stationary">스테이셔너리</option>
+        </select>
+        <span id="categoryError" class="error-message"></span>
+    </div>
+    
+    <div class="form-row5">
         <label for="location">지역</label>
-          <select id="location" name = "location">
+        <select id="location" name="location">
             <option value="" disabled selected>지역 선택</option>
             <option value="ECC">ECC</option>
             <option value="engineering">공학관</option>
             <option value="posco">포스코관</option>
-          </select>
-      </div>
-
-      <div class=form-row7>
+        </select>
+        <span id="locationError" class="error-message"></span>
+    </div>
+    
+    <div class="form-row7">
         <label for="description">설명</label>
         <textarea id="description" name="description" placeholder="상품에 대한 설명을 입력하세요"></textarea>
-      </div>
-  
-      <div class="form-row7">
+        <span id="descriptionError" class="error-message"></span>
+    </div>
+
+    <div class="form-row7">
         <label class="productImagec" for="productImage">상품 이미지</label>  
         <label class="fileTitle" for="productImage">choose file</label>
         <input class="file" type="file" onchange="readURL(this);"id="productImage" name= "productImage"/>
         <img id="preview" style="display:none;" />
-        <div id="fileCount" style="color:white; margin-top:10px;">0개의 파일이 선택되었습니다</div>
-      </div>
+        <div id="fileCount" style="color:#848484; margin-top:0px;">0개의 파일이 선택되었습니다</div>
+        <span id="fileError" class="error-message"></span>
+    </div>
+    
+  
       <script>
         function readURL(input) {
+          const fileCountElement = document.getElementById('fileCount');
+          const preview = document.getElementById('preview');
+        
           if (input.files && input.files.length > 0) {
             // 마지막 파일로 미리보기 설정
             var lastFile = input.files[input.files.length - 1];
             var reader = new FileReader();
+        
             reader.onload = function (e) {
-              var preview = document.getElementById('preview');
               preview.src = e.target.result;
               preview.style.display = 'block'; // 이미지를 블록으로 표시
             };
+        
             reader.readAsDataURL(lastFile);
-
+        
             // 파일 개수 업데이트
             var fileCount = input.files.length;
-            document.getElementById('fileCount').textContent = fileCount + "개의 파일이 선택되었습니다.";
+            fileCountElement.textContent = fileCount + "개의 파일이 선택되었습니다";
+            document.getElementById('fileError').textContent = ''; // 파일 에러 메시지 제거
           } else {
             // 파일이 선택되지 않은 경우 초기화
-            var preview = document.getElementById('preview');
             preview.src = "";
             preview.style.display = 'none'; // 미리보기 숨김
-            document.getElementById('fileCount').textContent = "0개의 파일이 선택되었습니다.";
+            fileCountElement.textContent = "상품 이미지를 등록하세요"; // 초기 메시지
+            document.getElementById('fileError').textContent = '상품 이미지를 업로드하세요'; // 에러 메시지
           }
         }
+        
       </script>
       <br>
       <div class="button-group">
@@ -97,6 +111,92 @@
       </div> 
     </form> 
   </div>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        let isValid = true; // 폼 유효성 플래그
+    
+        // 검증 함수 호출
+        isValid &= validateField('productName', '상품명을 입력하세요');
+        isValid &= validatePrice();
+        isValid &= validateField('category', '카테고리를 선택하세요', true);
+        isValid &= validateField('location', '지역을 선택하세요', true);
+        isValid &= validateField('description', '설명을 입력하세요');
+        isValid &= validateFile();
+    
+        // 유효하지 않은 경우 alert 메시지 출력 및 폼 제출 방지
+        if (!isValid) {
+            alert('모든 칸을 입력하세요');
+            event.preventDefault(); // 폼 제출 방지
+        }
+    });
+    
+    // 공통 검증 함수
+    function validateField(id, message, isSelect = false) {
+        const field = document.getElementById(id);
+        const errorElement = document.getElementById(`${id}Error`);
+        const value = isSelect ? field.value : field.value.trim();
+    
+        if (!value) {
+            errorElement.textContent = message;
+            errorElement.style.color = 'red';
+            return false;
+        } else {
+            errorElement.textContent = '';
+            return true;
+        }
+    }
+    
+    // 가격 검증 함수 (숫자, 0 이상)
+    function validatePrice() {
+        const priceField = document.getElementById('price');
+        const errorElement = document.getElementById('priceError');
+        const price = priceField.value.trim();
+    
+        if (!price || isNaN(price) || price <= 0) {
+            errorElement.textContent = '유효한 가격을 입력하세요';
+            errorElement.style.color = 'red';
+            return false;
+        } else {
+            errorElement.textContent = '';
+            return true;
+        }
+    }
+    
+    // 파일 검증 함수
+    function validateFile() {
+      const fileField = document.getElementById('productImage');
+      const errorElement = document.getElementById('fileError');
+      const fileCount = fileField.files.length;
+    
+      if (fileCount === 0) {
+        errorElement.textContent = '상품 이미지를 업로드하세요';
+        errorElement.style.color = 'red';
+        return false;
+      } else {
+        errorElement.textContent = '';
+        return true;
+      }
+    }
+    
+    
+    // 입력 시 검증 메시지 제거
+    document.getElementById('productName').addEventListener('input', () => clearError('productName'));
+    document.getElementById('price').addEventListener('input', () => clearError('price'));
+    document.getElementById('category').addEventListener('change', () => clearError('category'));
+    document.getElementById('location').addEventListener('change', () => clearError('location'));
+    document.getElementById('description').addEventListener('input', () => clearError('description'));
+    document.getElementById('productImage').addEventListener('change', () => clearError('fileError')); // 파일 변경 시 메시지 제거
+    
+    // 메시지 제거 함수
+    function clearError(id) {
+        const errorElement = document.getElementById(`${id}Error`);
+        errorElement.textContent = '';
+    }
+    </script>
+    
+    
+    
 </main> 
 
 {% endblock section %}

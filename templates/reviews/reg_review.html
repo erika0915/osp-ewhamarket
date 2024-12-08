@@ -24,66 +24,79 @@
             <input class="inlg" type="text" id="productName" name="productName" value="{{ productName }}" readonly>
           </div>
       
-          <div class="form-row2">
-            <label for="title">제목</label>
-            <input class="inpn" type="text" id="title" name="title" placeholder="제목을 입력하세요">
-          </div>
-      
-          <div class="form-row3">
-            <label for="star">평점</label>
-            <fieldset>
-              <span class="text-bold">별점을 선택해주세요</span>
-              <div class="stars">
+         <!-- 제목 -->
+      <div class="form-row2">
+        <label for="title">제목</label>
+        <input class="inpn" type="text" id="title" name="title" placeholder="제목을 입력하세요">
+        <span id="titleError" class="error-message"></span> <!-- 제목 에러 메시지 -->
+      </div>
+
+      <!-- 평점 -->
+      <div class="form-row3">
+        <label for="star">평점</label>
+        <fieldset>
+            <span class="text-bold">별점을 선택해주세요</span>
+            <div class="stars">
                 <div class="star" data-value="1"></div>
                 <div class="star" data-value="2"></div>
                 <div class="star" data-value="3"></div>
                 <div class="star" data-value="4"></div>
                 <div class="star" data-value="5"></div>
-              </div>
-            </fieldset>
-            <input type="hidden" id="rate" name="rate" value="0">
-          </div>
-        </div>
+            </div>
+        </fieldset>
+        <input type="hidden" id="rate" name="rate" value="0">
+        <span id="rateError" class="error-message"></span> <!-- 평점 에러 메시지 -->
+      </div>
+      <br>
+
+      <!-- 내용 -->
+      <div class="form-row4">
+        <label for="content">내용</label>
+        <textarea class="content-area" id="content" name="content" placeholder="최소 20자 이상 작성해주세요" rows="6"></textarea>
+        <span id="contentError" class="error-message"></span> <!-- 내용 에러 메시지 -->
+      </div>
+
+      <!-- 이미지 -->
+      <div class="form-row6">
+        <label class="file-label" for="reviewImage">이미지</label>
+        <label class="fileTitle" for="reviewImage">choose file</label>
+        <input class="file" type="file" onchange="readURL(this);" id="reviewImage" name="reviewImage" accept="image/*">
+        <img id="preview" style="display:none;"/>
+        <div id="fileCount" margin-top:0px;>0개의 파일이 선택되었습니다</div>
+        <span id="fileError" class="error-message"></span> <!-- 파일 에러 메시지 -->
+      </div>
+
+      <script>
+        function readURL(input) {
+          const fileCountElement = document.getElementById('fileCount');
+          const preview = document.getElementById('preview');
         
-        <br>
-        <div class="form-row4">
-          <label for="content">내용</label>
-          <textarea class="content-area" id="content" name="content" placeholder="최소 20자 이상 작성해주세요." rows="6"></textarea>
-        </div>
-    
-    
-        <div class="form-row6">
-          <label class="file-label" for="reviewImage">이미지</label>
-          <label class="fileTitle" for="reviewImage">choose file</label>
-          <input class="file" type="file" onchange="readURL(this);" id="reviewImage" name="reviewImage" accept="image/*">
-          <img id="preview" style="display:none;"/>
-          <div id="fileCount" margin-bottom:10px;">0개의 파일이 선택되었습니다</div>
-        </div>
-        <script>
-          function readURL(input) {
-            if (input.files && input.files.length > 0) {
-              // 마지막 파일로 미리보기 설정
-              var lastFile = input.files[input.files.length - 1];
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                var preview = document.getElementById('preview');
-                preview.src = e.target.result;
-                preview.style.display = 'block'; // 이미지를 블록으로 표시
-              };
-              reader.readAsDataURL(lastFile);
-  
-              // 파일 개수 업데이트
-              var fileCount = input.files.length;
-              document.getElementById('fileCount').textContent = fileCount + "개의 파일이 선택되었습니다.";
-            } else {
-              // 파일이 선택되지 않은 경우 초기화
-              var preview = document.getElementById('preview');
-              preview.src = "";
-              preview.style.display = 'none'; // 미리보기 숨김
-              document.getElementById('fileCount').textContent = "0개의 파일이 선택되었습니다.";
-            }
+          if (input.files && input.files.length > 0) {
+            // 마지막 파일로 미리보기 설정
+            var lastFile = input.files[input.files.length - 1];
+            var reader = new FileReader();
+        
+            reader.onload = function (e) {
+              preview.src = e.target.result;
+              preview.style.display = 'block'; // 이미지를 블록으로 표시
+            };
+        
+            reader.readAsDataURL(lastFile);
+        
+            // 파일 개수 업데이트
+            var fileCount = input.files.length;
+            fileCountElement.textContent = fileCount + "개의 파일이 선택되었습니다";
+            document.getElementById('fileError').textContent = ''; // 파일 에러 메시지 제거
+          } else {
+            // 파일이 선택되지 않은 경우 초기화
+            preview.src = "";
+            preview.style.display = 'none'; // 미리보기 숨김
+            fileCountElement.textContent = "상품 이미지를 등록하세요"; // 초기 메시지
+            document.getElementById('fileError').textContent = '상품 이미지를 업로드하세요'; // 에러 메시지
           }
-        </script>
+        }
+      </script>
+
         <br>
         <div class="button-group">
           <button type="button" class="cancel-button">취소</button>
@@ -95,21 +108,101 @@
 </body>
 
 <script>
-document.querySelectorAll('.star').forEach(($star) => {
-  $star.addEventListener('click', ({ target }) => {
-    // 모든 .star에서 .active 삭제
-    document.querySelectorAll('.star').forEach(($star) => {
-      $star.classList.remove('active');
+  document.querySelectorAll('.star').forEach(($star) => {
+    $star.addEventListener('click', function () {
+      // 별점 선택 후 에러 메시지 제거
+      const rateError = document.getElementById('rateError');
+      rateError.textContent = '';  // 에러 메시지 비우기
+      rateError.style.color = 'red'; // 에러 메시지 제거 후 스타일 초기화
+      
+      // 모든 .star에서 .active 삭제
+      document.querySelectorAll('.star').forEach(($star) => {
+        $star.classList.remove('active');
+      });
+  
+      // 클릭한 .star에 .active 추가
+      this.classList.add('active');
+  
+      // 선택한 별점의 data-value 값을 숨겨진 input에 설정
+      const rateValue = this.getAttribute("data-value");
+      document.getElementById('rate').value = rateValue;
     });
-
-    // 클릭한 .star에 .active 추가
-    target.classList.add('active');
-
-    // 선택한 별점의 data-value 값을 숨겨진 input 에 설정 
-    const rateValue = target.getAttribute("data-value");
-    document.getElementById('rate').value=rateValue;
   });
-});
+  
+</script>
+<script>
+  document.querySelector('form').addEventListener('submit', function (event) {
+      let isValid = true; // 폼 유효성 플래그
+
+      // 검증 함수 호출
+      isValid &= validateField('title', '제목을 입력하세요');
+      isValid &= validateRate();
+      isValid &= validateField('content', '내용을 작성하세요');
+      isValid &= validateFile();
+
+      // 유효하지 않은 경우 alert 메시지 출력 및 폼 제출 방지
+      if (!isValid) {
+          alert('모든 칸을 입력하세요');
+          event.preventDefault(); // 폼 제출 방지
+      }
+  });
+
+  // 공통 검증 함수
+  function validateField(id, message, isSelect = false) {
+      const field = document.getElementById(id);
+      const errorElement = document.getElementById(`${id}Error`);
+      const value = isSelect ? field.value : field.value.trim();
+
+      if (!value) {
+          errorElement.textContent = message;
+          errorElement.style.color = 'red';
+          return false;
+      } else {
+          errorElement.textContent = '';
+          return true;
+      }
+  }
+
+  // 평점 검증 함수
+  function validateRate() {
+      const rate = document.getElementById('rate').value;
+      const errorElement = document.getElementById('rateError');
+  
+      if (rate === "0") {
+          errorElement.textContent = '별점을 선택하세요';
+          errorElement.style.color = 'red';
+          return false;
+      } else {
+          errorElement.textContent = '';
+          return true;
+      }
+  }
+
+  // 파일 검증 함수
+  function validateFile() {
+      const fileField = document.getElementById('reviewImage');
+      const errorElement = document.getElementById('fileError');
+      const fileCount = fileField.files.length;
+
+      if (fileCount === 0) {
+          errorElement.textContent = '상품 이미지를 업로드하세요';
+          errorElement.style.color = 'red';
+          return false;
+      } else {
+          errorElement.textContent = '';
+          return true;
+      }
+  }
+  // 입력 시 검증 메시지 제거
+  document.getElementById('title').addEventListener('input', () => clearError('title'));
+  document.getElementById('content').addEventListener('input', () => clearError('content'));
+  document.getElementById('reviewImage').addEventListener('change', () => clearError('fileError')); // 파일 변경 시 메시지 제거
+  
+  // 메시지 제거 함수
+  function clearError(id) {
+      const errorElement = document.getElementById(`${id}Error`);
+      errorElement.textContent = '';
+  }
 </script>
 
 {% endblock %}
