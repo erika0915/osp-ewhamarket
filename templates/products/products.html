@@ -55,7 +55,7 @@
       <tr>
           {% for key, value in row1 %}
           <td>
-            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{ value.productName }}
+            <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">{{value.productName }}
               <div class="marketname">{{value.userId}}</div>
               <div class="price">{{ value.price }}원</div>
             </div>
@@ -78,10 +78,10 @@
           {% for key, value in row2 %}
           <td>
             <div class="product-title" onclick="location.href='{{ url_for('products.view_product_detail', productId=key) }}';" style="cursor:pointer;">
-              {{ value.productName }}
+              {{value.productName }}
               <div class="marketname">{{value.userId}}</div>
               <div class="price">
-                {{ value.price}}원
+                {{value.price}}원
               </div>
             </div>
           </td>
