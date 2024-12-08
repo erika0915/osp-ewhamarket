@@ -21,7 +21,6 @@
 
         <div>
             {% if total > 0 %}
-            <p class="reg-num">총 {{total}}개</p>
             <table>
                 <tr>
                     {% for review in row1 %}
@@ -44,6 +43,9 @@
                             </div>
                         </div>
                     </td>
+                    {% endfor %}
+                    {% for _ in range(2 - row1|length) %}
+                    <td></td> <!-- 빈 셀 추가 -->
                     {% endfor %}
                 </tr>
 
@@ -68,6 +70,9 @@
                             </div>
                         </div>
                     </td>
+                    {% endfor %}
+                    {% for _ in range(2 - row2|length) %}
+                    <td></td> <!-- 빈 셀 추가 -->
                     {% endfor %}
                 </tr>
             </table>
