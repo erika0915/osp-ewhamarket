@@ -73,7 +73,8 @@ main{
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
-  background-color:none;
+  background-color:white;
+  border-color: #ccc;
 }
 
 .array button:hover {
@@ -114,23 +115,24 @@ table {
 }
 
 td {
-  padding: 15px;
-  padding: 15px;
+  padding: 5px 50px;
+  padding-bottom: 30px;
   border: 1px solid #ccc;
   width: 200px; /* 고정된 너비 */
   vertical-align: top; /* 내용이 위쪽에 정렬되도록 설정 */
   border:none;
 }
 
+
 td:empty {
   border: none;
 }
-
 
 .product-title{
   float: left;
   font-size: 20px;
   font-weight: bold;
+  margin-top:0;
 }
 
 .reg-num{
@@ -192,7 +194,6 @@ td .desc, td .price, td .marketname{
   font-weight: bold;
   margin: 0; /* 기존 여백 제거 */
 }
-
 
 
 @media only screen and (max-width: 700px) {
