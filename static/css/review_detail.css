@@ -17,6 +17,7 @@ main {
     display: flex;
     justify-content: center;
     padding: 20px;
+    margin-top: 20px;
 }
   
 /* 리뷰 전체 컨테이너 */
