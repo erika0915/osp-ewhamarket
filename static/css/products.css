@@ -133,6 +133,8 @@ td:empty {
   font-size: 20px;
   font-weight: bold;
   margin-top:0;
+  margin-left:5px;
+  white-space: nowrap;
 }
 
 .reg-num{
@@ -157,6 +159,7 @@ td .desc, td .price, td .marketname{
 
 .marketname{
   font-size:15px;
+  color:#848484;
 }
 /*상품리스트끝*/
 
