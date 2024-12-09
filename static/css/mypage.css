@@ -137,7 +137,7 @@ main {
 
 
 /*컨테이너 공통 부분*/
-.image-List-pur, .image-List-sell {
+.image-List-pur, .image-List-sell, .image-List-like {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
