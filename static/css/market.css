@@ -47,7 +47,7 @@ main {
 /* 폼 컨데이너 */
 .form-container {
     width: 90%;
-    max-width: 1110px;
+    max-width: 1100px;
     margin: 20px auto; /* 중앙 정렬 */
     padding: 30px 90px 30px 90px;
     border: none;
