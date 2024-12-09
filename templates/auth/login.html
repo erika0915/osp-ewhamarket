@@ -15,7 +15,9 @@
 <main>
     <br>
     <div class="form-container">
-        <p class="titleLogin">ⓒ1886 EWHA</p>
+        <div class="login_logo">
+            <a href="/products"><img id="login_logo" src="/static/images/logo.png" ></a>
+        </div>
         <form action="{{ url_for('auth.login') }}" method="post">
             <div class="input"> <!-- request 받기 위해 name추가 -->
                 <input type="text" id="ID" name="userId" placeholder="아이디를 입력하세요">
