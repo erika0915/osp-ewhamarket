@@ -12,6 +12,14 @@
   box-sizing: border-box;
 }
 
+#login_logo {
+  width: 260px; 
+  height: 260px;
+  display: flex;
+  margin: 0px auto; /* 중앙 정렬 */
+  justify-content: center;
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
