@@ -49,7 +49,7 @@ a {
 }
 
 .side-bar a:hover{
-    color: green;
+    color: rgb(188,201,36);
 }
 /* 사이드바 끝 */
 
@@ -161,7 +161,7 @@ td .desc, td .price, td .marketname{
 
 .price{
   font-size: 15px;
-  color:darkgreen;
+  color: rgb(0,70,42);
 }
 
 .marketname{
