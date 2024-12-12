@@ -1,6 +1,5 @@
-![logo](https://github.com/user-attachments/assets/da2332b0-fe96-4c2f-bb0f-9efdd3468b13)
-
 # [2024-2] 이화여자대학교 오픈SW플랫폼 웁스!(Opss) 
+![logo](https://github.com/user-attachments/assets/da2332b0-fe96-4c2f-bb0f-9efdd3468b13)
 
 ## ℹ️ 프로젝트 소개
 
