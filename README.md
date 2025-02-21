@@ -1,4 +1,4 @@
-# 재학생 대상 수공예품 거래 서비스, ⓒ1886 EWHA 
+# 이화여대 재학생 대상 수공예품 거래 서비스, ⓒ1886 EWHA 
 ![Image](https://github.com/user-attachments/assets/72e0b98b-ba31-4957-a3fd-7cec69982ba4)
 
 
